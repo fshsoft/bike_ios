@@ -17,6 +17,26 @@
 		0E0879111ECA8B5800D7CD28 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0879101ECA8B5800D7CD28 /* UserNotifications.framework */; };
 		0E0879131ECA8B8B00D7CD28 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0879121ECA8B8B00D7CD28 /* libresolv.tbd */; };
 		0E0879151ECA944900D7CD28 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0879141ECA944900D7CD28 /* AdSupport.framework */; };
+		0E0879191ECAB0F300D7CD28 /* jshare-ios-1.0.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0879171ECAB0F300D7CD28 /* jshare-ios-1.0.0.a */; };
+		0E08791C1ECAB23E00D7CD28 /* ShareView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E08791B1ECAB23E00D7CD28 /* ShareView.m */; };
+		0E08791F1ECAC63D00D7CD28 /* ShearVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E08791E1ECAC63D00D7CD28 /* ShearVC.m */; };
+		0E08792E1ECACA6600D7CD28 /* 勾选@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0879201ECACA6600D7CD28 /* 勾选@3x.png */; };
+		0E08792F1ECACA6600D7CD28 /* qq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0879211ECACA6600D7CD28 /* qq@2x.png */; };
+		0E0879301ECACA6600D7CD28 /* qq@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0879221ECACA6600D7CD28 /* qq@3x.png */; };
+		0E0879311ECACA6600D7CD28 /* qzone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0879231ECACA6600D7CD28 /* qzone@2x.png */; };
+		0E0879321ECACA6600D7CD28 /* qzone@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0879241ECACA6600D7CD28 /* qzone@3x.png */; };
+		0E0879331ECACA6600D7CD28 /* res6.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0E0879251ECACA6600D7CD28 /* res6.gif */; };
+		0E0879341ECACA6600D7CD28 /* wechat_fav@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0879261ECACA6600D7CD28 /* wechat_fav@2x.png */; };
+		0E0879351ECACA6600D7CD28 /* wechat_fav@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0879271ECACA6600D7CD28 /* wechat_fav@3x.png */; };
+		0E0879361ECACA6600D7CD28 /* wechat_moment@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0879281ECACA6600D7CD28 /* wechat_moment@2x.png */; };
+		0E0879371ECACA6600D7CD28 /* wechat_moment@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0879291ECACA6600D7CD28 /* wechat_moment@3x.png */; };
+		0E0879381ECACA6600D7CD28 /* wechat@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E08792A1ECACA6600D7CD28 /* wechat@2x.png */; };
+		0E0879391ECACA6600D7CD28 /* wechat@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E08792B1ECACA6600D7CD28 /* wechat@3x.png */; };
+		0E08793A1ECACA6600D7CD28 /* weibo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E08792C1ECACA6600D7CD28 /* weibo@2x.png */; };
+		0E08793B1ECACA6600D7CD28 /* weibo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E08792D1ECACA6600D7CD28 /* weibo@3x.png */; };
+		0E0879411ECAF40800D7CD28 /* LogoTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0879401ECAF40800D7CD28 /* LogoTextField.m */; };
+		0E0879441ECB11AF00D7CD28 /* LogoAgreement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0879431ECB11AF00D7CD28 /* LogoAgreement.m */; };
+		0E0879461ECB1B2400D7CD28 /* cheaked.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E0879451ECB1B2400D7CD28 /* cheaked.png */; };
 		0E777BB01EC304A900539E18 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BAF1EC304A900539E18 /* QuartzCore.framework */; };
 		0E777BB21EC304B400539E18 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BB11EC304B400539E18 /* CoreText.framework */; };
 		0E777BB41EC304C300539E18 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BB31EC304C300539E18 /* CoreGraphics.framework */; };
@@ -201,6 +221,31 @@
 		0E0879101ECA8B5800D7CD28 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		0E0879121ECA8B8B00D7CD28 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
 		0E0879141ECA944900D7CD28 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		0E0879171ECAB0F300D7CD28 /* jshare-ios-1.0.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jshare-ios-1.0.0.a"; sourceTree = "<group>"; };
+		0E0879181ECAB0F300D7CD28 /* JSHAREService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSHAREService.h; sourceTree = "<group>"; };
+		0E08791A1ECAB23E00D7CD28 /* ShareView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareView.h; path = ../ShareView.h; sourceTree = "<group>"; };
+		0E08791B1ECAB23E00D7CD28 /* ShareView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareView.m; path = ../ShareView.m; sourceTree = "<group>"; };
+		0E08791D1ECAC63D00D7CD28 /* ShearVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShearVC.h; sourceTree = "<group>"; };
+		0E08791E1ECAC63D00D7CD28 /* ShearVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShearVC.m; sourceTree = "<group>"; };
+		0E0879201ECACA6600D7CD28 /* 勾选@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "勾选@3x.png"; sourceTree = "<group>"; };
+		0E0879211ECACA6600D7CD28 /* qq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qq@2x.png"; sourceTree = "<group>"; };
+		0E0879221ECACA6600D7CD28 /* qq@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qq@3x.png"; sourceTree = "<group>"; };
+		0E0879231ECACA6600D7CD28 /* qzone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qzone@2x.png"; sourceTree = "<group>"; };
+		0E0879241ECACA6600D7CD28 /* qzone@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qzone@3x.png"; sourceTree = "<group>"; };
+		0E0879251ECACA6600D7CD28 /* res6.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = res6.gif; sourceTree = "<group>"; };
+		0E0879261ECACA6600D7CD28 /* wechat_fav@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat_fav@2x.png"; sourceTree = "<group>"; };
+		0E0879271ECACA6600D7CD28 /* wechat_fav@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat_fav@3x.png"; sourceTree = "<group>"; };
+		0E0879281ECACA6600D7CD28 /* wechat_moment@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat_moment@2x.png"; sourceTree = "<group>"; };
+		0E0879291ECACA6600D7CD28 /* wechat_moment@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat_moment@3x.png"; sourceTree = "<group>"; };
+		0E08792A1ECACA6600D7CD28 /* wechat@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat@2x.png"; sourceTree = "<group>"; };
+		0E08792B1ECACA6600D7CD28 /* wechat@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wechat@3x.png"; sourceTree = "<group>"; };
+		0E08792C1ECACA6600D7CD28 /* weibo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo@2x.png"; sourceTree = "<group>"; };
+		0E08792D1ECACA6600D7CD28 /* weibo@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "weibo@3x.png"; sourceTree = "<group>"; };
+		0E08793F1ECAF40800D7CD28 /* LogoTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoTextField.h; sourceTree = "<group>"; };
+		0E0879401ECAF40800D7CD28 /* LogoTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoTextField.m; sourceTree = "<group>"; };
+		0E0879421ECB11AF00D7CD28 /* LogoAgreement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoAgreement.h; sourceTree = "<group>"; };
+		0E0879431ECB11AF00D7CD28 /* LogoAgreement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoAgreement.m; sourceTree = "<group>"; };
+		0E0879451ECB1B2400D7CD28 /* cheaked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cheaked.png; sourceTree = "<group>"; };
 		0E777BAF1EC304A900539E18 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0E777BB11EC304B400539E18 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		0E777BB31EC304C300539E18 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -563,6 +608,7 @@
 				0EB75CA41EB97181005321DE /* JavaScriptCore.framework in Frameworks */,
 				0E08790D1ECA891500D7CD28 /* jpush-ios-3.0.5.a in Frameworks */,
 				0EB75CA21EB9716C005321DE /* SystemConfiguration.framework in Frameworks */,
+				0E0879191ECAB0F300D7CD28 /* jshare-ios-1.0.0.a in Frameworks */,
 				0EB75CA01EB97160005321DE /* CoreTelephony.framework in Frameworks */,
 				0E7781271EC561FE00539E18 /* libssl.a in Frameworks */,
 				0EB75C9E1EB97154005321DE /* CoreLocation.framework in Frameworks */,
@@ -594,6 +640,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E0879161ECAB0CD00D7CD28 /* Jshare */ = {
+			isa = PBXGroup;
+			children = (
+				0E08791D1ECAC63D00D7CD28 /* ShearVC.h */,
+				0E08791E1ECAC63D00D7CD28 /* ShearVC.m */,
+				0E08791A1ECAB23E00D7CD28 /* ShareView.h */,
+				0E08791B1ECAB23E00D7CD28 /* ShareView.m */,
+				0E0879171ECAB0F300D7CD28 /* jshare-ios-1.0.0.a */,
+				0E0879181ECAB0F300D7CD28 /* JSHAREService.h */,
+			);
+			name = Jshare;
+			path = ../Jshare;
+			sourceTree = "<group>";
+		};
 		0E777F941EC561FD00539E18 /* BicycleApp */ = {
 			isa = PBXGroup;
 			children = (
@@ -812,10 +872,11 @@
 		0E7780121EC561FD00539E18 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
+				0E0879161ECAB0CD00D7CD28 /* Jshare */,
 				0E88B0D21EC9BEF900CE5A90 /* GdMap */,
 				0E88B0D11EC9BEA000CE5A90 /* WXpay */,
 				0E88B0D01EC9BE1300CE5A90 /* Alipay */,
-				0E88B0CF1EC9BE0100CE5A90 /* XGpush */,
+				0E88B0CF1EC9BE0100CE5A90 /* Jpush */,
 			);
 			path = SDK;
 			sourceTree = "<group>";
@@ -1051,6 +1112,21 @@
 		0E77815B1EC5654100539E18 /* imagegroup */ = {
 			isa = PBXGroup;
 			children = (
+				0E0879451ECB1B2400D7CD28 /* cheaked.png */,
+				0E0879201ECACA6600D7CD28 /* 勾选@3x.png */,
+				0E0879211ECACA6600D7CD28 /* qq@2x.png */,
+				0E0879221ECACA6600D7CD28 /* qq@3x.png */,
+				0E0879231ECACA6600D7CD28 /* qzone@2x.png */,
+				0E0879241ECACA6600D7CD28 /* qzone@3x.png */,
+				0E0879251ECACA6600D7CD28 /* res6.gif */,
+				0E0879261ECACA6600D7CD28 /* wechat_fav@2x.png */,
+				0E0879271ECACA6600D7CD28 /* wechat_fav@3x.png */,
+				0E0879281ECACA6600D7CD28 /* wechat_moment@2x.png */,
+				0E0879291ECACA6600D7CD28 /* wechat_moment@3x.png */,
+				0E08792A1ECACA6600D7CD28 /* wechat@2x.png */,
+				0E08792B1ECACA6600D7CD28 /* wechat@3x.png */,
+				0E08792C1ECACA6600D7CD28 /* weibo@2x.png */,
+				0E08792D1ECACA6600D7CD28 /* weibo@3x.png */,
 				0E77801B1EC561FD00539E18 /* catage.png */,
 				0E77807A1EC561FD00539E18 /* Scan.png */,
 				0E01E7701EC5B35100585C80 /* other.png */,
@@ -1075,6 +1151,10 @@
 			children = (
 				0E777FA01EC561FD00539E18 /* LoginVC.h */,
 				0E777FA11EC561FD00539E18 /* LoginVC.m */,
+				0E08793F1ECAF40800D7CD28 /* LogoTextField.h */,
+				0E0879401ECAF40800D7CD28 /* LogoTextField.m */,
+				0E0879421ECB11AF00D7CD28 /* LogoAgreement.h */,
+				0E0879431ECB11AF00D7CD28 /* LogoAgreement.m */,
 				0E7780001EC561FD00539E18 /* PinTimeBtn */,
 			);
 			name = LogoinVC;
@@ -1095,13 +1175,14 @@
 			path = CheakVC/MeVC/payOfwx;
 			sourceTree = "<group>";
 		};
-		0E88B0CF1EC9BE0100CE5A90 /* XGpush */ = {
+		0E88B0CF1EC9BE0100CE5A90 /* Jpush */ = {
 			isa = PBXGroup;
 			children = (
 				0E0879091ECA891500D7CD28 /* jcore-ios-1.1.3.a */,
 				0E08790A1ECA891500D7CD28 /* jpush-ios-3.0.5.a */,
 				0E08790B1ECA891500D7CD28 /* JPUSHService.h */,
 			);
+			name = Jpush;
 			path = XGpush;
 			sourceTree = "<group>";
 		};
@@ -1373,36 +1454,50 @@
 			files = (
 				0E7780EC1EC561FD00539E18 /* ico_check_nomal@2x.png in Resources */,
 				0E77810B1EC561FD00539E18 /* XWPublishController.xib in Resources */,
+				0E08792E1ECACA6600D7CD28 /* 勾选@3x.png in Resources */,
 				0E7781181EC561FD00539E18 /* login_bg.png in Resources */,
 				0E01E7771EC5B35100585C80 /* lock.png in Resources */,
 				0E7781151EC561FD00539E18 /* left.png in Resources */,
+				0E0879331ECACA6600D7CD28 /* res6.gif in Resources */,
 				0E7780EB1EC561FD00539E18 /* ico_check_nomal.png in Resources */,
 				0E77810F1EC561FD00539E18 /* helpcenter.png in Resources */,
 				0E7780F01EC561FD00539E18 /* ico_check_select@3x.png in Resources */,
 				0E7781081EC561FD00539E18 /* XWPhotoCell.xib in Resources */,
 				0E7780EA1EC561FD00539E18 /* close@3x.png in Resources */,
 				0E7780E51EC561FD00539E18 /* right.png in Resources */,
+				0E08793B1ECACA6600D7CD28 /* weibo@3x.png in Resources */,
+				0E08792F1ECACA6600D7CD28 /* qq@2x.png in Resources */,
 				0E7780FD1EC561FD00539E18 /* MGroupCell.xib in Resources */,
 				0E7780EE1EC561FD00539E18 /* ico_check_select.png in Resources */,
 				0E7780DC1EC561FD00539E18 /* Main.storyboard in Resources */,
 				0E7780DA1EC561FD00539E18 /* Assets.xcassets in Resources */,
+				0E0879461ECB1B2400D7CD28 /* cheaked.png in Resources */,
+				0E0879301ECACA6600D7CD28 /* qq@3x.png in Resources */,
 				0E7780ED1EC561FD00539E18 /* ico_check_nomal@3x.png in Resources */,
 				0E7781141EC561FD00539E18 /* refresh.png in Resources */,
 				0E01E7741EC5B35100585C80 /* other.png in Resources */,
+				0E0879341ECACA6600D7CD28 /* wechat_fav@2x.png in Resources */,
+				0E0879321ECACA6600D7CD28 /* qzone@3x.png in Resources */,
 				0E7781551EC561FE00539E18 /* line@2x.png in Resources */,
 				0E77811D1EC561FE00539E18 /* AlipaySDK.bundle in Resources */,
+				0E0879381ECACA6600D7CD28 /* wechat@2x.png in Resources */,
 				0E7781191EC561FE00539E18 /* logo.jpg in Resources */,
+				0E0879351ECACA6600D7CD28 /* wechat_fav@3x.png in Resources */,
 				0E77811F1EC561FE00539E18 /* AMap.bundle in Resources */,
+				0E0879311ECACA6600D7CD28 /* qzone@2x.png in Resources */,
+				0E0879391ECACA6600D7CD28 /* wechat@3x.png in Resources */,
 				0E01E7761EC5B35100585C80 /* breakdown.png in Resources */,
 				0E7781111EC561FD00539E18 /* mapcenter.png in Resources */,
 				0E7780DE1EC561FD00539E18 /* lightOn.png in Resources */,
 				0E01E7751EC5B35100585C80 /* stop.png in Resources */,
+				0E0879361ECACA6600D7CD28 /* wechat_moment@2x.png in Resources */,
 				0E7781241EC561FE00539E18 /* catage.png in Resources */,
 				0E7780E81EC561FD00539E18 /* close.png in Resources */,
 				0E7780DD1EC561FD00539E18 /* lightOff.png in Resources */,
 				0E77814A1EC561FE00539E18 /* LICENSE in Resources */,
 				0E7780FF1EC561FD00539E18 /* MImaCell.xib in Resources */,
 				0E7781561EC561FE00539E18 /* pick_bg@2x.png in Resources */,
+				0E08793A1ECACA6600D7CD28 /* weibo@2x.png in Resources */,
 				0E7781171EC561FD00539E18 /* Info.plist in Resources */,
 				0E7780FB1EC561FD00539E18 /* none.png in Resources */,
 				0E7780F21EC561FD00539E18 /* plus@2x.png in Resources */,
@@ -1410,6 +1505,7 @@
 				0E7780E91EC561FD00539E18 /* close@2x.png in Resources */,
 				0E77812F1EC561FE00539E18 /* Scan.png in Resources */,
 				0E7780EF1EC561FD00539E18 /* ico_check_select@2x.png in Resources */,
+				0E0879371ECACA6600D7CD28 /* wechat_moment@3x.png in Resources */,
 				0E7780F11EC561FD00539E18 /* plus.png in Resources */,
 				0E7780F31EC561FD00539E18 /* plus@3x.png in Resources */,
 			);
@@ -1516,12 +1612,14 @@
 				0E77813A1EC561FE00539E18 /* ALView+PureLayout.m in Sources */,
 				0E7780FC1EC561FD00539E18 /* MGroupCell.m in Sources */,
 				0E7781321EC561FE00539E18 /* UIAlertView+WX.m in Sources */,
+				0E08791C1ECAB23E00D7CD28 /* ShareView.m in Sources */,
 				0E7781461EC561FE00539E18 /* AFSecurityPolicy.m in Sources */,
 				0E77811B1EC561FE00539E18 /* NavigationVC.m in Sources */,
 				0E7780F81EC561FD00539E18 /* JJOneScrollView.m in Sources */,
 				0E7780E01EC561FD00539E18 /* MeVC.m in Sources */,
 				0E7781511EC561FE00539E18 /* UIImageView+AFNetworking.m in Sources */,
 				0E7780FE1EC561FD00539E18 /* MImaCell.m in Sources */,
+				0E0879441ECB11AF00D7CD28 /* LogoAgreement.m in Sources */,
 				0E77810E1EC561FD00539E18 /* CustomCalloutView.m in Sources */,
 				0E77814D1EC561FE00539E18 /* AFImageDownloader.m in Sources */,
 				0E77811C1EC561FE00539E18 /* RootTabVC.m in Sources */,
@@ -1545,6 +1643,7 @@
 				0E7781071EC561FD00539E18 /* XWPhotoCell.m in Sources */,
 				0E7781471EC561FE00539E18 /* AFURLRequestSerialization.m in Sources */,
 				0E77815F1EC5938400539E18 /* HomeHelpView.m in Sources */,
+				0E08791F1ECAC63D00D7CD28 /* ShearVC.m in Sources */,
 				0E7780E11EC561FD00539E18 /* NSString+ABSAdd.m in Sources */,
 				0E7781011EC561FD00539E18 /* MShowAllGroup.m in Sources */,
 				0E7781371EC561FE00539E18 /* RSADataVerifier.m in Sources */,
@@ -1558,6 +1657,7 @@
 				0E7781521EC561FE00539E18 /* UIProgressView+AFNetworking.m in Sources */,
 				0E7781431EC561FE00539E18 /* UIView+Frame.m in Sources */,
 				0E77812D1EC561FE00539E18 /* Order.m in Sources */,
+				0E0879411ECAF40800D7CD28 /* LogoTextField.m in Sources */,
 				0E77813B1EC561FE00539E18 /* NSArray+PureLayout.m in Sources */,
 				0E7781531EC561FE00539E18 /* UIRefreshControl+AFNetworking.m in Sources */,
 				0E7781001EC561FD00539E18 /* MImaLibTool.m in Sources */,
@@ -1752,6 +1852,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BicycleApp/SDK",
 					"$(PROJECT_DIR)/BicycleApp/SDK/XGpush",
+					"$(PROJECT_DIR)/BicycleApp/Jshare",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -1798,6 +1899,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/BicycleApp/SDK",
 					"$(PROJECT_DIR)/BicycleApp/SDK/XGpush",
+					"$(PROJECT_DIR)/BicycleApp/Jshare",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
