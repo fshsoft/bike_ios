@@ -11,6 +11,12 @@
 		0E01E7751EC5B35100585C80 /* stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E01E7711EC5B35100585C80 /* stop.png */; };
 		0E01E7761EC5B35100585C80 /* breakdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E01E7721EC5B35100585C80 /* breakdown.png */; };
 		0E01E7771EC5B35100585C80 /* lock.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E01E7731EC5B35100585C80 /* lock.png */; };
+		0E08790C1ECA891500D7CD28 /* jcore-ios-1.1.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0879091ECA891500D7CD28 /* jcore-ios-1.1.3.a */; };
+		0E08790D1ECA891500D7CD28 /* jpush-ios-3.0.5.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E08790A1ECA891500D7CD28 /* jpush-ios-3.0.5.a */; };
+		0E08790F1ECA8B3D00D7CD28 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E08790E1ECA8B3D00D7CD28 /* CoreFoundation.framework */; };
+		0E0879111ECA8B5800D7CD28 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0879101ECA8B5800D7CD28 /* UserNotifications.framework */; };
+		0E0879131ECA8B8B00D7CD28 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0879121ECA8B8B00D7CD28 /* libresolv.tbd */; };
+		0E0879151ECA944900D7CD28 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E0879141ECA944900D7CD28 /* AdSupport.framework */; };
 		0E777BB01EC304A900539E18 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BAF1EC304A900539E18 /* QuartzCore.framework */; };
 		0E777BB21EC304B400539E18 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BB11EC304B400539E18 /* CoreText.framework */; };
 		0E777BB41EC304C300539E18 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BB31EC304C300539E18 /* CoreGraphics.framework */; };
@@ -152,8 +158,6 @@
 		0E88B0C71EC9983600CE5A90 /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E88B0C51EC9983600CE5A90 /* CommonUtil.m */; };
 		0E88B0C91EC998AE00CE5A90 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E88B0C81EC998AE00CE5A90 /* libxml2.tbd */; };
 		0E88B0CB1EC998D700CE5A90 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E88B0CA1EC998D700CE5A90 /* libsqlite3.tbd */; };
-		0E88B0D71EC9C04600CE5A90 /* libXG-SDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E88B0D31EC9C04600CE5A90 /* libXG-SDK.a */; };
-		0E88B0D81EC9C04600CE5A90 /* ReleaseNotes.txt in Resources */ = {isa = PBXBuildFile; fileRef = 0E88B0D41EC9C04600CE5A90 /* ReleaseNotes.txt */; };
 		0EB75C711EB96A95005321DE /* BicycleAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB75C701EB96A95005321DE /* BicycleAppTests.m */; };
 		0EB75C7C1EB96A95005321DE /* BicycleAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EB75C7B1EB96A95005321DE /* BicycleAppUITests.m */; };
 		0EB75C961EB97127005321DE /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB75C951EB97127005321DE /* libc++.tbd */; };
@@ -190,6 +194,13 @@
 		0E01E7711EC5B35100585C80 /* stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = stop.png; sourceTree = "<group>"; };
 		0E01E7721EC5B35100585C80 /* breakdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = breakdown.png; sourceTree = "<group>"; };
 		0E01E7731EC5B35100585C80 /* lock.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lock.png; sourceTree = "<group>"; };
+		0E0879091ECA891500D7CD28 /* jcore-ios-1.1.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jcore-ios-1.1.3.a"; sourceTree = "<group>"; };
+		0E08790A1ECA891500D7CD28 /* jpush-ios-3.0.5.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "jpush-ios-3.0.5.a"; sourceTree = "<group>"; };
+		0E08790B1ECA891500D7CD28 /* JPUSHService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JPUSHService.h; sourceTree = "<group>"; };
+		0E08790E1ECA8B3D00D7CD28 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		0E0879101ECA8B5800D7CD28 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		0E0879121ECA8B8B00D7CD28 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		0E0879141ECA944900D7CD28 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		0E777BAF1EC304A900539E18 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0E777BB11EC304B400539E18 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		0E777BB31EC304C300539E18 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -505,10 +516,6 @@
 		0E88B0CA1EC998D700CE5A90 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		0E88B0CC1EC998F200CE5A90 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		0E88B0CE1EC9BBD700CE5A90 /* BicycleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BicycleApp.entitlements; sourceTree = "<group>"; };
-		0E88B0D31EC9C04600CE5A90 /* libXG-SDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libXG-SDK.a"; sourceTree = "<group>"; };
-		0E88B0D41EC9C04600CE5A90 /* ReleaseNotes.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReleaseNotes.txt; sourceTree = "<group>"; };
-		0E88B0D51EC9C04600CE5A90 /* XGPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGPush.h; sourceTree = "<group>"; };
-		0E88B0D61EC9C04600CE5A90 /* XGSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XGSetting.h; sourceTree = "<group>"; };
 		0EB75C531EB96A95005321DE /* BicycleApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BicycleApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB75C6C1EB96A95005321DE /* BicycleAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BicycleAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EB75C701EB96A95005321DE /* BicycleAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BicycleAppTests.m; sourceTree = "<group>"; };
@@ -535,6 +542,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E0879151ECA944900D7CD28 /* AdSupport.framework in Frameworks */,
+				0E777BB41EC304C300539E18 /* CoreGraphics.framework in Frameworks */,
+				0E0879131ECA8B8B00D7CD28 /* libresolv.tbd in Frameworks */,
+				0E0879111ECA8B5800D7CD28 /* UserNotifications.framework in Frameworks */,
+				0E08790F1ECA8B3D00D7CD28 /* CoreFoundation.framework in Frameworks */,
 				0E88B0CB1EC998D700CE5A90 /* libsqlite3.tbd in Frameworks */,
 				0E88B0C91EC998AE00CE5A90 /* libxml2.tbd in Frameworks */,
 				0E777BBC1EC304F200539E18 /* CoreMotion.framework in Frameworks */,
@@ -543,14 +555,13 @@
 				0E777BB81EC304D900539E18 /* Foundation.framework in Frameworks */,
 				0E7781201EC561FE00539E18 /* AMapFoundationKit.framework in Frameworks */,
 				0E777BB61EC304CE00539E18 /* UIKit.framework in Frameworks */,
-				0E88B0D71EC9C04600CE5A90 /* libXG-SDK.a in Frameworks */,
 				0E7781261EC561FE00539E18 /* libcrypto.a in Frameworks */,
-				0E777BB41EC304C300539E18 /* CoreGraphics.framework in Frameworks */,
 				0E777BB21EC304B400539E18 /* CoreText.framework in Frameworks */,
 				0E7781221EC561FE00539E18 /* AMapSearchKit.framework in Frameworks */,
 				0E777BB01EC304A900539E18 /* QuartzCore.framework in Frameworks */,
 				0EB75CA61EB974CE005321DE /* GLKit.framework in Frameworks */,
 				0EB75CA41EB97181005321DE /* JavaScriptCore.framework in Frameworks */,
+				0E08790D1ECA891500D7CD28 /* jpush-ios-3.0.5.a in Frameworks */,
 				0EB75CA21EB9716C005321DE /* SystemConfiguration.framework in Frameworks */,
 				0EB75CA01EB97160005321DE /* CoreTelephony.framework in Frameworks */,
 				0E7781271EC561FE00539E18 /* libssl.a in Frameworks */,
@@ -561,6 +572,7 @@
 				0EB75C981EB97131005321DE /* libz.tbd in Frameworks */,
 				0EB75C961EB97127005321DE /* libc++.tbd in Frameworks */,
 				ED3F75CD3BD122E55DB8CD4D /* libPods-BicycleApp.a in Frameworks */,
+				0E08790C1ECA891500D7CD28 /* jcore-ios-1.1.3.a in Frameworks */,
 				0E77811E1EC561FE00539E18 /* AlipaySDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1086,10 +1098,9 @@
 		0E88B0CF1EC9BE0100CE5A90 /* XGpush */ = {
 			isa = PBXGroup;
 			children = (
-				0E88B0D31EC9C04600CE5A90 /* libXG-SDK.a */,
-				0E88B0D41EC9C04600CE5A90 /* ReleaseNotes.txt */,
-				0E88B0D51EC9C04600CE5A90 /* XGPush.h */,
-				0E88B0D61EC9C04600CE5A90 /* XGSetting.h */,
+				0E0879091ECA891500D7CD28 /* jcore-ios-1.1.3.a */,
+				0E08790A1ECA891500D7CD28 /* jpush-ios-3.0.5.a */,
+				0E08790B1ECA891500D7CD28 /* JPUSHService.h */,
 			);
 			path = XGpush;
 			sourceTree = "<group>";
@@ -1202,6 +1213,10 @@
 		0EB75C941EB97127005321DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				0E0879141ECA944900D7CD28 /* AdSupport.framework */,
+				0E0879121ECA8B8B00D7CD28 /* libresolv.tbd */,
+				0E0879101ECA8B5800D7CD28 /* UserNotifications.framework */,
+				0E08790E1ECA8B3D00D7CD28 /* CoreFoundation.framework */,
 				0E88B0CC1EC998F200CE5A90 /* libxml2.2.tbd */,
 				0E88B0CA1EC998D700CE5A90 /* libsqlite3.tbd */,
 				0E88B0C81EC998AE00CE5A90 /* libxml2.tbd */,
@@ -1386,7 +1401,6 @@
 				0E7780E81EC561FD00539E18 /* close.png in Resources */,
 				0E7780DD1EC561FD00539E18 /* lightOff.png in Resources */,
 				0E77814A1EC561FE00539E18 /* LICENSE in Resources */,
-				0E88B0D81EC9C04600CE5A90 /* ReleaseNotes.txt in Resources */,
 				0E7780FF1EC561FD00539E18 /* MImaCell.xib in Resources */,
 				0E7781561EC561FE00539E18 /* pick_bg@2x.png in Resources */,
 				0E7781171EC561FD00539E18 /* Info.plist in Resources */,
