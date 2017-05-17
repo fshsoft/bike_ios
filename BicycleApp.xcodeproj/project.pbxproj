@@ -189,6 +189,10 @@
 		0EB75CA21EB9716C005321DE /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB75CA11EB9716C005321DE /* SystemConfiguration.framework */; };
 		0EB75CA41EB97181005321DE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB75CA31EB97181005321DE /* JavaScriptCore.framework */; };
 		0EB75CA61EB974CE005321DE /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB75CA51EB974CE005321DE /* GLKit.framework */; };
+		0ECB41631ECBE43A00396A20 /* HomeTopCheakView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB41621ECBE43A00396A20 /* HomeTopCheakView.m */; };
+		0ECB41651ECBE45700396A20 /* homeTopCheakView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB41641ECBE45700396A20 /* homeTopCheakView.xib */; };
+		0ECB416A1ECC6F2D00396A20 /* GeocodeAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB41671ECC6F2D00396A20 /* GeocodeAnnotation.m */; };
+		0ECB416B1ECC6F2D00396A20 /* ReGeocodeAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB41691ECC6F2D00396A20 /* ReGeocodeAnnotation.m */; };
 		ED3F75CD3BD122E55DB8CD4D /* libPods-BicycleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5DFB084188CA5DAEB4AEF1 /* libPods-BicycleApp.a */; };
 /* End PBXBuildFile section */
 
@@ -577,6 +581,13 @@
 		0EB75CA11EB9716C005321DE /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		0EB75CA31EB97181005321DE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		0EB75CA51EB974CE005321DE /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		0ECB41611ECBE43A00396A20 /* HomeTopCheakView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeTopCheakView.h; sourceTree = "<group>"; };
+		0ECB41621ECBE43A00396A20 /* HomeTopCheakView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeTopCheakView.m; sourceTree = "<group>"; };
+		0ECB41641ECBE45700396A20 /* homeTopCheakView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = homeTopCheakView.xib; sourceTree = "<group>"; };
+		0ECB41661ECC6F2D00396A20 /* GeocodeAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GeocodeAnnotation.h; sourceTree = "<group>"; };
+		0ECB41671ECC6F2D00396A20 /* GeocodeAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeocodeAnnotation.m; sourceTree = "<group>"; };
+		0ECB41681ECC6F2D00396A20 /* ReGeocodeAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReGeocodeAnnotation.h; sourceTree = "<group>"; };
+		0ECB41691ECC6F2D00396A20 /* ReGeocodeAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReGeocodeAnnotation.m; sourceTree = "<group>"; };
 		38B17FB5A251F08E2A07FD72 /* Pods-BicycleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BicycleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BicycleApp/Pods-BicycleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		3A5DFB084188CA5DAEB4AEF1 /* libPods-BicycleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BicycleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2E65EE369224E7CEEAE6E5 /* Pods-BicycleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BicycleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BicycleApp/Pods-BicycleApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -853,6 +864,9 @@
 				0E777FFE1EC561FD00539E18 /* HomeBottomView.m */,
 				0E77815D1EC5938400539E18 /* HomeHelpView.h */,
 				0E77815E1EC5938400539E18 /* HomeHelpView.m */,
+				0ECB41611ECBE43A00396A20 /* HomeTopCheakView.h */,
+				0ECB41621ECBE43A00396A20 /* HomeTopCheakView.m */,
+				0ECB41641ECBE45700396A20 /* homeTopCheakView.xib */,
 			);
 			path = HomeVC;
 			sourceTree = "<group>";
@@ -1227,6 +1241,10 @@
 		0E88B0D21EC9BEF900CE5A90 /* GdMap */ = {
 			isa = PBXGroup;
 			children = (
+				0ECB41661ECC6F2D00396A20 /* GeocodeAnnotation.h */,
+				0ECB41671ECC6F2D00396A20 /* GeocodeAnnotation.m */,
+				0ECB41681ECC6F2D00396A20 /* ReGeocodeAnnotation.h */,
+				0ECB41691ECC6F2D00396A20 /* ReGeocodeAnnotation.m */,
 				0E77807B1EC561FD00539E18 /* SendMessageToWXReq+requestWithTextOrMediaMessage.h */,
 				0E77807C1EC561FD00539E18 /* SendMessageToWXReq+requestWithTextOrMediaMessage.m */,
 				0E77807D1EC561FD00539E18 /* TenpayUtil.h */,
@@ -1496,6 +1514,7 @@
 				0E7780DD1EC561FD00539E18 /* lightOff.png in Resources */,
 				0E77814A1EC561FE00539E18 /* LICENSE in Resources */,
 				0E7780FF1EC561FD00539E18 /* MImaCell.xib in Resources */,
+				0ECB41651ECBE45700396A20 /* homeTopCheakView.xib in Resources */,
 				0E7781561EC561FE00539E18 /* pick_bg@2x.png in Resources */,
 				0E08793A1ECACA6600D7CD28 /* weibo@2x.png in Resources */,
 				0E7781171EC561FD00539E18 /* Info.plist in Resources */,
@@ -1611,6 +1630,7 @@
 				0E7781021EC561FD00539E18 /* MShowGroupAllSet.m in Sources */,
 				0E77813A1EC561FE00539E18 /* ALView+PureLayout.m in Sources */,
 				0E7780FC1EC561FD00539E18 /* MGroupCell.m in Sources */,
+				0ECB416B1ECC6F2D00396A20 /* ReGeocodeAnnotation.m in Sources */,
 				0E7781321EC561FE00539E18 /* UIAlertView+WX.m in Sources */,
 				0E08791C1ECAB23E00D7CD28 /* ShareView.m in Sources */,
 				0E7781461EC561FE00539E18 /* AFSecurityPolicy.m in Sources */,
@@ -1622,6 +1642,7 @@
 				0E0879441ECB11AF00D7CD28 /* LogoAgreement.m in Sources */,
 				0E77810E1EC561FD00539E18 /* CustomCalloutView.m in Sources */,
 				0E77814D1EC561FE00539E18 /* AFImageDownloader.m in Sources */,
+				0ECB41631ECBE43A00396A20 /* HomeTopCheakView.m in Sources */,
 				0E77811C1EC561FE00539E18 /* RootTabVC.m in Sources */,
 				0E7781361EC561FE00539E18 /* RSADataSigner.m in Sources */,
 				0E77812E1EC561FE00539E18 /* payRequsestHandler.mm in Sources */,
@@ -1640,6 +1661,7 @@
 				0E77810A1EC561FD00539E18 /* XWPublishController.m in Sources */,
 				0E7781581EC561FE00539E18 /* UIImage+CompressImage.m in Sources */,
 				0E7781501EC561FE00539E18 /* UIButton+AFNetworking.m in Sources */,
+				0ECB416A1ECC6F2D00396A20 /* GeocodeAnnotation.m in Sources */,
 				0E7781071EC561FD00539E18 /* XWPhotoCell.m in Sources */,
 				0E7781471EC561FE00539E18 /* AFURLRequestSerialization.m in Sources */,
 				0E77815F1EC5938400539E18 /* HomeHelpView.m in Sources */,
