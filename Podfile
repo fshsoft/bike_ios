@@ -6,4 +6,5 @@ pod 'MJRefresh'
 pod 'IQKeyboardManager'
 pod 'MBProgressHUD'
 pod 'WechatOpenSDK'
+pod ‘YYModel’
 end 
