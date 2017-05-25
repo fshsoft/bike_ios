@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>FMDB.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>IQKeyboardManager.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>YTKKeyValueStore.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>YYModel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,7 +57,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>543BBEF37565B0EA74FA886FAC82BAF8</key>
+		<key>0A092FC70410B7F6A5B50FE33ACD4935</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1949A6AA01CC2695D4A37E8A562E0A85</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4DB787839F9B5D0664236FB1B1709CC3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,7 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>61843658BD2CF0EA461EC3A0BEA8F76C</key>
+		<key>8642CC820CE8C5B88C113D7F47AF4BC3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>91BB439A8CB979D57EA46AF7C3B4820A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -68,11 +93,6 @@
 			<true/>
 		</dict>
 		<key>9DC8D9E02903E93BD0B2FEC9D846EA20</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AD2C4A5D7F4D6C89242374B14C69C50C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

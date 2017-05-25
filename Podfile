@@ -7,4 +7,5 @@ pod 'IQKeyboardManager'
 pod 'MBProgressHUD'
 pod 'WechatOpenSDK'
 pod ‘YYModel’
+pod ‘YTKKeyValueStore’
 end 
