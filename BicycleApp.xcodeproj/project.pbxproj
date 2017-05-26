@@ -47,6 +47,7 @@
 		0E36BBB91ED06F4A0022E3AD /* SportDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E36BBB81ED06F4A0022E3AD /* SportDetail.xib */; };
 		0E36BBBC1ED06F6E0022E3AD /* SportDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E36BBBB1ED06F6E0022E3AD /* SportDetailView.m */; };
 		0E36BC011ED099C70022E3AD /* UIView+ScaleAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E36BC001ED099C70022E3AD /* UIView+ScaleAnimation.m */; };
+		0E3A51AE1ED7F047002642FE /* stopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A51AD1ED7F047002642FE /* stopView.m */; };
 		0E614D371ED5784C003B64EC /* line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E614D361ED5784C003B64EC /* line@2x.png */; };
 		0E777BB01EC304A900539E18 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BAF1EC304A900539E18 /* QuartzCore.framework */; };
 		0E777BB21EC304B400539E18 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BB11EC304B400539E18 /* CoreText.framework */; };
@@ -110,7 +111,6 @@
 		0E7781121EC561FD00539E18 /* TimerButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7780021EC561FD00539E18 /* TimerButton.m */; };
 		0E7781131EC561FD00539E18 /* WLButtonCountdownManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7780041EC561FD00539E18 /* WLButtonCountdownManager.m */; };
 		0E7781161EC561FD00539E18 /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7780091EC561FD00539E18 /* HomeVC.m */; };
-		0E7781171EC561FD00539E18 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0E77800A1EC561FD00539E18 /* Info.plist */; };
 		0E77811A1EC561FE00539E18 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E77800D1EC561FD00539E18 /* main.m */; };
 		0E77811B1EC561FE00539E18 /* NavigationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E77800F1EC561FD00539E18 /* NavigationVC.m */; };
 		0E77811C1EC561FE00539E18 /* RootTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7780111EC561FD00539E18 /* RootTabVC.m */; };
@@ -251,7 +251,6 @@
 		0EBB1C2C1ED4D180009BC5FF /* lock.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EBB1C2B1ED4D180009BC5FF /* lock.xib */; };
 		0EBB1C2F1ED4D5D1009BC5FF /* StopVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB1C2E1ED4D5D1009BC5FF /* StopVC.m */; };
 		0EBB1C311ED4D5E0009BC5FF /* stop.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EBB1C301ED4D5E0009BC5FF /* stop.xib */; };
-		0EBB1C341ED4D8CA009BC5FF /* stopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB1C331ED4D8CA009BC5FF /* stopView.m */; };
 		0EBB1C371ED4DA6B009BC5FF /* ServesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB1C361ED4DA6B009BC5FF /* ServesVC.m */; };
 		0EBB1C3A1ED4DE41009BC5FF /* breakDownVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB1C391ED4DE41009BC5FF /* breakDownVC.m */; };
 		0EBB1C3D1ED4E052009BC5FF /* searchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB1C3C1ED4E052009BC5FF /* searchVC.m */; };
@@ -341,6 +340,8 @@
 		0ECB41FD1ECEEFCE00396A20 /* paymentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB41FC1ECEEFCE00396A20 /* paymentVC.m */; };
 		0ECB41FF1ECFD0A300396A20 /* payCate.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB41FE1ECFD0A300396A20 /* payCate.xib */; };
 		0ECB42021ECFD30100396A20 /* payCateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB42011ECFD30100396A20 /* payCateView.m */; };
+		0EF6215B1ED813EB00AC900C /* break.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF6215A1ED813EB00AC900C /* break.xib */; };
+		0EF6215E1ED8205900AC900C /* breakView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF6215D1ED8205900AC900C /* breakView.m */; };
 		ED3F75CD3BD122E55DB8CD4D /* libPods-BicycleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5DFB084188CA5DAEB4AEF1 /* libPods-BicycleApp.a */; };
 /* End PBXBuildFile section */
 
@@ -420,6 +421,8 @@
 		0E36BBBB1ED06F6E0022E3AD /* SportDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SportDetailView.m; path = ../../LoginVC/SportDetailView.m; sourceTree = "<group>"; };
 		0E36BBFF1ED099C70022E3AD /* UIView+ScaleAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ScaleAnimation.h"; sourceTree = "<group>"; };
 		0E36BC001ED099C70022E3AD /* UIView+ScaleAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ScaleAnimation.m"; sourceTree = "<group>"; };
+		0E3A51AC1ED7F047002642FE /* stopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stopView.h; sourceTree = "<group>"; };
+		0E3A51AD1ED7F047002642FE /* stopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = stopView.m; sourceTree = "<group>"; };
 		0E614D361ED5784C003B64EC /* line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line@2x.png"; sourceTree = "<group>"; };
 		0E777BAF1EC304A900539E18 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0E777BB11EC304B400539E18 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -819,8 +822,6 @@
 		0EBB1C2D1ED4D5D1009BC5FF /* StopVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopVC.h; sourceTree = "<group>"; };
 		0EBB1C2E1ED4D5D1009BC5FF /* StopVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopVC.m; sourceTree = "<group>"; };
 		0EBB1C301ED4D5E0009BC5FF /* stop.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = stop.xib; sourceTree = "<group>"; };
-		0EBB1C321ED4D8CA009BC5FF /* stopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stopView.h; sourceTree = "<group>"; };
-		0EBB1C331ED4D8CA009BC5FF /* stopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = stopView.m; sourceTree = "<group>"; };
 		0EBB1C351ED4DA6B009BC5FF /* ServesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServesVC.h; sourceTree = "<group>"; };
 		0EBB1C361ED4DA6B009BC5FF /* ServesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServesVC.m; sourceTree = "<group>"; };
 		0EBB1C381ED4DE41009BC5FF /* breakDownVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = breakDownVC.h; sourceTree = "<group>"; };
@@ -928,6 +929,9 @@
 		0ECB41FE1ECFD0A300396A20 /* payCate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = payCate.xib; sourceTree = "<group>"; };
 		0ECB42001ECFD30100396A20 /* payCateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = payCateView.h; sourceTree = "<group>"; };
 		0ECB42011ECFD30100396A20 /* payCateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = payCateView.m; sourceTree = "<group>"; };
+		0EF6215A1ED813EB00AC900C /* break.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = break.xib; sourceTree = "<group>"; };
+		0EF6215C1ED8205900AC900C /* breakView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = breakView.h; sourceTree = "<group>"; };
+		0EF6215D1ED8205900AC900C /* breakView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = breakView.m; sourceTree = "<group>"; };
 		38B17FB5A251F08E2A07FD72 /* Pods-BicycleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BicycleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BicycleApp/Pods-BicycleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		3A5DFB084188CA5DAEB4AEF1 /* libPods-BicycleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BicycleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2E65EE369224E7CEEAE6E5 /* Pods-BicycleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BicycleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BicycleApp/Pods-BicycleApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -1620,8 +1624,6 @@
 			children = (
 				0E777FA01EC561FD00539E18 /* LoginVC.h */,
 				0E777FA11EC561FD00539E18 /* LoginVC.m */,
-				0E36BBFF1ED099C70022E3AD /* UIView+ScaleAnimation.h */,
-				0E36BC001ED099C70022E3AD /* UIView+ScaleAnimation.m */,
 				0ECB41FB1ECEEFCE00396A20 /* paymentVC.h */,
 				0ECB41FC1ECEEFCE00396A20 /* paymentVC.m */,
 				0ECB42001ECFD30100396A20 /* payCateView.h */,
@@ -1632,6 +1634,8 @@
 				0ECB417A1ECD774E00396A20 /* CertifyTopView.h */,
 				0ECB417B1ECD774E00396A20 /* CertifyTopView.m */,
 				0ECB417D1ECD777700396A20 /* CerifyTop.xib */,
+				0E36BBFF1ED099C70022E3AD /* UIView+ScaleAnimation.h */,
+				0E36BC001ED099C70022E3AD /* UIView+ScaleAnimation.m */,
 				0E08793F1ECAF40800D7CD28 /* LogoTextField.h */,
 				0E0879401ECAF40800D7CD28 /* LogoTextField.m */,
 				0E0879421ECB11AF00D7CD28 /* LogoAgreement.h */,
@@ -1941,12 +1945,15 @@
 				0EBB1C2D1ED4D5D1009BC5FF /* StopVC.h */,
 				0EBB1C2E1ED4D5D1009BC5FF /* StopVC.m */,
 				0EBB1C301ED4D5E0009BC5FF /* stop.xib */,
-				0EBB1C321ED4D8CA009BC5FF /* stopView.h */,
-				0EBB1C331ED4D8CA009BC5FF /* stopView.m */,
+				0E3A51AC1ED7F047002642FE /* stopView.h */,
+				0E3A51AD1ED7F047002642FE /* stopView.m */,
 				0EBB1C351ED4DA6B009BC5FF /* ServesVC.h */,
 				0EBB1C361ED4DA6B009BC5FF /* ServesVC.m */,
 				0EBB1C381ED4DE41009BC5FF /* breakDownVC.h */,
 				0EBB1C391ED4DE41009BC5FF /* breakDownVC.m */,
+				0EF6215C1ED8205900AC900C /* breakView.h */,
+				0EF6215D1ED8205900AC900C /* breakView.m */,
+				0EF6215A1ED813EB00AC900C /* break.xib */,
 			);
 			path = bottomView;
 			sourceTree = "<group>";
@@ -2115,6 +2122,7 @@
 				0ECB41B61ECEAA2400396A20 /* home_center_pic@3x.png in Resources */,
 				0EBB1C4C1ED4E2C1009BC5FF /* used@2x.png in Resources */,
 				0ECB41C41ECEAA2400396A20 /* logotxt@3x.png in Resources */,
+				0EF6215B1ED813EB00AC900C /* break.xib in Resources */,
 				0E7780EC1EC561FD00539E18 /* ico_check_nomal@2x.png in Resources */,
 				0ECB41AF1ECEAA2400396A20 /* dw_pic@2x.png in Resources */,
 				0EBB1BF21ED49EE9009BC5FF /* pic_tui@2x.png in Resources */,
@@ -2237,7 +2245,6 @@
 				0EBB1C411ED4E2B9009BC5FF /* search_add@3x.png in Resources */,
 				0E08793A1ECACA6600D7CD28 /* weibo@2x.png in Resources */,
 				0EBB1BEA1ED49E92009BC5FF /* youhuijuan@2x.png in Resources */,
-				0E7781171EC561FD00539E18 /* Info.plist in Resources */,
 				0EBB1C651ED526B8009BC5FF /* choosepay_wei@2x.png in Resources */,
 				0E7780FB1EC561FD00539E18 /* none.png in Resources */,
 				0E7780F21EC561FD00539E18 /* plus@2x.png in Resources */,
@@ -2358,6 +2365,7 @@
 				0EBB1BAB1ED408BC009BC5FF /* travelCell.m in Sources */,
 				0E77812C1EC561FE00539E18 /* MANaviRoute.m in Sources */,
 				0E23230E1ED19A3E007FF580 /* travelVC.m in Sources */,
+				0EF6215E1ED8205900AC900C /* breakView.m in Sources */,
 				0E77813E1EC561FE00539E18 /* WXApiManager.m in Sources */,
 				0E88B0C61EC9983600CE5A90 /* GDataXMLNode.m in Sources */,
 				0E7C4E091ED29090000A9474 /* AboutMeCell.m in Sources */,
@@ -2382,6 +2390,7 @@
 				0E7781541EC561FE00539E18 /* UIWebView+AFNetworking.m in Sources */,
 				0E36BBB71ED030040022E3AD /* CheakNumberVC.m in Sources */,
 				0E7780E21EC561FD00539E18 /* PaySelect.m in Sources */,
+				0E3A51AE1ED7F047002642FE /* stopView.m in Sources */,
 				0EBB1BA51ED2D50D009BC5FF /* SocerCell.m in Sources */,
 				0E77812B1EC561FE00539E18 /* MANaviPolyline.m in Sources */,
 				0E7781231EC561FE00539E18 /* APAuthV2Info.m in Sources */,
@@ -2411,7 +2420,6 @@
 				0ECB41631ECBE43A00396A20 /* HomeTopCheakView.m in Sources */,
 				0ECB41791ECD74D500396A20 /* certifyPersonInfoVC.m in Sources */,
 				0E77811C1EC561FE00539E18 /* RootTabVC.m in Sources */,
-				0EBB1C341ED4D8CA009BC5FF /* stopView.m in Sources */,
 				0E7781361EC561FE00539E18 /* RSADataSigner.m in Sources */,
 				0E77812E1EC561FE00539E18 /* payRequsestHandler.mm in Sources */,
 				0E7781351EC561FE00539E18 /* openssl_wrapper.m in Sources */,
