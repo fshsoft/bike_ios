@@ -306,6 +306,11 @@
 		0EF6217E1EDB168800AC900C /* 152.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF6216E1EDB168800AC900C /* 152.png */; };
 		0EF6217F1EDB168800AC900C /* 167.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF6216F1EDB168800AC900C /* 167.png */; };
 		0EF621801EDB168800AC900C /* 180.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF621701EDB168800AC900C /* 180.png */; };
+		0EF621871EDEAC5700AC900C /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF621861EDEAC5700AC900C /* MainVC.m */; };
+		0EF6218A1EDED28E00AC900C /* PushBikeNumVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF621891EDED28E00AC900C /* PushBikeNumVC.m */; };
+		0EF6218D1EE02A3700AC900C /* ServeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF6218C1EE02A3700AC900C /* ServeVC.m */; };
+		0EF6218F1EE02B3300AC900C /* serve.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF6218E1EE02B3300AC900C /* serve.xib */; };
+		0EF621921EE02B4B00AC900C /* serve.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF621911EE02B4B00AC900C /* serve.m */; };
 		ED3F75CD3BD122E55DB8CD4D /* libPods-BicycleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5DFB084188CA5DAEB4AEF1 /* libPods-BicycleApp.a */; };
 /* End PBXBuildFile section */
 
@@ -839,6 +844,15 @@
 		0EF6216E1EDB168800AC900C /* 152.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 152.png; sourceTree = "<group>"; };
 		0EF6216F1EDB168800AC900C /* 167.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 167.png; sourceTree = "<group>"; };
 		0EF621701EDB168800AC900C /* 180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 180.png; sourceTree = "<group>"; };
+		0EF621851EDEAC5700AC900C /* MainVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainVC.h; sourceTree = "<group>"; };
+		0EF621861EDEAC5700AC900C /* MainVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainVC.m; sourceTree = "<group>"; };
+		0EF621881EDED28E00AC900C /* PushBikeNumVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PushBikeNumVC.h; sourceTree = "<group>"; };
+		0EF621891EDED28E00AC900C /* PushBikeNumVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PushBikeNumVC.m; sourceTree = "<group>"; };
+		0EF6218B1EE02A3700AC900C /* ServeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServeVC.h; sourceTree = "<group>"; };
+		0EF6218C1EE02A3700AC900C /* ServeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServeVC.m; sourceTree = "<group>"; };
+		0EF6218E1EE02B3300AC900C /* serve.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = serve.xib; sourceTree = "<group>"; };
+		0EF621901EE02B4B00AC900C /* serve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = serve.h; sourceTree = "<group>"; };
+		0EF621911EE02B4B00AC900C /* serve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = serve.m; sourceTree = "<group>"; };
 		38B17FB5A251F08E2A07FD72 /* Pods-BicycleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BicycleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BicycleApp/Pods-BicycleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		3A5DFB084188CA5DAEB4AEF1 /* libPods-BicycleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BicycleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2E65EE369224E7CEEAE6E5 /* Pods-BicycleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BicycleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BicycleApp/Pods-BicycleApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -1034,6 +1048,8 @@
 				0ECB41921ECEA9E800396A20 /* HomeImages */,
 				0E7780081EC561FD00539E18 /* HomeVC.h */,
 				0E7780091EC561FD00539E18 /* HomeVC.m */,
+				0EF621851EDEAC5700AC900C /* MainVC.h */,
+				0EF621861EDEAC5700AC900C /* MainVC.m */,
 				0EBB1C3B1ED4E052009BC5FF /* searchVC.h */,
 				0EBB1C3C1ED4E052009BC5FF /* searchVC.m */,
 				0ECB418D1ECEA22900396A20 /* HomeNaviView.h */,
@@ -1724,6 +1740,13 @@
 				0EF6215A1ED813EB00AC900C /* break.xib */,
 				0EBB1C351ED4DA6B009BC5FF /* ServesVC.h */,
 				0EBB1C361ED4DA6B009BC5FF /* ServesVC.m */,
+				0EF6218B1EE02A3700AC900C /* ServeVC.h */,
+				0EF6218C1EE02A3700AC900C /* ServeVC.m */,
+				0EF621901EE02B4B00AC900C /* serve.h */,
+				0EF621911EE02B4B00AC900C /* serve.m */,
+				0EF6218E1EE02B3300AC900C /* serve.xib */,
+				0EF621881EDED28E00AC900C /* PushBikeNumVC.h */,
+				0EF621891EDED28E00AC900C /* PushBikeNumVC.m */,
 			);
 			path = bottomView;
 			sourceTree = "<group>";
@@ -1952,6 +1975,7 @@
 				0E614D371ED5784C003B64EC /* line@2x.png in Resources */,
 				0EBB1BCA1ED49979009BC5FF /* suo@3x.png in Resources */,
 				0ECB41FA1ECEE8F300396A20 /* activity.xib in Resources */,
+				0EF6218F1EE02B3300AC900C /* serve.xib in Resources */,
 				0EBB1BCD1ED49979009BC5FF /* xkuang_onclick@2x.png in Resources */,
 				0EBB1C401ED4E2B9009BC5FF /* search_add@2x.png in Resources */,
 				0E0879381ECACA6600D7CD28 /* wechat@2x.png in Resources */,
@@ -2140,6 +2164,7 @@
 				0E7781541EC561FE00539E18 /* UIWebView+AFNetworking.m in Sources */,
 				0E36BBB71ED030040022E3AD /* CheakNumberVC.m in Sources */,
 				0E7780E21EC561FD00539E18 /* PaySelect.m in Sources */,
+				0EF6218A1EDED28E00AC900C /* PushBikeNumVC.m in Sources */,
 				0E3A51AE1ED7F047002642FE /* stopView.m in Sources */,
 				0EBB1BA51ED2D50D009BC5FF /* SocerCell.m in Sources */,
 				0E77812B1EC561FE00539E18 /* MANaviPolyline.m in Sources */,
@@ -2192,6 +2217,7 @@
 				0E2323061ED187A8007FF580 /* PullMoneyVC.m in Sources */,
 				0EAC75AA1ED143170063B03D /* MywalletVC.m in Sources */,
 				0E08791F1ECAC63D00D7CD28 /* ShearVC.m in Sources */,
+				0EF621921EE02B4B00AC900C /* serve.m in Sources */,
 				0E7780E11EC561FD00539E18 /* NSString+ABSAdd.m in Sources */,
 				0EBB1BA21ED2CD84009BC5FF /* SocerVC.m in Sources */,
 				0EBB1BA81ED2DE7A009BC5FF /* HcdProcessView.m in Sources */,
@@ -2207,10 +2233,12 @@
 				0E7781521EC561FE00539E18 /* UIProgressView+AFNetworking.m in Sources */,
 				0E7781431EC561FE00539E18 /* UIView+Frame.m in Sources */,
 				0EBB1C181ED4C4EB009BC5FF /* consumerVC.m in Sources */,
+				0EF621871EDEAC5700AC900C /* MainVC.m in Sources */,
 				0E77812D1EC561FE00539E18 /* Order.m in Sources */,
 				0E0879411ECAF40800D7CD28 /* LogoTextField.m in Sources */,
 				0E77813B1EC561FE00539E18 /* NSArray+PureLayout.m in Sources */,
 				0E23230A1ED190B8007FF580 /* preferentialVC.m in Sources */,
+				0EF6218D1EE02A3700AC900C /* ServeVC.m in Sources */,
 				0E7781531EC561FE00539E18 /* UIRefreshControl+AFNetworking.m in Sources */,
 				0E7781131EC561FD00539E18 /* WLButtonCountdownManager.m in Sources */,
 				0E77814F1EC561FE00539E18 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
