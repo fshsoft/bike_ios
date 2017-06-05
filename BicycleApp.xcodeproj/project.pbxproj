@@ -311,6 +311,10 @@
 		0EF6218D1EE02A3700AC900C /* ServeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF6218C1EE02A3700AC900C /* ServeVC.m */; };
 		0EF6218F1EE02B3300AC900C /* serve.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0EF6218E1EE02B3300AC900C /* serve.xib */; };
 		0EF621921EE02B4B00AC900C /* serve.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EF621911EE02B4B00AC900C /* serve.m */; };
+		0EF6219B1EE17E3100AC900C /* toux@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF621991EE17E3100AC900C /* toux@3x.png */; };
+		0EF6219C1EE17E3100AC900C /* toux@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF6219A1EE17E3100AC900C /* toux@2x.png */; };
+		0EF6219F1EE1827800AC900C /* jiesuo_enter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF6219D1EE1827800AC900C /* jiesuo_enter@3x.png */; };
+		0EF621A01EE1827800AC900C /* jiesuo_enter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EF6219E1EE1827800AC900C /* jiesuo_enter@2x.png */; };
 		ED3F75CD3BD122E55DB8CD4D /* libPods-BicycleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A5DFB084188CA5DAEB4AEF1 /* libPods-BicycleApp.a */; };
 /* End PBXBuildFile section */
 
@@ -853,6 +857,10 @@
 		0EF6218E1EE02B3300AC900C /* serve.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = serve.xib; sourceTree = "<group>"; };
 		0EF621901EE02B4B00AC900C /* serve.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = serve.h; sourceTree = "<group>"; };
 		0EF621911EE02B4B00AC900C /* serve.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = serve.m; sourceTree = "<group>"; };
+		0EF621991EE17E3100AC900C /* toux@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toux@3x.png"; sourceTree = "<group>"; };
+		0EF6219A1EE17E3100AC900C /* toux@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "toux@2x.png"; sourceTree = "<group>"; };
+		0EF6219D1EE1827800AC900C /* jiesuo_enter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiesuo_enter@3x.png"; sourceTree = "<group>"; };
+		0EF6219E1EE1827800AC900C /* jiesuo_enter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiesuo_enter@2x.png"; sourceTree = "<group>"; };
 		38B17FB5A251F08E2A07FD72 /* Pods-BicycleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BicycleApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BicycleApp/Pods-BicycleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		3A5DFB084188CA5DAEB4AEF1 /* libPods-BicycleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-BicycleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA2E65EE369224E7CEEAE6E5 /* Pods-BicycleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BicycleApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-BicycleApp/Pods-BicycleApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -1049,6 +1057,8 @@
 				0E7780081EC561FD00539E18 /* HomeVC.h */,
 				0E7780091EC561FD00539E18 /* HomeVC.m */,
 				0EF621851EDEAC5700AC900C /* MainVC.h */,
+				0EF6219D1EE1827800AC900C /* jiesuo_enter@3x.png */,
+				0EF6219E1EE1827800AC900C /* jiesuo_enter@2x.png */,
 				0EF621861EDEAC5700AC900C /* MainVC.m */,
 				0EBB1C3B1ED4E052009BC5FF /* searchVC.h */,
 				0EBB1C3C1ED4E052009BC5FF /* searchVC.m */,
@@ -1320,6 +1330,8 @@
 		0E77815B1EC5654100539E18 /* imagegroup */ = {
 			isa = PBXGroup;
 			children = (
+				0EF621991EE17E3100AC900C /* toux@3x.png */,
+				0EF6219A1EE17E3100AC900C /* toux@2x.png */,
 				0EBB1C681ED52A9B009BC5FF /* chooseplay@2x.png */,
 				0EBB1C691ED52A9B009BC5FF /* logotxt@2x.png */,
 				0EBB1C6A1ED52A9B009BC5FF /* logotxt@3x.png */,
@@ -1953,7 +1965,9 @@
 				0ECB41B51ECEAA2400396A20 /* home_center_pic@2x.png in Resources */,
 				0E7C4E0B1ED2B2E2000A9474 /* logo.png in Resources */,
 				0ECB41BD1ECEAA2400396A20 /* ic_msg@2x.png in Resources */,
+				0EF6219B1EE17E3100AC900C /* toux@3x.png in Resources */,
 				0E7780DC1EC561FD00539E18 /* Main.storyboard in Resources */,
+				0EF621A01EE1827800AC900C /* jiesuo_enter@2x.png in Resources */,
 				0EBB1C5F1ED526B8009BC5FF /* SM_jiao@2x.png in Resources */,
 				0E7780DA1EC561FD00539E18 /* Assets.xcassets in Resources */,
 				0EBB1BC31ED49979009BC5FF /* jubao@2x.png in Resources */,
@@ -2022,6 +2036,7 @@
 				0EBB1C311ED4D5E0009BC5FF /* stop.xib in Resources */,
 				0EBB1C481ED4E2C1009BC5FF /* history@2x.png in Resources */,
 				0EBB1BD41ED49AB8009BC5FF /* tksucc@3x.png in Resources */,
+				0EF6219C1EE17E3100AC900C /* toux@2x.png in Resources */,
 				0EBB1C131ED4C153009BC5FF /* agreen@2x.png in Resources */,
 				0ECB41651ECBE45700396A20 /* homeTopCheakView.xib in Resources */,
 				0EBB1C2C1ED4D180009BC5FF /* lock.xib in Resources */,
@@ -2035,6 +2050,7 @@
 				0EBB1BBF1ED49979009BC5FF /* addph@2x.png in Resources */,
 				0EBB1C141ED4C153009BC5FF /* agreen@3x.png in Resources */,
 				0ECB41B91ECEAA2400396A20 /* home_ic_sm@2x.png in Resources */,
+				0EF6219F1EE1827800AC900C /* jiesuo_enter@3x.png in Resources */,
 				0EBB1BC71ED49979009BC5FF /* problem@2x.png in Resources */,
 				0E0879371ECACA6600D7CD28 /* wechat_moment@3x.png in Resources */,
 			);
