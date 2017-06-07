@@ -8,4 +8,7 @@ pod 'MBProgressHUD'
 pod 'WechatOpenSDK'
 pod 'YYModel'
 pod 'YTKKeyValueStore'
+pod 'AMap3DMap'
+pod 'AMapSearch'
+pod 'AMapLocation'
 end 

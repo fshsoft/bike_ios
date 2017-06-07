@@ -47,6 +47,9 @@
 		0E36BBBC1ED06F6E0022E3AD /* SportDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E36BBBB1ED06F6E0022E3AD /* SportDetailView.m */; };
 		0E36BC011ED099C70022E3AD /* UIView+ScaleAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E36BC001ED099C70022E3AD /* UIView+ScaleAnimation.m */; };
 		0E3A51AE1ED7F047002642FE /* stopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A51AD1ED7F047002642FE /* stopView.m */; };
+		0E47D52A1EE7E8F700F7E0EA /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0E47D5291EE7E8F700F7E0EA /* loading.gif */; };
+		0E47D52D1EE7EA8700F7E0EA /* UIImage+anniGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E47D52C1EE7EA8700F7E0EA /* UIImage+anniGIF.m */; };
+		0E47D5331EE80FD800F7E0EA /* style_json.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E47D5321EE80FD800F7E0EA /* style_json.json */; };
 		0E614D371ED5784C003B64EC /* line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E614D361ED5784C003B64EC /* line@2x.png */; };
 		0E777BB01EC304A900539E18 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BAF1EC304A900539E18 /* QuartzCore.framework */; };
 		0E777BB21EC304B400539E18 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BB11EC304B400539E18 /* CoreText.framework */; };
@@ -79,16 +82,11 @@
 		0E77811C1EC561FE00539E18 /* RootTabVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7780111EC561FD00539E18 /* RootTabVC.m */; };
 		0E77811D1EC561FE00539E18 /* AlipaySDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0E7780131EC561FD00539E18 /* AlipaySDK.bundle */; };
 		0E77811E1EC561FE00539E18 /* AlipaySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7780141EC561FD00539E18 /* AlipaySDK.framework */; };
-		0E77811F1EC561FE00539E18 /* AMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 0E7780151EC561FD00539E18 /* AMap.bundle */; };
-		0E7781201EC561FE00539E18 /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7780161EC561FD00539E18 /* AMapFoundationKit.framework */; };
-		0E7781211EC561FE00539E18 /* AMapLocationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7780171EC561FD00539E18 /* AMapLocationKit.framework */; };
-		0E7781221EC561FE00539E18 /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7780181EC561FD00539E18 /* AMapSearchKit.framework */; };
 		0E7781231EC561FE00539E18 /* APAuthV2Info.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E77801A1EC561FD00539E18 /* APAuthV2Info.m */; };
 		0E7781251EC561FE00539E18 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E77801E1EC561FD00539E18 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m */; };
 		0E7781261EC561FE00539E18 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E77801F1EC561FD00539E18 /* libcrypto.a */; };
 		0E7781271EC561FE00539E18 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7780201EC561FD00539E18 /* libssl.a */; };
 		0E7781281EC561FE00539E18 /* LineDashPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7780221EC561FD00539E18 /* LineDashPolyline.m */; };
-		0E7781291EC561FE00539E18 /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E7780231EC561FD00539E18 /* MAMapKit.framework */; };
 		0E77812A1EC561FE00539E18 /* MANaviAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7780251EC561FD00539E18 /* MANaviAnnotation.m */; };
 		0E77812B1EC561FE00539E18 /* MANaviPolyline.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7780271EC561FD00539E18 /* MANaviPolyline.m */; };
 		0E77812C1EC561FE00539E18 /* MANaviRoute.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7780291EC561FD00539E18 /* MANaviRoute.m */; };
@@ -391,6 +389,10 @@
 		0E36BC001ED099C70022E3AD /* UIView+ScaleAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ScaleAnimation.m"; sourceTree = "<group>"; };
 		0E3A51AC1ED7F047002642FE /* stopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stopView.h; sourceTree = "<group>"; };
 		0E3A51AD1ED7F047002642FE /* stopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = stopView.m; sourceTree = "<group>"; };
+		0E47D5291EE7E8F700F7E0EA /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
+		0E47D52B1EE7EA8700F7E0EA /* UIImage+anniGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+anniGIF.h"; sourceTree = "<group>"; };
+		0E47D52C1EE7EA8700F7E0EA /* UIImage+anniGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+anniGIF.m"; sourceTree = "<group>"; };
+		0E47D5321EE80FD800F7E0EA /* style_json.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = style_json.json; sourceTree = "<group>"; };
 		0E614D361ED5784C003B64EC /* line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line@2x.png"; sourceTree = "<group>"; };
 		0E777BAF1EC304A900539E18 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0E777BB11EC304B400539E18 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
@@ -443,10 +445,6 @@
 		0E7780111EC561FD00539E18 /* RootTabVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootTabVC.m; path = ../RootTabVC.m; sourceTree = "<group>"; };
 		0E7780131EC561FD00539E18 /* AlipaySDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AlipaySDK.bundle; path = ../../AlipaySDK.bundle; sourceTree = "<group>"; };
 		0E7780141EC561FD00539E18 /* AlipaySDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AlipaySDK.framework; path = ../../AlipaySDK.framework; sourceTree = "<group>"; };
-		0E7780151EC561FD00539E18 /* AMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = AMap.bundle; path = ../AMap.bundle; sourceTree = "<group>"; };
-		0E7780161EC561FD00539E18 /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapFoundationKit.framework; path = ../AMapFoundationKit.framework; sourceTree = "<group>"; };
-		0E7780171EC561FD00539E18 /* AMapLocationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapLocationKit.framework; path = ../AMapLocationKit.framework; sourceTree = "<group>"; };
-		0E7780181EC561FD00539E18 /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMapSearchKit.framework; path = ../AMapSearchKit.framework; sourceTree = "<group>"; };
 		0E7780191EC561FD00539E18 /* APAuthV2Info.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = APAuthV2Info.h; path = ../../APAuthV2Info.h; sourceTree = "<group>"; };
 		0E77801A1EC561FD00539E18 /* APAuthV2Info.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = APAuthV2Info.m; path = ../../APAuthV2Info.m; sourceTree = "<group>"; };
 		0E77801C1EC561FD00539E18 /* Constant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constant.h; path = ../Constant.h; sourceTree = "<group>"; };
@@ -456,7 +454,6 @@
 		0E7780201EC561FD00539E18 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = ../../libssl.a; sourceTree = "<group>"; };
 		0E7780211EC561FD00539E18 /* LineDashPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LineDashPolyline.h; path = ../LineDashPolyline.h; sourceTree = "<group>"; };
 		0E7780221EC561FD00539E18 /* LineDashPolyline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LineDashPolyline.m; path = ../LineDashPolyline.m; sourceTree = "<group>"; };
-		0E7780231EC561FD00539E18 /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MAMapKit.framework; path = ../MAMapKit.framework; sourceTree = "<group>"; };
 		0E7780241EC561FD00539E18 /* MANaviAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MANaviAnnotation.h; path = ../MANaviAnnotation.h; sourceTree = "<group>"; };
 		0E7780251EC561FD00539E18 /* MANaviAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MANaviAnnotation.m; path = ../MANaviAnnotation.m; sourceTree = "<group>"; };
 		0E7780261EC561FD00539E18 /* MANaviPolyline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MANaviPolyline.h; path = ../MANaviPolyline.h; sourceTree = "<group>"; };
@@ -871,14 +868,11 @@
 				0E88B0CB1EC998D700CE5A90 /* libsqlite3.tbd in Frameworks */,
 				0E88B0C91EC998AE00CE5A90 /* libxml2.tbd in Frameworks */,
 				0E777BBC1EC304F200539E18 /* CoreMotion.framework in Frameworks */,
-				0E7781211EC561FE00539E18 /* AMapLocationKit.framework in Frameworks */,
 				0E777BBA1EC304E100539E18 /* CFNetwork.framework in Frameworks */,
 				0E777BB81EC304D900539E18 /* Foundation.framework in Frameworks */,
-				0E7781201EC561FE00539E18 /* AMapFoundationKit.framework in Frameworks */,
 				0E777BB61EC304CE00539E18 /* UIKit.framework in Frameworks */,
 				0E7781261EC561FE00539E18 /* libcrypto.a in Frameworks */,
 				0E777BB21EC304B400539E18 /* CoreText.framework in Frameworks */,
-				0E7781221EC561FE00539E18 /* AMapSearchKit.framework in Frameworks */,
 				0E777BB01EC304A900539E18 /* QuartzCore.framework in Frameworks */,
 				0EB75CA61EB974CE005321DE /* GLKit.framework in Frameworks */,
 				0EB75CA41EB97181005321DE /* JavaScriptCore.framework in Frameworks */,
@@ -889,7 +883,6 @@
 				0E7781271EC561FE00539E18 /* libssl.a in Frameworks */,
 				0EB75C9E1EB97154005321DE /* CoreLocation.framework in Frameworks */,
 				0EB75C9C1EB9714A005321DE /* Security.framework in Frameworks */,
-				0E7781291EC561FE00539E18 /* MAMapKit.framework in Frameworks */,
 				0EB75C9A1EB9713E005321DE /* libstdc++.6.0.9.tbd in Frameworks */,
 				0EB75C981EB97131005321DE /* libz.tbd in Frameworks */,
 				0EB75C961EB97127005321DE /* libc++.tbd in Frameworks */,
@@ -1058,6 +1051,7 @@
 				0ECB41811ECDB09E00396A20 /* NaviView.h */,
 				0ECB41821ECDB09E00396A20 /* NaviView.m */,
 				0ECB41841ECDB0C300396A20 /* Navi.xib */,
+				0E47D5321EE80FD800F7E0EA /* style_json.json */,
 				0ECB41F61ECEE62300396A20 /* activityView.h */,
 				0ECB41F71ECEE62300396A20 /* activityView.m */,
 				0ECB41F91ECEE8F300396A20 /* activity.xib */,
@@ -1304,6 +1298,8 @@
 				0E7780A91EC561FD00539E18 /* UIView+Frame.m */,
 				0E7780D71EC561FD00539E18 /* XYBaseVC.h */,
 				0E7780D81EC561FD00539E18 /* XYBaseVC.m */,
+				0E47D52B1EE7EA8700F7E0EA /* UIImage+anniGIF.h */,
+				0E47D52C1EE7EA8700F7E0EA /* UIImage+anniGIF.m */,
 				0E777FA41EC561FD00539E18 /* NSString+ABSAdd.h */,
 				0E777FA51EC561FD00539E18 /* NSString+ABSAdd.m */,
 				0E777FAD1EC561FD00539E18 /* XYUIKit.h */,
@@ -1385,6 +1381,7 @@
 				0E0879251ECACA6600D7CD28 /* res6.gif */,
 				0E0879261ECACA6600D7CD28 /* wechat_fav@2x.png */,
 				0E0879271ECACA6600D7CD28 /* wechat_fav@3x.png */,
+				0E47D5291EE7E8F700F7E0EA /* loading.gif */,
 				0E0879281ECACA6600D7CD28 /* wechat_moment@2x.png */,
 				0E0879291ECACA6600D7CD28 /* wechat_moment@3x.png */,
 				0E08792A1ECACA6600D7CD28 /* wechat@2x.png */,
@@ -1523,17 +1520,12 @@
 				0E77808D1EC561FD00539E18 /* Utility */,
 				0E7780211EC561FD00539E18 /* LineDashPolyline.h */,
 				0E7780221EC561FD00539E18 /* LineDashPolyline.m */,
-				0E7780231EC561FD00539E18 /* MAMapKit.framework */,
 				0E7780241EC561FD00539E18 /* MANaviAnnotation.h */,
 				0E7780251EC561FD00539E18 /* MANaviAnnotation.m */,
 				0E7780261EC561FD00539E18 /* MANaviPolyline.h */,
 				0E7780271EC561FD00539E18 /* MANaviPolyline.m */,
 				0E7780281EC561FD00539E18 /* MANaviRoute.h */,
 				0E7780291EC561FD00539E18 /* MANaviRoute.m */,
-				0E7780151EC561FD00539E18 /* AMap.bundle */,
-				0E7780161EC561FD00539E18 /* AMapFoundationKit.framework */,
-				0E7780171EC561FD00539E18 /* AMapLocationKit.framework */,
-				0E7780181EC561FD00539E18 /* AMapSearchKit.framework */,
 			);
 			path = GdMap;
 			sourceTree = "<group>";
@@ -1953,6 +1945,7 @@
 				0EF6219B1EE17E3100AC900C /* toux@3x.png in Resources */,
 				0E7780DC1EC561FD00539E18 /* Main.storyboard in Resources */,
 				0EF621A01EE1827800AC900C /* jiesuo_enter@2x.png in Resources */,
+				0E47D5331EE80FD800F7E0EA /* style_json.json in Resources */,
 				0EF621A41EE6AC4600AC900C /* logo.png in Resources */,
 				0EBB1C5F1ED526B8009BC5FF /* SM_jiao@2x.png in Resources */,
 				0E7780DA1EC561FD00539E18 /* Assets.xcassets in Resources */,
@@ -1981,7 +1974,6 @@
 				0EBB1BED1ED49E92009BC5FF /* pass_per@3x.png in Resources */,
 				0E0879351ECACA6600D7CD28 /* wechat_fav@3x.png in Resources */,
 				0EBB1C631ED526B8009BC5FF /* input_hand@2x.png in Resources */,
-				0E77811F1EC561FE00539E18 /* AMap.bundle in Resources */,
 				0EBB1BFD1ED4A3FB009BC5FF /* back@2x.png in Resources */,
 				0EBB1C661ED526B8009BC5FF /* chooseplay@3x.png in Resources */,
 				0EBB1BE21ED49C34009BC5FF /* alipay@2x.png in Resources */,
@@ -2035,6 +2027,7 @@
 				0EBB1C141ED4C153009BC5FF /* agreen@3x.png in Resources */,
 				0ECB41B91ECEAA2400396A20 /* home_ic_sm@2x.png in Resources */,
 				0EF6219F1EE1827800AC900C /* jiesuo_enter@3x.png in Resources */,
+				0E47D52A1EE7E8F700F7E0EA /* loading.gif in Resources */,
 				0EBB1BC71ED49979009BC5FF /* problem@2x.png in Resources */,
 				0E0879371ECACA6600D7CD28 /* wechat_moment@3x.png in Resources */,
 			);
@@ -2211,6 +2204,7 @@
 				0E7781501EC561FE00539E18 /* UIButton+AFNetworking.m in Sources */,
 				0ECB416A1ECC6F2D00396A20 /* GeocodeAnnotation.m in Sources */,
 				0E7C4E031ED27581000A9474 /* SetInfoVC.m in Sources */,
+				0E47D52D1EE7EA8700F7E0EA /* UIImage+anniGIF.m in Sources */,
 				0E7781471EC561FE00539E18 /* AFURLRequestSerialization.m in Sources */,
 				0EAC75A21ED12A420063B03D /* ChangeName.m in Sources */,
 				0E77815F1EC5938400539E18 /* HomeHelpView.m in Sources */,
