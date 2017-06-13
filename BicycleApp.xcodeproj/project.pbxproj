@@ -240,6 +240,7 @@
 		0EBB1C6B1ED52A9B009BC5FF /* chooseplay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EBB1C681ED52A9B009BC5FF /* chooseplay@2x.png */; };
 		0EBB1C6C1ED52A9B009BC5FF /* logotxt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EBB1C691ED52A9B009BC5FF /* logotxt@2x.png */; };
 		0EBB1C6D1ED52A9B009BC5FF /* logotxt@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EBB1C6A1ED52A9B009BC5FF /* logotxt@3x.png */; };
+		0EBB98421EEFE82E004297EF /* XYScanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EBB98411EEFE82E004297EF /* XYScanView.m */; };
 		0ECB41631ECBE43A00396A20 /* HomeTopCheakView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB41621ECBE43A00396A20 /* HomeTopCheakView.m */; };
 		0ECB41651ECBE45700396A20 /* homeTopCheakView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ECB41641ECBE45700396A20 /* homeTopCheakView.xib */; };
 		0ECB416A1ECC6F2D00396A20 /* GeocodeAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ECB41671ECC6F2D00396A20 /* GeocodeAnnotation.m */; };
@@ -767,6 +768,8 @@
 		0EBB1C681ED52A9B009BC5FF /* chooseplay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "chooseplay@2x.png"; path = "../HomeVC/chooseplay@2x.png"; sourceTree = "<group>"; };
 		0EBB1C691ED52A9B009BC5FF /* logotxt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logotxt@2x.png"; path = "../HomeVC/logotxt@2x.png"; sourceTree = "<group>"; };
 		0EBB1C6A1ED52A9B009BC5FF /* logotxt@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "logotxt@3x.png"; path = "../HomeVC/logotxt@3x.png"; sourceTree = "<group>"; };
+		0EBB98401EEFE82E004297EF /* XYScanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYScanView.h; path = ../CheakVC/XYScanView.h; sourceTree = "<group>"; };
+		0EBB98411EEFE82E004297EF /* XYScanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYScanView.m; path = ../CheakVC/XYScanView.m; sourceTree = "<group>"; };
 		0ECB41611ECBE43A00396A20 /* HomeTopCheakView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeTopCheakView.h; path = ../HomeTopCheakView.h; sourceTree = "<group>"; };
 		0ECB41621ECBE43A00396A20 /* HomeTopCheakView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeTopCheakView.m; path = ../HomeTopCheakView.m; sourceTree = "<group>"; };
 		0ECB41641ECBE45700396A20 /* homeTopCheakView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = homeTopCheakView.xib; path = ../homeTopCheakView.xib; sourceTree = "<group>"; };
@@ -1323,6 +1326,8 @@
 		0E77815A1EC564F500539E18 /* BaseVC */ = {
 			isa = PBXGroup;
 			children = (
+				0EBB98401EEFE82E004297EF /* XYScanView.h */,
+				0EBB98411EEFE82E004297EF /* XYScanView.m */,
 				0ECB41811ECDB09E00396A20 /* NaviView.h */,
 				0ECB41821ECDB09E00396A20 /* NaviView.m */,
 				0ECB41841ECDB0C300396A20 /* Navi.xib */,
@@ -2306,6 +2311,7 @@
 				0E7780E41EC561FD00539E18 /* personInfoCell.m in Sources */,
 				0E77814C1EC561FE00539E18 /* AFAutoPurgingImageCache.m in Sources */,
 				0E2323191ED1C31B007FF580 /* messageVC.m in Sources */,
+				0EBB98421EEFE82E004297EF /* XYScanView.m in Sources */,
 				0E77811A1EC561FE00539E18 /* main.m in Sources */,
 				0E36BBBC1ED06F6E0022E3AD /* SportDetailView.m in Sources */,
 				0E7780E71EC561FD00539E18 /* UIButton+TitleImgEdgeInsets.m in Sources */,
