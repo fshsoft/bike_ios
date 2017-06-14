@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>XHLaunchAd.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>YTKKeyValueStore.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,17 +62,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0A092FC70410B7F6A5B50FE33ACD4935</key>
+		<key>0807A0FD2F7E5FE8A4FBB0A7EE44FE3D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1949A6AA01CC2695D4A37E8A562E0A85</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4DB787839F9B5D0664236FB1B1709CC3</key>
+		<key>0F12CDC16322E3B0D291C5F3C104E764</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -77,12 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8642CC820CE8C5B88C113D7F47AF4BC3</key>
+		<key>68B9FE64222F79F6736DAE2290BC6C97</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>91BB439A8CB979D57EA46AF7C3B4820A</key>
+		<key>8642CC820CE8C5B88C113D7F47AF4BC3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -93,6 +93,16 @@
 			<true/>
 		</dict>
 		<key>9DC8D9E02903E93BD0B2FEC9D846EA20</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CB5E5E7C0623DB9429A9AB0F233F089F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CE11B4C31032A9EB79F5809B6F16DE2C</key>
 		<dict>
 			<key>primary</key>
 			<true/>

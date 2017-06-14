@@ -34,6 +34,12 @@
 		0E08793B1ECACA6600D7CD28 /* weibo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E08792D1ECACA6600D7CD28 /* weibo@3x.png */; };
 		0E0879411ECAF40800D7CD28 /* LogoTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0879401ECAF40800D7CD28 /* LogoTextField.m */; };
 		0E0879441ECB11AF00D7CD28 /* LogoAgreement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0879431ECB11AF00D7CD28 /* LogoAgreement.m */; };
+		0E19E0A81EF11A190047B94F /* LaunchIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E19E0A71EF11A190047B94F /* LaunchIntroductionView.m */; };
+		0E19E0AF1EF11BD80047B94F /* launch0.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E19E0AA1EF11BD80047B94F /* launch0.jpg */; };
+		0E19E0B01EF11BD80047B94F /* launch1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E19E0AB1EF11BD80047B94F /* launch1.jpg */; };
+		0E19E0B11EF11BD80047B94F /* launch2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0E19E0AC1EF11BD80047B94F /* launch2.jpg */; };
+		0E19E0B21EF11BD80047B94F /* launch3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E19E0AD1EF11BD80047B94F /* launch3.png */; };
+		0E19E0B31EF11BD80047B94F /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E19E0AE1EF11BD80047B94F /* login.png */; };
 		0E2322FB1ED1653F007FF580 /* depositMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2322FA1ED1653F007FF580 /* depositMoneyVC.m */; };
 		0E2322FE1ED17036007FF580 /* WalletMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2322FD1ED17036007FF580 /* WalletMoneyVC.m */; };
 		0E2323011ED170FE007FF580 /* MoneySelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2323001ED170FE007FF580 /* MoneySelectView.m */; };
@@ -371,6 +377,13 @@
 		0E0879401ECAF40800D7CD28 /* LogoTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoTextField.m; sourceTree = "<group>"; };
 		0E0879421ECB11AF00D7CD28 /* LogoAgreement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoAgreement.h; sourceTree = "<group>"; };
 		0E0879431ECB11AF00D7CD28 /* LogoAgreement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoAgreement.m; sourceTree = "<group>"; };
+		0E19E0A61EF11A190047B94F /* LaunchIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LaunchIntroductionView.h; path = ../BaseVC/LaunchIntroductionView.h; sourceTree = "<group>"; };
+		0E19E0A71EF11A190047B94F /* LaunchIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LaunchIntroductionView.m; path = ../BaseVC/LaunchIntroductionView.m; sourceTree = "<group>"; };
+		0E19E0AA1EF11BD80047B94F /* launch0.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch0.jpg; sourceTree = "<group>"; };
+		0E19E0AB1EF11BD80047B94F /* launch1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch1.jpg; sourceTree = "<group>"; };
+		0E19E0AC1EF11BD80047B94F /* launch2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = launch2.jpg; sourceTree = "<group>"; };
+		0E19E0AD1EF11BD80047B94F /* launch3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch3.png; sourceTree = "<group>"; };
+		0E19E0AE1EF11BD80047B94F /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
 		0E2322F91ED1653F007FF580 /* depositMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = depositMoneyVC.h; sourceTree = "<group>"; };
 		0E2322FA1ED1653F007FF580 /* depositMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = depositMoneyVC.m; sourceTree = "<group>"; };
 		0E2322FC1ED17036007FF580 /* WalletMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletMoneyVC.h; sourceTree = "<group>"; };
@@ -965,6 +978,21 @@
 			path = ../Jshare;
 			sourceTree = "<group>";
 		};
+		0E19E0A91EF11BD80047B94F /* leadLaunch */ = {
+			isa = PBXGroup;
+			children = (
+				0E19E0A61EF11A190047B94F /* LaunchIntroductionView.h */,
+				0E19E0A71EF11A190047B94F /* LaunchIntroductionView.m */,
+				0E19E0AA1EF11BD80047B94F /* launch0.jpg */,
+				0E19E0AB1EF11BD80047B94F /* launch1.jpg */,
+				0E19E0AC1EF11BD80047B94F /* launch2.jpg */,
+				0E19E0AD1EF11BD80047B94F /* launch3.png */,
+				0E19E0AE1EF11BD80047B94F /* login.png */,
+			);
+			name = leadLaunch;
+			path = ../leadLaunch;
+			sourceTree = "<group>";
+		};
 		0E2323071ED19098007FF580 /* Mypreferential */ = {
 			isa = PBXGroup;
 			children = (
@@ -1326,6 +1354,7 @@
 		0E77815A1EC564F500539E18 /* BaseVC */ = {
 			isa = PBXGroup;
 			children = (
+				0E19E0A91EF11BD80047B94F /* leadLaunch */,
 				0EBB98401EEFE82E004297EF /* XYScanView.h */,
 				0EBB98411EEFE82E004297EF /* XYScanView.m */,
 				0ECB41811ECDB09E00396A20 /* NaviView.h */,
@@ -2002,6 +2031,8 @@
 				0EBB1BCE1ED49979009BC5FF /* xkuang_onclick@3x.png in Resources */,
 				0EBB1BD31ED49AB8009BC5FF /* tksucc@2x.png in Resources */,
 				0EBB1C4B1ED4E2C1009BC5FF /* used_after@3x.png in Resources */,
+				0E19E0B01EF11BD80047B94F /* launch1.jpg in Resources */,
+				0E19E0AF1EF11BD80047B94F /* launch0.jpg in Resources */,
 				0ECB41B51ECEAA2400396A20 /* home_center_pic@2x.png in Resources */,
 				0ECB41BD1ECEAA2400396A20 /* ic_msg@2x.png in Resources */,
 				0EF6219B1EE17E3100AC900C /* toux@3x.png in Resources */,
@@ -2024,6 +2055,7 @@
 				0EBB1BFE1ED4A3FB009BC5FF /* back@3x.png in Resources */,
 				0EBB1BC81ED49979009BC5FF /* problem@3x.png in Resources */,
 				0EBB1C551ED52076009BC5FF /* btn_xyfen@2x.png in Resources */,
+				0E19E0B31EF11BD80047B94F /* login.png in Resources */,
 				0E0879321ECACA6600D7CD28 /* qzone@3x.png in Resources */,
 				0E77811D1EC561FE00539E18 /* AlipaySDK.bundle in Resources */,
 				0E614D371ED5784C003B64EC /* line@2x.png in Resources */,
@@ -2031,6 +2063,7 @@
 				0ECB41FA1ECEE8F300396A20 /* activity.xib in Resources */,
 				0EF6218F1EE02B3300AC900C /* serve.xib in Resources */,
 				0EBB1BCD1ED49979009BC5FF /* xkuang_onclick@2x.png in Resources */,
+				0E19E0B21EF11BD80047B94F /* launch3.png in Resources */,
 				0EBB1C401ED4E2B9009BC5FF /* search_add@2x.png in Resources */,
 				0E0879381ECACA6600D7CD28 /* wechat@2x.png in Resources */,
 				0EBB1BED1ED49E92009BC5FF /* pass_per@3x.png in Resources */,
@@ -2076,6 +2109,7 @@
 				0EBB1BD41ED49AB8009BC5FF /* tksucc@3x.png in Resources */,
 				0EF6219C1EE17E3100AC900C /* toux@2x.png in Resources */,
 				0EBB1C131ED4C153009BC5FF /* agreen@2x.png in Resources */,
+				0E19E0B11EF11BD80047B94F /* launch2.jpg in Resources */,
 				0ECB41651ECBE45700396A20 /* homeTopCheakView.xib in Resources */,
 				0EBB1C2C1ED4D180009BC5FF /* lock.xib in Resources */,
 				0EBB1C411ED4E2B9009BC5FF /* search_add@3x.png in Resources */,
@@ -2258,6 +2292,7 @@
 				0E7781121EC561FD00539E18 /* TimerButton.m in Sources */,
 				0E7781251EC561FE00539E18 /* GetMessageFromWXResp+responseWithTextOrMediaMessage.m in Sources */,
 				0ECB41711ECD4AB000396A20 /* startAnnotationView.m in Sources */,
+				0E19E0A81EF11A190047B94F /* LaunchIntroductionView.m in Sources */,
 				0E7781481EC561FE00539E18 /* AFURLResponseSerialization.m in Sources */,
 				0E77810D1EC561FD00539E18 /* CustomAnnotationView.m in Sources */,
 				0E36BC011ED099C70022E3AD /* UIView+ScaleAnimation.m in Sources */,

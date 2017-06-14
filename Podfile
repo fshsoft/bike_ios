@@ -11,4 +11,5 @@ pod 'YTKKeyValueStore'
 pod 'AMap3DMap'
 pod 'AMapSearch'
 pod 'AMapLocation'
+pod 'XHLaunchAd'
 end 
