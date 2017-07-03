@@ -61,6 +61,7 @@
 		0E36BBBC1ED06F6E0022E3AD /* SportDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E36BBBB1ED06F6E0022E3AD /* SportDetailView.m */; };
 		0E36BC011ED099C70022E3AD /* UIView+ScaleAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E36BC001ED099C70022E3AD /* UIView+ScaleAnimation.m */; };
 		0E3A51AE1ED7F047002642FE /* stopView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3A51AD1ED7F047002642FE /* stopView.m */; };
+		0E3B552D1F0A14C200BF38E8 /* ZKUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B552C1F0A14C200BF38E8 /* ZKUDID.m */; };
 		0E47D52A1EE7E8F700F7E0EA /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0E47D5291EE7E8F700F7E0EA /* loading.gif */; };
 		0E47D52D1EE7EA8700F7E0EA /* UIImage+anniGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E47D52C1EE7EA8700F7E0EA /* UIImage+anniGIF.m */; };
 		0E47D5331EE80FD800F7E0EA /* style_json.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E47D5321EE80FD800F7E0EA /* style_json.json */; };
@@ -426,6 +427,8 @@
 		0E36BC001ED099C70022E3AD /* UIView+ScaleAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ScaleAnimation.m"; sourceTree = "<group>"; };
 		0E3A51AC1ED7F047002642FE /* stopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stopView.h; sourceTree = "<group>"; };
 		0E3A51AD1ED7F047002642FE /* stopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = stopView.m; sourceTree = "<group>"; };
+		0E3B552B1F0A14C200BF38E8 /* ZKUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZKUDID.h; sourceTree = "<group>"; };
+		0E3B552C1F0A14C200BF38E8 /* ZKUDID.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZKUDID.m; sourceTree = "<group>"; };
 		0E47D5291EE7E8F700F7E0EA /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		0E47D52B1EE7EA8700F7E0EA /* UIImage+anniGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+anniGIF.h"; sourceTree = "<group>"; };
 		0E47D52C1EE7EA8700F7E0EA /* UIImage+anniGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+anniGIF.m"; sourceTree = "<group>"; };
@@ -1092,6 +1095,8 @@
 				0E88B0CE1EC9BBD700CE5A90 /* BicycleApp.entitlements */,
 				0E777F951EC561FD00539E18 /* AppDelegate.h */,
 				0E777F961EC561FD00539E18 /* AppDelegate.m */,
+				0E3B552B1F0A14C200BF38E8 /* ZKUDID.h */,
+				0E3B552C1F0A14C200BF38E8 /* ZKUDID.m */,
 				0ECB41861ECDB78000396A20 /* PrefixHeader.pch */,
 				0E777FF61EC561FD00539E18 /* Header.h */,
 				0EDB9DE11EEE654D00B42EBC /* model */,
@@ -2359,6 +2364,7 @@
 				0E7781581EC561FE00539E18 /* UIImage+CompressImage.m in Sources */,
 				0E7781501EC561FE00539E18 /* UIButton+AFNetworking.m in Sources */,
 				0ECB416A1ECC6F2D00396A20 /* GeocodeAnnotation.m in Sources */,
+				0E3B552D1F0A14C200BF38E8 /* ZKUDID.m in Sources */,
 				0E7C4E031ED27581000A9474 /* SetInfoVC.m in Sources */,
 				0E47D52D1EE7EA8700F7E0EA /* UIImage+anniGIF.m in Sources */,
 				0E51EA391EF927000097479E /* dataModel.m in Sources */,

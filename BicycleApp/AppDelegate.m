@@ -15,6 +15,7 @@
 #import <WXApi.h>
 #import <AdSupport/AdSupport.h>
 #import "XHLaunchAdManager.h"
+#import "ZKUDID.h"
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
 // iOS10注册APNs所需头文件
@@ -29,6 +30,11 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [ZKUDID setDebug:YES];   // default is NO.
+    NSString *UDID = [ZKUDID value];
+    NSLog(@"UDID: %@",UDID);
+    NSString *uuid = [[NSUUID UUID] UUIDString];
+    NSLog(@"uuid==%@",uuid);
     [self setGaodeMapInfo];
     [self setKeyboardManager];
     [WXApi registerApp:@"wx9befb1503750db67"];
@@ -42,6 +48,7 @@
     return YES;
     
 }
+
 -(void)setLaunchfirst{
     [LaunchIntroductionView sharedWithImages:@[@"launch0",@"launch1",@"launch2",@"launch3"]];
 
