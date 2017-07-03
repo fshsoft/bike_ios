@@ -37,6 +37,10 @@
 #import "CustomAnnotationView.h"
 #import "dataModel.h"
 #import "annotionInfoModel.h"
+#import "ZKUDID.h"
+#import "CusMD5.h"
+#import "appInfoModel.h"
+
 static const NSString *RoutePlanningViewControllerStartTitle       = @"起点";
 static const NSString *RoutePlanningViewControllerDestinationTitle = @"终点";
 static const NSInteger RoutePlanningPaddingEdge                   = 20;
@@ -86,8 +90,9 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
 
 @implementation HomeVC
 - (void)viewDidLoad {
+    [self getInfo];
     NSLog(@"%@",kName);
-    [self cheakToken];
+   // [self cheakToken];
     [self initMapInfoDetaile];
    // [self.mapView clearDisk];
     [self cheakMap];
@@ -125,7 +130,79 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     }
 }
 
+-(void)getInfo{
+    [ZKUDID setDebug:YES];   // default is NO.
+    NSString *UDID = [ZKUDID value];
+   
+    NSLog(@"UDID: %@",UDID);
 
+    NSString *strEnRes = [CusMD5 md5String:UDID];
+     NSLog(@"strEnRes: %@",strEnRes);
+    [RequestManager requestWithType:HttpRequestTypePost urlString:@"http://partner.baibaobike.com/authed/register.html" parameters:@{@"imei":UDID,@"code":strEnRes} successBlock:^(id response) {
+    NSLog(@"response==%@",response);
+        appInfoModel  * model = [appInfoModel yy_modelWithJSON: response];
+        
+        [DB putString:model.app_key      withId:@"app_key"      intoTable:tabName];
+        [DB putString:model.app_secret   withId:@"app_secret"   intoTable:tabName];
+        [DB putString:model.refresh_url  withId:@"refrsh_url"   intoTable:tabName];
+        [DB putString:model.seed_secret  withId:@"seed_secret"  intoTable:tabName];
+        [DB putString:model.source_url   withId:@"source_url"   intoTable:tabName];
+        [DB putString:model.token_url    withId:@"token_url"    intoTable:tabName];
+        [DB putString:model.authorize_url withId:@"authorize_url" intoTable:tabName];
+
+        
+        
+        NSString *url = [DB getStringById:@"authorize_url" fromTable:tabName];
+        //[NSString stringWithFormat:@"http://partner.baibaobike.com"]
+        
+        [RequestManager requestWithType:HttpRequestTypePost
+                              urlString:url parameters:
+  @{
+@"response_type" :@"code",
+@"client_id"     :[DB getStringById:@"app_key" fromTable:tabName],
+@"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
+                                                         
+                                                         }
+                           successBlock:^(id response) {
+                               NSLog(@"response==%@",response);
+                               [DB putString:[response objectForKey:@"authorize_code"] withId:@"authorize_code" intoTable:tabName];
+                           }
+                           failureBlock:^(NSError *error) {
+                               
+                           } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                               
+                           }];
+
+    } failureBlock:^(NSError *error) {
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+    
+   }
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    // [self setActivityView];
+    [RequestManager requestWithType:HttpRequestTypePost
+                          urlString:[DB getStringById:@"token_url" fromTable:tabName]
+parameters:@{
+
+@"client_id"     :[DB getStringById:@"app_key" fromTable:tabName],
+@"client_secret" :[DB getStringById:@"app_secret" fromTable:tabName],
+@"grant_type"    :@"authorization_code",
+@"code"          :[DB getStringById:@"authorize_code" fromTable:tabName],
+@"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
+
+                                      }
+                       successBlock:^(id response) {
+                           NSLog(@"response==%@",response);
+                           
+        
+    } failureBlock:^(NSError *error) {
+        
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+        
+    }];
+}
 #pragma mark 持续定位
  -(void)getLocationInfo{
     self.locationManager = [[AMapLocationManager alloc] init];
@@ -182,10 +259,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     self.actView.frame = CGRectMake(10, 82, SCREEN_WIDTH-20, 50);
     //[self.view addSubview:self.actView];
 }
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-   // [self setActivityView];
-    
-}
+
 /*- (void)configLocationManager
 {
     self.locationManager = [[AMapLocationManager alloc] init];
@@ -245,7 +319,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     self.MyCoordinate=location.coordinate;
     NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
  
-    [self getLocationManagerAnnotationLat:location.coordinate.latitude Lng:location.coordinate.longitude];
+   // [self getLocationManagerAnnotationLat:location.coordinate.latitude Lng:location.coordinate.longitude];
    // [self getCLLocationCoordinateInfo];
     NSLog(@"%@",reGeocode.city);
 }

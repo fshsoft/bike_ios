@@ -12,8 +12,8 @@
 #define DB        [[YTKKeyValueStore alloc]initDBWithName:@"personDB"]
 #define Tab       [DB createTableWithName                :@"person"]
 
-#define  tabName  @"person"
 
+#define  tabName       @"person"
 #define  TelNumber             [DB getStringById:@"phone"                      fromTable:tabName]
 #define  client_access_token   [DB getStringById:@"client_credentials_token"   fromTable:tabName]
 #define  password_token        [DB getStringById:@"password_token"             fromTable:tabName]

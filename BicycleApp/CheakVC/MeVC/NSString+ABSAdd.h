@@ -10,7 +10,7 @@
 
 @interface NSString (ABSAdd)
 
-+(NSString *)MD5:(NSString *)str;
+//+(NSString *)MD5:(NSString *)str;
 +(NSString *)Base64encode:(NSString *)encodeStr;
 +(NSString *)Base64decode:(NSString *)decodeStr;
 +(BOOL) isEmpty:(NSString *) str;

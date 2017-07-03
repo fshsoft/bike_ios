@@ -15,7 +15,7 @@
 #import <WXApi.h>
 #import <AdSupport/AdSupport.h>
 #import "XHLaunchAdManager.h"
-#import "ZKUDID.h"
+
 // 引入JPush功能所需头文件
 #import "JPUSHService.h"
 // iOS10注册APNs所需头文件
@@ -30,11 +30,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [ZKUDID setDebug:YES];   // default is NO.
-    NSString *UDID = [ZKUDID value];
-    NSLog(@"UDID: %@",UDID);
-    NSString *uuid = [[NSUUID UUID] UUIDString];
-    NSLog(@"uuid==%@",uuid);
+    
+   
     [self setGaodeMapInfo];
     [self setKeyboardManager];
     [WXApi registerApp:@"wx9befb1503750db67"];
@@ -68,8 +65,7 @@
 }
 -(void)setTabifno{
     Tab;
-
-}
+    }
 -(void)setKeyboardManager{
     
     // 控制点击背景是否收起键盘
