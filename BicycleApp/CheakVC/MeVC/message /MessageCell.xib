@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="326" id="KGk-i7-Jjw" customClass="MessageCell">
+            <rect key="frame" x="0.0" y="0.0" width="369" height="326"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="369" height="326"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZQ-oz-zWG">
+                        <rect key="frame" x="18" y="18" width="333" height="289.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a42-PQ-hYF">
+                                <rect key="frame" x="0.0" y="0.0" width="333" height="249.5"/>
+                                <color key="backgroundColor" red="0.81561428309999995" green="0.81573241949999997" blue="0.81558841469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="百宝单车邀您共享!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Alq-6K-dUn">
+                                <rect key="frame" x="14" y="259.5" width="200" height="20"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="CsX-gr-RRK"/>
+                                    <constraint firstAttribute="height" constant="20" id="ROQ-An-qyz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="djG-gP-3eU">
+                                <rect key="frame" x="297" y="259" width="20" height="20"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="6ZA-Ne-pZA"/>
+                                    <constraint firstAttribute="width" constant="20" id="yxo-ke-EWA"/>
+                                </constraints>
+                                <state key="normal" image="home_ic_enter.png"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="a42-PQ-hYF" firstAttribute="top" secondItem="SZQ-oz-zWG" secondAttribute="top" id="7wp-FB-DmR"/>
+                            <constraint firstAttribute="bottom" secondItem="Alq-6K-dUn" secondAttribute="bottom" constant="10" id="81a-Pb-NqK"/>
+                            <constraint firstItem="djG-gP-3eU" firstAttribute="top" secondItem="a42-PQ-hYF" secondAttribute="bottom" constant="10" id="AiS-hM-Qjy"/>
+                            <constraint firstAttribute="trailing" secondItem="a42-PQ-hYF" secondAttribute="trailing" id="DY8-ui-oL6"/>
+                            <constraint firstItem="Alq-6K-dUn" firstAttribute="top" secondItem="a42-PQ-hYF" secondAttribute="bottom" constant="10" id="IUJ-He-fZy"/>
+                            <constraint firstAttribute="trailing" secondItem="djG-gP-3eU" secondAttribute="trailing" constant="16" id="PFz-MC-tgE"/>
+                            <constraint firstItem="Alq-6K-dUn" firstAttribute="leading" secondItem="SZQ-oz-zWG" secondAttribute="leading" constant="14" id="ov3-EW-ig0"/>
+                            <constraint firstItem="a42-PQ-hYF" firstAttribute="leading" secondItem="SZQ-oz-zWG" secondAttribute="leading" id="weU-Tk-kys"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="SZQ-oz-zWG" secondAttribute="bottom" constant="10" id="K1J-rP-aGu"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="SZQ-oz-zWG" secondAttribute="trailing" constant="10" id="Pf8-dD-rmy"/>
+                    <constraint firstItem="SZQ-oz-zWG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="aor-iO-jie"/>
+                    <constraint firstItem="SZQ-oz-zWG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="tn8-HF-XXN"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="backView" destination="SZQ-oz-zWG" id="GuF-Oo-rMP"/>
+                <outlet property="img" destination="a42-PQ-hYF" id="rRv-mO-nmb"/>
+                <outlet property="titleLab" destination="Alq-6K-dUn" id="3lQ-Nk-m7K"/>
+            </connections>
+            <point key="canvasLocation" x="-411" y="-82"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="home_ic_enter.png" width="7" height="12"/>
+    </resources>
+</document>

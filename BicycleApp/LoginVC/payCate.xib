@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="payCateView">
+            <rect key="frame" x="0.0" y="0.0" width="387" height="142"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Meh-Oo-QeV">
+                    <rect key="frame" x="20" y="10" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="0yp-b3-Yo5"/>
+                        <constraint firstAttribute="width" constant="30" id="usW-pY-Z5P"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="押金（可秒退）" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z6g-WT-gBN">
+                    <rect key="frame" x="60" y="10" width="100" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="aM3-up-iCk"/>
+                        <constraint firstAttribute="width" constant="100" id="xrQ-Nt-3SH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="di8-1K-VOy">
+                    <rect key="frame" x="307" y="10" width="60" height="30"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="R27-Dh-41T"/>
+                        <constraint firstAttribute="width" constant="60" id="gRN-aT-UiI"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="cheakSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="Rnj-x2-rAw"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="z6g-WT-gBN" firstAttribute="leading" secondItem="Meh-Oo-QeV" secondAttribute="trailing" constant="10" id="9Ux-rS-PUk"/>
+                <constraint firstAttribute="trailing" secondItem="di8-1K-VOy" secondAttribute="trailing" constant="20" id="C2I-Wb-d46"/>
+                <constraint firstItem="di8-1K-VOy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="G1q-gb-gal"/>
+                <constraint firstItem="z6g-WT-gBN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="KGe-YX-QPm"/>
+                <constraint firstItem="Meh-Oo-QeV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="OWk-Mi-4Oe"/>
+                <constraint firstItem="Meh-Oo-QeV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="qVP-ly-wkn"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="cheakBtn" destination="di8-1K-VOy" id="Q3w-lJ-NPe"/>
+                <outlet property="img" destination="Meh-Oo-QeV" id="Uvo-67-wjc"/>
+                <outlet property="title" destination="z6g-WT-gBN" id="JwH-xt-Biq"/>
+            </connections>
+            <point key="canvasLocation" x="-182" y="-201"/>
+        </view>
+    </objects>
+</document>

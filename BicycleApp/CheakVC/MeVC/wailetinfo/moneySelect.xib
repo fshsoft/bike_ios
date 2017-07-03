@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="MoneySelectView">
+            <rect key="frame" x="0.0" y="0.0" width="367" height="153"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="充值金额" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEq-v8-oZY">
+                    <rect key="frame" x="14" y="10" width="353" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="ZkB-jT-awp"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.65092200040817261" green="0.65101778507232666" blue="0.65090101957321167" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K6Y-xn-rAB">
+                    <rect key="frame" x="14" y="40" width="164.5" height="40"/>
+                    <color key="backgroundColor" red="0.9421443343" green="0.56853318210000003" blue="0.25925678009999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="gRa-Dx-k7i"/>
+                    </constraints>
+                    <state key="normal" title="100元">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="hunFoundation:" destination="iN0-l3-epB" eventType="touchUpInside" id="Vcn-ph-joA"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrl-E8-lxp">
+                    <rect key="frame" x="188.5" y="90" width="164.5" height="40"/>
+                    <color key="backgroundColor" red="0.92540913820266724" green="0.92554211616516113" blue="0.92537993192672729" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="3Py-AA-gT4"/>
+                    </constraints>
+                    <state key="normal" title="10元">
+                        <color key="titleColor" red="0.65092200040000003" green="0.65101778509999997" blue="0.65090101960000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="tenBtn:" destination="iN0-l3-epB" eventType="touchUpInside" id="h4U-U1-GY2"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ptR-A1-4cd">
+                    <rect key="frame" x="188.5" y="40" width="164.5" height="40"/>
+                    <color key="backgroundColor" red="0.93325161933898926" green="0.93338567018508911" blue="0.93322223424911499" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="W7T-JE-SGk"/>
+                    </constraints>
+                    <state key="normal" title="50元">
+                        <color key="titleColor" red="0.65092200040000003" green="0.65101778509999997" blue="0.65090101960000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="halfHtnFoundation:" destination="iN0-l3-epB" eventType="touchUpInside" id="JYL-fG-eiQ"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eWp-T8-hJ7">
+                    <rect key="frame" x="14" y="90" width="164.5" height="40"/>
+                    <color key="backgroundColor" red="0.91756665706634521" green="0.91769856214523315" blue="0.91753774881362915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Tl3-dd-jNL"/>
+                    </constraints>
+                    <state key="normal" title="20元">
+                        <color key="titleColor" red="0.65092200040000003" green="0.65101778509999997" blue="0.65090101960000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="twoTenFoundation:" destination="iN0-l3-epB" eventType="touchUpInside" id="HT6-ha-Jqs"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="K6Y-xn-rAB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="0A8-wo-pQh"/>
+                <constraint firstItem="eWp-T8-hJ7" firstAttribute="top" secondItem="K6Y-xn-rAB" secondAttribute="bottom" constant="10" id="2LV-GO-8fk"/>
+                <constraint firstItem="hrl-E8-lxp" firstAttribute="centerY" secondItem="eWp-T8-hJ7" secondAttribute="centerY" id="3jL-cE-Qad"/>
+                <constraint firstItem="bEq-v8-oZY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="6kH-0q-i62"/>
+                <constraint firstItem="hrl-E8-lxp" firstAttribute="leading" secondItem="eWp-T8-hJ7" secondAttribute="trailing" constant="10" id="He2-JB-3dk"/>
+                <constraint firstAttribute="trailing" secondItem="bEq-v8-oZY" secondAttribute="trailing" id="Lr7-V1-523"/>
+                <constraint firstItem="eWp-T8-hJ7" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="14" id="QYd-6R-6Bl"/>
+                <constraint firstAttribute="trailing" secondItem="ptR-A1-4cd" secondAttribute="trailing" constant="14" id="VAg-1l-tQU"/>
+                <constraint firstItem="ptR-A1-4cd" firstAttribute="centerY" secondItem="K6Y-xn-rAB" secondAttribute="centerY" id="YKW-bS-LAT"/>
+                <constraint firstItem="ptR-A1-4cd" firstAttribute="leading" secondItem="K6Y-xn-rAB" secondAttribute="trailing" constant="10" id="ach-BO-sYZ"/>
+                <constraint firstItem="ptR-A1-4cd" firstAttribute="width" secondItem="K6Y-xn-rAB" secondAttribute="width" id="c9y-vu-MNW"/>
+                <constraint firstItem="hrl-E8-lxp" firstAttribute="width" secondItem="eWp-T8-hJ7" secondAttribute="width" id="kX0-bL-J01"/>
+                <constraint firstAttribute="trailing" secondItem="hrl-E8-lxp" secondAttribute="trailing" constant="14" id="rgL-dl-eAs"/>
+                <constraint firstItem="bEq-v8-oZY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="yiE-jx-Uvr"/>
+                <constraint firstItem="K6Y-xn-rAB" firstAttribute="top" secondItem="bEq-v8-oZY" secondAttribute="bottom" constant="10" id="zpM-Cy-4OG"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="halfHunBtn" destination="ptR-A1-4cd" id="rKc-hc-6G2"/>
+                <outlet property="hundredBtn" destination="K6Y-xn-rAB" id="ysW-jG-5nz"/>
+                <outlet property="tenBtn" destination="hrl-E8-lxp" id="9C9-JO-KuI"/>
+                <outlet property="twoTenBtn" destination="eWp-T8-hJ7" id="Mdp-eK-3xx"/>
+            </connections>
+            <point key="canvasLocation" x="-56" y="-321"/>
+        </view>
+    </objects>
+</document>
