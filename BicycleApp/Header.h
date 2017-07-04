@@ -15,9 +15,9 @@
 
 #define  tabName       @"person"
 #define  TelNumber             [DB getStringById:@"phone"                      fromTable:tabName]
-#define  client_access_token   [DB getStringById:@"client_credentials_token"   fromTable:tabName]
-#define  password_token        [DB getStringById:@"password_token"             fromTable:tabName]
-#define  refresh_token         [DB getStringById:@"refresh_token"              fromTable:tabName]
+//#define  client_access_token   [DB getStringById:@"client_credentials_token"   fromTable:tabName]
+//#define  password_token        [DB getStringById:@"password_token"             fromTable:tabName]
+//#define  refressh_token         [DB getStringById:@"refresh_token"              fromTable:tabName]
 //微信开放平台申请得到的 appid, 需要同时添加在 URL schema
 #define WXAppId  @"wx84df9bd306bad5a6"
 

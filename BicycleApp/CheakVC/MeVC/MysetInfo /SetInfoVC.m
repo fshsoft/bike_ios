@@ -63,8 +63,27 @@
 -(void)deleteInfo{
     [DB deleteObjectById:@"phone" fromTable:tabName];
     [DB deleteObjectById:@"password_token" fromTable:tabName];
+    [self sendLogoutRequest];
     [self.navigationController    popToRootViewControllerAnimated:YES];
 }
+
+- (void)sendLogoutRequest {
+    
+    NSDictionary  *dic = @{
+                           
+                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"logout",
+                           };
+    
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+           parameters:dic
+         successBlock:^(id response) {
+       } failureBlock:^(NSError *error) {
+             
+         }];}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.arr.count;
 }

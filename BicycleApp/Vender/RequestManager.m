@@ -200,20 +200,20 @@ static NSMutableArray *tasks;
     NSLog(@"******************** 请求参数 ***************************");
     //[DB getStringById:@"client_credentials_token" fromTable:tabName]
     //[DB getStringById:@"password_token"           fromTable:tabName]
-    if([DB getStringById:@"password_token"   fromTable:tabName]){
-        [[self sharedAFManager].requestSerializer
-         setValue: [DB getStringById:@"password_token" fromTable:tabName]
-         forHTTPHeaderField:@"Authorization"];
-        
-    }else{
-     if([DB getStringById:@"client_credentials_token" fromTable:tabName]){
-        
-        [[self sharedAFManager].requestSerializer
-         setValue: [DB getStringById:@"client_credentials_token"
-                           fromTable:tabName]
-                  forHTTPHeaderField:@"Authorization"];
-       }
-    }
+//    if([DB getStringById:@"password_token"   fromTable:tabName]){
+//        [[self sharedAFManager].requestSerializer
+//         setValue: [DB getStringById:@"password_token" fromTable:tabName]
+//         forHTTPHeaderField:@"Authorization"];
+//        
+//    }else{
+//     if([DB getStringById:@"client_credentials_token" fromTable:tabName]){
+//        
+//        [[self sharedAFManager].requestSerializer
+//         setValue: [DB getStringById:@"client_credentials_token"
+//                           fromTable:tabName]
+//                  forHTTPHeaderField:@"Authorization"];
+//       }
+//    }
 
     NSLog(@"请求头: %@\n请求方式: %@\n请求URL: %@\n请求param: %@\n\n",[self sharedAFManager].requestSerializer.HTTPRequestHeaders, requestType, URLString, parameters);
     NSLog(@"********************************************************");
@@ -271,6 +271,7 @@ static NSMutableArray *tasks;
             
             if (successBlock)
             {
+                NSLog(@"responseObject=%@",responseObject);
                         successBlock(responseObject);
             }
             

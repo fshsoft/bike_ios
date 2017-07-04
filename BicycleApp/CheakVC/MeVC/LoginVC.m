@@ -13,6 +13,7 @@
 #import "LogoTextField.h"
 #import "LogoAgreement.h"
 #import "paymentVC.h"
+#import "BaseModel.h"
 
 @interface LoginVC ()<UITextFieldDelegate, UIScrollViewDelegate>
 
@@ -252,8 +253,25 @@
 
 
 - (void)sendABSPinRequest {
-    
-    [self requestType:HttpRequestTypeGet url:[NSString stringWithFormat:@"https://api.baibaobike.com/v1/sms/send_login_code?mobi=%@",self.phoneNum.field.text] parameters:nil successBlock:^(id response) {
+   // [DB getStringById:@"refresh_token"              fromTable:tabName]
+    NSDictionary  *dic = @{
+                           
+                               @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                               @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                               @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                               @"action":      @"sendSmsCode",
+                               @"mobile":self.phoneNum.field.text
+                               };
+
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+
+parameters:dic
+         successBlock:^(id response) {
+             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
+             Toast(model.errmsg);
+             
+             
         
     } failureBlock:^(NSError *error) {
         
@@ -329,24 +347,25 @@
 
 - (void)sendABSLoginRequest {
     
-    NSDictionary *dic = @{
-                          @"client_id"    :@"ios",
-                          @"client_secret":@"789",
-                          @"grant_type":@"password",
-                          @"scope":@"all",
-                          @"username":self.phoneNum.field.text,
-                          @"password":self.cheakNum.field.text
-                          
-                          };
+    NSDictionary  *dic = @{
+                           
+                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"login",
+                           @"mobile":self.phoneNum.field.text,
+                          @"vericode":self.cheakNum.field.text
+                           };
     
-    [self requestType:HttpRequestTypePost url:url(@"oauth2/access_token")  parameters:dic  successBlock:^(id response) {
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+           parameters:dic
+         successBlock:^(id response) {
+        
+        BaseModel   * model = [BaseModel yy_modelWithJSON:response];
+        Toast(model.errmsg);
         paymentVC * vc  = [[paymentVC alloc]init];
         [DB putString:self.phoneNum.field.text withId:@"phone" intoTable:tabName];
-        
-        [DB putString: [response objectForKey:@"refresh_token"] withId:@"refresh_token"   intoTable:tabName];
-        [DB putString: [response objectForKey:@"access_token"]  withId:@"password_token"  intoTable:tabName];
-        
-        
         [self absPushViewController:vc animated:YES];
 
     } failureBlock:^(NSError *error) {

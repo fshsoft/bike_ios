@@ -13,8 +13,6 @@
 {
     
     return @{
-             @"data":@"data",
-             @"errmsg":@"errmsg",
              @"errorno":@"errno"
              };
 }

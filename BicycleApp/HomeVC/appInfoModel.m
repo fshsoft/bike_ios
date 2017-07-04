@@ -9,27 +9,27 @@
 #import "appInfoModel.h"
 
 @implementation appInfoModel
-+ (nullable NSDictionary<NSString *, id> *)modelCustomPropertyMapper
-{
-    
-    return @{
-           @"errorno":@"errno"
-             };
-}
-/// Dic -> model
-- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic {
-    
-    self.errorno = dic[@"errno"];
-    
-    return YES;
-}
-
-/// model -> Dic
-- (BOOL)modelCustomTransformToDictionary:(NSMutableDictionary *)dic {
-    
-    dic[@"errno"] =self.errorno;
-    
-    return YES;
-}
+//+ (nullable NSDictionary<NSString *, id> *)modelCustomPropertyMapper
+//{
+//    
+//    return @{
+//           @"errorno":@"errno"
+//             };
+//}
+///// Dic -> model
+//- (BOOL)modelCustomTransformFromDictionary:(NSDictionary *)dic {
+//    
+//    self.errorno = dic[@"errno"];
+//    
+//    return YES;
+//}
+//
+///// model -> Dic
+//- (BOOL)modelCustomTransformToDictionary:(NSMutableDictionary *)dic {
+//    
+//    dic[@"errno"] =self.errorno;
+//    
+//    return YES;
+//}
 
 @end

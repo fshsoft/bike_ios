@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-@class dataModel;
+@class appInfoModel;
 @interface BaseModel : NSObject
-@property (nonatomic,strong) dataModel * data;
+@property (nonatomic,strong) appInfoModel * data;
 @property (nonatomic,copy) NSString  * errorno;
+@property (nonatomic,copy) NSString  * status;
 @property (nonatomic,copy) NSString  * errmsg;
 @end

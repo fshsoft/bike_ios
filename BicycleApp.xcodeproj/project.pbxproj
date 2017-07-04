@@ -64,6 +64,7 @@
 		0E3B552D1F0A14C200BF38E8 /* ZKUDID.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B552C1F0A14C200BF38E8 /* ZKUDID.m */; };
 		0E3B55301F0A227000BF38E8 /* CusMD5.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B552F1F0A227000BF38E8 /* CusMD5.m */; };
 		0E3B55331F0A2C9B00BF38E8 /* appInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B55321F0A2C9B00BF38E8 /* appInfoModel.m */; };
+		0E3B55361F0B327B00BF38E8 /* infoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E3B55351F0B327B00BF38E8 /* infoModel.m */; };
 		0E47D52A1EE7E8F700F7E0EA /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0E47D5291EE7E8F700F7E0EA /* loading.gif */; };
 		0E47D52D1EE7EA8700F7E0EA /* UIImage+anniGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E47D52C1EE7EA8700F7E0EA /* UIImage+anniGIF.m */; };
 		0E47D5331EE80FD800F7E0EA /* style_json.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E47D5321EE80FD800F7E0EA /* style_json.json */; };
@@ -435,6 +436,8 @@
 		0E3B552F1F0A227000BF38E8 /* CusMD5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CusMD5.m; path = ../HomeVC/CusMD5.m; sourceTree = "<group>"; };
 		0E3B55311F0A2C9B00BF38E8 /* appInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = appInfoModel.h; sourceTree = "<group>"; };
 		0E3B55321F0A2C9B00BF38E8 /* appInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = appInfoModel.m; sourceTree = "<group>"; };
+		0E3B55341F0B327B00BF38E8 /* infoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = infoModel.h; sourceTree = "<group>"; };
+		0E3B55351F0B327B00BF38E8 /* infoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = infoModel.m; sourceTree = "<group>"; };
 		0E47D5291EE7E8F700F7E0EA /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		0E47D52B1EE7EA8700F7E0EA /* UIImage+anniGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+anniGIF.h"; sourceTree = "<group>"; };
 		0E47D52C1EE7EA8700F7E0EA /* UIImage+anniGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+anniGIF.m"; sourceTree = "<group>"; };
@@ -1170,6 +1173,8 @@
 				0E7780091EC561FD00539E18 /* HomeVC.m */,
 				0E3B55311F0A2C9B00BF38E8 /* appInfoModel.h */,
 				0E3B55321F0A2C9B00BF38E8 /* appInfoModel.m */,
+				0E3B55341F0B327B00BF38E8 /* infoModel.h */,
+				0E3B55351F0B327B00BF38E8 /* infoModel.m */,
 				0E0738641EEA7A6700878913 /* search */,
 				0E0738651EEA7B2500878913 /* homeniv */,
 				0E47D5321EE80FD800F7E0EA /* style_json.json */,
@@ -2322,6 +2327,7 @@
 				0E7781101EC561FD00539E18 /* HomeBottomView.m in Sources */,
 				0E77812A1EC561FE00539E18 /* MANaviAnnotation.m in Sources */,
 				0ECB417C1ECD774E00396A20 /* CertifyTopView.m in Sources */,
+				0E3B55361F0B327B00BF38E8 /* infoModel.m in Sources */,
 				0E7781541EC561FE00539E18 /* UIWebView+AFNetworking.m in Sources */,
 				0E36BBB71ED030040022E3AD /* CheakNumberVC.m in Sources */,
 				0E7780E21EC561FD00539E18 /* PaySelect.m in Sources */,

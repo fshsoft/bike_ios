@@ -1,3 +1,4 @@
+
 //
 //  ViewController.m
 //  BicycleApp
@@ -123,11 +124,11 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
 }
 #pragma mark token获取
 -(void)cheakToken{
-    if(!password_token){
-      if(!client_access_token){
-        [self refreshClientCredentialsToken];
-       }
-    }
+//    if(!password_token){
+//      if(!client_access_token){
+//        [self refreshClientCredentialsToken];
+//       }
+//    }
 }
 
 -(void)getInfo{
@@ -140,40 +141,58 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
      NSLog(@"strEnRes: %@",strEnRes);
     [RequestManager requestWithType:HttpRequestTypePost urlString:@"http://partner.baibaobike.com/authed/register.html" parameters:@{@"imei":UDID,@"code":strEnRes} successBlock:^(id response) {
     NSLog(@"response==%@",response);
-        appInfoModel  * model = [appInfoModel yy_modelWithJSON: response];
+        BaseModel  * model = [BaseModel yy_modelWithJSON: response];
+        appInfoModel    * appinfomodel = model.data;
         
-        [DB putString:model.app_key      withId:@"app_key"      intoTable:tabName];
-        [DB putString:model.app_secret   withId:@"app_secret"   intoTable:tabName];
-        [DB putString:model.refresh_url  withId:@"refrsh_url"   intoTable:tabName];
-        [DB putString:model.seed_secret  withId:@"seed_secret"  intoTable:tabName];
-        [DB putString:model.source_url   withId:@"source_url"   intoTable:tabName];
-        [DB putString:model.token_url    withId:@"token_url"    intoTable:tabName];
-        [DB putString:model.authorize_url withId:@"authorize_url" intoTable:tabName];
-
-        
-        
-        NSString *url = [DB getStringById:@"authorize_url" fromTable:tabName];
-        //[NSString stringWithFormat:@"http://partner.baibaobike.com"]
-        
-        [RequestManager requestWithType:HttpRequestTypePost
-                              urlString:url parameters:
-  @{
-@"response_type" :@"code",
-@"client_id"     :[DB getStringById:@"app_key" fromTable:tabName],
-@"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
+        [DB putString:appinfomodel.app_key       withId:@"app_key"      intoTable:tabName];
+        [DB putString:appinfomodel.app_secret    withId:@"app_secret"   intoTable:tabName];
+        [DB putString:appinfomodel.refresh_url   withId:@"refrsh_url"   intoTable:tabName];
+        [DB putString:appinfomodel.seed_secret   withId:@"seed_secret"  intoTable:tabName];
+        [DB putString:appinfomodel.source_url    withId:@"source_url"   intoTable:tabName];
+        [DB putString:appinfomodel.token_url     withId:@"token_url"    intoTable:tabName];
+        [DB putString:appinfomodel.authorize_url withId:@"authorize_url" intoTable:tabName];
+[RequestManager requestWithType:HttpRequestTypePost
+                      urlString:[DB getStringById:@"authorize_url" fromTable:tabName]
+                     parameters:
+          @{
+           @"response_type" :@"code",
+           @"client_id"     :[DB getStringById:@"app_key" fromTable:tabName],
+           @"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
                                                          
                                                          }
-                           successBlock:^(id response) {
-                               NSLog(@"response==%@",response);
-                               [DB putString:[response objectForKey:@"authorize_code"] withId:@"authorize_code" intoTable:tabName];
+                successBlock:^(id response) {
+                    
+              [DB putString:[[response objectForKey:@"data"] objectForKey:@"authorize_code"]withId:@"authorize_code" intoTable:tabName];
+[RequestManager requestWithType:HttpRequestTypePost
+                      urlString:[DB getStringById:@"token_url" fromTable:tabName]
+                     parameters:@{
+                                                                 
+              @"client_id"     :[DB getStringById:@"app_key" fromTable:tabName],
+              @"client_secret" :[DB getStringById:@"app_secret" fromTable:tabName],
+              @"grant_type"    :@"authorization_code",
+              @"code"          :[DB getStringById:@"authorize_code" fromTable:tabName],
+              @"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
+                                                                 }
+                  successBlock:^(id response) {
+                                                    
+                BaseModel    * model    = [BaseModel yy_modelWithJSON:response];
+                appInfoModel * appmodel = model.data;
+                [DB putString: appmodel.refresh_token withId:@"refresh_token"   intoTable:tabName];
+                [DB putString: appmodel.access_token  withId: @"access_token"  intoTable:tabName];
+                                                      
+                } failureBlock:^(NSError *error) {
+                                                      
+                    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                                                      }];
+
                            }
                            failureBlock:^(NSError *error) {
                                
                            } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
                                
-                           }];
+                    }];
 
-    } failureBlock:^(NSError *error) {
+              } failureBlock:^(NSError *error) {
         
     } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
         
@@ -182,27 +201,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
    }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     // [self setActivityView];
-    [RequestManager requestWithType:HttpRequestTypePost
-                          urlString:[DB getStringById:@"token_url" fromTable:tabName]
-parameters:@{
-
-@"client_id"     :[DB getStringById:@"app_key" fromTable:tabName],
-@"client_secret" :[DB getStringById:@"app_secret" fromTable:tabName],
-@"grant_type"    :@"authorization_code",
-@"code"          :[DB getStringById:@"authorize_code" fromTable:tabName],
-@"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
-
-                                      }
-                       successBlock:^(id response) {
-                           NSLog(@"response==%@",response);
-                           
-        
-    } failureBlock:^(NSError *error) {
-        
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        
-    }];
-}
+   }
 #pragma mark 持续定位
  -(void)getLocationInfo{
     self.locationManager = [[AMapLocationManager alloc] init];
@@ -326,7 +325,7 @@ parameters:@{
 #pragma mark 获取标注
 -(void)getLocationManagerAnnotationLat:(float)lat Lng:(float)lng{
     
-    [self requestType:HttpRequestTypeGet url:[NSString stringWithFormat:@"https://api.baibaobike.com/v1/bikes?lat=%f&lng=%f&range=1",lat,lng] parameters:nil successBlock:^(id response) {
+  /*  [self requestType:HttpRequestTypeGet url:[NSString stringWithFormat:@"https://api.baibaobike.com/v1/bikes?lat=%f&lng=%f&range=1",lat,lng] parameters:nil successBlock:^(id response) {
         NSLog(@"=============%@",response);
      BaseModel*annotion = [BaseModel yy_modelWithJSON:response];
         dataModel *annotionlist = annotion.data;
@@ -361,7 +360,7 @@ parameters:@{
         
     } failureBlock:^(NSError *error) {
         NSLog(@"%@",error);
-    }];
+    }];*/
     }
 #pragma mark 地图设置
 -(void)setMapSubview{

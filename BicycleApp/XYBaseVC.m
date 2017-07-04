@@ -373,19 +373,19 @@ NSString *const kName = @"Alun Chen";
             BaseModel *model = [BaseModel yy_modelWithJSON:response];
             NSLog(@"%@",model.errorno);
            
-            if( [model.errorno integerValue] ==2){
-                
-                Toast(@"请刷新一下试一试");
-                [self  refreshPassWordToken];
-            }else if([model.errorno integerValue]==3){
-                Toast(@"请重新登录");
-                [DB deleteObjectById:@"password_token" fromTable:tabName];
-                [self refreshClientCredentialsToken];
-                LoginVC *loginVC = [[LoginVC alloc]init];
-                [self  absPushViewController:loginVC animated:YES];
-                
-
-            }
+//            if( [model.errorno integerValue] ==2){
+//                
+//                Toast(@"请刷新一下试一试");
+//                [self  refreshPassWordToken];
+//            }else if([model.errorno integerValue]==3){
+//                Toast(@"请重新登录");
+//                [DB deleteObjectById:@"password_token" fromTable:tabName];
+//                [self refreshClientCredentialsToken];
+//                LoginVC *loginVC = [[LoginVC alloc]init];
+//                [self  absPushViewController:loginVC animated:YES];
+//                
+//
+           // }
             
             success(response);
         }
