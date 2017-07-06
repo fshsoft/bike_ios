@@ -10,15 +10,18 @@
 #import "MoneySelectView.h"
 #import "payCateView.h"
 #import "PaySelect.h"
+#import "appInfoModel.h"
 @interface WalletMoneyVC ()
 @property (nonatomic,strong)payCateView    *Wx;
 @property (nonatomic,strong)payCateView    *Alipay;
 @property (nonatomic,strong)MoneySelectView *topSelctView;
+@property (nonatomic,strong)NSString        * price;
 @end
 
 @implementation WalletMoneyVC
 
 - (void)viewDidLoad {
+    self.price =@"100";
     [super viewDidLoad];
     [self setNaivTitle:@"钱包充值"];
     [self setSelectView];
@@ -34,6 +37,7 @@
     self.topSelctView.frame = CGRectMake(0, 64, SCREEN_WIDTH, 140);
     [self.view addSubview:self.topSelctView];
     self.topSelctView.hunBlock = ^{
+        weakself.price =@"100";
         [weakself.topSelctView.hundredBtn setBackgroundColor:mainColor];
         [weakself.topSelctView.halfHunBtn setBackgroundColor:gary221];
         [weakself.topSelctView.twoTenBtn setBackgroundColor:gary221];
@@ -45,6 +49,7 @@
     };
     
     self.topSelctView. halfhunBlock = ^{
+           weakself.price =@"50";
         [weakself.topSelctView.hundredBtn setBackgroundColor:gary221];
         [weakself.topSelctView.halfHunBtn setBackgroundColor:mainColor];
         [weakself.topSelctView.twoTenBtn setBackgroundColor:gary221];
@@ -58,6 +63,7 @@
     };
     
     self.topSelctView.twotenBlock = ^{
+           weakself.price =@"20";
         [weakself.topSelctView.hundredBtn setBackgroundColor:gary221];
         [weakself.topSelctView.halfHunBtn setBackgroundColor:gary221];
         [weakself.topSelctView.twoTenBtn setBackgroundColor:mainColor];
@@ -69,6 +75,7 @@
     };
     
     self.topSelctView.tenBlock = ^{
+           weakself.price =@"10";
         [weakself.topSelctView.hundredBtn setBackgroundColor:gary221];
         [weakself.topSelctView.halfHunBtn setBackgroundColor:gary221];
         [weakself.topSelctView.twoTenBtn setBackgroundColor:gary221];
@@ -125,6 +132,40 @@
     
 }
 -(void)payStyle{
+    
+    NSDictionary  *dic = @{
+                           
+                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"getAlipayOrder",
+                           @"total": self.price
+                           };
+    
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+     
+           parameters:dic
+         successBlock:^(id response) {
+             
+             NSLog(@"response====%@",response);
+             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
+             if([model.errorno isEqualToString:@"0"]){
+             appInfoModel *appmodel= model.data;
+                 PaySelect *a =[[PaySelect alloc]init];
+                 [a doAlipayPayAppID:appmodel.appId
+                               Price:self.price
+                            orderNum:appmodel.orderid
+                        orderTime:   appmodel.createtime
+                          PrivateKey:appmodel.private_key
+                                Body:appmodel.createtime
+                             subJect:appmodel.createtime];
+             }
+         } failureBlock:^(NSError *error) {
+             
+         }];
+
+    
     //    certifyPersonInfoVC *vc =[[certifyPersonInfoVC alloc]init];
     //    [self absPushViewController:vc animated:YES];
     //PaySelect *a =[[PaySelect alloc]init];
@@ -137,6 +178,7 @@
     [super viewWillAppear:YES];
     //监听通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderPayResult:) name:@"WXPay" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderalPayResult:) name:@"alPay" object:nil];
     
 }
 
@@ -147,6 +189,20 @@
     //移除通知
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+- (void)getOrderalPayResult:(NSNotification *)notification
+{
+    NSLog(@"userInfo: %@",notification.userInfo);
+    
+    if ([notification.object isEqualToString:@"9000"])
+    {
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示信息" message:@"支付成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alertView show];
+    }else{
+        [self alert:@"提示" msg:@"支付失败"];
+      }
+}
+
+
 #pragma mark - 事件
 - (void)getOrderPayResult:(NSNotification *)notification
 {

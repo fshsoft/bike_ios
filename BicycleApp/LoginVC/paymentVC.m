@@ -11,6 +11,8 @@
 #import "payCateView.h"
 #import "PaySelect.h"
 #import "certifyPersonInfoVC.h"
+#import "PaySelect.h"
+#import "appInfoModel.h"
 @interface paymentVC ()
 @property (nonatomic,strong)CertifyTopView *topView;
 @property (nonatomic,strong)payCateView    *pormot;
@@ -117,8 +119,40 @@
  
 }
 -(void)payStyle{
-    certifyPersonInfoVC *vc =[[certifyPersonInfoVC alloc]init];
-    [self absPushViewController:vc animated:YES];
+    
+    NSDictionary  *dic = @{
+                           
+                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"getAlipayOrder",
+                           @"total": @"299"
+                           };
+    
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+     
+           parameters:dic
+         successBlock:^(id response) {
+             
+             NSLog(@"response====%@",response);
+             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
+             if([model.errorno isEqualToString:@"0"]){
+                 appInfoModel *appmodel= model.data;
+                 PaySelect *a =[[PaySelect alloc]init];
+                 [a doAlipayPayAppID:appmodel.appId
+                               Price:@"299"
+                            orderNum:appmodel.orderid
+                           orderTime:appmodel.createtime
+                          PrivateKey:appmodel.private_key
+                                Body:appmodel.createtime
+                             subJect:appmodel.createtime];
+             }
+         } failureBlock:^(NSError *error) {
+             
+         }];
+
+        //[DB putString: appmodel.access_token  withId: @"access_token"  intoTable:tabName];
     //PaySelect *a =[[PaySelect alloc]init];
     //[a  wxpay];
     //[a getWeChatPayWithOrderName:@"yifenqian" price:@"1"];
@@ -129,9 +163,24 @@
     [super viewWillAppear:YES];
     //监听通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderPayResult:) name:@"WXPay" object:nil];
+     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderalPayResult:) name:@"alPay" object:nil];
     
 }
+- (void)getOrderalPayResult:(NSNotification *)notification
+{
+    NSLog(@"userInfo: %@",notification.userInfo);
+    
+    if ([notification.object isEqualToString:@"9000"])
+    {
+        certifyPersonInfoVC *vc =[[certifyPersonInfoVC alloc]init];
+        [DB putString:@"1"   withId: @"money"  intoTable:tabName];
+        [self absPushViewController:vc animated:YES];
 
+    }else
+    {
+        [self alert:@"提示" msg:@"支付失败"];
+    }
+}
 #pragma mark 移除通知
 - (void)viewWillDisappear:(BOOL)animated
 {

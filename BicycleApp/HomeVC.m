@@ -41,6 +41,8 @@
 #import "ZKUDID.h"
 #import "CusMD5.h"
 #import "appInfoModel.h"
+#import "certifyPersonInfoVC.h"
+#import "paymentVC.h"
 
 static const NSString *RoutePlanningViewControllerStartTitle       = @"起点";
 static const NSString *RoutePlanningViewControllerDestinationTitle = @"终点";
@@ -91,9 +93,10 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
 
 @implementation HomeVC
 - (void)viewDidLoad {
+   
     [self getInfo];
     NSLog(@"%@",kName);
-   // [self cheakToken];
+    [self cheakToken];
     [self initMapInfoDetaile];
    // [self.mapView clearDisk];
     [self cheakMap];
@@ -124,11 +127,11 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
 }
 #pragma mark token获取
 -(void)cheakToken{
-//    if(!password_token){
-//      if(!client_access_token){
-//        [self refreshClientCredentialsToken];
-//       }
-//    }
+    if(!refressh_access_token){
+     
+        [self getInfo];
+     
+ }
 }
 
 -(void)getInfo{
@@ -201,6 +204,8 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
    }
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     // [self setActivityView];
+    PaySelect    * pay =[[PaySelect alloc]init];
+    //[pay doAlipayPay];
    }
 #pragma mark 持续定位
  -(void)getLocationInfo{
@@ -222,25 +227,53 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     self.homeNaiv.frame  =CGRectMake(0, 0, SCREEN_WIDTH, 64);
     __block HomeVC *weakSelf = self;
     self.homeNaiv.leftBlock = ^{
+        
         if( !TelNumber){
+            [weakSelf cheakToken];
             LoginVC *loginVC = [[LoginVC alloc]init];
             [weakSelf  absPushViewController:loginVC animated:YES];
             
             return;
-        }else{
-        MeVC *me = [[MeVC alloc]init];
-        [weakSelf.navigationController pushViewController:me animated:YES];
         }
+//        else{
+//            if(![[DB getStringById:@"money" fromTable:tabName] isEqualToString:@"1"]){
+//                paymentVC * vc = [[paymentVC alloc]init];
+//                [weakSelf absPushViewController:vc animated:YES];
+//            }else{
+//                if(![[DB getStringById:@"certify" fromTable:tabName] isEqualToString:@"1"]){
+//                    certifyPersonInfoVC * vc = [[certifyPersonInfoVC alloc]init];
+//                    [weakSelf absPushViewController:vc animated:YES];
+//
+//                }
+                else{
+                    MeVC * me  = [[MeVC alloc]init];
+                    [weakSelf.navigationController pushViewController:me animated:YES ];
+             //   }
+            //  }
+        }
+
         };
      self.homeNaiv.mesBlock = ^{
          if( !TelNumber){
+             [weakSelf cheakToken];
              LoginVC *loginVC = [[LoginVC alloc]init];
              [weakSelf  absPushViewController:loginVC animated:YES];
              
              return;
          }else{
-         messageVC *message = [[messageVC alloc]init];
-         [weakSelf absPushViewController:message animated:YES];
+             if(![[DB getStringById:@"money" fromTable:tabName] isEqualToString:@"1"]){
+                 paymentVC * vc = [[paymentVC alloc]init];
+                 [weakSelf absPushViewController:vc animated:YES];
+             }else{
+                 if(![[DB getStringById:@"certify" fromTable:tabName] isEqualToString:@"1"]){
+                     certifyPersonInfoVC * vc = [[certifyPersonInfoVC alloc]init];
+                     [weakSelf absPushViewController:vc animated:YES];
+                     
+                 }else{
+                     messageVC *message = [[messageVC alloc]init];
+                     [weakSelf absPushViewController:message animated:YES];
+                 }
+             }
          }
       
      };
@@ -746,13 +779,25 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     };
     bottom.cheakBlock=^{
         if( !TelNumber){
+            [selfblock cheakToken];
             LoginVC *loginVC = [[LoginVC alloc]init];
             [selfblock  absPushViewController:loginVC animated:YES];
             
             return;
         }else{
-        [selfblock jumpCheakViewConroller];
-    }
+            if(![[DB getStringById:@"money" fromTable:tabName] isEqualToString:@"1"]){
+                paymentVC * vc = [[paymentVC alloc]init];
+                [selfblock absPushViewController:vc animated:YES];
+            }else{
+                if(![[DB getStringById:@"certify" fromTable:tabName] isEqualToString:@"1"]){
+                    certifyPersonInfoVC * vc = [[certifyPersonInfoVC alloc]init];
+                    [selfblock absPushViewController:vc animated:YES];
+
+                }else{
+                    [selfblock jumpCheakViewConroller];
+                }
+            }
+        }
     };
     
     bottom.mapBlock = ^{
@@ -768,12 +813,24 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     
     bottom.helpBlock = ^{
         if( !TelNumber){
+            [selfblock cheakToken];
             LoginVC *loginVC = [[LoginVC alloc]init];
             [selfblock  absPushViewController:loginVC animated:YES];
             
             return;
         }else{
-       [selfblock BaseUpAnimation];
+            if(![[DB getStringById:@"money" fromTable:tabName] isEqualToString:@"1"]){
+                paymentVC * vc = [[paymentVC alloc]init];
+                [selfblock absPushViewController:vc animated:YES];
+            }else{
+                if(![[DB getStringById:@"certify" fromTable:tabName] isEqualToString:@"1"]){
+                    certifyPersonInfoVC * vc = [[certifyPersonInfoVC alloc]init];
+                    [selfblock absPushViewController:vc animated:YES];
+                    
+                }else{
+                    [selfblock BaseUpAnimation];
+                }
+            }
         }
     };
      [self.view addSubview:bottom];

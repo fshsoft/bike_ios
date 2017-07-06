@@ -363,7 +363,7 @@
 //
 //选中商品调用支付宝极简支付
 //
-- (void)doAlipayPay
+- (void)doAlipayPayAppID:(NSString *)appID  Price:(NSString *)price orderNum:(NSString *)ordernum orderTime:(NSString *)ordertime PrivateKey:(NSString *)privateKey Body:(NSString *)body subJect:(NSString *)subject
 {
     //重要说明
     //这里只是为了方便直接向商户展示支付宝的整个支付流程；所以Demo中加签过程直接放在客户端完成；
@@ -372,15 +372,16 @@
     /*============================================================================*/
     /*=======================需要填写商户app申请的===================================*/
     /*============================================================================*/
-    NSString *appID = @"2088811575443385";
+    //NSString *appID = @"2017061107466058";
     
     // 如下私钥，rsa2PrivateKey 或者 rsaPrivateKey 只需要填入一个
     // 如果商户两个都设置了，优先使用 rsa2PrivateKey
     // rsa2PrivateKey 可以保证商户交易在更加安全的环境下进行，建议使用 rsa2PrivateKey
     // 获取 rsa2PrivateKey，建议使用支付宝提供的公私钥生成工具生成，
     // 工具地址：https://doc.open.alipay.com/docs/doc.htm?treeId=291&articleId=106097&docType=1
-    NSString *rsa2PrivateKey = @"";
-    NSString *rsaPrivateKey = @"MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAM5OpdUDvkl3c4HVojMvtuUosd9DqNd+VzK6BrkP1mcEreZlCRVP7q9akNC+V4yUHuyhbFvpiCPreqBAtpygYftcNodC92WxxEGvdPWRERivV3NAzdaOl451OQDRLm1qPAqTV2A2YdP0eIpt57o2VLEkytgtI2/2XdzeR6LFVKbZAgMBAAECgYBmipTGQawM3ABfYg3Snz6qvAVc0UZUhYlVvzykMwj//0VoJIPVQfuC0OL1vgXJ671LJBi1vmdaYyp6CHA7fUP1RRdHokVCbwhMlWR4GEVuJR+n+td2H08YZ4SszjMnhCrl/F2/s62KW8Fdvj8v0zYaClCkYooaUSBfHF8RlOFnuQJBAO1gyq8a3HiV+OvY8n5a/4UiSk1wUHgLgWHl5cWsbvDYGH4yBT57ptEOOHIZ5YinGI/8Zto0s64vc9pTimhZvbsCQQDefd3zV3Yfph8pK9YVCpRf1tfLXgTpOOuncXBfFL10Mz/4qrj3gxrpMqKWvs3CZSRDrh7vs1yUrPhbuMKG/Jp7AkAdh9IPMJ9G3RlndcjNEVMCY/6sXZGVLZE99ZS9H7N5gNijMmPWnxlknolFIJWeh3MVzoeZE79apwqZmZT5YFirAkA9HXHkL/gghW81zfbGXNuY39jy4eaTcbE5k218kKPh0VoXIj4grwCrYd9LbSnz5fhqJuAUk74wkLq/5yZ4EdcVAkEAuRjIEqUhUvduCVZ1z+fPNMg7P2TiVVJHjbj6HB2PVLp64GeqbqQI8q6ll2QwnzmwjzfNxtIR4rUfcaHSDpVR0A==";
+    NSString *rsa2PrivateKey =privateKey;
+    /* @"MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC0J5GGpOqZuvUnD8QI6xDeyq6jaYe/VdU/t+6fmPv26+og8EgY/fJHzObJxQc+1doyRPIu59G1To6q+MC/wFZhxNDewa70i+8AjPS8QDa9pOqgvwJH5BlayclRCZXKzecERMA0DBteFB0baYif5G+8iBqQwPC5J1HdD82wHjXC8Lwtarg6Ix52/eB0XL/i6dYDbUuZekLJIZiDIkkWreB/En62tjgNKD6Bs0oi7tarPsDoibPeRxL3DnHFrbMkBrZaWXslLcj2pXeGmGb5vjmsY88cWYSgGJsBtLZ7ToU6iG54wFUPiskM3NzvBhBPKge/64alkbZTQ0q+YVScdVh7AgMBAAECggEBAI3deuOkinl0mAiiiaTcNvS6druIJrWtSbhbhzV2qzPOoxg9HwlPMLMJz9OjrAj3LlPXpz74nlNAAWjxaheVxnBHJJPFwZgheZvdY/u6NWExtPHQeGNUZALyU+3Utnh1nC3oVdKmlgaHoEQt3sDKipLUOtcymF21cOm7wCWoJH3U8MKJnoONBUnMBJcoiMZ1Vs5r+sJ0Z3fk4eP/1Z+Zg8DBSNsl9NSlbBmxVflw50aBa6I4CMnMegw/1t7L6TZtPTiP8o7hZ0G9KxJPeGnBo/um06mG3Clj3VF6DMd4eblgs8mEfWe+qTiP0IdPXUrR7eq6dszFNlC75a9+VMaRkgECgYEA7oYwyqu6RPpy00nd4gmyvyIbV2c4xygIJJ3uggXZCUSUVLX5RUapeOeC2wGjKe17Io/E6nQOWoqdkQyk3jM8kTGruXPyAd3xmzdSW3A42gjkW9QW+2Ery1JzW4GlVN0k86nBWPpqmYsp9Aqtj7sMgM5rRKOGEnPnCu4GL0pcA9sCgYEAwVqVymkW29Vtp1yC6ifMZK5uhTVlHAKAYjEl/9D8CBuN3vBaxVMVaGO3UiWqmERyiLN3tLsIAmP6ms6HgJnZpLakQbfNJgtOpKLLm2ypI88YrDoKZSHgW2J4Z8kaAQNLXbWY2BF+jH1UGYxyWm5/vaTo0SaxgMM2rTSJokzeb+ECgYAW8oAFL4pHEpUzcJrRIT+6FazttreGqXpHE46bobZkpt1iXPNzT74ELLmxGjI5WWiMRaqbJ7ktysIn70B5RBKioVW1DMuOlGynEyZwN5awm0Rk9T2Ux59v+ymv9wQR6wigDIfWaJkS1omdud1Cw6sLRVCalOTUJ6Rlr8qWiB/cGwKBgQCn/7wsvbil08DN7Py21VOrmz/eMDGk76t7JbcdmgiSRtazAWXtE66DIDkVgDLE0JwvmLgG6YchBJunTJHBtGu9yQ/ZJgly59oyBF0is3wW6AdJBbkofBHDdUCm9L3KaYFfb7zY6AJrsS2UcUqetmn5bkL4D0WlWni0b/Syd1XCIQKBgEnLVMR4mYbsnDj94owqjgC7y0A6Pq4+XGmwd+jj/uw/Tlh0z6J6dzT175faKFeuGGX0mb7cOikY/IAMUzvahYqdzAqdVDnHSJ+KbiF0bw32uN4O2iMFtHnCDzzus7NmYvjCGYxfnGalX6viBUFPUTOd+sX4zaAjkMOwVKbbmhcO";*/
+    NSString *rsaPrivateKey = @"";
     /*============================================================================*/
     /*============================================================================*/
     /*============================================================================*/
@@ -426,13 +427,12 @@
     
     // NOTE: 商品数据
     order.biz_content = [BizContent new];
-    order.biz_content.seller_id =@"dev_api@i-tianhuang.com";
-    order.biz_content.body = @"我是测试数据";
-    order.biz_content.subject = @"1";
-    order.biz_content.out_trade_no = [self generateTradeNO]; //订单ID（由商家自行制定）
+    order.biz_content.body         = body;
+    order.biz_content.subject      = subject;
+    order.biz_content.out_trade_no =[self generateTradeNO]; //订单ID（由商家自行制定）
     order.biz_content.timeout_express = @"30m"; //超时时间设置
-    order.biz_content.total_amount = [NSString stringWithFormat:@"%.2f", 0.01]; //商品价格
-    
+    order.biz_content.total_amount =price;
+    //[NSString stringWithFormat:@"%.2f", 0.01];
     //将商品信息拼接成字符串
     NSString *orderInfo = [order orderInfoEncoded:NO];
     NSString *orderInfoEncoded = [order orderInfoEncoded:YES];
@@ -451,7 +451,7 @@
     // NOTE: 如果加签成功，则继续执行支付
     if (signedString != nil) {
         //应用注册scheme,在AliSDKDemo-Info.plist定义URL types
-        NSString *appScheme = @"alisdkdemo";
+        NSString *appScheme = @"bikeAlipay";
         
         // NOTE: 将签名成功字符串格式化为订单字符串,请严格按照该格式
         NSString *orderString = [NSString stringWithFormat:@"%@&sign=%@",

@@ -21,4 +21,11 @@
 @property  (nonatomic,copy)NSString  * message;
 @property  (nonatomic,copy)NSString  * access_token;
 @property  (nonatomic,copy)NSString  * refresh_token;
+@property  (nonatomic,copy)NSString  * body;
+@property  (nonatomic,copy)NSString  * createtime;
+@property  (nonatomic,copy)NSString  * out_trade_no;
+@property  (nonatomic,copy)NSString  * total_amout;
+@property  (nonatomic,copy)NSString  * private_key;
+@property  (nonatomic,copy)NSString  * appId;
+@property  (nonatomic,copy)NSString  * orderid;
 @end

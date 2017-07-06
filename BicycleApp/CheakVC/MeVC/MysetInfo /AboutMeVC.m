@@ -23,7 +23,7 @@
     }
 -(void)setbottomView{
     UILabel  *lab =[[UILabel alloc]initWithFrame:CGRectMake(0, SCREENH_HEIGHT-60, SCREEN_WIDTH, 13)];
-    lab.text = @"Copyright©2016-2017";
+    lab.text = @"Copyright©2016-2046";
     lab.textAlignment = NSTextAlignmentCenter;
     lab.font = FontSize(12);
     [self.view addSubview: lab];

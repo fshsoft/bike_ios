@@ -13,4 +13,5 @@
 @property (nonatomic,copy) NSString  * errorno;
 @property (nonatomic,copy) NSString  * status;
 @property (nonatomic,copy) NSString  * errmsg;
+@property (nonatomic,copy) NSString  * message;
 @end

@@ -270,8 +270,8 @@ parameters:dic
          successBlock:^(id response) {
              BaseModel   * model = [BaseModel yy_modelWithJSON:response];
              Toast(model.errmsg);
-             
-             
+             NSString *errmsg = model.errmsg;
+             NSLog(@"errmsg==%@",errmsg);
         
     } failureBlock:^(NSError *error) {
         
@@ -363,10 +363,17 @@ parameters:dic
          successBlock:^(id response) {
         
         BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-        Toast(model.errmsg);
-        paymentVC * vc  = [[paymentVC alloc]init];
-        [DB putString:self.phoneNum.field.text withId:@"phone" intoTable:tabName];
-        [self absPushViewController:vc animated:YES];
+        
+             if([model.errorno intValue]==0){
+                 paymentVC * vc  = [[paymentVC alloc]init];
+                 [DB putString:self.phoneNum.field.text withId:@"phone" intoTable:tabName];
+                 [self absPushViewController:vc animated:YES];
+             }else{
+                 Toast(model.errmsg);
+             }
+        
+       
+       
 
     } failureBlock:^(NSError *error) {
         

@@ -61,10 +61,9 @@
     [btn addTarget:self action:@selector(deleteInfo) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)deleteInfo{
-    [DB deleteObjectById:@"phone" fromTable:tabName];
-    [DB deleteObjectById:@"password_token" fromTable:tabName];
+   
     [self sendLogoutRequest];
-    [self.navigationController    popToRootViewControllerAnimated:YES];
+    
 }
 
 - (void)sendLogoutRequest {
@@ -81,6 +80,9 @@
                   url:[DB getStringById:@"source_url" fromTable:tabName]
            parameters:dic
          successBlock:^(id response) {
+             [DB deleteObjectById:@"phone" fromTable:tabName];
+             [DB deleteObjectById:@"access_token" fromTable:tabName];
+             [self.navigationController    popToRootViewControllerAnimated:YES];
        } failureBlock:^(NSError *error) {
              
          }];}

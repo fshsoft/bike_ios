@@ -347,6 +347,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
                 //跳转支付宝钱包进行支付，处理支付结果
              [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
                    NSLog(@"result = %@",resultDic);
+                 NSNotification * notification = [NSNotification notificationWithName:@"alPay" object:[NSString stringWithFormat:@"%@",[resultDic objectForKey:@"resultStatus"]]];
+                 [[NSNotificationCenter defaultCenter] postNotification:notification];
               }];
           }
     if([url.scheme isEqualToString:WXAppId]){
@@ -364,6 +366,8 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             NSLog(@"result = %@",resultDic);
+            NSNotification * notification = [NSNotification notificationWithName:@"alPay" object:[NSString stringWithFormat:@"%@",[resultDic objectForKey:@"resultStatus"]]];
+            [[NSNotificationCenter defaultCenter] postNotification:notification];
         }];
     }
     if([url.scheme isEqualToString:WXAppId]){

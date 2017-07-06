@@ -13,4 +13,5 @@
 -(void)Order;
 - (void)getWeChatPayWithOrderName:(NSString *)name
                             price:(NSString*)price;
+- (void)doAlipayPayAppID:(NSString *)appID  Price:(NSString *)price orderNum:(NSString *)ordernum orderTime:(NSString *)ordertime PrivateKey:(NSString *)privateKey Body:(NSString *)body subJect:(NSString *)subject;
 @end
