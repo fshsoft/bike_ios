@@ -875,8 +875,8 @@
 		0ECB41FE1ECFD0A300396A20 /* payCate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = payCate.xib; path = ../payCate.xib; sourceTree = "<group>"; };
 		0ECB42001ECFD30100396A20 /* payCateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payCateView.h; path = ../payCateView.h; sourceTree = "<group>"; };
 		0ECB42011ECFD30100396A20 /* payCateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = payCateView.m; path = ../payCateView.m; sourceTree = "<group>"; };
-		0EDB9DE61EEE688800B42EBC /* annotionInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = annotionInfoModel.h; sourceTree = "<group>"; };
-		0EDB9DE71EEE688800B42EBC /* annotionInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = annotionInfoModel.m; sourceTree = "<group>"; };
+		0EDB9DE61EEE688800B42EBC /* annotionInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = annotionInfoModel.h; path = ../model/homeModel/annotionInfoModel.h; sourceTree = "<group>"; };
+		0EDB9DE71EEE688800B42EBC /* annotionInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = annotionInfoModel.m; path = ../model/homeModel/annotionInfoModel.m; sourceTree = "<group>"; };
 		0EF6215A1ED813EB00AC900C /* break.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = break.xib; sourceTree = "<group>"; };
 		0EF6215C1ED8205900AC900C /* breakView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = breakView.h; sourceTree = "<group>"; };
 		0EF6215D1ED8205900AC900C /* breakView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = breakView.m; sourceTree = "<group>"; };
@@ -1173,6 +1173,8 @@
 				0E7780091EC561FD00539E18 /* HomeVC.m */,
 				0E3B55311F0A2C9B00BF38E8 /* appInfoModel.h */,
 				0E3B55321F0A2C9B00BF38E8 /* appInfoModel.m */,
+				0EDB9DE61EEE688800B42EBC /* annotionInfoModel.h */,
+				0EDB9DE71EEE688800B42EBC /* annotionInfoModel.m */,
 				0E3B55341F0B327B00BF38E8 /* infoModel.h */,
 				0E3B55351F0B327B00BF38E8 /* infoModel.m */,
 				0E0738641EEA7A6700878913 /* search */,
@@ -1925,8 +1927,6 @@
 		0EDB9DE21EEE656E00B42EBC /* homeModel */ = {
 			isa = PBXGroup;
 			children = (
-				0EDB9DE61EEE688800B42EBC /* annotionInfoModel.h */,
-				0EDB9DE71EEE688800B42EBC /* annotionInfoModel.m */,
 				0E51EA371EF927000097479E /* dataModel.h */,
 				0E51EA381EF927000097479E /* dataModel.m */,
 				0E26EDD91EF375950063A5CE /* BaseModel.h */,

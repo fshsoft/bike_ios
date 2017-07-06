@@ -49,7 +49,31 @@
     [self setLightStatusButton];
 }
 -(void)getScanDataString:(NSString*)scanDataString{
+    NSDictionary  *dic = @{
+                           
+                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"scanCode",
+                           @"sn":scanDataString
+                           };
     
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+     
+           parameters:dic
+         successBlock:^(id response) {
+             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
+             if([model.errorno   isEqualToString:@"0"]){
+                 CkeakDetaitleVC *vc =[[CkeakDetaitleVC alloc]init];
+                 [self.navigationController pushViewController:vc  animated:YES];
+             }else{
+             Toast(model.errmsg);
+             }
+         } failureBlock:^(NSError *error) {
+             
+         }];
+
     NSLog(@"二维码内容：%@",scanDataString);
     
 }

@@ -28,4 +28,7 @@
 @property  (nonatomic,copy)NSString  * private_key;
 @property  (nonatomic,copy)NSString  * appId;
 @property  (nonatomic,copy)NSString  * orderid;
+
+
+
 @end

@@ -9,8 +9,10 @@
 #import <Foundation/Foundation.h>
 
 @interface annotionInfoModel : NSObject
-@property (nonatomic ,assign)  double lat;
-@property (nonatomic ,assign)  double lng;
-@property (nonatomic ,assign)  int   id;
+@property  (nonatomic,copy)NSString  * id;
+@property  (nonatomic,copy)NSString  * lat;
+@property  (nonatomic,copy)NSString  * lng;
+@property  (nonatomic,copy)NSString  * distance;
+@property  (nonatomic,copy)NSString  * action;
 
 @end

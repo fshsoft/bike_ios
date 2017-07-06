@@ -112,6 +112,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     [self setSearchMapPath];
     [self setBottomSubview];
     [self setNavLeftItemTitle:nil andImage:Img(@"catage")];
+   
        //[self startLoading];
     }
 #pragma mark 初始化地图所需数据
@@ -351,17 +352,70 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     self.MyCoordinate=location.coordinate;
     NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
  
-   // [self getLocationManagerAnnotationLat:location.coordinate.latitude Lng:location.coordinate.longitude];
+   [self getLocationManagerAnnotationLat:location.coordinate.latitude Lng:location.coordinate.longitude];
    // [self getCLLocationCoordinateInfo];
     NSLog(@"%@",reGeocode.city);
 }
 #pragma mark 获取标注
 -(void)getLocationManagerAnnotationLat:(float)lat Lng:(float)lng{
+    NSDictionary  *dic = @{
+                           
+                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"searchBikes",
+                           @"lat"   : [NSString stringWithFormat:@"%f", lat ],
+                           @"lng"   : [NSString stringWithFormat:@"%f",  lng ]
+                           };
     
-  /*  [self requestType:HttpRequestTypeGet url:[NSString stringWithFormat:@"https://api.baibaobike.com/v1/bikes?lat=%f&lng=%f&range=1",lat,lng] parameters:nil successBlock:^(id response) {
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+     
+           parameters:dic
+         successBlock:^(id response) {
+             NSLog(@"response====%@",response);
+               // BaseModel   * model = [BaseModel yy_modelWithJSON:response];
+             
+             NSMutableArray * arr = [response objectForKey:@"data"];
+             NSLog(@"=======%@+++++++++",arr);
+            
+             if(arr.count>0){
+                 self.paopaoTag=1;
+                 [self.mapView removeAnnotations:self.annotations];
+                 [self.annotations removeAllObjects ];
+                 self.changeAnnotation.lockedScreenPoint = CGPointMake(self.view.frame.size.width/2.0,(self.view.frame.size.height-64)/2.0);
+                 //self.changeAnnotation.lockedToScreen = YES;
+                 self.changeAnnotation.title =@"11111111";
+                 [self.annotations addObject:self.changeAnnotation];
+                 for(int i=0;i<arr.count;i++){
+                     annotionInfoModel *annotioninfo = [annotionInfoModel   yy_modelWithJSON:arr[i]];
+                     MAPointAnnotation *a1 = [[MAPointAnnotation alloc] init];
+                     a1.coordinate=CLLocationCoordinate2DMake([annotioninfo.lat floatValue  ], [annotioninfo.lng floatValue]);
+                     //NSLog(@"lat====%flng====%f",annotioninfo.lat, annotioninfo.lng);
+                     //a1.title      = [NSString stringWithFormat:@"anno: %d", annotioninfo.id];
+                     if(i==0){
+                         a1.subtitle      = @"离我最近";
+                         
+                     }
+                     [self.annotations addObject:a1];
+                 }
+                 NSLog(@"=============%lu",(unsigned long)self.annotations.count);
+                 [self.mapView addAnnotations:self.annotations];
+                 [self.mapView selectAnnotation:self.annotations[1] animated:YES];
+                 [self.mapView setZoomLevel:15 animated:YES];
+             }
+             
+
+             
+         } failureBlock:^(NSError *error) {
+             
+         }];
+
+    
+  /* [self requestType:HttpRequestTypeGet url:[NSString stringWithFormat:@"https://api.baibaobike.com/v1/bikes?lat=%f&lng=%f&range=1",lat,lng] parameters:nil successBlock:^(id response) {
         NSLog(@"=============%@",response);
      BaseModel*annotion = [BaseModel yy_modelWithJSON:response];
-        dataModel *annotionlist = annotion.data;
+       
        NSLog(@"=======%@+++++++++%@",annotion.errorno,annotion.errmsg);
         NSLog(@"=================++++++%ld",(unsigned long)annotionlist.list.count);
         if(annotionlist.list.count>0){
