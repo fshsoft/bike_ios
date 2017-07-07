@@ -68,10 +68,11 @@
                  CkeakDetaitleVC *vc =[[CkeakDetaitleVC alloc]init];
                  [self.navigationController pushViewController:vc  animated:YES];
              }else{
+                 [self.scanV startRunning];
              Toast(model.errmsg);
              }
          } failureBlock:^(NSError *error) {
-             
+             [self.scanV startRunning];
          }];
 
     NSLog(@"二维码内容：%@",scanDataString);

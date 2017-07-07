@@ -10,8 +10,8 @@
 
 @interface annotionInfoModel : NSObject
 @property  (nonatomic,copy)NSString  * id;
-@property  (nonatomic,copy)NSString  * lat;
-@property  (nonatomic,copy)NSString  * lng;
+@property  (nonatomic,assign)float  lat;
+@property  (nonatomic,assign)float lng;
 @property  (nonatomic,copy)NSString  * distance;
 @property  (nonatomic,copy)NSString  * action;
 

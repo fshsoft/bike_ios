@@ -107,7 +107,7 @@ static NSMutableArray *tasks;
         //        [manager.requestSerializer setValue:apikey forHTTPHeaderField:@"apikey"];
         
         /*! 复杂的参数类型 需要使用json传值-设置请求内容的类型*/
-        //        [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+          // [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         
         /*! 设置响应数据的基本类型 */
         manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html",@"text/css",@"text/xml",@"text/plain", @"application/javascript", @"image/*", nil];

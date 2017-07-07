@@ -31,7 +31,7 @@
     // Do any additional setup after loading the view.
 }
 -(void)leftFoundation{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -41,13 +41,6 @@
 -(void)setTopview{
     self.topView = [[NSBundle mainBundle]loadNibNamed:@"CerifyTop" owner:self options:nil].lastObject;
     self.topView.tag=1;
-    CALayer *Mylayer=[CALayer layer];
-    Mylayer.bounds=CGRectMake(0, 0, 20, 20);
-    Mylayer.position=CGPointMake(5, 5);
-    Mylayer.contents=(id)[UIImage imageNamed:@"pass_per"].CGImage;
-    self.topView.firstImg.layer.masksToBounds=NO;
-    [self.topView.firstImg.layer addSublayer:Mylayer ];
-
     self.topView.frame  = CGRectMake(0,64, SCREEN_WIDTH, 110);
     [self.view addSubview: self.topView];
    
@@ -126,7 +119,7 @@
                            @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
                            @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
                            @"action":      @"getAlipayOrder",
-                           @"total": @"299"
+                           @"total": @"199"
                            };
     
     [self requestType:HttpRequestTypePost

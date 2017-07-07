@@ -36,19 +36,19 @@
     self.topView.tag=2;
     self.topView.frame  = CGRectMake(0,64, SCREEN_WIDTH, 110);
     
-    CALayer *Mylayer=[CALayer layer];
-    Mylayer.bounds=CGRectMake(0, 0, 20, 20);
-    Mylayer.position=CGPointMake(5, 5);
-    Mylayer.contents=(id)[UIImage imageNamed:@"pass_per"].CGImage;
-    self.topView.firstImg.layer.masksToBounds=NO;
-    [self.topView.firstImg.layer addSublayer:Mylayer ];
-    
-    CALayer *Mylayer1=[CALayer layer];
-    Mylayer1.bounds=CGRectMake(0, 0, 20, 20);
-    Mylayer1.position=CGPointMake(5, 5);
-    Mylayer1.contents=(id)[UIImage imageNamed:@"pass_per"].CGImage;
-    self.topView.secondImg.layer.masksToBounds=NO;
-    [self.topView.secondImg.layer addSublayer:Mylayer1 ];
+//    CALayer *Mylayer=[CALayer layer];
+//    Mylayer.bounds=CGRectMake(0, 0, 20, 20);
+//    Mylayer.position=CGPointMake(5, 5);
+//    Mylayer.contents=(id)[UIImage imageNamed:@"pass_per"].CGImage;
+//    self.topView.firstImg.layer.masksToBounds=NO;
+//    [self.topView.firstImg.layer addSublayer:Mylayer ];
+//    
+//    CALayer *Mylayer1=[CALayer layer];
+//    Mylayer1.bounds=CGRectMake(0, 0, 20, 20);
+//    Mylayer1.position=CGPointMake(5, 5);
+//    Mylayer1.contents=(id)[UIImage imageNamed:@"pass_per"].CGImage;
+//    self.topView.secondImg.layer.masksToBounds=NO;
+//    [self.topView.secondImg.layer addSublayer:Mylayer1 ];
 
     [self.view addSubview: self.topView];
     [self.view addSubview:self.name];
@@ -60,7 +60,7 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)leftFoundation{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 - (LogoTextField *)name {
     if (!_name) {
@@ -77,8 +77,7 @@
 - (LogoTextField *)personID {
     if (!_personID) {
         _personID = [[LogoTextField alloc] initWithFrame:CGRectMake(14,244, SCREEN_WIDTH-28,kRowHeight)];
-       _personID.field.placeholder= @"请输身份证号" ;
-        _personID.field.keyboardType = UIKeyboardTypeNumberPad;
+        _personID.field.placeholder= @"请输身份证号" ;
         _personID.tittle.text= @"身份证";
     }
     return _personID;
@@ -111,6 +110,8 @@
           
              if([model.errorno isEqualToString:@"0"]){
                  [DB putString: @"1"  withId: @"certify"  intoTable:tabName];
+                 //[DB putString:self.name.field.text withId:@"IDname" intoTable:tabName];
+                 [self setCompletView];
              }else{
                  Toast(model.errmsg);
              }
@@ -120,8 +121,7 @@
              
          }];
 
-    [DB putString:self.name.field.text withId:@"IDname" intoTable:tabName];
-    [self setCompletView];
+   
 }
 -(void)setCompletView{
     CALayer *Mylayer1=[CALayer layer];

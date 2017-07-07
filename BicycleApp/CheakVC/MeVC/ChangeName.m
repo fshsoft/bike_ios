@@ -28,7 +28,7 @@
     [self setNaivTitle:@"昵称"];
     self.view.backgroundColor = RGBColor(245, 245, 245);
     [self.navi .leftBtn setImage:[UIImage  new] forState:UIControlStateNormal];
-    [self.navi.leftBtn setTitle:@"取消" forState:UIControlStateNormal];
+    [self.navi.leftBtn setTitle:@" 取消" forState:UIControlStateNormal];
     self.navi.leftBtn.titleLabel.font = FontSize(13);
     self.navi.leftBtn.titleLabel.textAlignment = NSTextAlignmentRight;
     
@@ -36,7 +36,32 @@
 
     // Do any additional setup after loading the view.
 }
-
+-(void)sendRequest{
+    NSDictionary  *dic = @{
+                           
+                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"modifyNickname",
+                           @"nickname":    self.name.text
+                           
+                           };
+    
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+     
+           parameters:dic
+         successBlock:^(id response) {
+             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
+             Toast(model.errmsg);
+             NSString *errmsg = model.errmsg;
+             NSLog(@"errmsg==%@",errmsg);
+             
+         } failureBlock:^(NSError *error) {
+             
+         }];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -62,6 +87,7 @@
     }else{
         
         [self postNotation];
+        [self sendRequest];
         [DB putString:_name.text withId:@"name" intoTable:tabName];
         [self.navigationController popViewControllerAnimated:YES];
     }

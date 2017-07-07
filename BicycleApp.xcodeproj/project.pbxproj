@@ -157,6 +157,7 @@
 		0E7C4E061ED28F4E000A9474 /* AboutMeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C4E051ED28F4E000A9474 /* AboutMeVC.m */; };
 		0E7C4E091ED29090000A9474 /* AboutMeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C4E081ED29090000A9474 /* AboutMeCell.m */; };
 		0E7C4E0E1ED2B721000A9474 /* detaileMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C4E0D1ED2B721000A9474 /* detaileMessageVC.m */; };
+		0E7E8FA51F0F7D39007F1EE5 /* listInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E8FA41F0F7D39007F1EE5 /* listInfoModel.m */; };
 		0E88B0C61EC9983600CE5A90 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E88B0C31EC9983600CE5A90 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		0E88B0C71EC9983600CE5A90 /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E88B0C51EC9983600CE5A90 /* CommonUtil.m */; };
 		0E88B0C91EC998AE00CE5A90 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E88B0C81EC998AE00CE5A90 /* libxml2.tbd */; };
@@ -687,6 +688,8 @@
 		0E7C4E081ED29090000A9474 /* AboutMeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutMeCell.m; sourceTree = "<group>"; };
 		0E7C4E0C1ED2B721000A9474 /* detaileMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = detaileMessageVC.h; sourceTree = "<group>"; };
 		0E7C4E0D1ED2B721000A9474 /* detaileMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detaileMessageVC.m; sourceTree = "<group>"; };
+		0E7E8FA31F0F7D39007F1EE5 /* listInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = listInfoModel.h; sourceTree = "<group>"; };
+		0E7E8FA41F0F7D39007F1EE5 /* listInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = listInfoModel.m; sourceTree = "<group>"; };
 		0E88B0C21EC9983600CE5A90 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		0E88B0C31EC9983600CE5A90 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		0E88B0C41EC9983600CE5A90 /* CommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtil.h; sourceTree = "<group>"; };
@@ -875,8 +878,8 @@
 		0ECB41FE1ECFD0A300396A20 /* payCate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = payCate.xib; path = ../payCate.xib; sourceTree = "<group>"; };
 		0ECB42001ECFD30100396A20 /* payCateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payCateView.h; path = ../payCateView.h; sourceTree = "<group>"; };
 		0ECB42011ECFD30100396A20 /* payCateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = payCateView.m; path = ../payCateView.m; sourceTree = "<group>"; };
-		0EDB9DE61EEE688800B42EBC /* annotionInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = annotionInfoModel.h; path = ../model/homeModel/annotionInfoModel.h; sourceTree = "<group>"; };
-		0EDB9DE71EEE688800B42EBC /* annotionInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = annotionInfoModel.m; path = ../model/homeModel/annotionInfoModel.m; sourceTree = "<group>"; };
+		0EDB9DE61EEE688800B42EBC /* annotionInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = annotionInfoModel.h; sourceTree = "<group>"; };
+		0EDB9DE71EEE688800B42EBC /* annotionInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = annotionInfoModel.m; sourceTree = "<group>"; };
 		0EF6215A1ED813EB00AC900C /* break.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = break.xib; sourceTree = "<group>"; };
 		0EF6215C1ED8205900AC900C /* breakView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = breakView.h; sourceTree = "<group>"; };
 		0EF6215D1ED8205900AC900C /* breakView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = breakView.m; sourceTree = "<group>"; };
@@ -1171,12 +1174,6 @@
 			children = (
 				0E7780081EC561FD00539E18 /* HomeVC.h */,
 				0E7780091EC561FD00539E18 /* HomeVC.m */,
-				0E3B55311F0A2C9B00BF38E8 /* appInfoModel.h */,
-				0E3B55321F0A2C9B00BF38E8 /* appInfoModel.m */,
-				0EDB9DE61EEE688800B42EBC /* annotionInfoModel.h */,
-				0EDB9DE71EEE688800B42EBC /* annotionInfoModel.m */,
-				0E3B55341F0B327B00BF38E8 /* infoModel.h */,
-				0E3B55351F0B327B00BF38E8 /* infoModel.m */,
 				0E0738641EEA7A6700878913 /* search */,
 				0E0738651EEA7B2500878913 /* homeniv */,
 				0E47D5321EE80FD800F7E0EA /* style_json.json */,
@@ -1931,6 +1928,14 @@
 				0E51EA381EF927000097479E /* dataModel.m */,
 				0E26EDD91EF375950063A5CE /* BaseModel.h */,
 				0E26EDDA1EF375950063A5CE /* BaseModel.m */,
+				0E3B55311F0A2C9B00BF38E8 /* appInfoModel.h */,
+				0E3B55321F0A2C9B00BF38E8 /* appInfoModel.m */,
+				0EDB9DE61EEE688800B42EBC /* annotionInfoModel.h */,
+				0EDB9DE71EEE688800B42EBC /* annotionInfoModel.m */,
+				0E7E8FA31F0F7D39007F1EE5 /* listInfoModel.h */,
+				0E7E8FA41F0F7D39007F1EE5 /* listInfoModel.m */,
+				0E3B55341F0B327B00BF38E8 /* infoModel.h */,
+				0E3B55351F0B327B00BF38E8 /* infoModel.m */,
 			);
 			path = homeModel;
 			sourceTree = "<group>";
@@ -2386,6 +2391,7 @@
 				0E51EA391EF927000097479E /* dataModel.m in Sources */,
 				0E7781471EC561FE00539E18 /* AFURLRequestSerialization.m in Sources */,
 				0E3B55331F0A2C9B00BF38E8 /* appInfoModel.m in Sources */,
+				0E7E8FA51F0F7D39007F1EE5 /* listInfoModel.m in Sources */,
 				0EAC75A21ED12A420063B03D /* ChangeName.m in Sources */,
 				0E77815F1EC5938400539E18 /* HomeHelpView.m in Sources */,
 				0E2323061ED187A8007FF580 /* PullMoneyVC.m in Sources */,

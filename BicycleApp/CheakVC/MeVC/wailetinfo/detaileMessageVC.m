@@ -15,10 +15,12 @@
 @implementation detaileMessageVC
 
 - (void)viewDidLoad {
+    [self sendRequest];
     [super viewDidLoad];
     [self setSubView];
 }
 -(void)setSubView{
+    
     [self setNaivTitle:@"明细"];
     
     self.tab = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREENH_HEIGHT-64) style:UITableViewStylePlain];
@@ -62,5 +64,29 @@
 -(void)leftFoundation{
     [self.navigationController   popViewControllerAnimated:YES];
 }
-
+-(void)sendRequest{
+    NSDictionary  *dic = @{
+                           
+                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"getUserRecharge",
+                           
+                           };
+    
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+     
+           parameters:dic
+         successBlock:^(id response) {
+             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
+             Toast(model.errmsg);
+             NSString *errmsg = model.errmsg;
+             NSLog(@"errmsg==%@",errmsg);
+             
+         } failureBlock:^(NSError *error) {
+             
+         }];
+    
+}
 @end

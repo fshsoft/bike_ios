@@ -144,21 +144,16 @@
     self.bottomView  = [[NSBundle mainBundle]loadNibNamed:@"CerifyTop" owner:self options:nil].lastObject;
     self.bottomView.frame =CGRectMake(0, 0, SCREEN_WIDTH, 110);
     self.bottomView.firstImg.contentMode =UIViewContentModeScaleAspectFit;
-    self.bottomView.tag=1;
+
     
-    CALayer *Mylayer=[CALayer layer];
-    Mylayer.bounds=CGRectMake(0, 0, 20, 20);
-    Mylayer.position=CGPointMake(5, 5);
-    Mylayer.contents=(id)[UIImage imageNamed:@"pass_per"].CGImage;
-    self.bottomView.firstImg.layer.masksToBounds=NO;
-    [self.bottomView.firstImg.layer addSublayer:Mylayer ];
+  
 
    [self.viewInfoCheak addSubview:self.bottomView];
     
     self.SbottomView = [[NSBundle mainBundle]loadNibNamed:@"SportDetail" owner:self options:nil].lastObject;
     self.SbottomView.frame =CGRectMake(0, 0, SCREEN_WIDTH, 110);
   
-   // [self.viewInfoCheak addSubview:self.SbottomView];
+    
     
     UILabel *labTitle = [[UILabel alloc]initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 20)];
     labTitle.font = FontSize(14);
@@ -190,17 +185,21 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self  requestType:HttpRequestTypeGet url:@"https://api.baibaobike.com/v1/users/current" parameters:nil successBlock:^(id response) {
-        BaseModel *model    = [BaseModel yy_modelWithJSON:response];
-        dataModel *data = model.data;
-        personModel *user =         data.user;
-        NSLog(@"%@====%@",user.mobi,user);
-        
-         NSLog(@"%@",response);
-    } failureBlock:^(NSError *error) {
-        
-    }];
+    if(![[DB getStringById:@"money" fromTable:tabName] isEqualToString:@"1"]){
+            self.bottomView.tag=1;
+    }else{
+   if(![[DB getStringById:@"certify" fromTable:tabName] isEqualToString:@"1"]){
+              self.bottomView.tag=2;
+   }else{
+          [self.bottomView  removeFromSuperview ];
+          [self.viewInfoCheak addSubview:self.SbottomView];
+       [self sendRequest];
+   }
+        }
 
+    
+    
+   
     if(  [ DB getStringById:@"name" fromTable:tabName]){
         self.personName.text = [DB getStringById:@"name" fromTable:tabName];
     }else{
@@ -215,6 +214,31 @@
     [self.personPhoto setImage:[UIImage imageWithContentsOfFile:imagePath] forState:UIControlStateNormal];
     }
 }
+-(void)sendRequest{
+    NSDictionary  *dic = @{
+                           
+                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"getUserInfo",
+                           
+                           };
+    
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+     
+           parameters:dic
+         successBlock:^(id response) {
+             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
+             Toast(model.errmsg);
+             NSString *errmsg = model.errmsg;
+             NSLog(@"errmsg==%@",errmsg);
+             
+         } failureBlock:^(NSError *error) {
+             
+         }];
+
+    }
 # pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     return self.arr.count;

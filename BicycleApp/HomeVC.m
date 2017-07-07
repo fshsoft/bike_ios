@@ -43,6 +43,7 @@
 #import "appInfoModel.h"
 #import "certifyPersonInfoVC.h"
 #import "paymentVC.h"
+#import "listInfoModel.h"
 
 static const NSString *RoutePlanningViewControllerStartTitle       = @"起点";
 static const NSString *RoutePlanningViewControllerDestinationTitle = @"终点";
@@ -374,12 +375,8 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
            parameters:dic
          successBlock:^(id response) {
              NSLog(@"response====%@",response);
-               // BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-             
-             NSMutableArray * arr = [response objectForKey:@"data"];
-             NSLog(@"=======%@+++++++++",arr);
-            
-             if(arr.count>0){
+            listInfoModel* model = [listInfoModel yy_modelWithJSON:response];
+    if(model.data.count>0){
                  self.paopaoTag=1;
                  [self.mapView removeAnnotations:self.annotations];
                  [self.annotations removeAllObjects ];
@@ -387,11 +384,11 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
                  //self.changeAnnotation.lockedToScreen = YES;
                  self.changeAnnotation.title =@"11111111";
                  [self.annotations addObject:self.changeAnnotation];
-                 for(int i=0;i<arr.count;i++){
-                     annotionInfoModel *annotioninfo = [annotionInfoModel   yy_modelWithJSON:arr[i]];
+                 for(int i=0;i<model.data.count;i++){
+                   annotionInfoModel * infomodel =  model.data[i];
                      MAPointAnnotation *a1 = [[MAPointAnnotation alloc] init];
-                     a1.coordinate=CLLocationCoordinate2DMake([annotioninfo.lat floatValue  ], [annotioninfo.lng floatValue]);
-                     //NSLog(@"lat====%flng====%f",annotioninfo.lat, annotioninfo.lng);
+                     a1.coordinate=CLLocationCoordinate2DMake( infomodel.lat,infomodel.lng  );
+                     NSLog(@"lat====%flng====%f",infomodel.lat,infomodel.lng);
                      //a1.title      = [NSString stringWithFormat:@"anno: %d", annotioninfo.id];
                      if(i==0){
                          a1.subtitle      = @"离我最近";
