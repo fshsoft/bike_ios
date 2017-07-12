@@ -37,7 +37,7 @@
     self.money = [[UILabel alloc]initWithFrame:CGRectMake(0,30, SCREEN_WIDTH, 40)];
     self.money.font = FontBold(30);
     self.money.textAlignment = NSTextAlignmentCenter;
-    self.money.text=@"0.0";
+    self.money.text=[DB getStringById:@"balance" fromTable:tabName];
     self.money.textColor =gary51;
     [topview  addSubview:self.money];
     UILabel *labPromit = [[UILabel alloc]initWithFrame:CGRectMake(0, self.money.bottom +10, SCREEN_WIDTH, 20)];

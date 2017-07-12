@@ -55,7 +55,7 @@
 //        attributes[NSForegroundColorAttributeName] = RGBColor(170, 170, 170);
 //        attributes[NSFontAttributeName] =  [UIFont fontWithName:@"Arial-BoldMT" size:14];
 //        _name.field.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入真实姓名" attributes:attributes];
-        _name.field.text=@"张三";
+        _name.field.text=[DB getStringById:@"truename" fromTable:tabName];
     }
     return _name;
 }
@@ -63,12 +63,11 @@
 - (LogoTextField *)personID {
     if (!_personID) {
         _personID = [[LogoTextField alloc] initWithFrame:CGRectMake(14,self.name.bottom+10, SCREEN_WIDTH-28,kRowHeight)];
-        NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
-        attributes[NSForegroundColorAttributeName] = RGBColor(170, 170, 170);
-        attributes[NSFontAttributeName] =  [UIFont fontWithName:@"Arial-BoldMT" size:14];
-        _personID.field.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输身份证号" attributes:attributes];
-        _personID.field.keyboardType = UIKeyboardTypeNumberPad;
-        
+//        NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+//        attributes[NSForegroundColorAttributeName] = RGBColor(170, 170, 170);
+//        attributes[NSFontAttributeName] =  [UIFont fontWithName:@"Arial-BoldMT" size:14];
+//        _personID.field.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输身份证号" attributes:attributes];
+            _personID.field.placeholder =@"请输身份证号";
         
         _personID.tittle.text= @"身份证";
         
@@ -79,10 +78,11 @@
 - (LogoTextField *)PhoneNumber {
     if (!_PhoneNumber) {
         _PhoneNumber = [[LogoTextField alloc] initWithFrame:CGRectMake(14,self.personID.bottom+10, SCREEN_WIDTH-28,kRowHeight)];
-        NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
-        attributes[NSForegroundColorAttributeName] = RGBColor(170, 170, 170);
-        attributes[NSFontAttributeName] =  [UIFont fontWithName:@"Arial-BoldMT" size:14];
-        _PhoneNumber.field.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输新手机号" attributes:attributes];
+        //NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+        //attributes[NSForegroundColorAttributeName] = RGBColor(170, 170, 170);
+        //attributes[NSFontAttributeName] =  [UIFont fontWithName:@"Arial-BoldMT" size:14];
+       // _PhoneNumber.field.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输新手机号" attributes:attributes];
+        _PhoneNumber.field.placeholder  =@"请输新手机号";
         _PhoneNumber.field.keyboardType = UIKeyboardTypeNumberPad;
         
         
@@ -104,10 +104,12 @@
 - (LogoTextField *)CheakNum {
     if (!_CheakNum) {
         _CheakNum = [[LogoTextField alloc] initWithFrame:CGRectMake(14,self.PhoneNumber.bottom+10,426/750.0*SCREEN_WIDTH,kRowHeight)];
-        NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
-        attributes[NSForegroundColorAttributeName] = RGBColor(170, 170, 170);
-        attributes[NSFontAttributeName] =  [UIFont fontWithName:@"Arial-BoldMT" size:14];
-        _CheakNum.field.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:attributes];
+        //NSMutableDictionary *attributes = [NSMutableDictionary dictionary];
+        //attributes[NSForegroundColorAttributeName] = RGBColor(170, 170, 170);
+        //attributes[NSFontAttributeName] =  [UIFont fontWithName:@"Arial-BoldMT" size:14];
+       // _CheakNum.field.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入验证码" attributes:attributes];
+        _CheakNum.field.placeholder  =@"请输入验证码";
+
         _CheakNum.field.keyboardType = UIKeyboardTypeNumberPad;
         
         
@@ -166,7 +168,8 @@
     return _PushInfo;
 }
 -(void)pushinfo{
-    [self.navigationController popViewControllerAnimated:YES];
+    [self sendRequest];
+    
 }
 -(void)leftFoundation{
     [self postNotation];
@@ -176,14 +179,38 @@
     [self.arr replaceObjectAtIndex:self.tag withObject:_PhoneNumber.field.text];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"personcenter" object:self.arr];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)sendRequest{
+    NSDictionary  *dic = @{
+                           
+                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"modifyMobile",
+                           @"mobile":    self.PhoneNumber.field.text,
+                           @"idno"  :    self.personID.field.text,
+                           @"vericode":  self.CheakNum.field.text
+                           
+                           };
+    
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+     
+           parameters:dic
+         successBlock:^(id response) {
+             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
+             Toast(model.errmsg);
+             if([model.errmsg isEqualToString:@"0"]){
+                 [self.navigationController popViewControllerAnimated:YES];
+             }else{
+                 NSString *errmsg = model.errmsg;
+                 NSLog(@"errmsg==%@",errmsg);
+             }
+           
+             
+         } failureBlock:^(NSError *error) {
+             
+         }];
+    
 }
-*/
 
 @end

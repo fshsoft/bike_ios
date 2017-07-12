@@ -28,6 +28,18 @@
 @property  (nonatomic,copy)NSString  * private_key;
 @property  (nonatomic,copy)NSString  * appId;
 @property  (nonatomic,copy)NSString  * orderid;
+@property  (nonatomic,copy)NSString  * subject;
+
+@property  (nonatomic,copy)NSString  * balance;
+@property  (nonatomic,copy)NSString  * integral;
+@property  (nonatomic,copy)NSString  * is_verified;
+@property  (nonatomic,copy)NSString  * mobile;
+@property  (nonatomic,copy)NSString  * truename;
+@property  (nonatomic,copy)NSString  * nickname;
+@property  (nonatomic,copy)NSString  * idno;
+@property  (nonatomic,copy)NSString  * is_paydeposit;
+
+
 
 
 

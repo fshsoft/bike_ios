@@ -697,7 +697,6 @@
 		0E88B0C81EC998AE00CE5A90 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		0E88B0CA1EC998D700CE5A90 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		0E88B0CC1EC998F200CE5A90 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
-		0E88B0CE1EC9BBD700CE5A90 /* BicycleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BicycleApp.entitlements; sourceTree = "<group>"; };
 		0E8F34AC1ED6C9F400D4759C /* 320_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 320_480.png; sourceTree = "<group>"; };
 		0E8F34AD1ED6C9F400D4759C /* 640_960.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 640_960.png; sourceTree = "<group>"; };
 		0E8F34AF1ED6C9F400D4759C /* 750_1334.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 750_1334.png; sourceTree = "<group>"; };
@@ -878,6 +877,7 @@
 		0ECB41FE1ECFD0A300396A20 /* payCate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = payCate.xib; path = ../payCate.xib; sourceTree = "<group>"; };
 		0ECB42001ECFD30100396A20 /* payCateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payCateView.h; path = ../payCateView.h; sourceTree = "<group>"; };
 		0ECB42011ECFD30100396A20 /* payCateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = payCateView.m; path = ../payCateView.m; sourceTree = "<group>"; };
+		0ECCB7501F14ACE600307D14 /* BicycleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BicycleApp.entitlements; sourceTree = "<group>"; };
 		0EDB9DE61EEE688800B42EBC /* annotionInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = annotionInfoModel.h; sourceTree = "<group>"; };
 		0EDB9DE71EEE688800B42EBC /* annotionInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = annotionInfoModel.m; sourceTree = "<group>"; };
 		0EF6215A1ED813EB00AC900C /* break.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = break.xib; sourceTree = "<group>"; };
@@ -1104,7 +1104,7 @@
 		0E777F941EC561FD00539E18 /* BicycleApp */ = {
 			isa = PBXGroup;
 			children = (
-				0E88B0CE1EC9BBD700CE5A90 /* BicycleApp.entitlements */,
+				0ECCB7501F14ACE600307D14 /* BicycleApp.entitlements */,
 				0E777F951EC561FD00539E18 /* AppDelegate.h */,
 				0E777F961EC561FD00539E18 /* AppDelegate.m */,
 				0ECB41861ECDB78000396A20 /* PrefixHeader.pch */,
@@ -2020,7 +2020,7 @@
 					0EB75C521EB96A95005321DE = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = 85AV7L542H;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2591,7 +2591,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = BicycleApp/BicycleApp.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 85AV7L542H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2627,7 +2630,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuting.BicycleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "892cbf30-2941-4103-afae-4c4b6efe203d";
+				PROVISIONING_PROFILE_SPECIFIER = BboxbikecomyutingBicycleApp;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -2640,7 +2644,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = BicycleApp/BicycleApp.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 85AV7L542H;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2676,7 +2682,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yuting.BicycleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "892cbf30-2941-4103-afae-4c4b6efe203d";
+				PROVISIONING_PROFILE_SPECIFIER = BboxbikecomyutingBicycleApp;
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};

@@ -794,9 +794,9 @@ static NSMutableArray *tasks;
     //   [self getCLLocationCoordinateInfo];
     [RequestManager  requestWithType:HttpRequestTypePost urlString: url(@"oauth2/access_token") parameters:dic successBlock:^(id response) {
         NSLog(@"===============%@",response);
-        [DB putString: [response objectForKey:@"access_token"] withId:@"token" intoTable:tabName];
+        //[DB putString: [response objectForKey:@"access_token"] withId:@"token" intoTable:tabName];
         
-        [DB putString: [response objectForKey:@"refresh_token"] withId:@"refreshtoken" intoTable:tabName];
+       // [DB putString: [response objectForKey:@"refresh_token"] withId:@"refreshtoken" intoTable:tabName];
     } failureBlock:^(NSError *error) {
         
     } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {

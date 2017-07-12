@@ -66,7 +66,7 @@
     self.Wx = [[NSBundle mainBundle]loadNibNamed:@"payCate" owner:self options:nil].lastObject;
     self.Wx.frame = CGRectMake(0, self.pormot.bottom, SCREEN_WIDTH, 50);
     self.Wx.title.text=@"微信支付";
-     [self.Wx.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
+     [self.Wx.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
     self.Wx.img.image =Img(@"WeChatpay");
     [self.view addSubview:self.Wx];
    
@@ -74,7 +74,7 @@
     self.Alipay.frame = CGRectMake(0, self.Wx.bottom, SCREEN_WIDTH, 50);
     self.Alipay.title.text=@"支付宝支付";
     
-    [self.Alipay.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
+    [self.Alipay.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
 
     self.Alipay.img.image =Img(@"alipay");
     [self.view addSubview:self.Alipay];
@@ -83,13 +83,14 @@
     __weak paymentVC *weakself =self;
     [self.Alipay addSubview:linebottom];
     self.Wx.cheakBlock = ^{
-        [weakself.Wx.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
-        [weakself.Alipay.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
+        Toast(@"暂未开通");
+        //[weakself.Wx.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
+        //[weakself.Alipay.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
         
     };
     self.Alipay.cheakBlock = ^{
-        [weakself.Wx.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
-        [weakself.Alipay.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
+        //[weakself.Wx.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
+        //[weakself.Alipay.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
     };
     
 
@@ -119,7 +120,8 @@
                            @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
                            @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
                            @"action":      @"getAlipayOrder",
-                           @"total": @"199"
+                           @"total": @"199",
+                           @"type":@"1"
                            };
     
     [self requestType:HttpRequestTypePost
@@ -134,12 +136,12 @@
                  appInfoModel *appmodel= model.data;
                  PaySelect *a =[[PaySelect alloc]init];
                  [a doAlipayPayAppID:appmodel.appId
-                               Price:@"0.01"
-                            orderNum:appmodel.orderid
+                               Price:@"199"
+                            orderNum:appmodel.out_trade_no
                            orderTime:appmodel.createtime
                           PrivateKey:appmodel.private_key
-                                Body:appmodel.createtime
-                             subJect:appmodel.createtime];
+                                Body:appmodel.body
+                             subJect:appmodel.subject];
              }
          } failureBlock:^(NSError *error) {
              
@@ -164,8 +166,7 @@
     NSLog(@"userInfo: %@",notification.userInfo);
     
     if ([notification.object isEqualToString:@"9000"])
-    {
-        certifyPersonInfoVC *vc =[[certifyPersonInfoVC alloc]init];
+    {   certifyPersonInfoVC *vc =[[certifyPersonInfoVC alloc]init];
         [DB putString:@"1"   withId: @"money"  intoTable:tabName];
         [self absPushViewController:vc animated:YES];
 

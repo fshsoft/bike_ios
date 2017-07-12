@@ -94,12 +94,10 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
 
 @implementation HomeVC
 - (void)viewDidLoad {
-   
-    [self getInfo];
+    
     NSLog(@"%@",kName);
     [self cheakToken];
     [self initMapInfoDetaile];
-   // [self.mapView clearDisk];
     [self cheakMap];
  
     self.tag = 1;
@@ -113,7 +111,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     [self setSearchMapPath];
     [self setBottomSubview];
     [self setNavLeftItemTitle:nil andImage:Img(@"catage")];
-   
+
        //[self startLoading];
     }
 #pragma mark 初始化地图所需数据
@@ -144,7 +142,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
 
     NSString *strEnRes = [CusMD5 md5String:UDID];
      NSLog(@"strEnRes: %@",strEnRes);
-    [RequestManager requestWithType:HttpRequestTypePost urlString:@"http://partner.baibaobike.com/authed/register.html" parameters:@{@"imei":UDID,@"code":strEnRes} successBlock:^(id response) {
+    [RequestManager requestWithType:HttpRequestTypePost urlString:@"https://partner.baibaobike.com/authed/register.html" parameters:@{@"imei":UDID,@"code":strEnRes} successBlock:^(id response) {
     NSLog(@"response==%@",response);
         BaseModel  * model = [BaseModel yy_modelWithJSON: response];
         appInfoModel    * appinfomodel = model.data;
@@ -184,6 +182,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
                 appInfoModel * appmodel = model.data;
                 [DB putString: appmodel.refresh_token withId:@"refresh_token"   intoTable:tabName];
                 [DB putString: appmodel.access_token  withId: @"access_token"  intoTable:tabName];
+             
                                                       
                 } failureBlock:^(NSError *error) {
                                                       
@@ -374,29 +373,29 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
      
            parameters:dic
          successBlock:^(id response) {
-             NSLog(@"response====%@",response);
+
             listInfoModel* model = [listInfoModel yy_modelWithJSON:response];
     if(model.data.count>0){
                  self.paopaoTag=1;
                  [self.mapView removeAnnotations:self.annotations];
                  [self.annotations removeAllObjects ];
                  self.changeAnnotation.lockedScreenPoint = CGPointMake(self.view.frame.size.width/2.0,(self.view.frame.size.height-64)/2.0);
-                 //self.changeAnnotation.lockedToScreen = YES;
+        
                  self.changeAnnotation.title =@"11111111";
                  [self.annotations addObject:self.changeAnnotation];
                  for(int i=0;i<model.data.count;i++){
                    annotionInfoModel * infomodel =  model.data[i];
                      MAPointAnnotation *a1 = [[MAPointAnnotation alloc] init];
                      a1.coordinate=CLLocationCoordinate2DMake( infomodel.lat,infomodel.lng  );
-                     NSLog(@"lat====%flng====%f",infomodel.lat,infomodel.lng);
-                     //a1.title      = [NSString stringWithFormat:@"anno: %d", annotioninfo.id];
+                  
+                 
                      if(i==0){
                          a1.subtitle      = @"离我最近";
                          
                      }
                      [self.annotations addObject:a1];
                  }
-                 NSLog(@"=============%lu",(unsigned long)self.annotations.count);
+        
                  [self.mapView addAnnotations:self.annotations];
                  [self.mapView selectAnnotation:self.annotations[1] animated:YES];
                  [self.mapView setZoomLevel:15 animated:YES];
@@ -409,43 +408,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
          }];
 
     
-  /* [self requestType:HttpRequestTypeGet url:[NSString stringWithFormat:@"https://api.baibaobike.com/v1/bikes?lat=%f&lng=%f&range=1",lat,lng] parameters:nil successBlock:^(id response) {
-        NSLog(@"=============%@",response);
-     BaseModel*annotion = [BaseModel yy_modelWithJSON:response];
-       
-       NSLog(@"=======%@+++++++++%@",annotion.errorno,annotion.errmsg);
-        NSLog(@"=================++++++%ld",(unsigned long)annotionlist.list.count);
-        if(annotionlist.list.count>0){
-            self.paopaoTag=1;
-            [self.mapView removeAnnotations:self.annotations];
-            [self.annotations removeAllObjects ];
-            self.changeAnnotation.lockedScreenPoint = CGPointMake(self.view.frame.size.width/2.0,(self.view.frame.size.height-64)/2.0);
-            //self.changeAnnotation.lockedToScreen = YES;
-            self.changeAnnotation.title =@"11111111";
-            [self.annotations addObject:self.changeAnnotation];
-            for(int i=0;i<annotionlist.list.count;i++){
-                annotionInfoModel *annotioninfo =annotionlist.list[i];
-                MAPointAnnotation *a1 = [[MAPointAnnotation alloc] init];
-                a1.coordinate=CLLocationCoordinate2DMake(annotioninfo.lat, annotioninfo.lng);
-                NSLog(@"lat====%flng====%f",annotioninfo.lat, annotioninfo.lng);
-                //a1.title      = [NSString stringWithFormat:@"anno: %d", annotioninfo.id];
-                if(i==0){
-                    a1.subtitle      = @"离我最近";
-                    
-                }
-                [self.annotations addObject:a1];
-            }
-            NSLog(@"=============%lu",(unsigned long)self.annotations.count);
-            [self.mapView addAnnotations:self.annotations];
-            [self.mapView selectAnnotation:self.annotations[1] animated:YES];
-            [self.mapView setZoomLevel:15 animated:YES];
-        }
-
-        
-    } failureBlock:^(NSError *error) {
-        NSLog(@"%@",error);
-    }];*/
-    }
+     }
 #pragma mark 地图设置
 -(void)setMapSubview{
     self.mapView  = [[MAMapView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREENH_HEIGHT-64)];
@@ -681,7 +644,6 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
    
     if ([annotation isKindOfClass:[MAPointAnnotation class]])
     {
-        NSLog(@"========0000990000000000");
         static NSString *pointReuseIndentifier = @"pointReuseIndentifier";
         MAPinAnnotationView*annotationView = (MAPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndentifier];
         if (annotationView == nil)
@@ -690,7 +652,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
         }
         
         if([annotationView.annotation   isEqual:self.changeAnnotation]||[annotationView.annotation.title isEqualToString:@"11111111"]){
-            NSLog(@"wqewqewqewqewqewqewqewqewq");
+          
             
             annotationView.image =Img(@"center");
             //设置中心心点偏移，使得标注底部中间点成为经纬度对应点
@@ -751,7 +713,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
                 
             }else{
             
-        NSLog(@" %f,%f",Annotation.coordinate.latitude,Annotation.coordinate.longitude);
+        //NSLog(@" %f,%f",Annotation.coordinate.latitude,Annotation.coordinate.longitude);
         self.centerCoordinate =[self.mapView convertPoint:self.view.center toCoordinateFromView:self.view];
         self.endAnnotation.coordinate  = self.centerCoordinate;
        
@@ -829,6 +791,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
             [selfblock getLocationManagerAnnotationLat:   self.changeAnnotation.coordinate.latitude Lng:   self.changeAnnotation.coordinate.longitude];}
     };
     bottom.cheakBlock=^{
+          [selfblock cheakPersonStatue];
         if( !TelNumber){
             [selfblock cheakToken];
             LoginVC *loginVC = [[LoginVC alloc]init];
@@ -863,6 +826,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
             };
     
     bottom.helpBlock = ^{
+          [selfblock cheakPersonStatue];
         if( !TelNumber){
             [selfblock cheakToken];
             LoginVC *loginVC = [[LoginVC alloc]init];
@@ -962,10 +926,10 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     };
     self.topCheakView.frame = CGRectMake(0, 64, SCREEN_WIDTH, 170);
     __weak HomeVC *weakself =self;
-    self.topCheakView.cheakBlock = ^{
-        LoginVC *loginVC = [[LoginVC alloc]init];
-        [weakself  absPushViewController:loginVC animated:YES];
-    };
+//    self.topCheakView.cheakBlock = ^{
+//        LoginVC *loginVC = [[LoginVC alloc]init];
+//        [weakself  absPushViewController:loginVC animated:YES];
+//    };
     [self.view addSubview:self.topCheakView];
 }
 - (void)mapViewDidFinishLoadingMap:(MAMapView *)mapView{
@@ -1031,7 +995,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
  * @param mapView 地图View
  */
 - (void)mapViewRegionChanged:(MAMapView *)mapView{
-    NSLog(@"地图区域改变过程中会调用此接口 ");
+   // NSLog(@"地图区域改变过程中会调用此接口 ");
 }
 
 /**
@@ -1040,7 +1004,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
  * @param animated 是否动画
  */
 - (void)mapView:(MAMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
-    NSLog(@"地图区域即将改变时会调用此接口");
+   // NSLog(@"地图区域即将改变时会调用此接口");
     //self.changeAnnotation.lockedToScreen=NO;
 }
 
@@ -1050,7 +1014,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
  * @param animated 是否动画
  */
 - (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
-    NSLog(@"地图区域改变完成后会调用此接口");
+    //NSLog(@"地图区域改变完成后会调用此接口");
 }
 
 /**
@@ -1059,7 +1023,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
  * @param wasUserAction 标识是否是用户动作
  */
 - (void)mapView:(MAMapView *)mapView mapWillMoveByUser:(BOOL)wasUserAction{
-    NSLog(@" 地图将要发生移动时调用此接口");
+   // NSLog(@" 地图将要发生移动时调用此接口");
 }
 
 /**
@@ -1068,10 +1032,44 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
  * @param wasUserAction 标识是否是用户动作
  */
 - (void)mapView:(MAMapView *)mapView mapDidMoveByUser:(BOOL)wasUserAction{
-    NSLog(@"地图移动结束后调用此接口");
+    //NSLog(@"地图移动结束后调用此接口");
 }
 
+-(void)cheakPersonStatue{
+    NSDictionary  *dic = @{
+                           
+                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"initUserStatus",
+                           
+                           };
+    
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+     
+           parameters:dic
+         successBlock:^(id response) {
+             BaseModel * model = [BaseModel yy_modelWithJSON:response];
+             NSLog(@"====%@",response);
+             if([model.errorno  isEqualToString:@"0"]){
+                  appInfoModel * appInfo = model.data;
+                 if([appInfo.is_verified isEqualToString:@"1"]){
+                     [DB putString: @"1"  withId: @"certify"  intoTable:tabName];
 
+                 }
+                 if([appInfo.is_paydeposit isEqualToString:@"1"]){
+                     [DB putString:@"1"   withId: @"money"  intoTable:tabName];
+                 }
+                              }
+            
+             
+             
+         } failureBlock:^(NSError *error) {
+             
+         }];
+ 
+}
 
 
 @end

@@ -9,13 +9,18 @@
 #import "SocerVC.h"
 #import "SocerCell.h"
 #import "HcdProcessView.h"
+#import "annotionInfoModel.h"
+#import "listInfoModel.h"
 @interface SocerVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView *tab;
+@property (nonatomic,strong)NSMutableArray * array;
+@property (nonatomic,strong) HcdProcessView *customView;
 @end
 
 @implementation SocerVC
 
 - (void)viewDidLoad {
+    self.array = [NSMutableArray array];
     [self sendRequest ];
     [super viewDidLoad];
     [self setSubView];
@@ -42,13 +47,22 @@
     
     HcdProcessView *customView = [[HcdProcessView alloc]initWithFrame:CGRectMake( 0, 0, 200,  200) ];
     customView.center =CGPointMake(80, 80);
- 
-    customView.time =@"评估于2017.05.16";
-    customView.num=@"80";
+    NSDate  * date = [[NSDate alloc]init];
+    NSDateFormatter * format = [[NSDateFormatter alloc]init];
+    [format setDateStyle:NSDateFormatterMediumStyle];
+    
+    [format setTimeStyle:NSDateFormatterShortStyle];
+    
+    [format setDateFormat:@"YYYY-MM-dd hh:mm:ss"];
+    //NSString *DateTime = [formatter stringFromDate:date];
+    customView.time =[format stringFromDate:date];
+    customView.num=@"100";
     customView.backWaterColor  =[UIColor whiteColor];
     customView.percent =[customView.num integerValue]/100.0;
     customView.layer.masksToBounds=YES;
+    
     [ring  addSubview:customView];
+    self.customView = customView;
     
     UIButton *btn = [[UIButton alloc ]initWithFrame:CGRectMake(SCREEN_WIDTH*0.5-50, ring.bottom +20, 100, 25)];
     [view addSubview:btn];
@@ -80,10 +94,16 @@
      
            parameters:dic
          successBlock:^(id response) {
-             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
+             listInfoModel   * model = [listInfoModel yy_modelWithJSON:response];
+             if([model.errorno isEqualToString:@"0"]){
+                  [self.array addObjectsFromArray:model.data];
+                 annotionInfoModel * model =self.array[0];
+                 self. customView.num=model.current;
+                  [self.tab reloadData];
+             }else{
+            
              Toast(model.errmsg);
-             NSString *errmsg = model.errmsg;
-             NSLog(@"errmsg==%@",errmsg);
+             }
              
          } failureBlock:^(NSError *error) {
              
@@ -100,7 +120,7 @@
     [self.view addSubview:self.tab];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 10;
+    return self.array.count;
 }
 
 
@@ -112,17 +132,20 @@
         cell = [[SocerCell   alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:str];
         cell.selectionStyle =UITableViewCellSelectionStyleNone  ;
     }
-    if(indexPath.row%2==0){
-    cell.title.text =@"违规停车";
-    cell.time.text = @"2015-05  15-23";
+    annotionInfoModel * model =self.array[indexPath.row];
+    if([model.description isEqualToString:@"1"]){
+    cell.title.text =model.note;
+    //cell.time.text = @"2015-05  15-23";
     cell.name.text=@"信用分";
-    cell.num.textColor =[UIColor greenColor];
-        cell.num.text=@"-6";}else{
-            cell.title.text =@"邀请好友注册";
-            cell.time.text = @"2015-05  15-23";
+   
+        cell.num.textColor =mainColor;
+        cell.num.text= [NSString stringWithFormat:@"-%@", model.changed];
+    }else{
+            cell.title.text =model.note;
+            //cell.time.text = @"2015-05  15-23";
             cell.name.text=@"信用分";
-            cell.num.textColor =mainColor;
-            cell.num.text=@"+2";
+            cell.num.textColor =[UIColor greenColor];
+         cell.num.text= [NSString stringWithFormat:@"+%@", model.changed];
             
         }
     return cell;

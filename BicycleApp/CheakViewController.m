@@ -13,6 +13,7 @@
 #import "CkeakDetaitleVC.h"
 #import "UIButton+TitleImgEdgeInsets.h"
 #import "CheakNumberVC.h"
+#import "WalletMoneyVC.h"
 @interface CheakViewController ()<XYScanViewDelegate
 >
 
@@ -37,7 +38,7 @@
 @implementation CheakViewController
 
 - (void)viewDidLoad {
-    
+   
     XYScanView *scanV = [[XYScanView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREENH_HEIGHT-64)];
     scanV.delegate = self;
  
@@ -67,9 +68,22 @@
              if([model.errorno   isEqualToString:@"0"]){
                  CkeakDetaitleVC *vc =[[CkeakDetaitleVC alloc]init];
                  [self.navigationController pushViewController:vc  animated:YES];
-             }else{
-                 [self.scanV startRunning];
-             Toast(model.errmsg);
+             }else if([model.errorno  isEqualToString:@"40020"]){
+            
+                 UIAlertController  * alra = [UIAlertController  alertControllerWithTitle:@"友情提示" message:model.errmsg preferredStyle:UIAlertControllerStyleAlert];
+                 UIAlertAction * select = [UIAlertAction actionWithTitle:@"充值" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                     WalletMoneyVC  *vc  = [[WalletMoneyVC alloc]init];
+                     [self.navigationController pushViewController:vc animated:YES];
+                 } ];
+                 UIAlertAction * unselect = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+                     
+                 } ];
+                 [alra addAction:select];
+                 [alra addAction:unselect];
+                 [self presentViewController:alra animated:YES completion:nil];
+                             }
+             else{
+                    Toast(model.errmsg);
              }
          } failureBlock:^(NSError *error) {
              [self.scanV startRunning];

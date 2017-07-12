@@ -429,7 +429,7 @@
     order.biz_content = [BizContent new];
     order.biz_content.body         = body;
     order.biz_content.subject      = subject;
-    order.biz_content.out_trade_no =[self generateTradeNO]; //订单ID（由商家自行制定）
+    order.biz_content.out_trade_no =ordernum;//[self generateTradeNO]; //订单ID（由商家自行制定）
     order.biz_content.timeout_express = @"30m"; //超时时间设置
     order.biz_content.total_amount =price;
     //[NSString stringWithFormat:@"%.2f", 0.01];

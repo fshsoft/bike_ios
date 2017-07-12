@@ -24,7 +24,10 @@
 #import "SocerVC.h"
 #import "consumerVC.h"
 #import "personModel.h"
-#import "dataModel.h"
+#import "listInfoModel.h"
+#import "annotionInfoModel.h"
+#import "appInfoModel.h"
+
 @interface MeVC ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate>
 @property (nonatomic,strong)UIButton     * personPhoto;
 @property (nonatomic,strong)UILabel      *  personName;
@@ -34,6 +37,7 @@
 @property (nonatomic,strong)UIView    *  viewInfoCheak;
 @property (nonatomic,strong)CertifyTopView * bottomView;
 @property (nonatomic,strong)SportDetailView * SbottomView;
+@property (nonatomic,strong)NSString      * price;
 
 @end
 
@@ -229,11 +233,16 @@
      
            parameters:dic
          successBlock:^(id response) {
-             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-             Toast(model.errmsg);
-             NSString *errmsg = model.errmsg;
-             NSLog(@"errmsg==%@",errmsg);
+             BaseModel * model = [BaseModel yy_modelWithJSON:response];
+             appInfoModel * appInfo = model.data;
+            // NSLog(@"%@==%@",appInfo.nickname,appInfo.truename);
+             [DB putString: appInfo.nickname withId:@"name" intoTable:tabName];
+             [DB putString: appInfo.truename withId:@"truename" intoTable:tabName];
+             [DB putString:appInfo.balance withId:@"balance" intoTable:tabName];
+             self.price = appInfo.balance;
+             [self.promiseBtn setTitle:[NSString stringWithFormat:@"信用积分 %@",appInfo.integral] forState:UIControlStateNormal];
              
+             [self.personalTableV reloadData];
          } failureBlock:^(NSError *error) {
              
          }];
@@ -270,7 +279,7 @@
         NSArray *arr=self.arr[indexPath.section];
         cell.title.text =arr[indexPath.row];
         if(indexPath.row==0){
-            cell.detailtitle.text=@"0.00元";
+            cell.detailtitle.text=self.price;
             
         }else if(indexPath.row==arr.count-1){
             cell.line.hidden=YES;

@@ -8,13 +8,17 @@
 
 #import "detaileMessageVC.h"
 #import "DemessageCell.h"
+#import "listInfoModel.h"
+#import "annotionInfoModel.h"
 @interface detaileMessageVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic,strong)UITableView   *tab ;
+@property (nonatomic,strong)NSMutableArray  * array;
 @end
 
 @implementation detaileMessageVC
 
 - (void)viewDidLoad {
+    self.array   = [NSMutableArray array];
     [self sendRequest];
     [super viewDidLoad];
     [self setSubView];
@@ -30,7 +34,7 @@
     [self.view addSubview:self.tab];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 11;
+    return self.array.count;
 }
 
 
@@ -44,13 +48,18 @@
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    if(indexPath.row==0){
-        
+    
+    annotionInfoModel * model = self.array[indexPath.row];
+    if([model.paidtype   isEqualToString:@"0"]){
+        cell.payName.text  =@"支付宝";
+        cell.title.text  = model.note;
+        cell.money.text  = model.changed;
+    }else{
+        cell.payName.text  =@"微信";
+        cell.title.text  = model.note;
+        cell.money.text  = model.changed;
     }
-    cell.time.text     =@"2017-05-16 15:23";
-    cell.title.text    =@"退款成功";
-    cell.payName.text  =@"支付宝";
-    cell.money.text    =@"199元";
+    
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath  {
@@ -79,10 +88,15 @@
      
            parameters:dic
          successBlock:^(id response) {
-             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-             Toast(model.errmsg);
-             NSString *errmsg = model.errmsg;
-             NSLog(@"errmsg==%@",errmsg);
+             listInfoModel * model = [listInfoModel yy_modelWithJSON:response];
+             if([model.errorno   isEqualToString:@"0"]){
+                 [self.array addObjectsFromArray: model.data];
+                 [self.tab reloadData];
+             }else{
+                
+                 Toast(model.errmsg);
+
+             }
              
          } failureBlock:^(NSError *error) {
              

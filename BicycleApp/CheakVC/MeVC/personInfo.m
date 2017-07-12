@@ -72,8 +72,8 @@
             name=@"百宝";
         }
         NSString *imagePath = [path stringByAppendingString:@"/pic.png"];
-        if([DB getStringById:@"IDname" fromTable:tabName]){
-            IDname = [DB getStringById:@"IDname" fromTable:tabName];
+        if([DB getStringById:@"truename" fromTable:tabName]){
+            IDname = [DB getStringById:@"truename" fromTable:tabName];
         }else{
             IDname =@"百宝科技";
         }
@@ -243,24 +243,6 @@
         //上传图片
         //  [self uploadImageWithData:fileData];
         
-    }else{
-        //如果是视频
-        NSURL *url = info[UIImagePickerControllerMediaURL];
-        //播放视频
-        //  _moviePlayer.contentURL = url;
-        // [_moviePlayer play];
-        //保存视频至相册（异步线程）
-        NSString *urlStr = [url path];
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            if (UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(urlStr)) {
-                
-                UISaveVideoAtPathToSavedPhotosAlbum(urlStr, self, @selector(video:didFinishSavingWithError:contextInfo:), nil);
-            }
-        });
-        NSData *videoData = [NSData dataWithContentsOfURL:url];
-        //视频上传
-        // [self uploadVideoWithData:videoData];
     }
     [self dismissViewControllerAnimated:YES completion:nil];
 }

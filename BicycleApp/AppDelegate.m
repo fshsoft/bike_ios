@@ -347,6 +347,15 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
                 //跳转支付宝钱包进行支付，处理支付结果
              [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
                    NSLog(@"result = %@",resultDic);
+                 NSDictionary  *dic = @{
+                                        
+                                        @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                                        @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                                        @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                                        @"action":      @"getAlipayNotifyOrder",
+                                        @"data"  :resultDic
+                                        };
+                 [self sendRequest:dic];
                  NSNotification * notification = [NSNotification notificationWithName:@"alPay" object:[NSString stringWithFormat:@"%@",[resultDic objectForKey:@"resultStatus"]]];
                  [[NSNotificationCenter defaultCenter] postNotification:notification];
               }];
@@ -366,6 +375,15 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             NSLog(@"result = %@",resultDic);
+            NSDictionary  *dic = @{
+                                   
+                                   @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                                   @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                                   @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                                   @"action":      @"getAlipayNotifyOrder",
+                                   @"data"  :resultDic
+                                   };
+            [self sendRequest:dic];
             NSNotification * notification = [NSNotification notificationWithName:@"alPay" object:[NSString stringWithFormat:@"%@",[resultDic objectForKey:@"resultStatus"]]];
             [[NSNotificationCenter defaultCenter] postNotification:notification];
         }];
@@ -422,6 +440,16 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     }
 }
 
+-(void)sendRequest:(NSDictionary *)dic{
+   
+    [RequestManager requestWithType:HttpRequestTypePost urlString:[DB getStringById:@"source_url" fromTable:tabName] parameters:dic successBlock:^(id response) {
 
+    } failureBlock:^(NSError *error) {
+
+    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+      
+    }];
+   
+}
  
 @end
