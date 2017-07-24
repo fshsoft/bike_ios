@@ -36,6 +36,7 @@
 		0E0879441ECB11AF00D7CD28 /* LogoAgreement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0879431ECB11AF00D7CD28 /* LogoAgreement.m */; };
 		0E19E0A81EF11A190047B94F /* LaunchIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E19E0A71EF11A190047B94F /* LaunchIntroductionView.m */; };
 		0E19E0B31EF11BD80047B94F /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E19E0AE1EF11BD80047B94F /* login.png */; };
+		0E1E47411F1A66B4000B5671 /* cheakInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1E47401F1A66B4000B5671 /* cheakInfoVC.m */; };
 		0E2322FB1ED1653F007FF580 /* depositMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2322FA1ED1653F007FF580 /* depositMoneyVC.m */; };
 		0E2322FE1ED17036007FF580 /* WalletMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2322FD1ED17036007FF580 /* WalletMoneyVC.m */; };
 		0E2323011ED170FE007FF580 /* MoneySelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2323001ED170FE007FF580 /* MoneySelectView.m */; };
@@ -50,10 +51,6 @@
 		0E26EDD51EF266540063A5CE /* home_center_pic@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26EDD31EF266540063A5CE /* home_center_pic@2x.png */; };
 		0E26EDD61EF266540063A5CE /* home_center_pic@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26EDD41EF266540063A5CE /* home_center_pic@3x.png */; };
 		0E26EDDB1EF375950063A5CE /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E26EDDA1EF375950063A5CE /* BaseModel.m */; };
-		0E26EDE01EF3E61C0063A5CE /* launch0.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26EDDC1EF3E61C0063A5CE /* launch0.png */; };
-		0E26EDE11EF3E61C0063A5CE /* launch1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26EDDD1EF3E61C0063A5CE /* launch1.png */; };
-		0E26EDE21EF3E61C0063A5CE /* launch2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26EDDE1EF3E61C0063A5CE /* launch2.png */; };
-		0E26EDE31EF3E61C0063A5CE /* launch3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26EDDF1EF3E61C0063A5CE /* launch3.png */; };
 		0E26EDEA1EF7D3350063A5CE /* center@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26EDE91EF7D3350063A5CE /* center@2x.png */; };
 		0E26EDEC1EF7D41B0063A5CE /* center@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E26EDEB1EF7D41B0063A5CE /* center@3x.png */; };
 		0E36BBB71ED030040022E3AD /* CheakNumberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E36BBB61ED030040022E3AD /* CheakNumberVC.m */; };
@@ -71,6 +68,10 @@
 		0E51EA361EF923350097479E /* personModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E51EA351EF923350097479E /* personModel.m */; };
 		0E51EA391EF927000097479E /* dataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E51EA381EF927000097479E /* dataModel.m */; };
 		0E614D371ED5784C003B64EC /* line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E614D361ED5784C003B64EC /* line@2x.png */; };
+		0E68B6EF1F221C2900BC4AE7 /* page1.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E68B6EB1F221C2900BC4AE7 /* page1.png */; };
+		0E68B6F01F221C2900BC4AE7 /* page2.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E68B6EC1F221C2900BC4AE7 /* page2.png */; };
+		0E68B6F11F221C2900BC4AE7 /* page3.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E68B6ED1F221C2900BC4AE7 /* page3.png */; };
+		0E68B6F21F221C2900BC4AE7 /* page4.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E68B6EE1F221C2900BC4AE7 /* page4.png */; };
 		0E777BB01EC304A900539E18 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BAF1EC304A900539E18 /* QuartzCore.framework */; };
 		0E777BB21EC304B400539E18 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BB11EC304B400539E18 /* CoreText.framework */; };
 		0E777BB41EC304C300539E18 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E777BB31EC304C300539E18 /* CoreGraphics.framework */; };
@@ -392,6 +393,8 @@
 		0E19E0A61EF11A190047B94F /* LaunchIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LaunchIntroductionView.h; path = ../BaseVC/LaunchIntroductionView.h; sourceTree = "<group>"; };
 		0E19E0A71EF11A190047B94F /* LaunchIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LaunchIntroductionView.m; path = ../BaseVC/LaunchIntroductionView.m; sourceTree = "<group>"; };
 		0E19E0AE1EF11BD80047B94F /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
+		0E1E473F1F1A66B4000B5671 /* cheakInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cheakInfoVC.h; sourceTree = "<group>"; };
+		0E1E47401F1A66B4000B5671 /* cheakInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cheakInfoVC.m; sourceTree = "<group>"; };
 		0E2322F91ED1653F007FF580 /* depositMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = depositMoneyVC.h; sourceTree = "<group>"; };
 		0E2322FA1ED1653F007FF580 /* depositMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = depositMoneyVC.m; sourceTree = "<group>"; };
 		0E2322FC1ED17036007FF580 /* WalletMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletMoneyVC.h; sourceTree = "<group>"; };
@@ -416,10 +419,6 @@
 		0E26EDD41EF266540063A5CE /* home_center_pic@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "home_center_pic@3x.png"; path = "../home_center_pic@3x.png"; sourceTree = "<group>"; };
 		0E26EDD91EF375950063A5CE /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
 		0E26EDDA1EF375950063A5CE /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
-		0E26EDDC1EF3E61C0063A5CE /* launch0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch0.png; sourceTree = "<group>"; };
-		0E26EDDD1EF3E61C0063A5CE /* launch1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch1.png; sourceTree = "<group>"; };
-		0E26EDDE1EF3E61C0063A5CE /* launch2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch2.png; sourceTree = "<group>"; };
-		0E26EDDF1EF3E61C0063A5CE /* launch3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = launch3.png; sourceTree = "<group>"; };
 		0E26EDE91EF7D3350063A5CE /* center@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "center@2x.png"; path = "../center@2x.png"; sourceTree = "<group>"; };
 		0E26EDEB1EF7D41B0063A5CE /* center@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "center@3x.png"; path = "../homeniv/center@3x.png"; sourceTree = "<group>"; };
 		0E36BBB51ED030040022E3AD /* CheakNumberVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheakNumberVC.h; sourceTree = "<group>"; };
@@ -429,6 +428,7 @@
 		0E36BBBB1ED06F6E0022E3AD /* SportDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SportDetailView.m; path = ../../LoginVC/SportDetailView.m; sourceTree = "<group>"; };
 		0E36BBFF1ED099C70022E3AD /* UIView+ScaleAnimation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ScaleAnimation.h"; sourceTree = "<group>"; };
 		0E36BC001ED099C70022E3AD /* UIView+ScaleAnimation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ScaleAnimation.m"; sourceTree = "<group>"; };
+		0E36D4021F1E1C3B00A928DE /* BicycleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BicycleApp.entitlements; sourceTree = "<group>"; };
 		0E3A51AC1ED7F047002642FE /* stopView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stopView.h; sourceTree = "<group>"; };
 		0E3A51AD1ED7F047002642FE /* stopView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = stopView.m; sourceTree = "<group>"; };
 		0E3B552B1F0A14C200BF38E8 /* ZKUDID.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZKUDID.h; path = ../ZKUDID.h; sourceTree = "<group>"; };
@@ -448,6 +448,10 @@
 		0E51EA371EF927000097479E /* dataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dataModel.h; sourceTree = "<group>"; };
 		0E51EA381EF927000097479E /* dataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dataModel.m; sourceTree = "<group>"; };
 		0E614D361ED5784C003B64EC /* line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "line@2x.png"; sourceTree = "<group>"; };
+		0E68B6EB1F221C2900BC4AE7 /* page1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page1.png; sourceTree = "<group>"; };
+		0E68B6EC1F221C2900BC4AE7 /* page2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page2.png; sourceTree = "<group>"; };
+		0E68B6ED1F221C2900BC4AE7 /* page3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page3.png; sourceTree = "<group>"; };
+		0E68B6EE1F221C2900BC4AE7 /* page4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = page4.png; sourceTree = "<group>"; };
 		0E777BAF1EC304A900539E18 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		0E777BB11EC304B400539E18 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		0E777BB31EC304C300539E18 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -877,7 +881,6 @@
 		0ECB41FE1ECFD0A300396A20 /* payCate.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = payCate.xib; path = ../payCate.xib; sourceTree = "<group>"; };
 		0ECB42001ECFD30100396A20 /* payCateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = payCateView.h; path = ../payCateView.h; sourceTree = "<group>"; };
 		0ECB42011ECFD30100396A20 /* payCateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = payCateView.m; path = ../payCateView.m; sourceTree = "<group>"; };
-		0ECCB7501F14ACE600307D14 /* BicycleApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BicycleApp.entitlements; sourceTree = "<group>"; };
 		0EDB9DE61EEE688800B42EBC /* annotionInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = annotionInfoModel.h; sourceTree = "<group>"; };
 		0EDB9DE71EEE688800B42EBC /* annotionInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = annotionInfoModel.m; sourceTree = "<group>"; };
 		0EF6215A1ED813EB00AC900C /* break.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = break.xib; sourceTree = "<group>"; };
@@ -1015,10 +1018,10 @@
 			children = (
 				0E19E0A61EF11A190047B94F /* LaunchIntroductionView.h */,
 				0E19E0A71EF11A190047B94F /* LaunchIntroductionView.m */,
-				0E26EDDC1EF3E61C0063A5CE /* launch0.png */,
-				0E26EDDD1EF3E61C0063A5CE /* launch1.png */,
-				0E26EDDE1EF3E61C0063A5CE /* launch2.png */,
-				0E26EDDF1EF3E61C0063A5CE /* launch3.png */,
+				0E68B6EB1F221C2900BC4AE7 /* page1.png */,
+				0E68B6EC1F221C2900BC4AE7 /* page2.png */,
+				0E68B6ED1F221C2900BC4AE7 /* page3.png */,
+				0E68B6EE1F221C2900BC4AE7 /* page4.png */,
 				0E19E0AE1EF11BD80047B94F /* login.png */,
 			);
 			name = leadLaunch;
@@ -1104,7 +1107,7 @@
 		0E777F941EC561FD00539E18 /* BicycleApp */ = {
 			isa = PBXGroup;
 			children = (
-				0ECCB7501F14ACE600307D14 /* BicycleApp.entitlements */,
+				0E36D4021F1E1C3B00A928DE /* BicycleApp.entitlements */,
 				0E777F951EC561FD00539E18 /* AppDelegate.h */,
 				0E777F961EC561FD00539E18 /* AppDelegate.m */,
 				0ECB41861ECDB78000396A20 /* PrefixHeader.pch */,
@@ -1546,6 +1549,8 @@
 			children = (
 				0E777FA01EC561FD00539E18 /* LoginVC.h */,
 				0E777FA11EC561FD00539E18 /* LoginVC.m */,
+				0E1E473F1F1A66B4000B5671 /* cheakInfoVC.h */,
+				0E1E47401F1A66B4000B5671 /* cheakInfoVC.m */,
 				0ECB417A1ECD774E00396A20 /* CertifyTopView.h */,
 				0ECB417B1ECD774E00396A20 /* CertifyTopView.m */,
 				0ECB417D1ECD777700396A20 /* CerifyTop.xib */,
@@ -2019,7 +2024,7 @@
 				TargetAttributes = {
 					0EB75C521EB96A95005321DE = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = 85AV7L542H;
+						DevelopmentTeam = 9VDDJ828HQ;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -2123,6 +2128,7 @@
 				0ECB41BC1ECEAA2400396A20 /* home_tips@3x.png in Resources */,
 				0ECB417E1ECD777700396A20 /* CerifyTop.xib in Resources */,
 				0ECB41B81ECEAA2400396A20 /* home_ic_enter@3x.png in Resources */,
+				0E68B6F21F221C2900BC4AE7 /* page4.png in Resources */,
 				0E0879341ECACA6600D7CD28 /* wechat_fav@2x.png in Resources */,
 				0EBB1BE01ED49C34009BC5FF /* WeChatpay@2x.png in Resources */,
 				0EBB1C4A1ED4E2C1009BC5FF /* used_after@2x.png in Resources */,
@@ -2137,7 +2143,6 @@
 				0ECB41FA1ECEE8F300396A20 /* activity.xib in Resources */,
 				0EF6218F1EE02B3300AC900C /* serve.xib in Resources */,
 				0EBB1BCD1ED49979009BC5FF /* xkuang_onclick@2x.png in Resources */,
-				0E26EDE31EF3E61C0063A5CE /* launch3.png in Resources */,
 				0EBB1C401ED4E2B9009BC5FF /* search_add@2x.png in Resources */,
 				0E0879381ECACA6600D7CD28 /* wechat@2x.png in Resources */,
 				0EBB1BED1ED49E92009BC5FF /* pass_per@3x.png in Resources */,
@@ -2148,6 +2153,7 @@
 				0EBB1BE21ED49C34009BC5FF /* alipay@2x.png in Resources */,
 				0ECB41C11ECEAA2400396A20 /* ic_search@2x.png in Resources */,
 				0EBB1BC91ED49979009BC5FF /* suo@2x.png in Resources */,
+				0E68B6F11F221C2900BC4AE7 /* page3.png in Resources */,
 				0EBB1BE91ED49E92009BC5FF /* youhuijuan@3x.png in Resources */,
 				0E0879311ECACA6600D7CD28 /* qzone@2x.png in Resources */,
 				0E0879391ECACA6600D7CD28 /* wechat@3x.png in Resources */,
@@ -2160,18 +2166,19 @@
 				0ECB41FF1ECFD0A300396A20 /* payCate.xib in Resources */,
 				0EBB1BD51ED49AB8009BC5FF /* ziliaoxg@2x.png in Resources */,
 				0ECB41B11ECEAA2400396A20 /* gold@2x.png in Resources */,
+				0E68B6EF1F221C2900BC4AE7 /* page1.png in Resources */,
 				0EBB1BC11ED49979009BC5FF /* guzhang@2x.png in Resources */,
 				0ECB41C01ECEAA2400396A20 /* ic_nav_l@3x.png in Resources */,
 				0ECB41BA1ECEAA2400396A20 /* home_ic_sm@3x.png in Resources */,
 				0EBB1C611ED526B8009BC5FF /* flashlight@3x.png in Resources */,
 				0ECB41851ECDB0C300396A20 /* Navi.xib in Resources */,
 				0ECB41C51ECEAA2400396A20 /* service_pic@2x.png in Resources */,
-				0E26EDE11EF3E61C0063A5CE /* launch1.png in Resources */,
 				0EBB1BDD1ED49C34009BC5FF /* yajin@3x.png in Resources */,
 				0E0879361ECACA6600D7CD28 /* wechat_moment@2x.png in Resources */,
 				0EBB1BDE1ED49C34009BC5FF /* yajin@2x.png in Resources */,
 				0EBB1C6C1ED52A9B009BC5FF /* logotxt@2x.png in Resources */,
 				0EBB1BAD1ED40A71009BC5FF /* travel.xib in Resources */,
+				0E68B6F01F221C2900BC4AE7 /* page2.png in Resources */,
 				0EBB1C6D1ED52A9B009BC5FF /* logotxt@3x.png in Resources */,
 				0ECB41B01ECEAA2400396A20 /* dw_pic@3x.png in Resources */,
 				0ECB41C61ECEAA2400396A20 /* service_pic@3x.png in Resources */,
@@ -2181,7 +2188,6 @@
 				0E26EDEC1EF7D41B0063A5CE /* center@3x.png in Resources */,
 				0EBB1C491ED4E2C1009BC5FF /* history@3x.png in Resources */,
 				0E77814A1EC561FE00539E18 /* LICENSE in Resources */,
-				0E26EDE21EF3E61C0063A5CE /* launch2.png in Resources */,
 				0EBB1C311ED4D5E0009BC5FF /* stop.xib in Resources */,
 				0EBB1C481ED4E2C1009BC5FF /* history@2x.png in Resources */,
 				0EBB1BD41ED49AB8009BC5FF /* tksucc@3x.png in Resources */,
@@ -2202,7 +2208,6 @@
 				0ECB41B91ECEAA2400396A20 /* home_ic_sm@2x.png in Resources */,
 				0EF6219F1EE1827800AC900C /* jiesuo_enter@3x.png in Resources */,
 				0EC2EAF11EF137990081202D /* refresh@2x.png in Resources */,
-				0E26EDE01EF3E61C0063A5CE /* launch0.png in Resources */,
 				0E47D52A1EE7E8F700F7E0EA /* loading.gif in Resources */,
 				0EBB1BC71ED49979009BC5FF /* problem@2x.png in Resources */,
 				0E0879371ECACA6600D7CD28 /* wechat_moment@3x.png in Resources */,
@@ -2384,6 +2389,7 @@
 				0E77810C1EC561FD00539E18 /* CheakViewController.m in Sources */,
 				0E7781581EC561FE00539E18 /* UIImage+CompressImage.m in Sources */,
 				0E7781501EC561FE00539E18 /* UIButton+AFNetworking.m in Sources */,
+				0E1E47411F1A66B4000B5671 /* cheakInfoVC.m in Sources */,
 				0ECB416A1ECC6F2D00396A20 /* GeocodeAnnotation.m in Sources */,
 				0E3B552D1F0A14C200BF38E8 /* ZKUDID.m in Sources */,
 				0E7C4E031ED27581000A9474 /* SetInfoVC.m in Sources */,
@@ -2591,11 +2597,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = BicycleApp/BicycleApp.entitlements;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 85AV7L542H;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9VDDJ828HQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BicycleApp/SDK",
@@ -2628,10 +2634,10 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yuting.BicycleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Box.BicycleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "892cbf30-2941-4103-afae-4c4b6efe203d";
-				PROVISIONING_PROFILE_SPECIFIER = BboxbikecomyutingBicycleApp;
+				PROVISIONING_PROFILE = "057d2d0a-42ef-4cdc-b351-b58bbf22139c";
+				PROVISIONING_PROFILE_SPECIFIER = "xc-Bike-Distribution";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -2646,8 +2652,8 @@
 				CODE_SIGN_ENTITLEMENTS = BicycleApp/BicycleApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 85AV7L542H;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 9VDDJ828HQ;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BicycleApp/SDK",
@@ -2680,10 +2686,10 @@
 					"-ObjC",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yuting.BicycleApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Box.BicycleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "892cbf30-2941-4103-afae-4c4b6efe203d";
-				PROVISIONING_PROFILE_SPECIFIER = BboxbikecomyutingBicycleApp;
+				PROVISIONING_PROFILE = "057d2d0a-42ef-4cdc-b351-b58bbf22139c";
+				PROVISIONING_PROFILE_SPECIFIER = "xc-Bike-Distribution";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};

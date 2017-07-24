@@ -351,8 +351,9 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     self.mapView.centerCoordinate = location.coordinate;
     self.MyCoordinate=location.coordinate;
     NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
- 
-   [self getLocationManagerAnnotationLat:location.coordinate.latitude Lng:location.coordinate.longitude];
+    if(refressh_access_token){
+
+        [self getLocationManagerAnnotationLat:location.coordinate.latitude Lng:location.coordinate.longitude];}
    // [self getCLLocationCoordinateInfo];
     NSLog(@"%@",reGeocode.city);
 }
@@ -367,6 +368,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
                            @"lat"   : [NSString stringWithFormat:@"%f", lat ],
                            @"lng"   : [NSString stringWithFormat:@"%f",  lng ]
                            };
+  
     
     [self requestType:HttpRequestTypePost
                   url:[DB getStringById:@"source_url" fromTable:tabName]

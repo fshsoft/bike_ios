@@ -465,7 +465,7 @@
 /**
  *  格式化电量的Label的字体
  *
- *  @param percent 百分比
+ *  @param text 百分比
  *
  *  @return 电量百分比文字参数
  */

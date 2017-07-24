@@ -156,7 +156,7 @@
              appInfoModel *appmodel= model.data;
                  PaySelect *a =[[PaySelect alloc]init];
                  [a doAlipayPayAppID:appmodel.appId
-                               Price:@"0.01"
+                               Price:self.price
                             orderNum:appmodel.out_trade_no
                         orderTime:   appmodel.createtime
                           PrivateKey:appmodel.private_key

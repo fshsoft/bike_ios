@@ -159,11 +159,11 @@
     //广告frame
     imageAdconfiguration.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height);
     //广告图片URLString/或本地图片名(.jpg/.gif请带上后缀)
-    imageAdconfiguration.imageNameOrURLString = @"launch3.png";
+    imageAdconfiguration.imageNameOrURLString = @"page3.png";
     //图片填充模式
     imageAdconfiguration.contentMode = UIViewContentModeScaleToFill;
     //广告点击打开链接
-    imageAdconfiguration.openURLString = @"http://www.it7090.com";
+    //imageAdconfiguration.openURLString = @"http://www.it7090.com";
     //广告显示完成动画
     imageAdconfiguration.showFinishAnimate =ShowFinishAnimateFadein;
     //跳过按钮类型
