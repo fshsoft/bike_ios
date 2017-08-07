@@ -66,7 +66,13 @@
     [bottom   addSubview: self.depositMoney];
     
     [self.depositMoney addTarget:self action:@selector(depositMoneyFoundation) forControlEvents:UIControlEventTouchUpInside];
-    [self.depositMoney setTitle:@"199元,退押金" forState:UIControlStateNormal ];
+    if([[DB getStringById:@"money" fromTable:tabName]isEqualToString:@"1"]){
+        [self.depositMoney setTitle:@"199元,退押金" forState:UIControlStateNormal ];
+        
+    }else{
+        [self.depositMoney setTitle:@"尚未充值" forState:UIControlStateNormal ];
+        
+    }
     [self.depositMoney setTitleColor:gary170 forState:UIControlStateNormal];
     self.depositMoney.titleLabel.font =FontSize(14);
     [self.depositMoney setImage:Img(@"home_ic_enter") forState:UIControlStateNormal];
@@ -132,8 +138,11 @@
     [btnright setBackgroundColor:mainColor];
 }
 -(void)moneyPull{
-    PullMoneyVC *pullvc = [[PullMoneyVC alloc]init];
-    [self absPushViewController:pullvc animated:YES];
+    if([[DB getStringById:@"money" fromTable:tabName]isEqualToString:@"1"]){
+        PullMoneyVC *pullvc = [[PullMoneyVC alloc]init];
+        [self absPushViewController:pullvc animated:YES];
+    }
+
 }
 -(void)cancelPull{
     [self.backgroungView removeFromSuperview];

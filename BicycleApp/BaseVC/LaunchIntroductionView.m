@@ -141,6 +141,7 @@ NSString *storyboard;
     page.backgroundColor = [UIColor clearColor];
     page.currentPage = 0;
     page.defersCurrentPageDisplay = YES;
+    page.userInteractionEnabled = NO;
     [self addSubview:page];
 }
 #pragma mark - 进入按钮

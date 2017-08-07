@@ -44,12 +44,27 @@
 #import "certifyPersonInfoVC.h"
 #import "paymentVC.h"
 #import "listInfoModel.h"
-
+#import "JSCenterAnnotation.h"
+#import "ZXNLocationGaoDeManager.h"
 static const NSString *RoutePlanningViewControllerStartTitle       = @"起点";
 static const NSString *RoutePlanningViewControllerDestinationTitle = @"终点";
 static const NSInteger RoutePlanningPaddingEdge                   = 20;
 
 @interface HomeVC ()<AMapSearchDelegate,MAMapViewDelegate,AMapLocationManagerDelegate>
+{
+    NSMutableArray *all_arrayList;
+    ZXNLocationGaoDeManager *currentPosition;
+    
+    BOOL isShowView;//上部自行车信息框弹出
+    BOOL isMoveView;//是否移动地图
+    CLLocationCoordinate2D currentCoordinate;
+    
+    JSCenterAnnotation *centerAnnotaion;
+    MAAnnotationView *centerAnnoView;
+    
+    
+}
+
 
 @property (nonatomic,strong)MAMapView * mapView ;
 
@@ -93,9 +108,32 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
 @end
 
 @implementation HomeVC
+- (void)setUpData{
+    
+    
+    __block CLLocationCoordinate2D coor;
+    
+    coor.latitude =[currentPosition.lat_gaode doubleValue];
+    coor.longitude  = [currentPosition.lon_gaode doubleValue];
+    WeakSelf(self);
+    currentCoordinate = coor;
+    
+    [[ZXNLocationGaoDeManager sharedManager] getGps:^(NSString *lat, NSString *lon) {
+        
+        if(lat.length!=0&&lon.length!=0   ){
+            coor.longitude = [lat doubleValue];
+            coor.latitude =  [lon doubleValue];
+            
+            [weakself   getLocationManagerAnnotationLat:lat Lng:lon ];
+        }
+    }];
+    isMoveView = YES;
+    
+}
+
+
 - (void)viewDidLoad {
     
-    NSLog(@"%@",kName);
     [self cheakToken];
     [self initMapInfoDetaile];
     [self cheakMap];
@@ -105,124 +143,50 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     [self setHomeNaviView];
     [super viewDidLoad];
     self.navi.hidden=YES;
-    [self getLocationInfo];
     [self setMapSubview];
     [self setTopCheakview];
     [self setSearchMapPath];
     [self setBottomSubview];
     [self setNavLeftItemTitle:nil andImage:Img(@"catage")];
 
-       //[self startLoading];
+    
     }
+- (void)local{
+    //    centerAnnotaion.coordinate = currentCoordinate;
+    self.mapView.showsUserLocation = true;
+    self.mapView.userTrackingMode = MAUserTrackingModeFollow;
+}
+#pragma mark - mapViewDelete
+- (void)mapView:(MAMapView *)mapView mapWillMoveByUser:(BOOL)wasUserAction{
+    if (!isMoveView) {
+        //不能移动
+        centerAnnotaion.lockedToScreen = NO;
+    }else{
+        centerAnnotaion.lockedToScreen = YES;
+    }
+}
+
+- (void)mapInitComplete:(MAMapView *)mapView{
+    centerAnnotaion = [[JSCenterAnnotation alloc]init];
+    centerAnnotaion.coordinate = currentCoordinate;//self.mapView.centerCoordinate;
+    centerAnnotaion.lockedScreenPoint = CGPointMake(self.view.bounds.size.width/2, (self.view.bounds.size.height-64)/2);
+    centerAnnotaion.lockedToScreen = YES;
+    self.startAnnotation.coordinate =centerAnnotaion.coordinate;
+    [self.mapView addAnnotation:centerAnnotaion];
+    [self.mapView showAnnotations:@[centerAnnotaion] animated:YES];
+}
+
 #pragma mark 初始化地图所需数据
 -(void)initMapInfoDetaile{
     self.annotations = [NSMutableArray array];
     self.changeAnnotation = [[MAPointAnnotation alloc]init];
     self.startAnnotation  = [[MAPointAnnotation alloc] init];
     self.endAnnotation    = [[MAPointAnnotation alloc] init];
-    self.changeAnnotation.lockedScreenPoint = CGPointMake(self.view.frame.size.width/2.0,(self.view.frame.size.height-64)/2.0);
-    self.changeAnnotation.lockedToScreen = YES;
-    self.changeAnnotation.title =@"11111111";
-
-}
-#pragma mark token获取
--(void)cheakToken{
-    if(!refressh_access_token){
-     
-        [self getInfo];
-     
- }
-}
-
--(void)getInfo{
-    [ZKUDID setDebug:YES];   // default is NO.
-    NSString *UDID = [ZKUDID value];
-   
-    NSLog(@"UDID: %@",UDID);
-
-    NSString *strEnRes = [CusMD5 md5String:UDID];
-     NSLog(@"strEnRes: %@",strEnRes);
-    [RequestManager requestWithType:HttpRequestTypePost urlString:@"https://partner.baibaobike.com/authed/register.html" parameters:@{@"imei":UDID,@"code":strEnRes} successBlock:^(id response) {
-    NSLog(@"response==%@",response);
-        BaseModel  * model = [BaseModel yy_modelWithJSON: response];
-        appInfoModel    * appinfomodel = model.data;
-        
-        [DB putString:appinfomodel.app_key       withId:@"app_key"      intoTable:tabName];
-        [DB putString:appinfomodel.app_secret    withId:@"app_secret"   intoTable:tabName];
-        [DB putString:appinfomodel.refresh_url   withId:@"refrsh_url"   intoTable:tabName];
-        [DB putString:appinfomodel.seed_secret   withId:@"seed_secret"  intoTable:tabName];
-        [DB putString:appinfomodel.source_url    withId:@"source_url"   intoTable:tabName];
-        [DB putString:appinfomodel.token_url     withId:@"token_url"    intoTable:tabName];
-        [DB putString:appinfomodel.authorize_url withId:@"authorize_url" intoTable:tabName];
-[RequestManager requestWithType:HttpRequestTypePost
-                      urlString:[DB getStringById:@"authorize_url" fromTable:tabName]
-                     parameters:
-          @{
-           @"response_type" :@"code",
-           @"client_id"     :[DB getStringById:@"app_key" fromTable:tabName],
-           @"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
-                                                         
-                                                         }
-                successBlock:^(id response) {
-                    
-              [DB putString:[[response objectForKey:@"data"] objectForKey:@"authorize_code"]withId:@"authorize_code" intoTable:tabName];
-[RequestManager requestWithType:HttpRequestTypePost
-                      urlString:[DB getStringById:@"token_url" fromTable:tabName]
-                     parameters:@{
-                                                                 
-              @"client_id"     :[DB getStringById:@"app_key" fromTable:tabName],
-              @"client_secret" :[DB getStringById:@"app_secret" fromTable:tabName],
-              @"grant_type"    :@"authorization_code",
-              @"code"          :[DB getStringById:@"authorize_code" fromTable:tabName],
-              @"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
-                                                                 }
-                  successBlock:^(id response) {
-                                                    
-                BaseModel    * model    = [BaseModel yy_modelWithJSON:response];
-                appInfoModel * appmodel = model.data;
-                [DB putString: appmodel.refresh_token withId:@"refresh_token"   intoTable:tabName];
-                [DB putString: appmodel.access_token  withId: @"access_token"  intoTable:tabName];
-             
-                                                      
-                } failureBlock:^(NSError *error) {
-                                                      
-                    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-                                                      }];
-
-                           }
-                           failureBlock:^(NSError *error) {
-                               
-                           } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-                               
-                    }];
-
-              } failureBlock:^(NSError *error) {
-        
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        
-    }];
     
-   }
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    // [self setActivityView];
-    PaySelect    * pay =[[PaySelect alloc]init];
-    //[pay doAlipayPay];
-   }
-#pragma mark 持续定位
- -(void)getLocationInfo{
-    self.locationManager = [[AMapLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.distanceFilter =100;
-     //iOS 9（不包含iOS 9） 之前设置允许后台定位参数，保持不会被系统挂起
-    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
-     //iOS 9（包含iOS 9）之后新特性：将允许出现这种场景，同一app中多个locationmanager：一些只能在前台定位，另一些可在后台定位，并可随时禁止其后台定位。
-     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 9) {
-         self.locationManager.allowsBackgroundLocationUpdates = YES;
-     }
-     //开始持续定位
-     [self.locationManager startUpdatingLocation];
+
 }
-#pragma mark nav视图
+
+  #pragma mark nav视图
  -(void)setHomeNaviView{
     self.homeNaiv = [[NSBundle mainBundle]loadNibNamed:@"HomeNaiv" owner:self options:nil].lastObject;
     self.homeNaiv.frame  =CGRectMake(0, 0, SCREEN_WIDTH, 64);
@@ -236,21 +200,10 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
             
             return;
         }
-//        else{
-//            if(![[DB getStringById:@"money" fromTable:tabName] isEqualToString:@"1"]){
-//                paymentVC * vc = [[paymentVC alloc]init];
-//                [weakSelf absPushViewController:vc animated:YES];
-//            }else{
-//                if(![[DB getStringById:@"certify" fromTable:tabName] isEqualToString:@"1"]){
-//                    certifyPersonInfoVC * vc = [[certifyPersonInfoVC alloc]init];
-//                    [weakSelf absPushViewController:vc animated:YES];
-//
-//                }
-                else{
+                 else{
                     MeVC * me  = [[MeVC alloc]init];
                     [weakSelf.navigationController pushViewController:me animated:YES ];
-             //   }
-            //  }
+           
         }
 
         };
@@ -293,166 +246,27 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     //[self.view addSubview:self.actView];
 }
 
-/*- (void)configLocationManager
-{
-    self.locationManager = [[AMapLocationManager alloc] init];
-    
-    [self.locationManager setDelegate:self];
-    
-    [self.locationManager setPausesLocationUpdatesAutomatically:NO];
-    
-    [self.locationManager setAllowsBackgroundLocationUpdates:YES];
-}
 
-- (void)addCircleReionForCoordinate:(CLLocationCoordinate2D)coordinate
-{
-    int radius = 250;
-    
-    //创建circleRegion
-    AMapLocationCircleRegion *cirRegion = [[AMapLocationCircleRegion alloc] initWithCenter:coordinate
-                                                                                    radius:radius
-                                                                                identifier:@"circleRegion"];
-    
-    //添加地理围栏
-    [self.locationManager startMonitoringForRegion:cirRegion];
-    
-    //保存地理围栏
-    //[self.regions addObject:cirRegion];
-    
-    //添加Overlay
-    MACircle *circle = [MACircle circleWithCenterCoordinate:coordinate radius:radius];
-    [self.mapView addOverlay:circle];
-    [self.mapView setVisibleMapRect:circle.boundingMapRect];
-}
-
-- (void)amapLocationManager:(AMapLocationManager *)manager didStartMonitoringForRegion:(AMapLocationRegion *)region
-{
-    NSLog(@"开始监听地理围栏:%@", region);
-}
-
-- (void)amapLocationManager:(AMapLocationManager *)manager monitoringDidFailForRegion:(AMapLocationRegion *)region withError:(NSError *)error
-{
-    NSLog(@"监听地理围栏失败:%@", error.localizedDescription);
-}
-
-- (void)amapLocationManager:(AMapLocationManager *)manager didEnterRegion:(AMapLocationRegion *)region
-{
-    NSLog(@"进入地理围栏:%@", region);
-}
-
-- (void)amapLocationManager:(AMapLocationManager *)manager didExitRegion:(AMapLocationRegion *)region
-{
-    NSLog(@"退出地理围栏:%@", region);
-}*/
-
-#pragma mark 定位代理事件
-- (void)amapLocationManager:(AMapLocationManager *)manager didUpdateLocation:(CLLocation *)location reGeocode:(AMapLocationReGeocode *)reGeocode{
-    self.startAnnotation.coordinate    = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
-    self.mapView.centerCoordinate = location.coordinate;
-    self.MyCoordinate=location.coordinate;
-    NSLog(@"location:{lat:%f; lon:%f; accuracy:%f}", location.coordinate.latitude, location.coordinate.longitude, location.horizontalAccuracy);
-    if(refressh_access_token){
-
-        [self getLocationManagerAnnotationLat:location.coordinate.latitude Lng:location.coordinate.longitude];}
-   // [self getCLLocationCoordinateInfo];
-    NSLog(@"%@",reGeocode.city);
-}
-#pragma mark 获取标注
--(void)getLocationManagerAnnotationLat:(float)lat Lng:(float)lng{
-    NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"searchBikes",
-                           @"lat"   : [NSString stringWithFormat:@"%f", lat ],
-                           @"lng"   : [NSString stringWithFormat:@"%f",  lng ]
-                           };
-  
-    
-    [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-     
-           parameters:dic
-         successBlock:^(id response) {
-
-            listInfoModel* model = [listInfoModel yy_modelWithJSON:response];
-    if(model.data.count>0){
-                 self.paopaoTag=1;
-                 [self.mapView removeAnnotations:self.annotations];
-                 [self.annotations removeAllObjects ];
-                 self.changeAnnotation.lockedScreenPoint = CGPointMake(self.view.frame.size.width/2.0,(self.view.frame.size.height-64)/2.0);
-        
-                 self.changeAnnotation.title =@"11111111";
-                 [self.annotations addObject:self.changeAnnotation];
-                 for(int i=0;i<model.data.count;i++){
-                   annotionInfoModel * infomodel =  model.data[i];
-                     MAPointAnnotation *a1 = [[MAPointAnnotation alloc] init];
-                     a1.coordinate=CLLocationCoordinate2DMake( infomodel.lat,infomodel.lng  );
-                  
-                 
-                     if(i==0){
-                         a1.subtitle      = @"离我最近";
-                         
-                     }
-                     [self.annotations addObject:a1];
-                 }
-        
-                 [self.mapView addAnnotations:self.annotations];
-                 [self.mapView selectAnnotation:self.annotations[1] animated:YES];
-                 [self.mapView setZoomLevel:15 animated:YES];
-             }
-             
-
-             
-         } failureBlock:^(NSError *error) {
-             
-         }];
-
-    
-     }
 #pragma mark 地图设置
 -(void)setMapSubview{
     self.mapView  = [[MAMapView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREENH_HEIGHT-64)];
     
     self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-
     self.mapView.delegate = self;
-    [self.mapView setZoomLevel:15 animated:YES];
-    self.mapView.showsCompass =NO;
-    self.mapView.showsScale =NO;
-    self.mapView .showsUserLocation = YES;
-    
+    self.mapView.zoomLevel = 15;
+    // 开启定位
+    self.mapView.showsUserLocation = YES;
     self.mapView.userTrackingMode = MAUserTrackingModeFollow;
+    [self.mapView addAnnotation:centerAnnotaion];
+    
     //初始化 MAUserLocationRepresentation 对象：
-  
-    MAUserLocationRepresentation *r = [[MAUserLocationRepresentation alloc] init];
+    MAUserLocationRepresentation *localPoint = [[MAUserLocationRepresentation alloc] init];
+    localPoint.showsHeadingIndicator = YES;
+    [self.mapView updateUserLocationRepresentation:localPoint];
     
-    r.enablePulseAnnimation = NO;///内部蓝色圆点是否使用律动效果, 默认YES
-    
-    r.strokeColor = [UIColor clearColor];///精度圈 边线颜色, 默认 kAccuracyCircleDefaultColor
-    r.fillColor = [UIColor clearColor];
-    
-    r.lineWidth = 8;///精度圈 边线宽度，默认0
-
-    [self.mapView updateUserLocationRepresentation:r];
-   [self.view addSubview:self.mapView];
-    NSString *path = [NSString stringWithFormat:@"%@/style_json.json", [NSBundle mainBundle].bundlePath];
-    
-    NSData *data = [NSData dataWithContentsOfFile:path];
-    
-  
-    [self.mapView setCustomMapStyle:data];
+    [self.view addSubview:self.mapView];
    }
-- (void)mapInitComplete:(MAMapView *)mapView {
-    
-    self.mapView.customMapStyleEnabled = YES;
-}
-- (void)setCustomMapStyle:(NSData*)customJson{
-    self.mapView.customMapStyleEnabled = YES;
-
-}
 
 - (void)viewDidAppear:(BOOL)animated
 {
@@ -507,10 +321,10 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     self.naviRoute = [MANaviRoute naviRouteForPath:self.route.paths[self.currentCourse] withNaviType:type showTraffic:YES startPoint:[AMapGeoPoint locationWithLatitude:self.startAnnotation.coordinate.latitude longitude:self.startAnnotation.coordinate.longitude] endPoint:[AMapGeoPoint locationWithLatitude:self.endAnnotation.coordinate.latitude longitude:self.endAnnotation.coordinate.longitude]];
     [self.naviRoute addToMapView:self.mapView];
     
-//    [self.mapView setVisibleMapRect:[CommonUtility mapRectForOverlays:self.naviRoute.routePolylines]
-//                        edgePadding:UIEdgeInsetsMake(RoutePlanningPaddingEdge, RoutePlanningPaddingEdge, RoutePlanningPaddingEdge, RoutePlanningPaddingEdge)
-//                           animated:YES];
+    
     self.mapView.centerCoordinate = self.endAnnotation.coordinate;
+    
+
     
 }
 #pragma mark 路经star end
@@ -525,8 +339,8 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     navi.multipath = 1;
     
     /* 出发点. */
-    navi.origin = [AMapGeoPoint locationWithLatitude:self.changeAnnotation.coordinate.latitude
-                                           longitude:self.changeAnnotation.coordinate.longitude];
+    navi.origin = [AMapGeoPoint locationWithLatitude:centerAnnotaion.coordinate.latitude
+                                           longitude:centerAnnotaion.coordinate.longitude];
     /* 目的地. */
     navi.destination = [AMapGeoPoint locationWithLatitude:self.endAnnotation.coordinate.latitude
                                                 longitude:self.endAnnotation.coordinate.longitude];
@@ -577,18 +391,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     }
     
 
-//    if (response.route == nil)
-//    {
-//        return;
-//    }
-//    self.route = response.route;
-//    [self updateTotal];
-//    self.currentCourse = 0;
-//    if (response.count > 0)
-//    {
-//        [self presentCurrentCourse];
-//    }
-}
+ }
 #pragma mark - Utility
 /* 更新"上一个", "下一个"按钮状态. */
 - (void)updateCourseUI
@@ -644,45 +447,43 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
 {
     
    
-    if ([annotation isKindOfClass:[MAPointAnnotation class]])
-    {
-        static NSString *pointReuseIndentifier = @"pointReuseIndentifier";
-        MAPinAnnotationView*annotationView = (MAPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:pointReuseIndentifier];
-        if (annotationView == nil)
-        {
-            annotationView = [[MAPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:pointReuseIndentifier];
-        }
+    if ([annotation isMemberOfClass:[MAUserLocation class]]) {
         
-        if([annotationView.annotation   isEqual:self.changeAnnotation]||[annotationView.annotation.title isEqualToString:@"11111111"]){
-          
-            
-            annotationView.image =Img(@"center");
-            //设置中心心点偏移，使得标注底部中间点成为经纬度对应点
-            annotationView.centerOffset = CGPointMake(0, -18);
-            return annotationView;
-        }
-        //在地图上添加圆
-//      if ([annotationView.annotation.title isEqualToString:@"11111111"]) {
-//            annotationView.image =Img(@"home_center_pic");
-//           //设置中心心点偏移，使得标注底部中间点成为经纬度对应点
-//            annotationView.centerOffset = CGPointMake(0, -15);
-//            return annotationView;
-//       
-//            
-//        }
-//    else{
-            if([annotationView.annotation.subtitle isEqualToString:@"离我最近"]){
-                annotationView.canShowCallout   = YES;
-                UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20,80)];
-                vc.backgroundColor=[UIColor redColor];
-                [annotationView.customCalloutView addSubview:vc];
-            }
-        annotationView.centerOffset = CGPointMake(0, -18);
-            annotationView.image =Img(@"bike");
-            return annotationView;
-          }
+        return nil;
+    }
     
-    return nil;
+    
+    
+    if ([annotation isMemberOfClass:[JSCenterAnnotation class]]) {
+        static NSString *reuseCneterid = @"myCenterId";
+        MAAnnotationView *annotationView= [self.mapView dequeueReusableAnnotationViewWithIdentifier:reuseCneterid];
+        if (!annotationView) {
+            annotationView = [[MAAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:reuseCneterid];
+        }
+        annotationView.image =Img(@"home_center_pic");
+        //设置中心心点偏移，使得标注底部中间点成为经纬度对应点
+        annotationView.centerOffset = CGPointMake(0, -18);
+        annotationView.canShowCallout = NO;
+        centerAnnoView = annotationView;
+        return annotationView;
+    }
+    
+    static NSString *reuseid = @"myId";
+    
+    MAAnnotationView *annotationView = [self.mapView dequeueReusableAnnotationViewWithIdentifier:reuseid];
+    if (!annotationView) {
+        annotationView = [[MAAnnotationView alloc] initWithAnnotation:nil reuseIdentifier:reuseid];
+    }
+    if([annotationView.annotation.subtitle isEqualToString:@"离我最近"]){
+        annotationView.canShowCallout   = YES;
+        UIView *vc = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 20,80)];
+        vc.backgroundColor=[UIColor redColor];
+        [annotationView.customCalloutView addSubview:vc];
+    }
+    annotationView.image =Img(@"bike");
+    //    annotationView.canShowCallout = YES;
+    return annotationView;
+    
 }
  
 -(UIImage *)getImageFromView:(UIView *)view{
@@ -693,82 +494,73 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     return image;
 }
 
-/*!
- @brief 当选中一个annotation views时调用此接口
- @param mapView 地图View
- @param view 选中的annotation views
- */
+
+//单击地图
+- (void)mapView:(MAMapView *)mapView didSingleTappedAtCoordinate:(CLLocationCoordinate2D)coordinate{
+    
+    if (isShowView) {
+        // [self.showView setHidden:YES];
+        // [self.btn_local setHidden:NO];
+    }
+    [self clearLine];
+    self.topCheakView.hidden=YES;
+    self.mapView.zoomLevel = 15;
+    
+    [self.mapView removeAnnotations:self.mapView.annotations];
+    [self.mapView removeOverlays:self.mapView.overlays];
+    
+    [self.mapView addAnnotations: self.annotations];
+    [self.mapView addAnnotation:centerAnnotaion];
+    
+    isMoveView = YES;
+}
+
+
 
 
 # pragma mark 点击标注
 - (void)mapView:(MAMapView *)mapView didSelectAnnotationView:(MAAnnotationView *)view {
     
-    
-    if ([view isKindOfClass:[MAPinAnnotationView class]]) {
-        if(self.paopaoTag==1){
-            self.paopaoTag=2;
-        }else{
-        Toast(@"路径规划中");
-        [self clearLine];
-        MAPointAnnotation *Annotation = (MAPointAnnotation*)view.annotation;
-            if([Annotation.title isEqualToString:@"11111111"]){
-                
-            }else{
-            
-        //NSLog(@" %f,%f",Annotation.coordinate.latitude,Annotation.coordinate.longitude);
-        self.centerCoordinate =[self.mapView convertPoint:self.view.center toCoordinateFromView:self.view];
-        self.endAnnotation.coordinate  = self.centerCoordinate;
-       
-        self.startAnnotation.coordinate =Annotation.coordinate ;
-        BOOL isContains = MACircleContainsCoordinate(self.startAnnotation.coordinate, self.endAnnotation.coordinate, 200);
-        NSLog(@"isContains===%d",isContains);
-        [self clearLine];
-        [self searchRoutePlanningWalk];
-        //1.将两个经纬度点转成投影点
-        MAMapPoint point1 = MAMapPointForCoordinate(Annotation .coordinate);
-        MAMapPoint point2 = MAMapPointForCoordinate(self.endAnnotation.coordinate);
-        //2.计算距离
-        CLLocationDistance distance = MAMetersBetweenMapPoints(point1,point2);
-          //self.changeAnnotation.lockedToScreen = NO;
-        self.topCheakView.distanceLab.text =[NSString stringWithFormat:@"%.0f米",distance];
-        AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
-        regeo.location                    = [AMapGeoPoint locationWithLatitude:Annotation.coordinate.latitude longitude:Annotation.coordinate.longitude];
-        regeo.requireExtension =YES;
-        [self.search AMapReGoecodeSearch:regeo];
-
-        //CLLocationCoordinate2D coordinate =  self.endAnnotation.coordinate;
-        //ReGeocodeAnnotation *reGeocodeAnnotation = [[ReGeocodeAnnotation alloc] initWithCoordinate:coordinate
-                                                                                        // reGeocode:response.regeocode];
-        self.topCheakView.hidden=NO;
-        //self.changeAnnotation.lockedToScreen=NO;
-                
-            }
-        }
+    if ([view.annotation isMemberOfClass:[MAUserLocation class]]) {
+        
+        return ;
     }
+    
+
+    Toast(@"路径规划中");
+    [self clearLine];
+    MAPointAnnotation *Annotation = (MAPointAnnotation*)view.annotation;
+    
+    
+    self.centerCoordinate =[self.mapView convertPoint:self.view.center toCoordinateFromView:self.view];
+    self.endAnnotation.coordinate  = self.centerCoordinate;
+    
+    self.startAnnotation.coordinate =Annotation.coordinate ;
+    BOOL isContains = MACircleContainsCoordinate(self.startAnnotation.coordinate, self.endAnnotation.coordinate, 200);
+    
+    
+    [self searchRoutePlanningWalk];
+    //1.将两个经纬度点转成投影点
+    MAMapPoint point1 = MAMapPointForCoordinate(Annotation .coordinate);
+    MAMapPoint point2 = MAMapPointForCoordinate(self.endAnnotation.coordinate);
+    //2.计算距离
+    CLLocationDistance distance = MAMetersBetweenMapPoints(point1,point2);
+    //self.changeAnnotation.lockedToScreen = NO;
+    self.topCheakView.distanceLab.text =[NSString stringWithFormat:@"%.0f米",distance];
+    AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
+    regeo.location                    = [AMapGeoPoint locationWithLatitude:Annotation.coordinate.latitude longitude:Annotation.coordinate.longitude];
+    regeo.requireExtension =YES;
+    [self.search AMapReGoecodeSearch:regeo];
+    
+    //CLLocationCoordinate2D coordinate =  self.endAnnotation.coordinate;
+    //ReGeocodeAnnotation *reGeocodeAnnotation = [[ReGeocodeAnnotation alloc] initWithCoordinate:coordinate
+    // reGeocode:response.regeocode];
+    self.topCheakView.hidden=NO;
+    //self.changeAnnotation.lockedToScreen=NO;
+    
    // [_mapView  deselectAnnotation:view.annotation animated:YES];
 
     
-}
-- (void)setStartandendAnnotations
-{
-    /*
-     { //  UIImageView *imageview=[[UIImageView alloc]init];
-     //异步加载
-     //    [imageview sd_setImageWithURL:[NSURL URLWithString:annotation.subtitle] placeholderImage:[UIImage imageNamed:@"placehodeLoading.png"]];
-     
-     //    [imageview sd_setImageWithURL:[NSURL URLWithString:annotation.subtitle] placeholderImage:[UIImage imageNamed:@"placehodeLoading.png"] options:SDWebImageLowPriority | SDWebImageRetryFailed completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
-     //     {
-     //         annotationView.image=[self getImageFromView:viewForImage];//修改默认图片不替换问题
-     //     }];
-     
-     //在地图上添加圆
-     }
-    MAPointAnnotation *startAnnotation = [[MAPointAnnotation alloc] init];
-    startAnnotation.coordinate = self.startCoordinate;
-    self.startAnnotation = startAnnotation;
-    MAPointAnnotation *destinationAnnotation = [[MAPointAnnotation alloc] init];
-    destinationAnnotation.coordinate = self.destinationCoordinate;
-    self.destinationAnnotation = destinationAnnotation;*/
 }
 
 /* 清空地图上已有的路线. */
@@ -776,6 +568,70 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
 {
     [self.naviRoute removeFromMapView];
 }
+
+-(void)viewWillDisappear:(BOOL)animated
+{
+    self.actView.hidden=YES;
+    self.topCheakView.hidden=YES;
+    [self clearLine];
+}
+#pragma mark 获取标注
+-(void)getLocationManagerAnnotationLat:(NSString*)lat Lng:(NSString *)lng{
+    NSDictionary  *dic = @{
+                           
+                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
+                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"searchBikes",
+                           @"lat"   :  lat ,
+                           @"lng"   :  lng
+                           };
+    
+    
+    [self requestType:HttpRequestTypePost
+                  url:[DB getStringById:@"source_url" fromTable:tabName]
+     
+           parameters:dic
+         successBlock:^(id response) {
+             
+             listInfoModel* model = [listInfoModel yy_modelWithJSON:response];
+             if(model.data.count>0){
+                 self.paopaoTag=1;
+                 [self.mapView removeAnnotations:self.annotations];
+                 [self.annotations removeAllObjects ];
+                 
+                 
+                 
+                 for(int i=0;i<model.data.count;i++){
+                     annotionInfoModel * infomodel =  model.data[i];
+                     MAPointAnnotation *a1 = [[MAPointAnnotation alloc] init];
+                     a1.coordinate=CLLocationCoordinate2DMake( infomodel.lat,infomodel.lng  );
+                     
+                     
+                     if(i==0){
+                         if(a1.coordinate.longitude==0||a1.coordinate.latitude==0){
+                             a1.coordinate=CLLocationCoordinate2DMake( [lat doubleValue]-0.001, [lng doubleValue]-0.001);
+                         }
+                         a1.subtitle      = @"离我最近";
+                         
+                     }
+                     [self.annotations addObject:a1];
+                 }
+                 [self.mapView addAnnotation:centerAnnotaion];
+                 [self.mapView addAnnotations:self.annotations];
+                 //[self.mapView selectAnnotation:self.annotations[1] animated:YES];
+                 
+             }
+             
+             
+             
+         } failureBlock:^(NSError *error) {
+             
+         }];
+    
+    
+}
+
 #pragma 底部视图
 -(void)setBottomSubview{
     HomeBottomView *bottom = [[HomeBottomView alloc]initWithFrame:CGRectMake(0, SCREENH_HEIGHT-90, SCREEN_WIDTH, 90)];
@@ -786,11 +642,8 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     [self clearLine];
         [self.mapView removeAnnotations:self.annotations];
         self.changeAnnotation.lockedScreenPoint = CGPointMake(self.view.frame.size.width/2.0,(self.view.frame.size.height-64)/2.0);
-        if(self.changeAnnotation.coordinate.latitude==0){
-             self.changeAnnotation.coordinate =self.startAnnotation.coordinate;
-             [selfblock getLocationManagerAnnotationLat:   self.startAnnotation.coordinate.latitude Lng:   self.startAnnotation.coordinate.longitude];
-        }else{
-            [selfblock getLocationManagerAnnotationLat:   self.changeAnnotation.coordinate.latitude Lng:   self.changeAnnotation.coordinate.longitude];}
+        
+        [selfblock  setUpData];
     };
     bottom.cheakBlock=^{
           [selfblock cheakPersonStatue];
@@ -817,15 +670,11 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     };
     
     bottom.mapBlock = ^{
-        if(self.MyCoordinate.latitude ==0){
-            [self clearLine];
-            selfblock.mapView.centerCoordinate=self.startAnnotation.coordinate;
-            
-        }else{
-            [self clearLine];
-            selfblock.mapView.centerCoordinate=  self.MyCoordinate;
-                   }
-            };
+        self.topCheakView.hidden=YES;
+        [self clearLine];
+        [selfblock  local];
+
+                    };
     
     bottom.helpBlock = ^{
           [selfblock cheakPersonStatue];
@@ -883,12 +732,6 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     [self.view addSubview:self.animationView ];
     
 }
--(void)viewWillDisappear:(BOOL)animated
-{
-    self.actView.hidden=YES;
-    self.topCheakView.hidden=YES;
-    [self clearLine];
-   }
 
 #pragma 跳转验证页
 
@@ -992,50 +835,6 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
         [[UIApplication sharedApplication] openURL:url];
     }
 }
-/**
- * @brief 地图区域改变过程中会调用此接口 since 4.6.0
- * @param mapView 地图View
- */
-- (void)mapViewRegionChanged:(MAMapView *)mapView{
-   // NSLog(@"地图区域改变过程中会调用此接口 ");
-}
-
-/**
- * @brief 地图区域即将改变时会调用此接口
- * @param mapView 地图View
- * @param animated 是否动画
- */
-- (void)mapView:(MAMapView *)mapView regionWillChangeAnimated:(BOOL)animated{
-   // NSLog(@"地图区域即将改变时会调用此接口");
-    //self.changeAnnotation.lockedToScreen=NO;
-}
-
-/**
- * @brief 地图区域改变完成后会调用此接口
- * @param mapView 地图View
- * @param animated 是否动画
- */
-- (void)mapView:(MAMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
-    //NSLog(@"地图区域改变完成后会调用此接口");
-}
-
-/**
- * @brief 地图将要发生移动时调用此接口
- * @param mapView       地图view
- * @param wasUserAction 标识是否是用户动作
- */
-- (void)mapView:(MAMapView *)mapView mapWillMoveByUser:(BOOL)wasUserAction{
-   // NSLog(@" 地图将要发生移动时调用此接口");
-}
-
-/**
- * @brief 地图移动结束后调用此接口
- * @param mapView       地图view
- * @param wasUserAction 标识是否是用户动作
- */
-- (void)mapView:(MAMapView *)mapView mapDidMoveByUser:(BOOL)wasUserAction{
-    //NSLog(@"地图移动结束后调用此接口");
-}
 
 -(void)cheakPersonStatue{
     NSDictionary  *dic = @{
@@ -1073,5 +872,117 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
  
 }
 
+#pragma mark token获取
+-(void)cheakToken{
+    
+    if(refressh_access_token){
+        
+        [self setUpData];
+    }else{
+        [self getInfo];
+    }
+}
+
+-(void)getInfo{
+    [ZKUDID setDebug:YES];   // default is NO.
+    NSString *UDID = [ZKUDID value];
+    NSLog(@"%@",UDID);
+    NSString *strEnRes = [CusMD5 md5String:UDID];
+    NSLog(@"%@",UDID);
+    [RequestManager requestWithType:HttpRequestTypePost
+                          urlString:@"https://partner.baibaobike.com/authed/register.html"
+                         parameters:@{@"imei":UDID,@"code":strEnRes}
+                       successBlock:^(id response) {
+                           NSLog(@"%@",response);
+                           BaseModel  * model = [BaseModel yy_modelWithJSON: response];
+                           if([model.errorno isEqualToString:@"0"]){
+                               appInfoModel    * appinfomodel = model.data;
+                               
+                               [DB putString:appinfomodel.app_key       withId:@"app_key"      intoTable:tabName];
+                               [DB putString:appinfomodel.app_secret    withId:@"app_secret"   intoTable:tabName];
+                               [DB putString:appinfomodel.refresh_url   withId:@"refrsh_url"   intoTable:tabName];
+                               [DB putString:appinfomodel.seed_secret   withId:@"seed_secret"  intoTable:tabName];
+                               [DB putString:appinfomodel.source_url    withId:@"source_url"   intoTable:tabName];
+                               [DB putString:appinfomodel.token_url     withId:@"token_url"    intoTable:tabName];
+                               [DB putString:appinfomodel.authorize_url withId:@"authorize_url" intoTable:tabName];
+                               [self requestToken];
+                           }
+                           else{
+                               //   [self getInfo];
+                               
+                           }
+                       } failureBlock:^(NSError *error) {
+                           
+                           // Toast(@"网络请求失败，请退出重试");
+                           
+                       } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                           
+                       }];
+    
+}
+-(void)requestToken{
+    [RequestManager requestWithType:HttpRequestTypePost
+                          urlString:[DB getStringById:@"authorize_url" fromTable:tabName]
+                         parameters:
+     @{
+       @"response_type" :@"code",
+       @"client_id"     :[DB getStringById:@"app_key" fromTable:tabName],
+       @"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
+       
+       }
+                       successBlock:^(id response) {
+                           NSLog(@"%@",response);
+                           if([[response objectForKey:@"errno"] isEqualToString:@"0"]){
+                               
+                               [DB putString:[[response objectForKey:@"data"] objectForKey:@"authorize_code"]withId:@"authorize_code" intoTable:tabName];
+                               [self getToken];
+                           }else{
+                               [self requestToken];
+                           }
+                       }
+                       failureBlock:^(NSError *error) {
+                           // Toast(@"网络请求失败，请退出重试");
+                       } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                           
+                       }];
+    
+    
+}
+
+-(void)getToken{
+    
+    [RequestManager requestWithType:HttpRequestTypePost
+                          urlString:[DB getStringById:@"token_url" fromTable:tabName]
+                         parameters:@{
+                                      
+                                      @"client_id"     :[DB getStringById:@"app_key" fromTable:tabName],
+                                      @"client_secret" :[DB getStringById:@"app_secret" fromTable:tabName],
+                                      @"grant_type"    :@"authorization_code",
+                                      @"code"          :[DB getStringById:@"authorize_code" fromTable:tabName],
+                                      @"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
+                                      }
+                       successBlock:^(id response) {
+                           NSLog(@"%@",response);
+                           if([[response objectForKey:@"errno"] isEqualToString:@"0"]){
+                               
+                               BaseModel    * model    = [BaseModel yy_modelWithJSON:response];
+                               appInfoModel * appmodel = model.data;
+                               [DB putString: appmodel.refresh_token withId:@"refresh_token"   intoTable:tabName];
+                               [DB putString: appmodel.access_token  withId: @"access_token"  intoTable:tabName];
+                               [self setUpData];
+                               
+                           }else{
+                               [self getToken];
+                           }
+                           
+                           
+                           
+                           
+                       } failureBlock:^(NSError *error) {
+                           
+                       } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                       }];
+    
+}
 
 @end

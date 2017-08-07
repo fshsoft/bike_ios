@@ -37,6 +37,8 @@
 		0E19E0A81EF11A190047B94F /* LaunchIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E19E0A71EF11A190047B94F /* LaunchIntroductionView.m */; };
 		0E19E0B31EF11BD80047B94F /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E19E0AE1EF11BD80047B94F /* login.png */; };
 		0E1E47411F1A66B4000B5671 /* cheakInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1E47401F1A66B4000B5671 /* cheakInfoVC.m */; };
+		0E2163111F384C0700DB1AD2 /* JSCenterAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E21630E1F384C0700DB1AD2 /* JSCenterAnnotation.m */; };
+		0E2163121F384C0700DB1AD2 /* ZXNLocationGaoDeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2163101F384C0700DB1AD2 /* ZXNLocationGaoDeManager.m */; };
 		0E2322FB1ED1653F007FF580 /* depositMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2322FA1ED1653F007FF580 /* depositMoneyVC.m */; };
 		0E2322FE1ED17036007FF580 /* WalletMoneyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2322FD1ED17036007FF580 /* WalletMoneyVC.m */; };
 		0E2323011ED170FE007FF580 /* MoneySelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2323001ED170FE007FF580 /* MoneySelectView.m */; };
@@ -395,6 +397,10 @@
 		0E19E0AE1EF11BD80047B94F /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
 		0E1E473F1F1A66B4000B5671 /* cheakInfoVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = cheakInfoVC.h; sourceTree = "<group>"; };
 		0E1E47401F1A66B4000B5671 /* cheakInfoVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = cheakInfoVC.m; sourceTree = "<group>"; };
+		0E21630D1F384C0700DB1AD2 /* JSCenterAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSCenterAnnotation.h; sourceTree = "<group>"; };
+		0E21630E1F384C0700DB1AD2 /* JSCenterAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSCenterAnnotation.m; sourceTree = "<group>"; };
+		0E21630F1F384C0700DB1AD2 /* ZXNLocationGaoDeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXNLocationGaoDeManager.h; sourceTree = "<group>"; };
+		0E2163101F384C0700DB1AD2 /* ZXNLocationGaoDeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZXNLocationGaoDeManager.m; sourceTree = "<group>"; };
 		0E2322F91ED1653F007FF580 /* depositMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = depositMoneyVC.h; sourceTree = "<group>"; };
 		0E2322FA1ED1653F007FF580 /* depositMoneyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = depositMoneyVC.m; sourceTree = "<group>"; };
 		0E2322FC1ED17036007FF580 /* WalletMoneyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WalletMoneyVC.h; sourceTree = "<group>"; };
@@ -1177,6 +1183,10 @@
 			children = (
 				0E7780081EC561FD00539E18 /* HomeVC.h */,
 				0E7780091EC561FD00539E18 /* HomeVC.m */,
+				0E21630D1F384C0700DB1AD2 /* JSCenterAnnotation.h */,
+				0E21630E1F384C0700DB1AD2 /* JSCenterAnnotation.m */,
+				0E21630F1F384C0700DB1AD2 /* ZXNLocationGaoDeManager.h */,
+				0E2163101F384C0700DB1AD2 /* ZXNLocationGaoDeManager.m */,
 				0E0738641EEA7A6700878913 /* search */,
 				0E0738651EEA7B2500878913 /* homeniv */,
 				0E47D5321EE80FD800F7E0EA /* style_json.json */,
@@ -2025,7 +2035,7 @@
 					0EB75C521EB96A95005321DE = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = 9VDDJ828HQ;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2424,6 +2434,8 @@
 				0EBB1C181ED4C4EB009BC5FF /* consumerVC.m in Sources */,
 				0E77812D1EC561FE00539E18 /* Order.m in Sources */,
 				0E0879411ECAF40800D7CD28 /* LogoTextField.m in Sources */,
+				0E2163121F384C0700DB1AD2 /* ZXNLocationGaoDeManager.m in Sources */,
+				0E2163111F384C0700DB1AD2 /* JSCenterAnnotation.m in Sources */,
 				0E3B55301F0A227000BF38E8 /* CusMD5.m in Sources */,
 				0E77813B1EC561FE00539E18 /* NSArray+PureLayout.m in Sources */,
 				0E23230A1ED190B8007FF580 /* preferentialVC.m in Sources */,
@@ -2599,9 +2611,9 @@
 				CODE_SIGN_ENTITLEMENTS = BicycleApp/BicycleApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9VDDJ828HQ;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BicycleApp/SDK",
@@ -2636,8 +2648,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Box.BicycleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "057d2d0a-42ef-4cdc-b351-b58bbf22139c";
-				PROVISIONING_PROFILE_SPECIFIER = "xc-Bike-Distribution";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
@@ -2651,9 +2663,9 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = BicycleApp/BicycleApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9VDDJ828HQ;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/BicycleApp/SDK",
@@ -2688,8 +2700,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Box.BicycleApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "057d2d0a-42ef-4cdc-b351-b58bbf22139c";
-				PROVISIONING_PROFILE_SPECIFIER = "xc-Bike-Distribution";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
