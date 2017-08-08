@@ -34,7 +34,7 @@
 
 #define url(info)    [NSString stringWithFormat:@"https://api.baibaobike.com/%@",info]
 #define Ip           @"https://api.baibaobike.com/"
-#define mainColor        RGBColor(254, 147, 68)
+#define mainColor        RGBColor(88, 185, 41)
 #define gary170          RGBColor(170, 170, 170)
 #define gary242          RGBColor(242, 242, 242)
 #define gary51           RGBColor(51,51,51)

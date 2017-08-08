@@ -207,7 +207,7 @@
     if(  [ DB getStringById:@"name" fromTable:tabName]){
         self.personName.text = [DB getStringById:@"name" fromTable:tabName];
     }else{
-        self.personName.text =@"百宝科技";
+        self.personName.text =@"小樱单车";
     }
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);

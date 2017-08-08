@@ -13,16 +13,16 @@
 #import "JSHAREService.h"
 #import "HomeVC.h"
 #import <WXApi.h>
-#import <AdSupport/AdSupport.h>
+//#import <AdSupport/AdSupport.h>
 #import "XHLaunchAdManager.h"
 
 // 引入JPush功能所需头文件
-#import "JPUSHService.h"
+//#import "JPUSHService.h"
 // iOS10注册APNs所需头文件
-#ifdef NSFoundationVersionNumber_iOS_9_x_Max
-#import <UserNotifications/UserNotifications.h>
-#endif
- @interface AppDelegate ()<WXApiDelegate ,JPUSHRegisterDelegate>
+//#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+//#import <UserNotifications/UserNotifications.h>
+//#endif
+ @interface AppDelegate ()<WXApiDelegate >//,JPUSHRegisterDelegate>
 
 @end
 
@@ -35,7 +35,7 @@
     [self setGaodeMapInfo];
     [self setKeyboardManager];
     [WXApi registerApp:@"wx9befb1503750db67"];
-    [self setPushInfo:launchOptions];
+   // [self setPushInfo:launchOptions];
     [self setzShearInfo];
     [self setTabifno];
     
@@ -47,7 +47,7 @@
 }
 
 -(void)setLaunchfirst{
-   [LaunchIntroductionView sharedWithImages:@[@"page1",@"page2",@"page3",@"page4"] buttonImage:nil buttonFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
+   [LaunchIntroductionView sharedWithImages:@[@"page01",@"page02",@"page03",@"page04"] buttonImage:nil buttonFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
 
 }
 -(void)setTabifno{
@@ -76,7 +76,7 @@
 -(void)setGaodeMapInfo{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
-    [AMapServices sharedServices].apiKey =@"834d7ab66c7ae516c0d7fa3e40916df2";
+    [AMapServices sharedServices].apiKey =@"9be0e88e2aad12e9788483b3a5adcef4";
     
     [[AMapServices sharedServices] setEnableHTTPS:YES];
 }
@@ -96,8 +96,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     
-    [application setApplicationIconBadgeNumber:0];
-    [application cancelAllLocalNotifications];
+    //[application setApplicationIconBadgeNumber:0];
+    //[application cancelAllLocalNotifications];
 
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
 }
@@ -114,7 +114,7 @@
     // appropriate. See also applicationDidEnterBackground:.
 }
     // ===================================         推送        ==============================================
--(void)setPushInfo :(NSDictionary *)launchOptions{
+/*-(void)setPushInfo :(NSDictionary *)launchOptions{
     
    // NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
@@ -303,7 +303,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
                                                format:NULL
                                      errorDescription:NULL];
     return str;
-}
+}*/
 
  // ===================================         分享        ==============================================
 #pragma 分享

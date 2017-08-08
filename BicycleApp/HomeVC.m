@@ -675,6 +675,11 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
         [selfblock  local];
 
                     };
+    bottom.infoBlock = ^{
+        messageVC *message = [[messageVC alloc]init];
+        [selfblock absPushViewController:message animated:YES];
+    };
+
     
     bottom.helpBlock = ^{
           [selfblock cheakPersonStatue];

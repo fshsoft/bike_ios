@@ -328,7 +328,7 @@
     //======================= 矩阵操作 ============================
     CGContextTranslateCTM(context, fullRect.size.width / 2, fullRect.size.width / 2);
     
-    CGContextSetStrokeColorWithColor(context, [UIColor colorWithRed:1 green:140/255.0 blue:41/255.0 alpha:1.00].CGColor);//线框颜色
+    CGContextSetStrokeColorWithColor(context, mainColor.CGColor);//线框颜色
     
     int count = (_scaleCount / 2 + 1) * currentPercent;
     CGFloat scaleAngle = 2 * M_PI / _scaleCount;

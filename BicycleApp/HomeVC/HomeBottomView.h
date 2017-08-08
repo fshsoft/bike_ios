@@ -12,16 +12,19 @@ typedef void(^cheakViewBlock)();
 typedef void(^refreshBlock)();
 typedef void(^mapcenterBlock)();
 typedef void(^helpcenterBlock)();
+typedef void(^helpInfoBlock)();
+
 
 @interface HomeBottomView : UIView
 @property  (nonatomic,strong) UIButton   *refreshButton;
 @property  (nonatomic,strong) UIButton   *mapcenterButton;
 @property  (nonatomic,strong) UIButton   *helpcenterButton;
 @property  (nonatomic,strong) UIButton   *cheakcodeButton;
- 
+@property  (nonatomic,strong) UIButton   *cheakinfoButton;
 
 @property (nonatomic, copy)   cheakViewBlock    cheakBlock;
 @property (nonatomic, copy)   refreshBlock      freshBlock;
 @property (nonatomic, copy)   mapcenterBlock    mapBlock;
 @property (nonatomic, copy)   helpcenterBlock   helpBlock;
+@property  (nonatomic,copy)   helpInfoBlock     infoBlock;
 @end

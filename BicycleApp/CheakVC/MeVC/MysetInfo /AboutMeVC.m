@@ -23,12 +23,12 @@
     }
 -(void)setbottomView{
     UILabel  *lab =[[UILabel alloc]initWithFrame:CGRectMake(0, SCREENH_HEIGHT-60, SCREEN_WIDTH, 13)];
-    lab.text = @"Copyright©2016-2046";
+    lab.text = @"Copyright©2014-2046";
     lab.textAlignment = NSTextAlignmentCenter;
     lab.font = FontSize(12);
     [self.view addSubview: lab];
     UILabel  *labbottom =[[UILabel alloc]initWithFrame:CGRectMake(0, SCREENH_HEIGHT-34, SCREEN_WIDTH, 17)];
-    labbottom.text = @"金元宝网络科技有限公司";
+    labbottom.text = @"千樱信息科技有限公司";
     labbottom.textAlignment = NSTextAlignmentCenter;
     labbottom.font = FontSize(14);
     [self.view addSubview:labbottom];
@@ -64,7 +64,7 @@
     UILabel *labTitle  = [[UILabel alloc]initWithFrame:CGRectMake(0, logo.bottom+10, SCREEN_WIDTH, 20)];
     labTitle.textAlignment  = NSTextAlignmentCenter;
     labTitle.font = FontSize(14);
-    labTitle.text = @"百宝单车";
+    labTitle.text = @"小樱单车";
     
     [view addSubview:labTitle];
     UILabel *labNum  = [[UILabel alloc]initWithFrame:CGRectMake(0, labTitle.bottom, SCREEN_WIDTH, 20)];
@@ -83,7 +83,7 @@
 -(NSMutableArray*)arr{
     
     if(!_arr){
-        _arr =[NSMutableArray arrayWithObjects:@{@"title":@"微信公众号",@"content":@"bikeBox"},@{@"title":@"联系电话",@"content":@"021-55698974"},@{@"title":@"电子邮箱",@"content":@"admin@baibaobike.com"},@{@"title":@"官方网站",@"content":@"http://www.baibaobike.com"} ,nil];
+        _arr =[NSMutableArray arrayWithObjects:@{@"title":@"微信公众号",@"content":@"xiaoyingBike"},@{@"title":@"联系电话",@"content":@"021-55698974"},@{@"title":@"电子邮箱",@"content":@"admin@shnow.cn"},@{@"title":@"官方网站",@"content":@"http://xiaoying.shnow.cn"} ,nil];
     }
     return _arr;
 }

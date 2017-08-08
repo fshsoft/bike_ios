@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -34,7 +34,6 @@
                         <constraint firstAttribute="height" constant="44" id="Z8B-9b-o6K"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="14" maxY="0.0"/>
-                    <state key="normal" image="ic_msg.png"/>
                     <connections>
                         <action selector="mesBtnFoundation:" destination="iN0-l3-epB" eventType="touchUpInside" id="LMs-hF-fXR"/>
                     </connections>
@@ -46,12 +45,11 @@
                         <constraint firstAttribute="height" constant="44" id="7q6-PJ-Rns"/>
                     </constraints>
                     <inset key="imageEdgeInsets" minX="26" minY="0.0" maxX="0.0" maxY="0.0"/>
-                    <state key="normal" image="ic_search.png"/>
                     <connections>
                         <action selector="seachBtnFoundation:" destination="iN0-l3-epB" eventType="touchUpInside" id="rVc-b4-8el"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logotxt.png" translatesAutoresizingMaskIntoConstraints="NO" id="3g7-1D-ogF">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakurabike.png" translatesAutoresizingMaskIntoConstraints="NO" id="3g7-1D-ogF">
                     <rect key="frame" x="133.5" y="33.5" width="72" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="XuG-AE-Tln"/>
@@ -59,7 +57,7 @@
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" red="0.99607843139999996" green="0.57647058819999997" blue="0.2666666667" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" red="0.44590771198272705" green="0.80774801969528198" blue="0.17790734767913818" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="MYr-YB-J9c" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="Hqr-nS-ALY"/>
                 <constraint firstItem="3g7-1D-ogF" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="U9E-PV-voD"/>
@@ -80,9 +78,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_msg.png" width="17" height="17"/>
         <image name="ic_nav_l.png" width="17" height="16"/>
-        <image name="ic_search.png" width="16" height="17"/>
-        <image name="logotxt.png" width="72" height="17"/>
+        <image name="sakurabike.png" width="111" height="17"/>
     </resources>
 </document>

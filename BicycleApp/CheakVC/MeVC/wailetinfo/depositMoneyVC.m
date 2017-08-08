@@ -77,7 +77,7 @@
     pormot.textColor = gary221;
     pormot.font = FontSize(12);
     pormot.textAlignment = NSTextAlignmentCenter ;
-    pormot.text = @"百宝不会以任何形式要求您输入银行账号和密码";
+    pormot.text = @"小樱不会以任何形式要求您输入银行账号和密码";
     
     
     
