@@ -36,7 +36,7 @@
 
     self.tab.delegate   = self;
     self.tab.dataSource = self;
-   
+    [self showPlaceholderViewWithImage:nil message:@"还未骑行" buttonTitle:nil centerOffsetY:0 onSuperView:self.tab];
     self.tab.separatorStyle  = UITableViewCellSeparatorStyleNone;
     [self.view addSubview:self.tab];
 }
@@ -44,7 +44,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 9;
+    return 0;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 90;

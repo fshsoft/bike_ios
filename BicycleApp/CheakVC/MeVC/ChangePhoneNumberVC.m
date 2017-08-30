@@ -30,7 +30,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setNaivTitle:@"跟换手机号"];
+    [self setNaivTitle:@"更换手机号"];
     [self.view addSubview:self.name];
     [self.view addSubview:self.personID];
     [self.view addSubview:self.PhoneNumber];
@@ -55,6 +55,7 @@
 //        attributes[NSForegroundColorAttributeName] = RGBColor(170, 170, 170);
 //        attributes[NSFontAttributeName] =  [UIFont fontWithName:@"Arial-BoldMT" size:14];
 //        _name.field.attributedPlaceholder = [[NSAttributedString alloc] initWithString:@"请输入真实姓名" attributes:attributes];
+        _name.userInteractionEnabled=NO;
         _name.field.text=[DB getStringById:@"truename" fromTable:tabName];
     }
     return _name;
@@ -161,7 +162,7 @@
         
         _PushInfo  = [[UIButton alloc]initWithFrame:CGRectMake(14, self.pinBtn.bottom+30, SCREEN_WIDTH-28, 40)];
         [_PushInfo setBackgroundColor:mainColor];
-        [_PushInfo setTitle:@"跟换手机号" forState:UIControlStateNormal];
+        [_PushInfo setTitle:@"更换手机号" forState:UIControlStateNormal];
         [_PushInfo    addTarget:self action:@selector(pushinfo) forControlEvents:UIControlEventTouchUpInside ];
         
     }

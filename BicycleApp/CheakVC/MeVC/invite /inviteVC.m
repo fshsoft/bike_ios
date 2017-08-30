@@ -51,12 +51,12 @@
     JSHAREMessage *message = [JSHAREMessage message];
   
     message.mediaType = JSHARELink;
-    message.url = @"https://www.jiguang.cn/";
-    message.text = @"欢迎使用极光社会化组件JShare，SDK包体积小，集成简单，支持主流社交平台、帮助开发者轻松实现社会化功能！";
-    message.title = @"欢迎使用极光社会化组件JShare";
+    message.url = @"http://xiaoying.shnow.cn";
+    message.text = @"欢迎使用小樱单车";
+    message.title = @"小樱单车期待你的加入";
     message.platform = platform;
-    NSString *imageURL = @"http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1308/02/c0/24056523_1375430477597.jpg";
-    NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:imageURL]];
+   // NSString *imageURL = @"http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1308/02/c0/24056523_1375430477597.jpg";
+    NSData *imageData = UIImageJPEGRepresentation(Img(@"logo"),1);
     
     message.image = imageData;
     [JSHAREService share:message handler:^(JSHAREState state, NSError *error) {

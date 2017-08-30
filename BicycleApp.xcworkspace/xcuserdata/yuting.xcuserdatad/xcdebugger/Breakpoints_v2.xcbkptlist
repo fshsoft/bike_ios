@@ -61,5 +61,165 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BicycleApp/CheakVC/MeVC/message /messageVC.m"
+            timestampString = "525764408.680383"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "-tableView:heightForRowAtIndexPath:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BicycleApp/HomeVC.m"
+            timestampString = "525774393.094051"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "356"
+            endingLineNumber = "356"
+            landmarkName = "-amapGeoFenceManager:didGeoFencesStatusChangedForRegion:customID:error:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[HomeVC amapGeoFenceManager:didGeoFencesStatusChangedForRegion:customID:error:]"
+                  moduleName = "BicycleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yuting/Desktop/bike_ios/BicycleApp/HomeVC.m"
+                  timestampString = "525775910.921878"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "356"
+                  endingLineNumber = "356"
+                  offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__80-[HomeVC amapGeoFenceManager:didGeoFencesStatusChangedForRegion:customID:error:]_block_invoke"
+                  moduleName = "BicycleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yuting/Desktop/bike_ios/BicycleApp/HomeVC.m"
+                  timestampString = "525775910.923849"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "356"
+                  endingLineNumber = "356"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BicycleApp/HomeVC.m"
+            timestampString = "525774393.094051"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "359"
+            endingLineNumber = "359"
+            landmarkName = "-amapGeoFenceManager:didGeoFencesStatusChangedForRegion:customID:error:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[HomeVC amapGeoFenceManager:didGeoFencesStatusChangedForRegion:customID:error:]"
+                  moduleName = "BicycleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yuting/Desktop/bike_ios/BicycleApp/HomeVC.m"
+                  timestampString = "525775910.928677"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "359"
+                  endingLineNumber = "359"
+                  offsetFromSymbolStart = "720">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__80-[HomeVC amapGeoFenceManager:didGeoFencesStatusChangedForRegion:customID:error:]_block_invoke_2"
+                  moduleName = "BicycleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yuting/Desktop/bike_ios/BicycleApp/HomeVC.m"
+                  timestampString = "525775910.930527"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "359"
+                  endingLineNumber = "359"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "BicycleApp/HomeVC.m"
+            timestampString = "525774393.094051"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "361"
+            endingLineNumber = "361"
+            landmarkName = "-amapGeoFenceManager:didGeoFencesStatusChangedForRegion:customID:error:"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[HomeVC amapGeoFenceManager:didGeoFencesStatusChangedForRegion:customID:error:]"
+                  moduleName = "BicycleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yuting/Desktop/bike_ios/BicycleApp/HomeVC.m"
+                  timestampString = "525775910.935003"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "1212">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__80-[HomeVC amapGeoFenceManager:didGeoFencesStatusChangedForRegion:customID:error:]_block_invoke_3"
+                  moduleName = "BicycleApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yuting/Desktop/bike_ios/BicycleApp/HomeVC.m"
+                  timestampString = "525775910.937067"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "361"
+                  endingLineNumber = "361"
+                  offsetFromSymbolStart = "36">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

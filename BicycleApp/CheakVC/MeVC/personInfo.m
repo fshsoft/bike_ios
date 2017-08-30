@@ -64,21 +64,35 @@
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *path = [paths objectAtIndex:0];
         NSString *name = [[NSString alloc]init];
+        NSString *phone = [[NSString alloc]init];
         NSString *IDname = [[NSString alloc]init];
+        NSString * cheak = [[NSString alloc]init];
         //设置一个图片的存储路径
         if([DB getStringById:@"name" fromTable:tabName]){
             name = [DB getStringById:@"name" fromTable:tabName];
         }else{
-            name=@"百宝";
+            name=@"小樱";
         }
         NSString *imagePath = [path stringByAppendingString:@"/pic.png"];
         if([DB getStringById:@"truename" fromTable:tabName]){
             IDname = [DB getStringById:@"truename" fromTable:tabName];
         }else{
-            IDname =@"百宝科技";
+            IDname =@"小樱单车";
+        }
+        if([DB getStringById:@"phone" fromTable:tabName]){
+            phone =[DB getStringById:@"phone" fromTable:tabName];
+        }else{
+            phone =@"";
         }
         
-        _arrInfo = [NSMutableArray arrayWithObjects:imagePath,name,IDname,@"未认证",@"17089494645", nil];
+        if([DB getStringById:@"certify" fromTable:tabName]){
+            cheak =@"已认证";
+            
+        }else{
+            cheak =@"未认证";
+
+        }
+        _arrInfo = [NSMutableArray arrayWithObjects:imagePath,name,IDname,cheak,phone, nil];
     }
     return _arrInfo;
 }

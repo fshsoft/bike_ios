@@ -110,6 +110,7 @@
           
              if([model.errorno isEqualToString:@"0"]){
                  [DB putString: @"1"  withId: @"certify"  intoTable:tabName];
+                 [DB putString:self.name.field.text withId:@"truename" intoTable:tabName];
                  //[DB putString:self.name.field.text withId:@"IDname" intoTable:tabName];
                  [self setCompletView];
              }else{

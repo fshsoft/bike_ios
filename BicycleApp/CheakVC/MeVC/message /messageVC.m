@@ -31,11 +31,12 @@
     self.tab.delegate   = self;
     self.tab.dataSource = self;
     self.tab.separatorStyle = UITableViewScrollPositionNone;
+    [self showPlaceholderViewWithImage:nil message:@"无新消息" buttonTitle:nil centerOffsetY:0 onSuperView:self.tab];
     [self.view addSubview:self.tab];
     
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;
+    return 0;
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

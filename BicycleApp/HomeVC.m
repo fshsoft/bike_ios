@@ -46,11 +46,9 @@
 #import "listInfoModel.h"
 #import "JSCenterAnnotation.h"
 #import "ZXNLocationGaoDeManager.h"
-static const NSString *RoutePlanningViewControllerStartTitle       = @"起点";
-static const NSString *RoutePlanningViewControllerDestinationTitle = @"终点";
-static const NSInteger RoutePlanningPaddingEdge                   = 20;
 
-@interface HomeVC ()<AMapSearchDelegate,MAMapViewDelegate,AMapLocationManagerDelegate>
+
+@interface HomeVC ()<AMapSearchDelegate,MAMapViewDelegate,AMapLocationManagerDelegate,AMapGeoFenceManagerDelegate>
 {
     NSMutableArray *all_arrayList;
     ZXNLocationGaoDeManager *currentPosition;
@@ -85,6 +83,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
 /* 用于显示当前路线方案. */
 @property (nonatomic) MANaviRoute * naviRoute;
 
+
 @property (nonatomic, strong) MAPointAnnotation *startAnnotation;
 @property (nonatomic, strong) MAPointAnnotation *endAnnotation;
 @property (nonatomic, strong) MAPointAnnotation *changeAnnotation;
@@ -104,6 +103,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
 @property (nonatomic,strong) HomeNaviView *homeNaiv;
 @property (nonatomic,strong) activityView *actView;
 @property (nonatomic,assign) NSInteger    paopaoTag;
+@property (nonatomic ,strong)AMapGeoFenceManager *geoFenceManager;
 
 @end
 
@@ -266,15 +266,115 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     [self.mapView updateUserLocationRepresentation:localPoint];
     
     [self.view addSubview:self.mapView];
-   }
+    [self.view sendSubviewToBack:self.mapView];
+    [self configGeoFenceManager];
+    [self addGeoFencePolygonRegion];
+      }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
+
+
+//初始化地理围栏manager
+- (void)configGeoFenceManager {
+    self.geoFenceManager = [[AMapGeoFenceManager alloc] init];
+
+    self.geoFenceManager.delegate = self;
+    self.geoFenceManager.activeAction = AMapGeoFenceActiveActionInside | AMapGeoFenceActiveActionOutside | AMapGeoFenceActiveActionStayed; //进入，离开，停留都要进行通知
+    self.geoFenceManager.allowsBackgroundLocationUpdates = YES;  //允许后台定位
+}
+
+//添加地理围栏对应的Overlay，方便查看。地图上显示圆
+- (MACircle *)showCircleInMap:(CLLocationCoordinate2D )coordinate radius:(NSInteger)radius {
+    MACircle *circleOverlay = [MACircle circleWithCenterCoordinate:coordinate radius:radius];
+    [self.mapView addOverlay:circleOverlay];
+    return circleOverlay;
+}
+
+//地图上显示多边形
+- (MAPolygon *)showPolygonInMap:(CLLocationCoordinate2D *)coordinates count:(NSInteger)count {
+    MAPolygon *polygonOverlay = [MAPolygon polygonWithCoordinates:coordinates count:count];
+    [self.mapView addOverlay:polygonOverlay];
+    return polygonOverlay;
+}
+
+// 清除上一次按钮点击创建的围栏
+- (void)doClear {
+    [self.mapView removeOverlays:self.mapView.overlays];  //把之前添加的Overlay都移除掉
+    [self.geoFenceManager removeAllGeoFenceRegions];  //移除所有已经添加的围栏，如果有正在请求的围栏也会丢弃
+}
+
+
+#pragma mark xib btns click
+
+
+
+//添加多边形围栏按钮点击
+- (void)addGeoFencePolygonRegion {
+    NSInteger count = 5;
+    CLLocationCoordinate2D *coorArr = malloc(sizeof(CLLocationCoordinate2D) * count);
     
-  }
+    coorArr[0] = CLLocationCoordinate2DMake(31.199987, 121.369135);     //平安里地铁站
+    coorArr[1] = CLLocationCoordinate2DMake(31.233835, 121.412253);     //西单地铁站
+    coorArr[2] = CLLocationCoordinate2DMake(31.223212, 121.558282);     //崇文门地铁站
+    coorArr[3] = CLLocationCoordinate2DMake(31.154261, 121.501653);     //东直门地铁站
+    coorArr[4] = CLLocationCoordinate2DMake(31.096887,  121.373303);
+   
+    [self doClear];
+    [self.geoFenceManager addPolygonRegionForMonitoringWithCoordinates:coorArr count:count customID:@"polygon_1"];
+    
+    free(coorArr);
+    coorArr = NULL;
+}
 
- #pragma mark - MAMapViewDelegate路径显示
+
+
+
+
+
+
+#pragma mark - AMapGeoFenceManagerDelegate
+
+//添加地理围栏完成后的回调，成功与失败都会调用
+- (void)amapGeoFenceManager:(AMapGeoFenceManager *)manager didAddRegionForMonitoringFinished:(NSArray<AMapGeoFenceRegion *> *)regions customID:(NSString *)customID error:(NSError *)error {
+    
+     if ([customID isEqualToString:@"polygon_1"]) {
+        if (error) {
+            NSLog(@"=======polygon error %@",error);
+        } else {
+            AMapGeoFencePolygonRegion *polygonRegion = (AMapGeoFencePolygonRegion *)regions.firstObject;
+            MAPolygon *polygonOverlay = [self showPolygonInMap:polygonRegion.coordinates count:polygonRegion.count];
+          // [self.mapView setVisibleMapRect:polygonOverlay.boundingMapRect edgePadding:UIEdgeInsetsMake(20, 20, 20, 20) animated:YES];
+        }
+    }
+}
+
+//地理围栏状态改变时回调，当围栏状态的值发生改变，定位失败都会调用
+- (void)amapGeoFenceManager:(AMapGeoFenceManager *)manager didGeoFencesStatusChangedForRegion:(AMapGeoFenceRegion *)region customID:(NSString *)customID error:(NSError *)error {
+    if (error) {
+        NSLog(@"status changed error %@",error);
+    }else{
+        if(manager.activeAction==AMapGeoFenceActiveActionInside){
+            Toast(@"在电子围栏中");
+            
+        }else if(manager.activeAction==AMapGeoFenceActiveActionOutside){
+            Toast(@"离开电子围栏中");
+        }else if(manager.activeAction==AMapGeoFenceActiveActionStayed){
+            Toast(@"进入电子围栏中");
+        }
+
+        
+        NSLog(@"status changed %@",[region description]);
+    }
+}
+
+
+#pragma mark - MAMapViewDelegate
+
+- (void)mapView:(MAMapView *)mapView didUpdateUserLocation:(MAUserLocation *)userLocation updatingLocation:(BOOL)updatingLocation{
+    //self.userLocation = userLocation.location;
+}
+
+
+  #pragma mark - MAMapViewDelegate路径显示
 
 - (MAOverlayRenderer *)mapView:(MAMapView *)mapView rendererForOverlay:(id<MAOverlay>)overlay
 {
@@ -311,7 +411,24 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
         }
         
         return polylineRenderer;
+    }else if ([overlay isKindOfClass:[MAPolygon class]]) {
+        MAPolygonRenderer *polylineRenderer = [[MAPolygonRenderer alloc] initWithPolygon:overlay];
+        polylineRenderer.lineWidth = 4.0f;
+        polylineRenderer.lineDash  = NO;
+        polylineRenderer.fillColor =[UIColor clearColor];
+        polylineRenderer.lineJoinType=kMALineJoinRound;
+        polylineRenderer.lineCapType =kMALineCapRound;
+        polylineRenderer.strokeColor = mainColor;
+        
+        return polylineRenderer;
+    } else if ([overlay isKindOfClass:[MACircle class]]) {
+        MACircleRenderer *circleRenderer = [[MACircleRenderer alloc] initWithCircle:overlay];
+        circleRenderer.lineWidth = 4.0f;
+        circleRenderer.strokeColor = mainColor;
+        
+        return circleRenderer;
     }
+
     return nil;
 }
 
@@ -382,8 +499,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     [self updateTotal];
     self.currentCourse = 0;
     
-    [self updateCourseUI];
-    [self updateDetailUI];
+  
     
     if (response.count > 0)
     {
@@ -393,21 +509,6 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
 
  }
 #pragma mark - Utility
-/* 更新"上一个", "下一个"按钮状态. */
-- (void)updateCourseUI
-{
-    /* 上一个. */
-    //self.previousItem.enabled = (self.currentCourse > 0);
-    
-    /* 下一个. */
-    //self.nextItem.enabled = (self.currentCourse < self.totalCourse - 1);
-}
-
-/* 更新"详情"按钮状态. */
-- (void)updateDetailUI
-{
-    self.navigationItem.rightBarButtonItem.enabled = self.route != nil;
-}
 
 - (void)updateTotal
 {
@@ -452,7 +553,7 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
         return nil;
     }
     
-    
+   
     
     if ([annotation isMemberOfClass:[JSCenterAnnotation class]]) {
         static NSString *reuseCneterid = @"myCenterId";
@@ -504,14 +605,14 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     }
     [self clearLine];
     self.topCheakView.hidden=YES;
-    self.mapView.zoomLevel = 15;
+    //self.mapView.zoomLevel = 15;
     
     [self.mapView removeAnnotations:self.mapView.annotations];
     [self.mapView removeOverlays:self.mapView.overlays];
     
     [self.mapView addAnnotations: self.annotations];
     [self.mapView addAnnotation:centerAnnotaion];
-    
+    [self addGeoFencePolygonRegion];
     isMoveView = YES;
 }
 
@@ -547,6 +648,8 @@ static const NSInteger RoutePlanningPaddingEdge                   = 20;
     CLLocationDistance distance = MAMetersBetweenMapPoints(point1,point2);
     //self.changeAnnotation.lockedToScreen = NO;
     self.topCheakView.distanceLab.text =[NSString stringWithFormat:@"%.0f米",distance];
+    
+    self.topCheakView.timeLab.text = [NSString stringWithFormat:@"%.0f分钟",distance/70.0];
     AMapReGeocodeSearchRequest *regeo = [[AMapReGeocodeSearchRequest alloc] init];
     regeo.location                    = [AMapGeoPoint locationWithLatitude:Annotation.coordinate.latitude longitude:Annotation.coordinate.longitude];
     regeo.requireExtension =YES;

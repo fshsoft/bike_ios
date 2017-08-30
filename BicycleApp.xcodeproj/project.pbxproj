@@ -34,6 +34,8 @@
 		0E08793B1ECACA6600D7CD28 /* weibo@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E08792D1ECACA6600D7CD28 /* weibo@3x.png */; };
 		0E0879411ECAF40800D7CD28 /* LogoTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0879401ECAF40800D7CD28 /* LogoTextField.m */; };
 		0E0879441ECB11AF00D7CD28 /* LogoAgreement.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E0879431ECB11AF00D7CD28 /* LogoAgreement.m */; };
+		0E100BAE1F569092008D5489 /* jiesuo_enter@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E100BAC1F569092008D5489 /* jiesuo_enter@3x.png */; };
+		0E100BAF1F569092008D5489 /* jiesuo_enter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E100BAD1F569092008D5489 /* jiesuo_enter@2x.png */; };
 		0E19E0A81EF11A190047B94F /* LaunchIntroductionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E19E0A71EF11A190047B94F /* LaunchIntroductionView.m */; };
 		0E19E0B31EF11BD80047B94F /* login.png in Resources */ = {isa = PBXBuildFile; fileRef = 0E19E0AE1EF11BD80047B94F /* login.png */; };
 		0E1E47411F1A66B4000B5671 /* cheakInfoVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1E47401F1A66B4000B5671 /* cheakInfoVC.m */; };
@@ -415,6 +417,8 @@
 		0E0879401ECAF40800D7CD28 /* LogoTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoTextField.m; sourceTree = "<group>"; };
 		0E0879421ECB11AF00D7CD28 /* LogoAgreement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoAgreement.h; sourceTree = "<group>"; };
 		0E0879431ECB11AF00D7CD28 /* LogoAgreement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoAgreement.m; sourceTree = "<group>"; };
+		0E100BAC1F569092008D5489 /* jiesuo_enter@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiesuo_enter@3x.png"; sourceTree = "<group>"; };
+		0E100BAD1F569092008D5489 /* jiesuo_enter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jiesuo_enter@2x.png"; sourceTree = "<group>"; };
 		0E19E0A61EF11A190047B94F /* LaunchIntroductionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LaunchIntroductionView.h; path = ../BaseVC/LaunchIntroductionView.h; sourceTree = "<group>"; };
 		0E19E0A71EF11A190047B94F /* LaunchIntroductionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LaunchIntroductionView.m; path = ../BaseVC/LaunchIntroductionView.m; sourceTree = "<group>"; };
 		0E19E0AE1EF11BD80047B94F /* login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = login.png; sourceTree = "<group>"; };
@@ -1889,6 +1893,8 @@
 		0ECB41921ECEA9E800396A20 /* HomeImages */ = {
 			isa = PBXGroup;
 			children = (
+				0E100BAC1F569092008D5489 /* jiesuo_enter@3x.png */,
+				0E100BAD1F569092008D5489 /* jiesuo_enter@2x.png */,
 				0EEF31821F386FF0000A4E1A /* qyImg */,
 				0ECB41951ECEAA2400396A20 /* dw_pic@2x.png */,
 				0ECB41961ECEAA2400396A20 /* dw_pic@3x.png */,
@@ -2175,6 +2181,7 @@
 				0EEF31BF1F386FF0000A4E1A /* dingwei@2x.png in Resources */,
 				0E2323031ED173D3007FF580 /* moneySelect.xib in Resources */,
 				0EEF31C31F386FF0000A4E1A /* finish@2x.png in Resources */,
+				0E100BAE1F569092008D5489 /* jiesuo_enter@3x.png in Resources */,
 				0EEF31421F386E3F000A4E1A /* 640_960.png in Resources */,
 				0EEF31541F386E3F000A4E1A /* 180.png in Resources */,
 				0EEF31E51F386FF0000A4E1A /* used_after@2x.png in Resources */,
@@ -2238,6 +2245,7 @@
 				0EEF31481F386E3F000A4E1A /* 1242_2208.png in Resources */,
 				0ECB41FF1ECFD0A300396A20 /* payCate.xib in Resources */,
 				0ECB41B11ECEAA2400396A20 /* gold@2x.png in Resources */,
+				0E100BAF1F569092008D5489 /* jiesuo_enter@2x.png in Resources */,
 				0E68B6EF1F221C2900BC4AE7 /* page1.png in Resources */,
 				0ECB41C01ECEAA2400396A20 /* ic_nav_l@3x.png in Resources */,
 				0ECB41BA1ECEAA2400396A20 /* home_ic_sm@3x.png in Resources */,
@@ -2676,8 +2684,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 85AV7L542H;
