@@ -11,10 +11,8 @@
 #import "APAuthV2Info.h"
 #import "RSADataSigner.h"
 #import "AlipaySDK/AlipaySDK.h"
-#import "payRequsestHandler.h"
 #import <WXApi.h>
-#import "CommonUtil.h"
-#import "GDataXMLNode.h"
+
 
 #define kValue_AlipayPrivateKey @"MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAM5OpdUDvkl3c4HVojMvtuUosd9DqNd+VzK6BrkP1mcEreZlCRVP7q9akNC+V4yUHuyhbFvpiCPreqBAtpygYftcNodC92WxxEGvdPWRERivV3NAzdaOl451OQDRLm1qPAqTV2A2YdP0eIpt57o2VLEkytgtI2/2XdzeR6LFVKbZAgMBAAECgYBmipTGQawM3ABfYg3Snz6qvAVc0UZUhYlVvzykMwj//0VoJIPVQfuC0OL1vgXJ671LJBi1vmdaYyp6CHA7fUP1RRdHokVCbwhMlWR4GEVuJR+n+td2H08YZ4SszjMnhCrl/F2/s62KW8Fdvj8v0zYaClCkYooaUSBfHF8RlOFnuQJBAO1gyq8a3HiV+OvY8n5a/4UiSk1wUHgLgWHl5cWsbvDYGH4yBT57ptEOOHIZ5YinGI/8Zto0s64vc9pTimhZvbsCQQDefd3zV3Yfph8pK9YVCpRf1tfLXgTpOOuncXBfFL10Mz/4qrj3gxrpMqKWvs3CZSRDrh7vs1yUrPhbuMKG/Jp7AkAdh9IPMJ9G3RlndcjNEVMCY/6sXZGVLZE99ZS9H7N5gNijMmPWnxlknolFIJWeh3MVzoeZE79apwqZmZT5YFirAkA9HXHkL/gghW81zfbGXNuY39jy4eaTcbE5k218kKPh0VoXIj4grwCrYd9LbSnz5fhqJuAUk74wkLq/5yZ4EdcVAkEAuRjIEqUhUvduCVZ1z+fPNMg7P2TiVVJHjbj6HB2PVLp64GeqbqQI8q6ll2QwnzmwjzfNxtIR4rUfcaHSDpVR0A=="
 @interface   PaySelect () 
@@ -23,7 +21,7 @@
 @implementation PaySelect
 
 // 调起微信支付，传进来商品名称和价格
-- (void)getWeChatPayWithOrderName:(NSString *)name
+/*- (void)getWeChatPayWithOrderName:(NSString *)name
                             price:(NSString*)price
 
 {
@@ -97,12 +95,12 @@
     
     
 }
-
+*/
 
 
 
 // 发送给微信的XML格式数据
-- (NSString *)genPackage:(NSMutableDictionary*)packageParams
+/*- (NSString *)genPackage:(NSMutableDictionary*)packageParams
 {
     NSString *sign;
     NSMutableString *reqPars = [NSMutableString string];
@@ -120,13 +118,13 @@
     [reqPars appendFormat:@"<sign>%@</sign></xml>", sign];
     
     return [NSString stringWithString:reqPars];
-}
+}*/
 
 
 
 
 // 获取prePayId
-- (NSString *)sendPrepay:(NSMutableDictionary *)prePayParams
+/*- (NSString *)sendPrepay:(NSMutableDictionary *)prePayParams
 {
     
     // 获取提交预支付的xml格式数据
@@ -166,7 +164,7 @@
         return nil;
     }
 }
-
+*/
 #pragma mark - 生成各种参数
 
 - (NSString *)genTimeStamp
@@ -177,10 +175,10 @@
 /**
  * 注意：商户系统内部的订单号,32个字符内、可包含字母,确保在商户系统唯一
  */
-- (NSString *)genNonceStr
+/*- (NSString *)genNonceStr
 {
     return [CommonUtil md5:[NSString stringWithFormat:@"%d", arc4random() % 10000]];
-}
+}*/
 
 /**
  * 建议 traceid 字段包含用户信息及订单信息，方便后续对订单状态的查询和跟踪
@@ -190,15 +188,15 @@
     return [NSString stringWithFormat:@"myt_%@", [self genTimeStamp]];
 }
 
-- (NSString *)genOutTradNo
+/*- (NSString *)genOutTradNo
 {
     return [CommonUtil md5:[NSString stringWithFormat:@"%d", arc4random() % 10000]];
-}
+}*/
 
 
 #pragma mark - 签名
 /** 签名 */
-- (NSString *)genSign:(NSDictionary *)signParams
+/*- (NSString *)genSign:(NSDictionary *)signParams
 {
     // 排序, 因为微信规定 ---> 参数名ASCII码从小到大排序
     NSArray *keys = [signParams allKeys];
@@ -228,7 +226,7 @@
     NSLog(@"signMD5 = %@", signMD5);
     return signMD5;
 }
-
+*/
 
 
 -(void)Order{

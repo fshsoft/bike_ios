@@ -174,6 +174,7 @@
     self.startAnnotation.coordinate =centerAnnotaion.coordinate;
     [self.mapView addAnnotation:centerAnnotaion];
     [self.mapView showAnnotations:@[centerAnnotaion] animated:YES];
+        [self local];
 }
 
 #pragma mark 初始化地图所需数据
@@ -998,7 +999,7 @@
     NSString *strEnRes = [CusMD5 md5String:UDID];
     NSLog(@"%@",UDID);
     [RequestManager requestWithType:HttpRequestTypePost
-                          urlString:@"https://partner.baibaobike.com/authed/register.html"
+                          urlString:@"https://ying.baibaobike.com/authed/register.html"
                          parameters:@{@"imei":UDID,@"code":strEnRes}
                        successBlock:^(id response) {
                            NSLog(@"%@",response);

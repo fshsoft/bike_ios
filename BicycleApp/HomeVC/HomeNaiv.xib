@@ -27,7 +27,7 @@
                         <action selector="leftBtnFoundation:" destination="iN0-l3-epB" eventType="touchUpInside" id="beG-jU-ez0"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCV-tx-O9t">
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RCV-tx-O9t">
                     <rect key="frame" x="295" y="20" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="FBi-An-mFM"/>
@@ -38,7 +38,7 @@
                         <action selector="mesBtnFoundation:" destination="iN0-l3-epB" eventType="touchUpInside" id="LMs-hF-fXR"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYr-YB-J9c">
+                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageWhenHighlighted="NO" adjustsImageWhenDisabled="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MYr-YB-J9c">
                     <rect key="frame" x="251" y="20" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="77K-vZ-eiA"/>
