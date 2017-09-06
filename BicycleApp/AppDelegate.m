@@ -17,11 +17,11 @@
 #import "XHLaunchAdManager.h"
 
 // 引入JPush功能所需头文件
-//#import "JPUSHService.h"
+#import "JPUSHService.h"
 // iOS10注册APNs所需头文件
-//#ifdef NSFoundationVersionNumber_iOS_9_x_Max
-//#import <UserNotifications/UserNotifications.h>
-//#endif
+#ifdef NSFoundationVersionNumber_iOS_9_x_Max
+#import <UserNotifications/UserNotifications.h>
+#endif
  @interface AppDelegate ()<WXApiDelegate >//,JPUSHRegisterDelegate>
 
 @end
@@ -35,7 +35,7 @@
     [self setGaodeMapInfo];
     [self setKeyboardManager];
     [WXApi registerApp:@"wx9befb1503750db67"];
-   // [self setPushInfo:launchOptions];
+    [self setPushInfo:launchOptions];
     [self setzShearInfo];
     [self setTabifno];
     
@@ -114,7 +114,7 @@
     // appropriate. See also applicationDidEnterBackground:.
 }
     // ===================================         推送        ==============================================
-/*-(void)setPushInfo :(NSDictionary *)launchOptions{
+-(void)setPushInfo :(NSDictionary *)launchOptions{
     
    // NSString *advertisingId = [[[ASIdentifierManager sharedManager] advertisingIdentifier] UUIDString];
     
@@ -303,7 +303,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
                                                format:NULL
                                      errorDescription:NULL];
     return str;
-}*/
+}
 
  // ===================================         分享        ==============================================
 #pragma 分享

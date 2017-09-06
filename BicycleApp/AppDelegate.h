@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <WXApi.h>
-static NSString *appKey =@"38bbf593723ec451129526fa";
+static NSString *appKey =@"c87ba5ba9199058558d47551";
 static NSString *channel = @"Publish channel";
 static BOOL isProduction = FALSE;
 

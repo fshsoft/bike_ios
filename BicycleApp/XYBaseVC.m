@@ -364,40 +364,46 @@ NSString *const kName = @"Alun Chen";
                url:(NSString *)url
         parameters:(NSDictionary *)parm
       successBlock:(RequestSuccess)success failureBlock:(RequestFail)failure{
-   
+
+    
+    
+    
+    NSMutableDictionary  * dic =[NSMutableDictionary    dictionaryWithDictionary:parm];
+    
+    [ dic addEntriesFromDictionary:@{
+                                     @"client_id" : [DB getStringById:@"app_key" fromTable:tabName],
+                                     @"state" : [DB getStringById:@"seed_secret" fromTable:tabName],
+                                     @"access_token" :[DB getStringById:@"access_token" fromTable:tabName],
+                                     }];
+    
     [RequestManager requestWithType:type
-                          urlString:url
-                         parameters:parm
+                          urlString:[DB getStringById:@"source_url" fromTable:tabName]
+                         parameters:dic
                        successBlock:^(id response) {
-        if(success){
-            BaseModel *model = [BaseModel yy_modelWithJSON:response];
-            NSLog(@"%@",model.errorno);
-           
-//            if( [model.errorno integerValue] ==2){
-//                
-//                Toast(@"请刷新一下试一试");
-//                [self  refreshPassWordToken];
-//            }else if([model.errorno integerValue]==3){
-//                Toast(@"请重新登录");
-//                [DB deleteObjectById:@"password_token" fromTable:tabName];
-//                [self refreshClientCredentialsToken];
-//                LoginVC *loginVC = [[LoginVC alloc]init];
-//                [self  absPushViewController:loginVC animated:YES];
-//                
-//
-           // }
-            
-            success(response);
-        }
-        
-    } failureBlock:^(NSError *error) {
-        if(failure){
-            failure(error);
-        }
-        
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-        
-    }];
+                           if(success){
+                          
+                               BaseModel * model = [BaseModel yy_modelWithDictionary:response];
+//                               DLog(@"%@",model);
+//                               NSLog(@"%@",response);
+//                               DLog(@"%@",model.errmsg);
+//                               DLog(@"%@",model.message);
+                               if(![model.errorno isEqualToString:@"0"]){
+                                  
+                               }
+                               success(model);
+                           }
+                           
+                       }
+     
+                       failureBlock:^(NSError *error) {
+                           if(failure){
+                               
+                            failure(error);
+                           }
+                           
+                       } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                           
+                       }];
 }
 -(void)refreshClientCredentialsToken{
     NSDictionary *dic = @{
@@ -426,4 +432,4 @@ NSString *const kName = @"Alun Chen";
     
     
 }
-@end
+ @end

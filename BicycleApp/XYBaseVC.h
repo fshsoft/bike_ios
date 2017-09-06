@@ -11,7 +11,7 @@
 extern NSString *const kName;
 
 /*! 定义请求成功的 block */
-typedef void( ^ RequestSuccess)(id  response);
+typedef void( ^ RequestSuccess)(BaseModel * response);
 /*! 定义请求失败的 block */
 typedef void( ^ RequestFail)(NSError *error);
 
