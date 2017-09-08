@@ -139,9 +139,7 @@
                            @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
                            @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
                            @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"getAlipayOrder",
-                           @"total": self.price,
-                           @"type": @"2"
+                           
                            };
     
     [self requestType:HttpRequestTypePost
@@ -151,28 +149,33 @@
          successBlock:^(id response) {
              
              NSLog(@"response====%@",response);
-             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-             if([model.errorno isEqualToString:@"0"]){
-             appInfoModel *appmodel= model.data;
+                     } failureBlock:^(NSError *error) {
+             
+         }];
+
+    [self requestType:HttpRequestTypePost
+                  url:nil
+           parameters:@{@"action":      @"getAlipayOrder",
+                        @"total": self.price,
+                        @"type": @"2"}
+         successBlock:^(BaseModel *response) {
+        
+             if([response.errorno isEqualToString:@"0"]){
+                 appInfoModel *appmodel= response.data;
                  PaySelect *a =[[PaySelect alloc]init];
                  [a doAlipayPayAppID:appmodel.appId
                                Price:self.price
                             orderNum:appmodel.out_trade_no
-                        orderTime:   appmodel.createtime
+                           orderTime:   appmodel.createtime
                           PrivateKey:appmodel.private_key
                                 Body:appmodel.body
                              subJect:appmodel.subject];
              }
+
          } failureBlock:^(NSError *error) {
              
          }];
-
-    
-    //    certifyPersonInfoVC *vc =[[certifyPersonInfoVC alloc]init];
-    //    [self absPushViewController:vc animated:YES];
-    //PaySelect *a =[[PaySelect alloc]init];
-    //[a  wxpay];
-    //[a getWeChatPayWithOrderName:@"yifenqian" price:@"1"];
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated

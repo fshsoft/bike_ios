@@ -254,37 +254,19 @@
 
 
 - (void)sendABSPinRequest {
-   // [DB getStringById:@"refresh_token"              fromTable:tabName]
-    NSDictionary  *dic = @{
-                           
-                               @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                               @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                               @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                               @"action":      @"sendSmsCode",
-                               @"mobile":self.phoneNum.field.text
-                               };
 
     [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
+               url:nil
+        parameters:@{ @"action":      @"sendSmsCode",
+                      @"mobile":self.phoneNum.field.text}
+      successBlock:^(BaseModel *response) {
+          
+          Toast(response.errmsg);
+       
 
-parameters:dic
-         successBlock:^(id response) {
-             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-             Toast(model.errmsg);
-             NSString *errmsg = model.errmsg;
-             NSLog(@"errmsg==%@",errmsg);
-        
-    } failureBlock:^(NSError *error) {
-        
-    }];
-//    [RequestManager  requestWithType:HttpRequestTypeGet urlString:[NSString stringWithFormat:@"https://api.baibaobike.com/v1/sms/send_login_code?mobi=%@",self.phoneNum.field.text] parameters:nil  successBlock:^(id response) {
-//        NSLog(@"===============%@",response);
-//        NSLog(@"%@",[response objectForKey:@"errmsg"]);
-//    } failureBlock:^(NSError *error) {
-//        
-//    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-//        
-//    }];
+      } failureBlock:^(NSError *error) {
+          
+      }];
     
 
 }
@@ -358,66 +340,38 @@ parameters:dic
         [self absPushViewController:vc animated:YES];
         
     }else
-    {NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"login",
-                           @"mobile":self.phoneNum.field.text,
-                          @"vericode":self.cheakNum.field.text
-                           };
-    
-    [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-           parameters:dic
-         successBlock:^(id response) {
-        
-        BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-        
-             if([model.errorno intValue]==0){
-             [DB putString:self.phoneNum.field.text withId:@"phone" intoTable:tabName];
-                
+    {
+        [self requestType:HttpRequestTypePost
+                  url:nil
+           parameters:@{ @"action":      @"login",
+                         @"mobile":self.phoneNum.field.text,
+                         @"vericode":self.cheakNum.field.text}
+         successBlock:^(BaseModel *response) {
+             if([response.errorno intValue]==0){
+                 [self cheakMoneyandCertify];
+                 [DB putString:self.phoneNum.field.text withId:@"phone" intoTable:tabName];
+                 
                  if([[DB getStringById:@"money" fromTable:tabName]isEqualToString:@"1"]){
-                 if([[DB getStringById:@"certify" fromTable:tabName]isEqualToString:@"1"]){
+                     if([[DB getStringById:@"certify" fromTable:tabName]isEqualToString:@"1"]){
                          [self.navigationController popViewControllerAnimated:YES];
                      }else{
                          certifyPersonInfoVC * vc = [[certifyPersonInfoVC alloc]init];
                          [self absPushViewController:vc animated:YES];
                      }
                  }else{
-                       paymentVC * vc  = [[paymentVC alloc]init];
-                       [self absPushViewController:vc animated:YES];
+                     paymentVC * vc  = [[paymentVC alloc]init];
+                     [self absPushViewController:vc animated:YES];
                  }
              }else{
-                 Toast(model.errmsg);
+                 Toast(response.errmsg);
              }
-        
-       
-       
 
-    } failureBlock:^(NSError *error) {
-        
-    }];}
-//    //   [self getCLLocationCoordinateInfo];
-//    [RequestManager  requestWithType:HttpRequestTypePost urlString:url(@"oauth2/access_token") parameters:dic successBlock:^(id response) {
-//        NSLog(@"===============%@",response);
-//        paymentVC * vc  = [[paymentVC alloc]init];
-//        [DB putString:self.phoneNum.field.text withId:@"phone" intoTable:tabName];
-//        
-//        [DB putString: [response objectForKey:@"refresh_token"] withId:@"refresh_token"   intoTable:tabName];
-//        [DB putString: [response objectForKey:@"access_token"]  withId:@"password_token"  intoTable:tabName];
-//     
-//        
-//        [self absPushViewController:vc animated:YES];
-//        
-//
-//    } failureBlock:^(NSError *error) {
-//        
-//    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-//        
-//    }];
-//    
+         } failureBlock:^(NSError *error) {
+             
+         }]
+        ;
+    }
+    
 }
 -(void)setRequest{
   }

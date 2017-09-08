@@ -50,27 +50,21 @@
     [self setLightStatusButton];
 }
 -(void)getScanDataString:(NSString*)scanDataString{
-    NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"scanCode",
-                           @"sn":scanDataString
-                           };
+    
     
     [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-     
-           parameters:dic
-         successBlock:^(id response) {
-             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-             if([model.errorno   isEqualToString:@"0"]){
+                  url:nil
+           parameters:@{ @"action":      @"scanCode",
+                         @"sn":scanDataString
+}
+         successBlock:^(BaseModel *response) {
+             
+             if([response.errorno   isEqualToString:@"0"]){
                  CkeakDetaitleVC *vc =[[CkeakDetaitleVC alloc]init];
                  [self.navigationController pushViewController:vc  animated:YES];
-             }else if([model.errorno  isEqualToString:@"40020"]){
-            
-                 UIAlertController  * alra = [UIAlertController  alertControllerWithTitle:@"友情提示" message:model.errmsg preferredStyle:UIAlertControllerStyleAlert];
+             }else if([response.errorno  isEqualToString:@"40020"]){
+                 
+                 UIAlertController  * alra = [UIAlertController  alertControllerWithTitle:@"友情提示" message:response.errmsg preferredStyle:UIAlertControllerStyleAlert];
                  UIAlertAction * select = [UIAlertAction actionWithTitle:@"充值" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
                      WalletMoneyVC  *vc  = [[WalletMoneyVC alloc]init];
                      [self.navigationController pushViewController:vc animated:YES];
@@ -81,14 +75,15 @@
                  [alra addAction:select];
                  [alra addAction:unselect];
                  [self presentViewController:alra animated:YES completion:nil];
-                             }
-             else{
-                    Toast(model.errmsg);
              }
-         } failureBlock:^(NSError *error) {
-             [self.scanV startRunning];
-         }];
+             else{
+                 Toast(response.errmsg);
+             }
 
+         } failureBlock:^(NSError *error) {
+              [self.scanV startRunning];
+         }];
+   
     NSLog(@"二维码内容：%@",scanDataString);
     
 }

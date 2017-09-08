@@ -181,33 +181,20 @@
     [[NSNotificationCenter defaultCenter]postNotificationName:@"personcenter" object:self.arr];
 }
 -(void)sendRequest{
-    NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"modifyMobile",
-                           @"mobile":    self.PhoneNumber.field.text,
-                           @"idno"  :    self.personID.field.text,
-                           @"vericode":  self.CheakNum.field.text
-                           
-                           };
+ 
     
     [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-     
-           parameters:dic
-         successBlock:^(id response) {
-             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-             Toast(model.errmsg);
-             if([model.errmsg isEqualToString:@"0"]){
+                  url:nil
+           parameters:@{@"action":      @"modifyMobile",
+                        @"mobile":    self.PhoneNumber.field.text,
+                        @"idno"  :    self.personID.field.text,
+                      @"vericode":  self.CheakNum.field.text}
+         successBlock:^(BaseModel *response) {
+             Toast(response.errmsg);
+             if([response.errorno isEqualToString:@"0"]){
                  [self.navigationController popViewControllerAnimated:YES];
-             }else{
-                 NSString *errmsg = model.errmsg;
-                 NSLog(@"errmsg==%@",errmsg);
              }
-           
-             
+
          } failureBlock:^(NSError *error) {
              
          }];

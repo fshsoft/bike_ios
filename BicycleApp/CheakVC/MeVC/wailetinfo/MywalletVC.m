@@ -11,6 +11,7 @@
 #import "WalletMoneyVC.h"
 #import "PullMoneyVC.h"
 #import "detaileMessageVC.h"
+#import "appInfoModel.h"
 @interface MywalletVC ()
 @property (nonatomic,strong)UILabel  * money;
 @property (nonatomic,strong)UIButton *pushMoney;
@@ -37,7 +38,6 @@
     self.money = [[UILabel alloc]initWithFrame:CGRectMake(0,30, SCREEN_WIDTH, 40)];
     self.money.font = FontBold(30);
     self.money.textAlignment = NSTextAlignmentCenter;
-    self.money.text=[DB getStringById:@"balance" fromTable:tabName];
     self.money.textColor =gary51;
     [topview  addSubview:self.money];
     UILabel *labPromit = [[UILabel alloc]initWithFrame:CGRectMake(0, self.money.bottom +10, SCREEN_WIDTH, 20)];
@@ -66,13 +66,7 @@
     [bottom   addSubview: self.depositMoney];
     
     [self.depositMoney addTarget:self action:@selector(depositMoneyFoundation) forControlEvents:UIControlEventTouchUpInside];
-    if([[DB getStringById:@"money" fromTable:tabName]isEqualToString:@"1"]){
-        [self.depositMoney setTitle:@"199元,退押金" forState:UIControlStateNormal ];
-        
-    }else{
-        [self.depositMoney setTitle:@"尚未充值" forState:UIControlStateNormal ];
-        
-    }
+    
     [self.depositMoney setTitleColor:gary170 forState:UIControlStateNormal];
     self.depositMoney.titleLabel.font =FontSize(14);
     [self.depositMoney setImage:Img(@"home_ic_enter") forState:UIControlStateNormal];
@@ -138,23 +132,67 @@
     [btnright setBackgroundColor:mainColor];
 }
 -(void)moneyPull{
-    if([[DB getStringById:@"money" fromTable:tabName]isEqualToString:@"1"]){
+    if( [self.depositMoney.titleLabel.text isEqualToString:@"尚未充值"]){
+        
+    }else{
+        
+        [self requestType:HttpRequestTypePost
+                      url:nil
+               parameters:@{@"action":@"depositApplied"
+} successBlock:^(BaseModel *response) {
+    if([response.errorno intValue]==0){
+        Toast(response.message);
+      
         PullMoneyVC *pullvc = [[PullMoneyVC alloc]init];
+        pullvc.moneynum = self.depositMoney.titleLabel.text;
         [self absPushViewController:pullvc animated:YES];
+    }else{
+          Toast(response.errmsg);
     }
-
+} failureBlock:^(NSError *error) {
+    
+}];
+       
+    
+    }
 }
 -(void)cancelPull{
     [self.backgroungView removeFromSuperview];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self cheakPersonStatue];
 }
-*/
+-(void)cheakPersonStatue{
+    
+    
+    
+    [self requestType:HttpRequestTypePost
+                  url:nil
+           parameters:@{ @"action":      @"userStatus",}
+         successBlock:^(BaseModel *response) {
+             
+             appInfoModel * appInfo = response.data;
+             // NSLog(@"%@==%@",appInfo.nickname,appInfo.truename);
+             [DB putString: appInfo.nickname withId:@"name" intoTable:tabName];
+             [DB putString: appInfo.truename withId:@"truename" intoTable:tabName];
+   
+             self.money.text =appInfo.balance;
+             if([appInfo.deposit floatValue]==0){
+             [self.depositMoney setTitle:@"尚未充值" forState:UIControlStateNormal];
+            }
+             else{
+             [self.depositMoney setTitle: [NSString stringWithFormat:@"%@元", appInfo.deposit]  forState:UIControlStateNormal];
+            
+             }
+
+         } failureBlock:^(NSError *error) {
+             
+         }];
+    
+
+    }
+
+
 
 @end

@@ -81,6 +81,8 @@ typedef void( ^ RequestFail)(NSError *error);
 -(void)requestType:(HttpRequestType)type
                url:(NSString *)url
         parameters:(NSDictionary *)parm
-      successBlock:(RequestSuccess)success failureBlock:(RequestFail)failure;
-
+      successBlock:(RequestSuccess)success
+      failureBlock:(RequestFail)failure;
+-(void)initAppinfo;
+-(void)cheakMoneyandCertify;
 @end

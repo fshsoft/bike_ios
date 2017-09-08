@@ -11,6 +11,9 @@
 #import "UIColor+XYColor.h"
 #import "LoginVC.h"
 #import "UIImage+anniGIF.h"
+#import "ZKUDID.h"
+#import "CusMD5.h"
+#import "appInfoModel.h"
 NSString *const kName = @"Alun Chen";
 @interface XYBaseVC ()
 @property (nonatomic, strong) UIView *loadingView;
@@ -327,39 +330,7 @@ NSString *const kName = @"Alun Chen";
     float origin = [text boundingRectWithSize:CGSizeMake(textWidth, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:@{NSFontAttributeName: font} context:nil].size.height;
     return ceilf(origin);
 }
--(void)refreshPassWordToken{
 
-    NSString *refreshtoken =@"";
-    
-    if(  [ DB getStringById:@"refresh_token" fromTable:tabName]){
-        
-        refreshtoken= [DB getStringById:@"refresh_token" fromTable:tabName];
-        
-        NSDictionary *dic = @{
-                              @"client_id"    :@"ios",
-                              @"client_secret":@"789",
-                              @"grant_type":@"refresh_token",
-                              @"scope":@"all",
-                              @"refresh_token":refreshtoken
-                              };
-        //   [self getCLLocationCoordinateInfo];
-        [RequestManager  requestWithType:HttpRequestTypePost urlString: url(@"oauth2/access_token") parameters:dic successBlock:^(id response) {
-            NSLog(@"===============%@",response);
-            //[DB putString: [response objectForKey:@"access_token"] withId:@"password_token" intoTable:tabName];
-            
-            //[DB putString: [response objectForKey:@"refresh_token"] withId:@"refresh_token" intoTable:tabName];
-        } failureBlock:^(NSError *error) {
-            
-        } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-            
-        }];
-
-    }else{
-        [self refreshClientCredentialsToken];
-    }
-    
-
-}
 -(void)requestType:(HttpRequestType)type
                url:(NSString *)url
         parameters:(NSDictionary *)parm
@@ -381,7 +352,7 @@ NSString *const kName = @"Alun Chen";
                          parameters:dic
                        successBlock:^(id response) {
                            if(success){
-                          
+                               NSLog(@"response=====%@",response);
                                BaseModel * model = [BaseModel yy_modelWithDictionary:response];
 //                               DLog(@"%@",model);
 //                               NSLog(@"%@",response);
@@ -405,31 +376,154 @@ NSString *const kName = @"Alun Chen";
                            
                        }];
 }
--(void)refreshClientCredentialsToken{
-    NSDictionary *dic = @{
-                          @"client_id"    :@"ios",
-                          @"client_secret":@"789",
-                          @"grant_type":@"client_credentials",
-                          @"scope":@"all"
-                          };
-    [RequestManager  requestWithType:HttpRequestTypePost
-                           urlString:url(@"oauth2/access_token")
-                          parameters:dic
-                        successBlock:^(id response) {
-                            
-                            NSLog(@"===============%@",response);
-                            
-                           // [DB putString: [response objectForKey:@"access_token"]
-                              //     withId:@"client_credentials_token"
-                              //  intoTable:tabName];
-                        }
-                        failureBlock:^(NSError *error) {
-                            
-                        }
-                            progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-                                
-                            }];
+-(void)initAppinfo{
+    dispatch_queue_t queue=dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_t group=dispatch_group_create();
+    dispatch_group_async(group, queue, ^{
+        [NSThread sleepForTimeInterval:1];
+        NSLog(@"group1");
+        [self getInfo];
+    });
     
+    dispatch_group_async(group, queue, ^{
+        [NSThread sleepForTimeInterval:2];
+        [self registToken];
+        NSLog(@"group 2");
+    });
+    dispatch_group_async(group, queue, ^{
+        [NSThread sleepForTimeInterval:3];
+        [self getToken];
+        NSLog(@"group3");
+    });
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        NSLog(@"update UI");
+    });
     
 }
+-(void)getInfo{
+    [ZKUDID setDebug:YES];
+    NSString *UDID = [ZKUDID value];
+    NSLog(@"UDID: %@",UDID);
+    NSString *strEnRes = [CusMD5 md5String:UDID];
+    NSLog(@"strEnRes: %@",strEnRes);
+    
+    
+     [RequestManager requestWithType:HttpRequestTypePost
+                           urlString:@"http://ying.baibaobike.com/authed/register.html"
+                          parameters:@{@"imei":UDID,@"code":strEnRes}
+                        successBlock:^(id response) {
+                            NSLog(@"%@",response);
+                            BaseModel  * model = [BaseModel yy_modelWithJSON: response];
+                            if([model.errorno isEqualToString:@"0"]){
+                                appInfoModel    * appinfomodel = model.data;
+                                
+                                [DB putString:appinfomodel.app_key       withId:@"app_key"      intoTable:tabName];
+                                [DB putString:appinfomodel.app_secret    withId:@"app_secret"   intoTable:tabName];
+                                [DB putString:appinfomodel.refresh_url   withId:@"refrsh_url"   intoTable:tabName];
+                                [DB putString:appinfomodel.seed_secret   withId:@"seed_secret"  intoTable:tabName];
+                                [DB putString:appinfomodel.source_url    withId:@"source_url"   intoTable:tabName];
+                                [DB putString:appinfomodel.token_url     withId:@"token_url"    intoTable:tabName];
+                                [DB putString:appinfomodel.authorize_url withId:@"authorize_url" intoTable:tabName];
+                             
+                            }
+                            else{
+                                //   [self getInfo];
+                                
+                            }
+                        } failureBlock:^(NSError *error) {
+                            
+                            // Toast(@"网络请求失败，请退出重试");
+                            
+                        } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                            
+                        }];
+     
+}
+
+-(void)registToken{
+    
+    [RequestManager requestWithType:HttpRequestTypePost
+                          urlString:[DB getStringById:@"authorize_url" fromTable:tabName]
+                         parameters:
+     @{
+       @"response_type" :@"code",
+       @"client_id"     :[DB getStringById:@"app_key" fromTable:tabName],
+       @"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
+       
+       }
+                       successBlock:^(id response) {
+                           NSLog(@"%@",response);
+                           if([[response objectForKey:@"errno"] isEqualToString:@"0"]){
+                               
+                               [DB putString:[[response objectForKey:@"data"] objectForKey:@"authorize_code"]withId:@"authorize_code" intoTable:tabName];
+                             
+                           }
+                       }
+                       failureBlock:^(NSError *error) {
+                           // Toast(@"网络请求失败，请退出重试");
+                       } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                           
+                       }];
+    
+
+    
+}
+
+-(void)getToken{
+        
+    [RequestManager requestWithType:HttpRequestTypePost
+                          urlString:[DB getStringById:@"token_url" fromTable:tabName]
+                         parameters:@{
+                                      
+                                      @"client_id"     :[DB getStringById:@"app_key" fromTable:tabName],
+                                      @"client_secret" :[DB getStringById:@"app_secret" fromTable:tabName],
+                                      @"grant_type"    :@"authorization_code",
+                                      @"code"          :[DB getStringById:@"authorize_code" fromTable:tabName],
+                                      @"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
+                                      }
+                       successBlock:^(id response) {
+                           NSLog(@"%@",response);
+                           if([[response objectForKey:@"errno"] isEqualToString:@"0"]){
+                               
+                               BaseModel    * model    = [BaseModel yy_modelWithJSON:response];
+                               appInfoModel * appmodel = model.data;
+                               [DB putString: appmodel.refresh_token withId:@"refresh_token"   intoTable:tabName];
+                               [DB putString: appmodel.access_token  withId: @"access_token"  intoTable:tabName];
+                                                              
+                           }
+                           
+                           
+                           
+                       } failureBlock:^(NSError *error) {
+                           
+                       } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                       }];
+    
+
+    
+}
+-(void)cheakMoneyandCertify{
+    [self requestType:HttpRequestTypePost
+                  url:nil
+           parameters:@{@"action":@"userStatus"}
+         successBlock:^(BaseModel *response) {
+             
+             if([response.errorno intValue]==0){
+                 if([response.data.is_verified intValue]==1){
+                     [DB putString: @"1"  withId: @"certify"  intoTable:tabName];
+                     
+                 }else{
+                     [DB deleteObjectById:@"certify" fromTable:tabName];
+                 }
+                 if([response.data.is_paydeposit intValue] ==1){
+                     [DB putString:@"1"   withId: @"money"  intoTable:tabName];
+                 }else{
+                     [DB deleteObjectById:@"money" fromTable:tabName];
+                 }
+             }
+         } failureBlock:^(NSError *error) {
+             
+         }];
+}
+
  @end

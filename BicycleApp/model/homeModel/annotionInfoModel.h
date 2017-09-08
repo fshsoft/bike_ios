@@ -33,5 +33,9 @@
 @property (nonatomic,copy)NSString  *  paidtype;
 
 
+ 
+
+ 
+
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "appInfoModel.h"
-
+#import "annotionInfoModel.h"
 @implementation appInfoModel
 //+ (nullable NSDictionary<NSString *, id> *)modelCustomPropertyMapper
 //{
@@ -31,5 +31,11 @@
 //    
 //    return YES;
 //}
++ (NSDictionary *)modelContainerPropertyGenericClass {
+    return @{
+             @"bikes" : [annotionInfoModel class],
+             
+             };
+}
 
 @end

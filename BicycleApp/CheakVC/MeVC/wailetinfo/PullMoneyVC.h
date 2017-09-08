@@ -9,5 +9,5 @@
 #import "XYBaseVC.h"
 
 @interface PullMoneyVC : XYBaseVC
-
+@property   (nonatomic  , copy)NSString   * moneynum;
 @end

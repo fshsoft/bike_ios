@@ -67,25 +67,21 @@
 }
 
 - (void)sendLogoutRequest {
-    
-    NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"logout",
-                           };
-    
     [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-           parameters:dic
-         successBlock:^(id response) {
+                  url:nil
+           parameters:@{ @"action":      @"logout"
+}
+         successBlock:^(BaseModel *response) {
              [DB deleteObjectById:@"phone" fromTable:tabName];
              [DB deleteObjectById:@"access_token" fromTable:tabName];
+             [self initAppinfo];
              [self.navigationController    popToRootViewControllerAnimated:YES];
-       } failureBlock:^(NSError *error) {
+
+         } failureBlock:^(NSError *error) {
              
-         }];}
+         }];
+
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return self.arr.count;
 }

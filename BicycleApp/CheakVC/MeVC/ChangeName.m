@@ -37,29 +37,17 @@
     // Do any additional setup after loading the view.
 }
 -(void)sendRequest{
-    NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"modifyNickname",
-                           @"nickname":    self.name.text
-                           
-                           };
-    
-    [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-     
-           parameters:dic
-         successBlock:^(id response) {
-             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-             Toast(model.errmsg);
-             NSString *errmsg = model.errmsg;
-             NSLog(@"errmsg==%@",errmsg);
-             
+        [self requestType:HttpRequestTypePost
+                  url:nil
+           parameters:@{@"action":      @"modifyNickname",
+                        @"nickname":    self.name.text}
+         successBlock:^(BaseModel *response) {
+             Toast(response.errmsg);
+
          } failureBlock:^(NSError *error) {
              
          }];
+    
     
 }
 - (void)didReceiveMemoryWarning {

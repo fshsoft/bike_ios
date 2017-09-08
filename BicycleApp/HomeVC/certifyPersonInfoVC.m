@@ -91,37 +91,22 @@
     [btn addTarget:self action:@selector(cheakInfo) forControlEvents:UIControlEventTouchUpInside];
 }
 -(void)cheakInfo{
-    NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"verified",
-                           @"truename":self.name.field.text,
-                           @"idno"    :self.personID.field.text
-                           };
     
-    [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-     
-           parameters:dic
-         successBlock:^(id response) {
-             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-          
-             if([model.errorno isEqualToString:@"0"]){
+    [self requestType:HttpRequestTypePost url:nil
+           parameters:@{ @"action":      @"verified",
+                         @"truename":self.name.field.text,
+                         @"idno"    :self.personID.field.text
+                         }
+         successBlock:^(BaseModel *response) {
+             if([response.errorno isEqualToString:@"0"]){
                  [DB putString: @"1"  withId: @"certify"  intoTable:tabName];
                  [DB putString:self.name.field.text withId:@"truename" intoTable:tabName];
                  //[DB putString:self.name.field.text withId:@"IDname" intoTable:tabName];
                  [self setCompletView];
-             }else{
-                 Toast(model.errmsg);
              }
-            
-             
          } failureBlock:^(NSError *error) {
              
          }];
-
    
 }
 -(void)setCompletView{

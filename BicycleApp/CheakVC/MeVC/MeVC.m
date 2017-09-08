@@ -219,34 +219,27 @@
     }
 }
 -(void)sendRequest{
-    NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"getUserInfo",
-                           
-                           };
+    
     
     [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-     
-           parameters:dic
-         successBlock:^(id response) {
-             BaseModel * model = [BaseModel yy_modelWithJSON:response];
-             appInfoModel * appInfo = model.data;
-            // NSLog(@"%@==%@",appInfo.nickname,appInfo.truename);
+                  url:nil
+           parameters:@{ @"action":      @"userStatus",}
+         successBlock:^(BaseModel *response) {
+         
+             appInfoModel * appInfo = response.data;
+             // NSLog(@"%@==%@",appInfo.nickname,appInfo.truename);
              [DB putString: appInfo.nickname withId:@"name" intoTable:tabName];
              [DB putString: appInfo.truename withId:@"truename" intoTable:tabName];
-             [DB putString:appInfo.balance withId:@"balance" intoTable:tabName];
-             self.price = appInfo.balance;
+             [DB putString: appInfo.balance withId:@"balance" intoTable:tabName];
+             self.price =   appInfo.balance;
+             self.personName.text=appInfo.truename;
              [self.promiseBtn setTitle:[NSString stringWithFormat:@"信用积分 %@",appInfo.integral] forState:UIControlStateNormal];
              
              [self.personalTableV reloadData];
          } failureBlock:^(NSError *error) {
              
          }];
-
+    
     }
 # pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -343,7 +336,9 @@
 # pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    }
+   
+
+}
 
 
 @end

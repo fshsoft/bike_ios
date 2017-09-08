@@ -13,7 +13,12 @@
 @end
 
 @implementation PullMoneyVC
-
+- (id)init{
+    if(self==[super init]){
+        self.moneynum =[NSString string];
+    }
+    return self;
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setNaivTitle:@"退押金"];
@@ -36,7 +41,7 @@
     [self.view addSubview:labSuccess];
     UILabel *money  = [[UILabel alloc]initWithFrame:CGRectMake(0, labSuccess.bottom, SCREEN_WIDTH, 30)];
     money.textAlignment = NSTextAlignmentCenter;
-    money.text =@"¥ 199";
+    money.text =[NSString stringWithFormat:@"¥ %@",self.moneynum];
     [self.view addSubview:money];
     UILabel *detail = [[UILabel alloc]initWithFrame:CGRectMake(0, money.bottom+10, SCREEN_WIDTH, 20)];
     detail.font = FontSize(12);
@@ -45,11 +50,11 @@
     detail.text =@"由于银行原因可能会在0-3个工作日内到账";
     [self.view addSubview:detail];
     
-    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(14, detail.bottom+10, SCREEN_WIDTH-28, 40)];
-    [self.view addSubview:btn];
-    [btn setTitle:@"充值" forState:UIControlStateNormal];
-    btn.backgroundColor =mainColor;
-    [btn addTarget:self action:@selector(pushMoney) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton *btn = [[UIButton alloc]initWithFrame:CGRectMake(14, detail.bottom+10, SCREEN_WIDTH-28, 40)];
+//    [self.view addSubview:btn];
+//    [btn setTitle:@"充值" forState:UIControlStateNormal];
+//    btn.backgroundColor =mainColor;
+//    [btn addTarget:self action:@selector(pushMoney) forControlEvents:UIControlEventTouchUpInside];
     
 }
 -(void)pushMoney{

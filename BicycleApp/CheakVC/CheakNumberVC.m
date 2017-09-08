@@ -60,42 +60,24 @@
     [self.navigationController popToViewController:viewControllers[1] animated:NO];
     }else{
         
-        NSDictionary  *dic = @{
-                               
-                               @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                               @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                               @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                               @"action":      @"scanCode",
-                               @"sn":self.Num.field.text
-                               };
-        
         [self requestType:HttpRequestTypePost
-                      url:[DB getStringById:@"source_url" fromTable:tabName]
-         
-               parameters:dic
-             successBlock:^(id response) {
-                 BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-                 if([model.errorno   isEqualToString:@"0"]){
+                      url:nil
+               parameters:@{ @"action":      @"scanCode",
+                             @"sn":self.Num.field.text}
+             successBlock:^(BaseModel *response) {
+                 if([response.errorno   isEqualToString:@"0"]){
                      CkeakDetaitleVC *vc =[[CkeakDetaitleVC alloc]init];
                      [self.navigationController pushViewController:vc  animated:YES];
                  }else{
-                 Toast(model.errmsg);
+                     Toast(response. errmsg);
                  }
+                 
              } failureBlock:^(NSError *error) {
                  
              }];
-
    
     }
+    
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

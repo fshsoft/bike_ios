@@ -82,25 +82,25 @@
                            @"action":      @"getUserRecharge",
                            
                            };
-    
-    [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-     
-           parameters:dic
-         successBlock:^(id response) {
-             listInfoModel * model = [listInfoModel yy_modelWithJSON:response];
-             if([model.errorno   isEqualToString:@"0"]){
-                 [self.array addObjectsFromArray: model.data];
-                 [self.tab reloadData];
-             }else{
-                
-                 Toast(model.errmsg);
+    [RequestManager requestWithType:HttpRequestTypePost
+                          urlString:[DB getStringById:@"source_url" fromTable:tabName]
 
-             }
-             
-         } failureBlock:^(NSError *error) {
-             
-         }];
-    
+                         parameters:dic
+                       successBlock:^(id response) {
+                           listInfoModel * model = [listInfoModel yy_modelWithJSON:response];
+                           if([model.errorno   isEqualToString:@"0"]){
+                               [self.array addObjectsFromArray: model.data];
+                               [self.tab reloadData];
+                           }else{
+                               
+                               Toast(model.errmsg);
+                           }
+ 
+                       } failureBlock:^(NSError *error) {
+                           
+                       } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                           
+                       }];
+        
 }
 @end

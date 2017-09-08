@@ -80,34 +80,34 @@
     return view;
 }
 -(void)sendRequest{
-    NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"getUserIntegral",
-                           
-                           };
     
-    [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-     
-           parameters:dic
-         successBlock:^(id response) {
-             listInfoModel   * model = [listInfoModel yy_modelWithJSON:response];
-             if([model.errorno isEqualToString:@"0"]){
-                  [self.array addObjectsFromArray:model.data];
-                 annotionInfoModel * model =self.array[0];
-                 self. customView.num=model.current;
-                  [self.tab reloadData];
-             }else{
-            
-             Toast(model.errmsg);
-             }
-             
-         } failureBlock:^(NSError *error) {
-             
-         }];
+    [RequestManager  requestWithType:HttpRequestTypePost
+                           urlString:[DB getStringById:@"source_url" fromTable:tabName]
+                          parameters:@{
+                        @"client_id":       [DB getStringById:@"app_key" fromTable:tabName],
+                            @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
+                     @"access_token":      [DB getStringById:@"access_token" fromTable:tabName],
+                           @"action":      @"getUserIntegral",
+                                                        
+                                                                                                     }
+                        successBlock:^(id response) {
+                            listInfoModel   * model = [listInfoModel yy_modelWithJSON:response];
+                            if([model.errorno isEqualToString:@"0"]){
+                                [self.array addObjectsFromArray:model.data];
+                                annotionInfoModel * model =self.array[0];
+                                self. customView.num=model.current;
+                                [self.tab reloadData];
+                            }else{
+                                
+                                Toast(model.errmsg);
+                            }
+                            
+
+                           } failureBlock:^(NSError *error) {
+                               
+                           } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
+                               
+                           }];
     
 }
 -(void)setSubView{

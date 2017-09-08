@@ -114,43 +114,29 @@
 }
 -(void)payStyle{
     
-    NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"getAlipayOrder",
-                           @"total": @"199",
-                           @"type":@"1"
-                           };
-    
+   
     [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-     
-           parameters:dic
-         successBlock:^(id response) {
-             
-             NSLog(@"response====%@",response);
-             BaseModel   * model = [BaseModel yy_modelWithJSON:response];
-             if([model.errorno isEqualToString:@"0"]){
-                 appInfoModel *appmodel= model.data;
+                  url:nil
+           parameters:@{ @"action":      @"getAlipayOrder",
+                         @"total": @"199",
+                         @"type":@"1"}
+         successBlock:^(BaseModel *response) {
+             if([response.errorno isEqualToString:@"0"]){
+                 appInfoModel *appmodel= response.data;
                  PaySelect *a =[[PaySelect alloc]init];
                  [a doAlipayPayAppID:appmodel.appId
-                               Price:@"199"
+                               Price:@"0.01"
                             orderNum:appmodel.out_trade_no
                            orderTime:appmodel.createtime
                           PrivateKey:appmodel.private_key
                                 Body:appmodel.body
                              subJect:appmodel.subject];
              }
+
          } failureBlock:^(NSError *error) {
              
          }];
 
-        //[DB putString: appmodel.access_token  withId: @"access_token"  intoTable:tabName];
-    //PaySelect *a =[[PaySelect alloc]init];
-    //[a  wxpay];
-    //[a getWeChatPayWithOrderName:@"yifenqian" price:@"1"];
 }
 
 - (void)viewWillAppear:(BOOL)animated

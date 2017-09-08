@@ -104,7 +104,9 @@
 @property (nonatomic,strong) activityView *actView;
 @property (nonatomic,assign) NSInteger    paopaoTag;
 @property (nonatomic ,strong)AMapGeoFenceManager *geoFenceManager;
-
+@property (nonatomic,assign) int loadStatus;
+@property (nonatomic,assign) int moneyStatus;
+@property (nonatomic,assign) int certifyStatus;
 @end
 
 @implementation HomeVC
@@ -148,8 +150,8 @@
     [self setSearchMapPath];
     [self setBottomSubview];
     [self setNavLeftItemTitle:nil andImage:Img(@"catage")];
-
     
+       
     }
 - (void)local{
     //    centerAnnotaion.coordinate = currentCoordinate;
@@ -194,7 +196,7 @@
     __block HomeVC *weakSelf = self;
     self.homeNaiv.leftBlock = ^{
         
-        if( !TelNumber){
+        if( self.loadStatus!=1){
             [weakSelf cheakToken];
             LoginVC *loginVC = [[LoginVC alloc]init];
             [weakSelf  absPushViewController:loginVC animated:YES];
@@ -209,7 +211,7 @@
 
         };
      self.homeNaiv.mesBlock = ^{
-         if( !TelNumber){
+         if( self.loadStatus!=1){
              [weakSelf cheakToken];
              LoginVC *loginVC = [[LoginVC alloc]init];
              [weakSelf  absPushViewController:loginVC animated:YES];
@@ -681,61 +683,56 @@
 }
 #pragma mark 获取标注
 -(void)getLocationManagerAnnotationLat:(NSString*)lat Lng:(NSString *)lng{
-    NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"searchBikes",
-                           @"lat"   :  lat ,
-                           @"lng"   :  lng
-                           };
-    
     
     [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-     
-           parameters:dic
-         successBlock:^(id response) {
-             
-             listInfoModel* model = [listInfoModel yy_modelWithJSON:response];
-             if(model.data.count>0){
-                 self.paopaoTag=1;
-                 [self.mapView removeAnnotations:self.annotations];
-                 [self.annotations removeAllObjects ];
-                 
-                 
-                 
-                 for(int i=0;i<model.data.count;i++){
-                     annotionInfoModel * infomodel =  model.data[i];
-                     MAPointAnnotation *a1 = [[MAPointAnnotation alloc] init];
-                     a1.coordinate=CLLocationCoordinate2DMake( infomodel.lat,infomodel.lng  );
-                     
-                     
-                     if(i==0){
-                         if(a1.coordinate.longitude==0||a1.coordinate.latitude==0){
-                             a1.coordinate=CLLocationCoordinate2DMake( [lat doubleValue]-0.001, [lng doubleValue]-0.001);
-                         }
-                         a1.subtitle      = @"离我最近";
-                         
-                     }
-                     [self.annotations addObject:a1];
+                  url:nil
+           parameters:@{@"action":  @"searchBikes",
+                        @"lat"   :  lat ,
+                        @"lng"   :  lng
+                        }
+         successBlock:^(BaseModel *response) {
+             if([response.errorno intValue]==0){
+                 self.loadStatus=[response.data.islogin intValue];
+                 if(self.loadStatus==1){
+                     [self cheakMoneyandCertify];
                  }
-                 [self.mapView addAnnotation:centerAnnotaion];
-                 [self.mapView addAnnotations:self.annotations];
-                 //[self.mapView selectAnnotation:self.annotations[1] animated:YES];
-                 
+                 NSMutableArray * arr = [NSMutableArray array];
+                 [arr addObjectsFromArray:response.data.bikes];
+                 //listInfoModel* model = [listInfoModel yy_modelWithJSON:response];
+                 if(arr.count>0){
+                     self.paopaoTag=1;
+                     [self.mapView removeAnnotations:self.annotations];
+                     [self.annotations removeAllObjects ];
+                     
+                     
+                     
+                     for(int i=0;i<arr.count;i++){
+                         annotionInfoModel * infomodel =  arr[i];
+                         
+                         MAPointAnnotation *a1 = [[MAPointAnnotation alloc] init];
+                         a1.coordinate=CLLocationCoordinate2DMake( infomodel.lat,infomodel.lng  );
+                         
+                         
+                         if(i==0){
+                             if(a1.coordinate.longitude==0||a1.coordinate.latitude==0){
+                                 a1.coordinate=CLLocationCoordinate2DMake( [lat doubleValue]-0.001, [lng doubleValue]-0.001);
+                             }
+                             a1.subtitle      = @"离我最近";
+                             
+                         }
+                         [self.annotations addObject:a1];
+                     }
+                     [self.mapView addAnnotation:centerAnnotaion];
+                     [self.mapView addAnnotations:self.annotations];
+                     //[self.mapView selectAnnotation:self.annotations[1] animated:YES];
+                     
+                 }
+
              }
-             
-             
-             
          } failureBlock:^(NSError *error) {
              
          }];
-    
-    
 }
-
 #pragma 底部视图
 -(void)setBottomSubview{
     HomeBottomView *bottom = [[HomeBottomView alloc]initWithFrame:CGRectMake(0, SCREENH_HEIGHT-90, SCREEN_WIDTH, 90)];
@@ -750,8 +747,8 @@
         [selfblock  setUpData];
     };
     bottom.cheakBlock=^{
-          [selfblock cheakPersonStatue];
-        if( !TelNumber){
+      
+        if( self.loadStatus!=1){
             [selfblock cheakToken];
             LoginVC *loginVC = [[LoginVC alloc]init];
             [selfblock  absPushViewController:loginVC animated:YES];
@@ -786,8 +783,8 @@
 
     
     bottom.helpBlock = ^{
-          [selfblock cheakPersonStatue];
-        if( !TelNumber){
+        
+        if( self.loadStatus!=1){
             [selfblock cheakToken];
             LoginVC *loginVC = [[LoginVC alloc]init];
             [selfblock  absPushViewController:loginVC animated:YES];
@@ -945,41 +942,6 @@
     }
 }
 
--(void)cheakPersonStatue{
-    NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           @"action":      @"initUserStatus",
-                           
-                           };
-    
-    [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-     
-           parameters:dic
-         successBlock:^(id response) {
-             BaseModel * model = [BaseModel yy_modelWithJSON:response];
-             NSLog(@"====%@",response);
-             if([model.errorno  isEqualToString:@"0"]){
-                  appInfoModel * appInfo = model.data;
-                 if([appInfo.is_verified isEqualToString:@"1"]){
-                     [DB putString: @"1"  withId: @"certify"  intoTable:tabName];
-
-                 }
-                 if([appInfo.is_paydeposit isEqualToString:@"1"]){
-                     [DB putString:@"1"   withId: @"money"  intoTable:tabName];
-                 }
-                              }
-            
-             
-             
-         } failureBlock:^(NSError *error) {
-             
-         }];
- 
-}
 
 #pragma mark token获取
 -(void)cheakToken{
@@ -999,7 +961,7 @@
     NSString *strEnRes = [CusMD5 md5String:UDID];
     NSLog(@"%@",UDID);
     [RequestManager requestWithType:HttpRequestTypePost
-                          urlString:@"https://ying.baibaobike.com/authed/register.html"
+                          urlString:@"http://ying.baibaobike.com/authed/register.html"
                          parameters:@{@"imei":UDID,@"code":strEnRes}
                        successBlock:^(id response) {
                            NSLog(@"%@",response);
@@ -1093,5 +1055,8 @@
                        }];
     
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated  ];
+    [self cheakToken];
+}
 @end
