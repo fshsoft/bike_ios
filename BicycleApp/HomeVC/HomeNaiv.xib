@@ -49,7 +49,7 @@
                         <action selector="seachBtnFoundation:" destination="iN0-l3-epB" eventType="touchUpInside" id="rVc-b4-8el"/>
                     </connections>
                 </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakurabike.png" translatesAutoresizingMaskIntoConstraints="NO" id="3g7-1D-ogF">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sakurabike.png" translatesAutoresizingMaskIntoConstraints="NO" id="3g7-1D-ogF">
                     <rect key="frame" x="133.5" y="33.5" width="72" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="XuG-AE-Tln"/>

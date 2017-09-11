@@ -630,6 +630,10 @@
         return ;
     }
     
+    if ([view.annotation isMemberOfClass:[JSCenterAnnotation class]]) {
+        
+        return ;
+    }
 
     Toast(@"路径规划中");
     [self clearLine];

@@ -12,6 +12,7 @@
 #import "PullMoneyVC.h"
 #import "detaileMessageVC.h"
 #import "appInfoModel.h"
+#import "paymentVC.h"
 @interface MywalletVC ()
 @property (nonatomic,strong)UILabel  * money;
 @property (nonatomic,strong)UIButton *pushMoney;
@@ -65,7 +66,7 @@
    
     [bottom   addSubview: self.depositMoney];
     
-    [self.depositMoney addTarget:self action:@selector(depositMoneyFoundation) forControlEvents:UIControlEventTouchUpInside];
+    [self.depositMoney addTarget:self action:@selector(depositMoneyFoundation:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.depositMoney setTitleColor:gary170 forState:UIControlStateNormal];
     self.depositMoney.titleLabel.font =FontSize(14);
@@ -87,10 +88,16 @@
     WalletMoneyVC *vc = [[WalletMoneyVC  alloc]init];
     [self.navigationController pushViewController:vc animated:YES];
 }
--(void)depositMoneyFoundation{
+-(void)depositMoneyFoundation:(UIButton*)sender{
+    if(sender.tag==0){
+        paymentVC * vc  = [[paymentVC alloc]init];
+        [self absPushViewController:vc animated:YES];
+    }else if(sender.tag==1){
+     [self setBackgroundView];
+    }
 //    depositMoneyVC *vc = [[depositMoneyVC alloc]init];
 //    [self.navigationController pushViewController:vc animated:YES];
-    [self setBackgroundView];
+   
     
 }
 -(void)setBackgroundView{
@@ -132,9 +139,7 @@
     [btnright setBackgroundColor:mainColor];
 }
 -(void)moneyPull{
-    if( [self.depositMoney.titleLabel.text isEqualToString:@"尚未充值"]){
-        
-    }else{
+  
         
         [self requestType:HttpRequestTypePost
                       url:nil
@@ -152,9 +157,7 @@
 } failureBlock:^(NSError *error) {
     
 }];
-       
     
-    }
 }
 -(void)cancelPull{
     [self.backgroungView removeFromSuperview];
@@ -178,10 +181,12 @@
              [DB putString: appInfo.truename withId:@"truename" intoTable:tabName];
    
              self.money.text =appInfo.balance;
-             if([appInfo.deposit floatValue]==0){
-             [self.depositMoney setTitle:@"尚未充值" forState:UIControlStateNormal];
+             if([appInfo.is_paydeposit floatValue]==0){
+                 self.depositMoney.tag =0;
+             [self.depositMoney setTitle:@"0元" forState:UIControlStateNormal];
             }
              else{
+                 self.depositMoney.tag =1;
              [self.depositMoney setTitle: [NSString stringWithFormat:@"%@元", appInfo.deposit]  forState:UIControlStateNormal];
             
              }

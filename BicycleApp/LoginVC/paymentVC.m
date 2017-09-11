@@ -152,9 +152,31 @@
     NSLog(@"userInfo: %@",notification.userInfo);
     
     if ([notification.object isEqualToString:@"9000"])
-    {   certifyPersonInfoVC *vc =[[certifyPersonInfoVC alloc]init];
-        [DB putString:@"1"   withId: @"money"  intoTable:tabName];
-        [self absPushViewController:vc animated:YES];
+        
+    {
+        [self requestType:HttpRequestTypePost
+                      url:nil
+               parameters:@{@"action":@"userStatus"}
+             successBlock:^(BaseModel *response) {
+                 
+                 if([response.errorno intValue]==0){
+                     if([response.data.is_verified intValue]==1){
+                         [self.navigationController popToRootViewControllerAnimated:YES];
+                     }else{
+                         certifyPersonInfoVC *vc =[[certifyPersonInfoVC alloc]init];
+                         [DB putString:@"1"   withId: @"money"  intoTable:tabName];
+                         [self absPushViewController:vc animated:YES];
+                       
+                     }
+                     
+                 
+                 }
+             } failureBlock:^(NSError *error) {
+                 
+             }];
+
+        
+       
 
     }else
     {
