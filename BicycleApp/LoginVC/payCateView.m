@@ -20,7 +20,7 @@
 - (IBAction)cheakSelect:(UIButton *)sender {
     
     if(self.cheakBlock){
-        self.cheakBlock (self.cheakBtn);
+        self.cheakBlock ();
     }
 }
 

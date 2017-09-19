@@ -22,7 +22,7 @@
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
- @interface AppDelegate ()<WXApiDelegate >//,JPUSHRegisterDelegate>
+ @interface AppDelegate ()<WXApiDelegate ,JPUSHRegisterDelegate>
 
 @end
 
@@ -31,14 +31,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-   
+    [self setTabifno];
     [self setGaodeMapInfo];
     [self setKeyboardManager];
-    [WXApi registerApp:@"wx9befb1503750db67"];
+    [WXApi registerApp:WXAppId];
     [self setPushInfo:launchOptions];
     [self setzShearInfo];
-    [self setTabifno];
-    
     [self setRootView];
     [self setLaunchfirst];
     
@@ -96,8 +94,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     
-    //[application setApplicationIconBadgeNumber:0];
-    //[application cancelAllLocalNotifications];
+    [application setApplicationIconBadgeNumber:0];
+    [application cancelAllLocalNotifications];
 
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
 }
@@ -146,7 +144,7 @@
     [JPUSHService registrationIDCompletionHandler:^(int resCode, NSString *registrationID) {
         if(resCode == 0){
             NSLog(@"registrationID获取成功：%@",registrationID);
-            
+            [DB putString:registrationID withId:@"pushID" intoTable:tabName];
         }
         else{
             NSLog(@"registrationID获取失败，code：%d",resCode);
@@ -335,15 +333,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
                 //跳转支付宝钱包进行支付，处理支付结果
              [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
                    NSLog(@"result = %@",resultDic);
-                 NSDictionary  *dic = @{
-                                        
-                                        @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                                        @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                                        @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                                        @"action":      @"getAlipayNotifyOrder",
-                                        @"data"  :resultDic
-                                        };
-                 [self sendRequest:dic];
+                                 
                  NSNotification * notification = [NSNotification notificationWithName:@"alPay" object:[NSString stringWithFormat:@"%@",[resultDic objectForKey:@"resultStatus"]]];
                  [[NSNotificationCenter defaultCenter] postNotification:notification];
               }];
@@ -363,16 +353,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
         //跳转支付宝钱包进行支付，处理支付结果
         [[AlipaySDK defaultService] processOrderWithPaymentResult:url standbyCallback:^(NSDictionary *resultDic) {
             NSLog(@"result = %@",resultDic);
-            NSDictionary  *dic = @{
-                                   
-                                   @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                                   @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                                   @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                                   @"action":      @"getAlipayNotifyOrder",
-                                   @"data"  :resultDic
-                                   };
-            [self sendRequest:dic];
-            NSNotification * notification = [NSNotification notificationWithName:@"alPay" object:[NSString stringWithFormat:@"%@",[resultDic objectForKey:@"resultStatus"]]];
+                        NSNotification * notification = [NSNotification notificationWithName:@"alPay" object:[NSString stringWithFormat:@"%@",[resultDic objectForKey:@"resultStatus"]]];
             [[NSNotificationCenter defaultCenter] postNotification:notification];
         }];
     }
@@ -428,16 +409,5 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     }
 }
 
--(void)sendRequest:(NSDictionary *)dic{
-   
-    [RequestManager requestWithType:HttpRequestTypePost urlString:[DB getStringById:@"source_url" fromTable:tabName] parameters:dic successBlock:^(id response) {
-
-    } failureBlock:^(NSError *error) {
-
-    } progress:^(int64_t bytesProgress, int64_t totalBytesProgress) {
-      
-    }];
-   
-}
- 
+  
 @end

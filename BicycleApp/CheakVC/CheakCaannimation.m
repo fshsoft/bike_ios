@@ -71,7 +71,7 @@
     CGContextSetLineCap(context, kCGLineCapRound);
     CGContextSetLineJoin(context, kCGLineJoinRound);
     CGFloat endAngle = self.pregress * 2 * M_PI - M_PI_2;
-    CGContextSetRGBStrokeColor(context, 0.9, 0.5, 0.3, 1);
+    CGContextSetRGBStrokeColor(context, 0.34, 0.72, 0.16, 1);
     CGContextAddArc(context, viewW * 0.5, viewH * 0.5, radius, - M_PI_2, endAngle, 0);
     CGContextSetLineWidth(context, 10);
     

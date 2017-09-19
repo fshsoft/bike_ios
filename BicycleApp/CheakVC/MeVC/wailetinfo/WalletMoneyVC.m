@@ -12,16 +12,18 @@
 #import "PaySelect.h"
 #import "appInfoModel.h"
 @interface WalletMoneyVC ()
-@property (nonatomic,strong)payCateView    *Wx;
-@property (nonatomic,strong)payCateView    *Alipay;
+@property (nonatomic,strong)payCateView     *Wx;
+@property (nonatomic,strong)payCateView     *Alipay;
 @property (nonatomic,strong)MoneySelectView *topSelctView;
 @property (nonatomic,strong)NSString        * price;
+@property (nonatomic,assign)int             type;
 @end
 
 @implementation WalletMoneyVC
 
 - (void)viewDidLoad {
     self.price =@"100";
+    self.type=1;
     [super viewDidLoad];
     [self setNaivTitle:@"钱包充值"];
     [self setSelectView];
@@ -93,25 +95,26 @@
     self.Wx.frame = CGRectMake(0,self.topSelctView.bottom  , SCREEN_WIDTH, 50);
     self.Wx.title.text=@"微信支付";
       self.Wx.img.image =Img(@"WeChatpay");
-    [self.Wx.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
+    [self.Wx.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
     [self.view addSubview:self.Wx];
     
     self.Alipay = [[NSBundle mainBundle]loadNibNamed:@"payCate" owner:self options:nil].lastObject;
     self.Alipay.frame = CGRectMake(0, self.Wx.bottom, SCREEN_WIDTH, 50);
-    [self.Alipay.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
+    [self.Alipay.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
     self.Alipay.title.text=@"支付宝支付";
     self.Alipay.img.image =Img(@"alipay");
     [self.view addSubview:self.Alipay];
    
     self.Wx.cheakBlock = ^{
-        Toast(@"暂未开通");
-        //[weakself.Wx.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
-        //[weakself.Alipay.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
+        weakself.type=1;
+        [weakself.Wx.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
+        [weakself.Alipay.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
         
     };
     self.Alipay.cheakBlock = ^{
-        //[weakself.Wx.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
-        //[weakself.Alipay.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
+        weakself.type=2;
+        [weakself.Wx.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
+        [weakself.Alipay.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
     };
     
     
@@ -120,7 +123,7 @@
     
     [btnPrice setBackgroundColor:mainColor];
     [btnPrice setTitle:@"去充值" forState:UIControlStateNormal];
-    [btnPrice addTarget:self action:@selector(payStyle) forControlEvents:UIControlEventTouchUpInside ];
+    [btnPrice addTarget:self action:@selector(payselect ) forControlEvents:UIControlEventTouchUpInside ];
     
     UILabel *pormot = [[UILabel alloc]initWithFrame:CGRectMake(0, SCREENH_HEIGHT-60-30, SCREEN_WIDTH, 20)];
     [self.view addSubview:pormot];
@@ -132,44 +135,24 @@
     
     
 }
--(void)payStyle{
-    
-    NSDictionary  *dic = @{
-                           
-                           @"client_id":   [DB getStringById:@"app_key" fromTable:tabName],
-                           @"state":       [DB getStringById:@"seed_secret" fromTable:tabName],
-                           @"access_token":[DB getStringById:@"access_token" fromTable:tabName],
-                           
-                           };
-    
-    [self requestType:HttpRequestTypePost
-                  url:[DB getStringById:@"source_url" fromTable:tabName]
-     
-           parameters:dic
-         successBlock:^(id response) {
-             
-             NSLog(@"response====%@",response);
-                     } failureBlock:^(NSError *error) {
-             
-         }];
-
+-(void)payselect{
+    if (self.type==1){
+        [self payWX];
+    }else{
+        [self payALI];
+    }
+}
+-(void)payALI{
     [self requestType:HttpRequestTypePost
                   url:nil
-           parameters:@{@"action":      @"getAlipayOrder",
+           parameters:@{@"action":      @"aliPay",
                         @"total": self.price,
                         @"type": @"2"}
          successBlock:^(BaseModel *response) {
         
              if([response.errorno isEqualToString:@"0"]){
                  appInfoModel *appmodel= response.data;
-                 PaySelect *a =[[PaySelect alloc]init];
-                 [a doAlipayPayAppID:appmodel.appId
-                               Price:self.price
-                            orderNum:appmodel.out_trade_no
-                           orderTime:   appmodel.createtime
-                          PrivateKey:appmodel.private_key
-                                Body:appmodel.body
-                             subJect:appmodel.subject];
+                 [PaySelect aliPay:appmodel.order];
              }
 
          } failureBlock:^(NSError *error) {
@@ -177,7 +160,29 @@
          }];
    
 }
-
+-(void)payWX{
+    [self requestType:HttpRequestTypePost
+                  url:nil
+           parameters:@{@"action":      @"wxPay",
+                        @"total": self.price,
+                        @"type": @"2"}
+         successBlock:^(BaseModel *response) {
+             
+             if([response.errorno isEqualToString:@"0"]){
+                 appInfoModel *appmodel= response.data;
+                 [PaySelect WxpayappID:appmodel.appid
+                             partnerID:appmodel.partnerid
+                              noncestr:appmodel.noncestr
+                               package:appmodel.package
+                             timestamp:appmodel.timestamp
+                              prepayid:appmodel.prepayid
+                                  sign:appmodel.sign];
+             }
+             
+         } failureBlock:^(NSError *error) {
+             
+         }];
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:YES];

@@ -16,6 +16,7 @@
 #import "BaseModel.h"
 #import "certifyPersonInfoVC.h"
 #import "cheakInfoVC.h"
+#import "appInfoModel.h"
 @interface LoginVC ()<UITextFieldDelegate, UIScrollViewDelegate>
 
 @property (nonatomic, strong) UIButton    *loginBtn;
@@ -331,29 +332,35 @@
 - (void)sendABSLoginRequest {
     if([self.phoneNum.field.text isEqualToString:@"17621514022"]&&[self.cheakNum.field.text isEqualToString:@"123456"]){
         
-        cheakInfoVC * vc  = [[cheakInfoVC alloc]init];
-        [DB putString: @"1"  withId: @"certify"  intoTable:tabName];
-        [DB putString:self.phoneNum.field.text withId:@"phone" intoTable:tabName];
-
+        [self requestType:HttpRequestTypePost
+                      url:nil
+               parameters:@{ @"action":      @"sendSmsCode",
+                             @"mobile":self.phoneNum.field.text}
+             successBlock:^(BaseModel *response) {
+                 
+         
+                 
+                 
+             } failureBlock:^(NSError *error) {
+                 
+             }];
         
-        [DB putString:@"1"   withId: @"money"  intoTable:tabName];
-        [self absPushViewController:vc animated:YES];
-        
-    }else
-    {
+    }
+    //else
+    //{*/
         [self requestType:HttpRequestTypePost
                   url:nil
            parameters:@{ @"action":      @"login",
                          @"mobile":self.phoneNum.field.text,
-                         @"vericode":self.cheakNum.field.text}
+                         @"vericode":self.cheakNum.field.text,
+                         @"jpushid" :[DB getStringById:@"pushID" fromTable:tabName]  }
          successBlock:^(BaseModel *response) {
              if([response.errorno intValue]==0){
                  [self cheakMoneyandCertify];
-                 [DB putString:self.phoneNum.field.text withId:@"phone" intoTable:tabName];
-                 
-                 if([[DB getStringById:@"money" fromTable:tabName]isEqualToString:@"1"]){
-                     if([[DB getStringById:@"certify" fromTable:tabName]isEqualToString:@"1"]){
-                         [self.navigationController popViewControllerAnimated:YES];
+                     [DB putString:self.phoneNum.field.text withId:@"phone" intoTable:tabName];
+                 if([response.data.is_paydeposit intValue]==1){
+                     if([response.data.is_verified intValue ]==1){
+                     [self.navigationController popViewControllerAnimated:YES];
                      }else{
                          certifyPersonInfoVC * vc = [[certifyPersonInfoVC alloc]init];
                          [self absPushViewController:vc animated:YES];
@@ -362,6 +369,17 @@
                      paymentVC * vc  = [[paymentVC alloc]init];
                      [self absPushViewController:vc animated:YES];
                  }
+                /* if([[DB getStringById:@"money" fromTable:tabName]isEqualToString:@"1"]){
+                     if([[DB getStringById:@"certify" fromTable:tabName]isEqualToString:@"1"]){
+                        
+                     }else{
+                         certifyPersonInfoVC * vc = [[certifyPersonInfoVC alloc]init];
+                         [self absPushViewController:vc animated:YES];
+                     }
+                 }else{
+                     paymentVC * vc  = [[paymentVC alloc]init];
+                     [self absPushViewController:vc animated:YES];
+                 }*/
              }else{
                  Toast(response.errmsg);
              }
@@ -370,10 +388,8 @@
              
          }]
         ;
-    }
+   // }
     
 }
--(void)setRequest{
-  }
 
 @end

@@ -153,8 +153,6 @@
 		0E7C4E091ED29090000A9474 /* AboutMeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C4E081ED29090000A9474 /* AboutMeCell.m */; };
 		0E7C4E0E1ED2B721000A9474 /* detaileMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7C4E0D1ED2B721000A9474 /* detaileMessageVC.m */; };
 		0E7E8FA51F0F7D39007F1EE5 /* listInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E7E8FA41F0F7D39007F1EE5 /* listInfoModel.m */; };
-		0E88B0C61EC9983600CE5A90 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E88B0C31EC9983600CE5A90 /* GDataXMLNode.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		0E88B0C71EC9983600CE5A90 /* CommonUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E88B0C51EC9983600CE5A90 /* CommonUtil.m */; };
 		0E88B0C91EC998AE00CE5A90 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E88B0C81EC998AE00CE5A90 /* libxml2.tbd */; };
 		0E88B0CB1EC998D700CE5A90 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E88B0CA1EC998D700CE5A90 /* libsqlite3.tbd */; };
 		0EAC75A21ED12A420063B03D /* ChangeName.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAC75A11ED12A420063B03D /* ChangeName.m */; };
@@ -704,10 +702,6 @@
 		0E7C4E0D1ED2B721000A9474 /* detaileMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = detaileMessageVC.m; sourceTree = "<group>"; };
 		0E7E8FA31F0F7D39007F1EE5 /* listInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = listInfoModel.h; sourceTree = "<group>"; };
 		0E7E8FA41F0F7D39007F1EE5 /* listInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = listInfoModel.m; sourceTree = "<group>"; };
-		0E88B0C21EC9983600CE5A90 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
-		0E88B0C31EC9983600CE5A90 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
-		0E88B0C41EC9983600CE5A90 /* CommonUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonUtil.h; sourceTree = "<group>"; };
-		0E88B0C51EC9983600CE5A90 /* CommonUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommonUtil.m; sourceTree = "<group>"; };
 		0E88B0C81EC998AE00CE5A90 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		0E88B0CA1EC998D700CE5A90 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		0E88B0CC1EC998F200CE5A90 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
@@ -1582,10 +1576,6 @@
 		0E88B0C11EC9974300CE5A90 /* payOfwx */ = {
 			isa = PBXGroup;
 			children = (
-				0E88B0C21EC9983600CE5A90 /* GDataXMLNode.h */,
-				0E88B0C31EC9983600CE5A90 /* GDataXMLNode.m */,
-				0E88B0C41EC9983600CE5A90 /* CommonUtil.h */,
-				0E88B0C51EC9983600CE5A90 /* CommonUtil.m */,
 				0E777FA61EC561FD00539E18 /* PaySelect.h */,
 				0E777FA71EC561FD00539E18 /* PaySelect.m */,
 			);
@@ -2357,13 +2347,11 @@
 				0E7780DF1EC561FD00539E18 /* LoginVC.m in Sources */,
 				0E7781571EC561FE00539E18 /* RequestManager.m in Sources */,
 				0E77814E1EC561FE00539E18 /* AFNetworkActivityIndicatorManager.m in Sources */,
-				0E88B0C71EC9983600CE5A90 /* CommonUtil.m in Sources */,
 				0EBB1BAB1ED408BC009BC5FF /* travelCell.m in Sources */,
 				0EDB9DE81EEE688800B42EBC /* annotionInfoModel.m in Sources */,
 				0E77812C1EC561FE00539E18 /* MANaviRoute.m in Sources */,
 				0E23230E1ED19A3E007FF580 /* travelVC.m in Sources */,
 				0EF6215E1ED8205900AC900C /* breakView.m in Sources */,
-				0E88B0C61EC9983600CE5A90 /* GDataXMLNode.m in Sources */,
 				0E7C4E091ED29090000A9474 /* AboutMeCell.m in Sources */,
 				0E7781311EC561FE00539E18 /* TenpayUtil.mm in Sources */,
 				0E7781591EC561FE00539E18 /* XYBaseVC.m in Sources */,

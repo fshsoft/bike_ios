@@ -19,18 +19,9 @@
 //#define  password_token        [DB getStringById:@"password_token"             fromTable:tabName]
 //#define  refressh_token         [DB getStringById:@"refresh_token"              fromTable:tabName]
 //微信开放平台申请得到的 appid, 需要同时添加在 URL schema
-#define WXAppId  @"wx84df9bd306bad5a6"
+#define WXAppId  @"wx0889a773cbaf6df0"
 
-/**
- *  申请微信支付成功后，发给你的邮件里的微信支付商户号
- */
-#define  WXPartnerId @"1230702001"
-
-/** API密钥 去微信商户平台设置--->账户设置--->API安全， 参与签名使用 */
-#define  WXAPIKey  @"d6e86c7a829a3c0849f4b8aa02b9efd7"
-
-/** 获取prePayId的url, 这是官方给的接口 */
-#define getPrePayIdUrl  @"https://api.mch.weixin.qq.com/pay/unifiedorder"
+ 
 
 #define url(info)    [NSString stringWithFormat:@"https://api.baibaobike.com/%@",info]
 #define Ip           @"https://api.baibaobike.com/"

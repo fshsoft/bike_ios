@@ -9,9 +9,14 @@
 #import <Foundation/Foundation.h>
 
 @interface PaySelect : NSObject
-- (void)weChatPayButtonAction;
--(void)Order;
-- (void)getWeChatPayWithOrderName:(NSString *)name
-                            price:(NSString*)price;
-- (void)doAlipayPayAppID:(NSString *)appID  Price:(NSString *)price orderNum:(NSString *)ordernum orderTime:(NSString *)ordertime PrivateKey:(NSString *)privateKey Body:(NSString *)body subJect:(NSString *)subject;
+ 
+
++(void)aliPay:(NSString *)order;
++(void)WxpayappID:(NSString * )appid
+        partnerID:(NSString *)partnertid
+         noncestr:(NSString *)noncestr
+         package :(NSString *)package
+       timestamp :(NSString *)timestamp
+         prepayid:(NSString *)prepayid
+             sign:(NSString *)sign;
 @end

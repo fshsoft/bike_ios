@@ -46,7 +46,7 @@
                        range:NSMakeRange(textStr.length-5, 5)];
     self.pormot.title.attributedText =attribtStr;
     
-    [self.pormot.cheakBtn setTitle:@"¥199" forState:UIControlStateNormal];
+    [self.pormot.cheakBtn setTitle:@"¥99" forState:UIControlStateNormal];
     UIImageView *line =[[UIImageView alloc]initWithFrame:CGRectMake(0, self.pormot.height+14, SCREEN_WIDTH, 1)];
     line.backgroundColor =gary170;
     [self.pormot addSubview:line];

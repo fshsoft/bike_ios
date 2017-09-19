@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12118" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -46,11 +46,21 @@
                         <action selector="cheakSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="Rnj-x2-rAw"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lKD-Wr-x6b">
+                    <rect key="frame" x="0.0" y="0.0" width="387" height="142"/>
+                    <connections>
+                        <action selector="cheakSelect:" destination="iN0-l3-epB" eventType="touchUpInside" id="hx9-cl-VDw"/>
+                    </connections>
+                </button>
             </subviews>
             <constraints>
+                <constraint firstItem="lKD-Wr-x6b" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="2QJ-hE-L7j"/>
                 <constraint firstItem="z6g-WT-gBN" firstAttribute="leading" secondItem="Meh-Oo-QeV" secondAttribute="trailing" constant="10" id="9Ux-rS-PUk"/>
+                <constraint firstAttribute="bottom" secondItem="lKD-Wr-x6b" secondAttribute="bottom" id="ANy-I3-2P3"/>
                 <constraint firstAttribute="trailing" secondItem="di8-1K-VOy" secondAttribute="trailing" constant="20" id="C2I-Wb-d46"/>
+                <constraint firstItem="lKD-Wr-x6b" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="FcK-mF-uJv"/>
                 <constraint firstItem="di8-1K-VOy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="G1q-gb-gal"/>
+                <constraint firstAttribute="trailing" secondItem="lKD-Wr-x6b" secondAttribute="trailing" id="H5E-cC-azi"/>
                 <constraint firstItem="z6g-WT-gBN" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="KGe-YX-QPm"/>
                 <constraint firstItem="Meh-Oo-QeV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="OWk-Mi-4Oe"/>
                 <constraint firstItem="Meh-Oo-QeV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="qVP-ly-wkn"/>
@@ -61,7 +71,7 @@
                 <outlet property="img" destination="Meh-Oo-QeV" id="Uvo-67-wjc"/>
                 <outlet property="title" destination="z6g-WT-gBN" id="JwH-xt-Biq"/>
             </connections>
-            <point key="canvasLocation" x="-182" y="-201"/>
+            <point key="canvasLocation" x="-207" y="-211"/>
         </view>
     </objects>
 </document>

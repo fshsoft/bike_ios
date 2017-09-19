@@ -26,7 +26,7 @@
 @property  (nonatomic,copy)NSString  * out_trade_no;
 @property  (nonatomic,copy)NSString  * total_amout;
 @property  (nonatomic,copy)NSString  * private_key;
-@property  (nonatomic,copy)NSString  * appId;
+//@property  (nonatomic,copy)NSString  * appId;
 @property  (nonatomic,copy)NSString  * orderid;
 @property  (nonatomic,copy)NSString  * subject;
 @property  (nonatomic,copy)NSString  * balance;
@@ -37,7 +37,15 @@
 @property  (nonatomic,copy)NSString  * nickname;
 @property  (nonatomic,copy)NSString  * idno;
 @property  (nonatomic,copy)NSString  * is_paydeposit;
-@property  (nonatomic,strong) NSArray   * bikes;
-@property  (nonatomic,copy)   NSString  * islogin;
+@property  (nonatomic,strong)NSArray   * bikes;
+@property  (nonatomic,copy)  NSString  * islogin;
 @property  (nonatomic,copy)NSString  *deposit ;
+@property  (nonatomic,copy)NSString  * order;
+@property  (nonatomic,copy)NSString  *appid  ;
+@property  (nonatomic,copy)NSString  *noncestr  ;
+@property  (nonatomic,copy)NSString  *package  ;
+@property  (nonatomic,copy)NSString  *partnerid  ;
+@property  (nonatomic,copy)NSString  *prepayid  ;
+@property  (nonatomic,copy)NSString  *sign  ;
+@property  (nonatomic,copy)NSString  *timestamp  ;
 @end

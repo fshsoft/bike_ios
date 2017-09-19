@@ -18,12 +18,14 @@
 @property (nonatomic,strong)payCateView    *pormot;
 @property (nonatomic,strong)payCateView    *Wx;
 @property (nonatomic,strong)payCateView    *Alipay;
+@property (nonatomic,assign)int type;
 @end
 
 @implementation paymentVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.type=1;
     [self setNaivTitle:@"押金充值"];
     [self setTopview ];
     [self setSelectView];
@@ -58,7 +60,7 @@
                        range:NSMakeRange(textStr.length-5, 5)];
     self.pormot.title.attributedText =attribtStr;
     
-    [self.pormot.cheakBtn setTitle:@"¥199" forState:UIControlStateNormal];
+    [self.pormot.cheakBtn setTitle:@"¥99" forState:UIControlStateNormal];
     UIImageView *line =[[UIImageView alloc]initWithFrame:CGRectMake(0, self.pormot.height-1, SCREEN_WIDTH, 1)];
     line.backgroundColor =gary238;
     [self.pormot addSubview:line];
@@ -66,7 +68,7 @@
     self.Wx = [[NSBundle mainBundle]loadNibNamed:@"payCate" owner:self options:nil].lastObject;
     self.Wx.frame = CGRectMake(0, self.pormot.bottom, SCREEN_WIDTH, 50);
     self.Wx.title.text=@"微信支付";
-     [self.Wx.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
+     [self.Wx.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
     self.Wx.img.image =Img(@"WeChatpay");
     [self.view addSubview:self.Wx];
    
@@ -74,7 +76,7 @@
     self.Alipay.frame = CGRectMake(0, self.Wx.bottom, SCREEN_WIDTH, 50);
     self.Alipay.title.text=@"支付宝支付";
     
-    [self.Alipay.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
+    [self.Alipay.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
 
     self.Alipay.img.image =Img(@"alipay");
     [self.view addSubview:self.Alipay];
@@ -83,14 +85,15 @@
     __weak paymentVC *weakself =self;
     [self.Alipay addSubview:linebottom];
     self.Wx.cheakBlock = ^{
-        Toast(@"暂未开通");
-        //[weakself.Wx.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
-        //[weakself.Alipay.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
+        weakself.type=1;
+        [weakself.Wx.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
+        [weakself.Alipay.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
         
     };
     self.Alipay.cheakBlock = ^{
-        //[weakself.Wx.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
-        //[weakself.Alipay.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
+        weakself.type=2;
+        [weakself.Wx.cheakBtn setImage:Img(@"choosepay_wei") forState:UIControlStateNormal];
+        [weakself.Alipay.cheakBtn setImage:Img(@"chooseplay") forState:UIControlStateNormal];
     };
     
 
@@ -114,29 +117,54 @@
 }
 -(void)payStyle{
     
-   
+    if (self.type==1){
+        [self payWX];
+    }else{
+        [self payALI];
+    }
+    
+
+}
+-(void)payALI{
     [self requestType:HttpRequestTypePost
                   url:nil
-           parameters:@{ @"action":      @"getAlipayOrder",
-                         @"total": @"199",
-                         @"type":@"1"}
+           parameters:@{@"action":      @"aliPay",
+                        @"total": @"99",
+                        @"type": @"1"}
          successBlock:^(BaseModel *response) {
+             
              if([response.errorno isEqualToString:@"0"]){
                  appInfoModel *appmodel= response.data;
-                 PaySelect *a =[[PaySelect alloc]init];
-                 [a doAlipayPayAppID:appmodel.appId
-                               Price:@"0.01"
-                            orderNum:appmodel.out_trade_no
-                           orderTime:appmodel.createtime
-                          PrivateKey:appmodel.private_key
-                                Body:appmodel.body
-                             subJect:appmodel.subject];
+                 [PaySelect aliPay:appmodel.order];
              }
-
+             
          } failureBlock:^(NSError *error) {
              
          }];
-
+    
+}
+-(void)payWX{
+    [self requestType:HttpRequestTypePost
+                  url:nil
+           parameters:@{@"action":      @"wxPay",
+                        @"total": @"99",
+                        @"type": @"1"}
+         successBlock:^(BaseModel *response) {
+             
+             if([response.errorno isEqualToString:@"0"]){
+                 appInfoModel *appmodel= response.data;
+                 [PaySelect WxpayappID:appmodel.appid
+                             partnerID:appmodel.partnerid
+                              noncestr:appmodel.noncestr
+                               package:appmodel.package
+                             timestamp:appmodel.timestamp
+                              prepayid:appmodel.prepayid
+                                  sign:appmodel.sign];
+             }
+             
+         } failureBlock:^(NSError *error) {
+             
+         }];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -197,8 +225,30 @@
     
     if ([notification.object isEqualToString:@"0"])
     {
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示信息" message:@"支付成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
-        [alertView show];
+        [self requestType:HttpRequestTypePost
+                      url:nil
+               parameters:@{@"action":@"userStatus"}
+             successBlock:^(BaseModel *response) {
+                 
+                 if([response.errorno intValue]==0){
+                     if([response.data.is_verified intValue]==1){
+                         [self.navigationController popToRootViewControllerAnimated:YES];
+                     }else{
+                         certifyPersonInfoVC *vc =[[certifyPersonInfoVC alloc]init];
+                         [DB putString:@"1"   withId: @"money"  intoTable:tabName];
+                         [self absPushViewController:vc animated:YES];
+                         
+                     }
+                     
+                     
+                 }
+             } failureBlock:^(NSError *error) {
+                 
+             }];
+        
+
+        /*UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提示信息" message:@"支付成功" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil, nil];
+        [alertView show];*/
     }
     else if([notification.object isEqualToString:@"-2"])
     {
