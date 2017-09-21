@@ -133,7 +133,6 @@
     
 }
 
-
 - (void)viewDidLoad {
     
     [self cheakToken];
@@ -176,7 +175,7 @@
     self.startAnnotation.coordinate =centerAnnotaion.coordinate;
     [self.mapView addAnnotation:centerAnnotaion];
     [self.mapView showAnnotations:@[centerAnnotaion] animated:YES];
-        [self local];
+    [self local];
 }
 
 #pragma mark 初始化地图所需数据
@@ -585,7 +584,7 @@
         [annotationView.customCalloutView addSubview:vc];
     }
     annotationView.image =Img(@"bike");
-    //    annotationView.canShowCallout = YES;
+    //annotationView.canShowCallout = YES;
     return annotationView;
     
 }
@@ -910,7 +909,7 @@
         //解析response获取地址描述，具体解析见 Demo
         CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(request.location.latitude, request.location.longitude);
         ReGeocodeAnnotation *reGeocodeAnnotation = [[ReGeocodeAnnotation alloc] initWithCoordinate:coordinate reGeocode:response.regeocode];
-        NSLog(@"%@==%@",reGeocodeAnnotation.title ,reGeocodeAnnotation.subtitle);
+        //NSLog(@"%@==%@",reGeocodeAnnotation.title ,reGeocodeAnnotation.subtitle);
         self.topCheakView.LocalInfoLab.text =reGeocodeAnnotation.title ;
 
     }
@@ -946,7 +945,6 @@
     }
 }
 
-
 #pragma mark token获取
 -(void)cheakToken{
     
@@ -965,10 +963,10 @@
     NSString *strEnRes = [CusMD5 md5String:UDID];
     NSLog(@"%@",UDID);
     [RequestManager requestWithType:HttpRequestTypePost
-                          urlString:@"http://ying.baibaobike.com/authed/register.html"
+                          urlString:@"https://ying.baibaobike.com/authed/register.html"
                          parameters:@{@"imei":UDID,@"code":strEnRes}
                        successBlock:^(id response) {
-                           NSLog(@"%@",response);
+                           //NSLog(@"%@",response);
                            BaseModel  * model = [BaseModel yy_modelWithJSON: response];
                            if([model.errorno isEqualToString:@"0"]){
                                appInfoModel    * appinfomodel = model.data;
@@ -1006,7 +1004,7 @@
        
        }
                        successBlock:^(id response) {
-                           NSLog(@"%@",response);
+                           //NSLog(@"%@",response);
                            if([[response objectForKey:@"errno"] isEqualToString:@"0"]){
                                
                                [DB putString:[[response objectForKey:@"data"] objectForKey:@"authorize_code"]withId:@"authorize_code" intoTable:tabName];
@@ -1037,7 +1035,7 @@
                                       @"state"         :[DB getStringById:@"seed_secret" fromTable:tabName]
                                       }
                        successBlock:^(id response) {
-                           NSLog(@"%@",response);
+                          // NSLog(@"%@",response);
                            if([[response objectForKey:@"errno"] isEqualToString:@"0"]){
                                
                                BaseModel    * model    = [BaseModel yy_modelWithJSON:response];
@@ -1062,5 +1060,27 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated  ];
     [self cheakToken];
+    if(refressh_access_token){
+        [self requestCheakNOtify];
+    }
+}
+-(void)requestCheakNOtify{
+    [self requestType:HttpRequestTypePost url:nil
+           parameters:@{
+                        @"action":@"latestNotify"
+                        }
+         successBlock:^(BaseModel *response) {
+             if (response.errorno){
+            appInfoModel *model = response.data;
+            if([model.scene intValue]==1001){
+NSLog(@"model.cost=%@model.duration=%@model.display=%@model.scene=%@",model.cost,model.duration,model.display,model.scene);
+                     [[ [UIAlertView alloc]initWithTitle:@"提示信息" message:[NSString stringWithFormat:@"费用:%@骑行时间:%@",model.cost,model.duration]  delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+            }else if([model.scene intValue]==1000){
+                 [[ [UIAlertView alloc]initWithTitle:@"提示信息" message:@"已经可以开始骑行"  delegate:self cancelButtonTitle:@"确认" otherButtonTitles:nil, nil] show];
+            }
+             }
+         } failureBlock:^(NSError *error) {
+             
+         }];
 }
 @end

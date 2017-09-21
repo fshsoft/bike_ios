@@ -38,7 +38,7 @@
 @property  (nonatomic,copy)NSString  * idno;
 @property  (nonatomic,copy)NSString  * is_paydeposit;
 @property  (nonatomic,strong)NSArray   * bikes;
-@property  (nonatomic,copy)  NSString  * islogin;
+@property  (nonatomic,copy) NSString  * islogin;
 @property  (nonatomic,copy)NSString  *deposit ;
 @property  (nonatomic,copy)NSString  * order;
 @property  (nonatomic,copy)NSString  *appid  ;
@@ -48,4 +48,8 @@
 @property  (nonatomic,copy)NSString  *prepayid  ;
 @property  (nonatomic,copy)NSString  *sign  ;
 @property  (nonatomic,copy)NSString  *timestamp  ;
+@property  (nonatomic,copy)NSString  *cost;
+@property  (nonatomic,copy)NSString  *display;
+@property  (nonatomic,copy)NSString  *duration ;
+@property  (nonatomic,copy)NSString  *scene ;
 @end

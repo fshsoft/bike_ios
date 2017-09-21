@@ -9,6 +9,6 @@
 //#import "XYKeychain.h"
 @interface HomeVC : XYBaseVC
 
-
+-(void)requestCheakNOtify;
 @end
 

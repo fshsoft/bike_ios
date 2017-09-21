@@ -271,7 +271,7 @@ static NSMutableArray *tasks;
             
             if (successBlock)
             {
-                NSLog(@"responseObject=%@",responseObject);
+               // NSLog(@"responseObject=%@",responseObject);
                         successBlock(responseObject);
             }
             

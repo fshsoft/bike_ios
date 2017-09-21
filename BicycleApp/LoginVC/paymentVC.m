@@ -129,7 +129,7 @@
     [self requestType:HttpRequestTypePost
                   url:nil
            parameters:@{@"action":      @"aliPay",
-                        @"total": @"99",
+                        @"total": @"0.01",
                         @"type": @"1"}
          successBlock:^(BaseModel *response) {
              
@@ -147,7 +147,7 @@
     [self requestType:HttpRequestTypePost
                   url:nil
            parameters:@{@"action":      @"wxPay",
-                        @"total": @"99",
+                        @"total": @"0.01",
                         @"type": @"1"}
          successBlock:^(BaseModel *response) {
              

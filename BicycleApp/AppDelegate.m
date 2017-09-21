@@ -22,7 +22,9 @@
 #ifdef NSFoundationVersionNumber_iOS_9_x_Max
 #import <UserNotifications/UserNotifications.h>
 #endif
- @interface AppDelegate ()<WXApiDelegate ,JPUSHRegisterDelegate>
+@interface AppDelegate ()<WXApiDelegate ,JPUSHRegisterDelegate>{
+    HomeVC * home;
+}
 
 @end
 
@@ -39,11 +41,15 @@
     [self setzShearInfo];
     [self setRootView];
     [self setLaunchfirst];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkDidReceiveMessage:) name:kJPFNetworkDidReceiveMessageNotification object:nil];
     
+
     return YES;
     
 }
-
+- (void)networkDidReceiveMessage:(NSNotification *)notification{
+    
+}
 -(void)setLaunchfirst{
    [LaunchIntroductionView sharedWithImages:@[@"page01",@"page02",@"page03",@"page04"] buttonImage:nil buttonFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
 
@@ -64,11 +70,11 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
      self.window.backgroundColor = [UIColor whiteColor];
-     HomeVC *vic =[[HomeVC alloc]init];
-     NavigationVC  *niv = [[NavigationVC  alloc]initWithRootViewController:vic];
+    home =[[HomeVC alloc]init];
+     NavigationVC  *niv = [[NavigationVC  alloc]initWithRootViewController:home ];
      self.window.rootViewController =niv;
      [self.window makeKeyAndVisible];
-
+  
     }
 
 -(void)setGaodeMapInfo{
@@ -178,6 +184,8 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 - (void)application:(UIApplication *)application
 didRegisterUserNotificationSettings:
 (UIUserNotificationSettings *)notificationSettings {
+    
+    
 }
 
 // Called when your app has been activated by the user selecting an action from
@@ -189,6 +197,7 @@ didRegisterUserNotificationSettings:
 handleActionWithIdentifier:(NSString *)identifier
 forLocalNotification:(UILocalNotification *)notification
   completionHandler:(void (^)())completionHandler {
+
 }
 
 // Called when your app has been activated by the user selecting an action from
@@ -200,6 +209,7 @@ forLocalNotification:(UILocalNotification *)notification
 handleActionWithIdentifier:(NSString *)identifier
 forRemoteNotification:(NSDictionary *)userInfo
   completionHandler:(void (^)())completionHandler {
+    
 }
 #endif
 
@@ -208,6 +218,8 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     [JPUSHService handleRemoteNotification:userInfo];
     NSLog(@"iOS6及以下系统，收到通知:%@", [self logDic:userInfo]);
    // [rootViewController addNotificationCount];
+     [home requestCheakNOtify];
+    
 }
 
 - (void)application:(UIApplication *)application
@@ -218,6 +230,7 @@ fetchCompletionHandler:
     NSLog(@"iOS7及以上系统，收到通知:%@", [self logDic:userInfo]);
     
     if ([[UIDevice currentDevice].systemVersion floatValue]<10.0 || application.applicationState>0) {
+         [home requestCheakNOtify];
        // [rootViewController addNotificationCount];
     }
     
@@ -246,6 +259,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
         NSLog(@"iOS10 前台收到远程通知:%@", [self logDic:userInfo]);
         
       //  [rootViewController addNotificationCount];
+  [home requestCheakNOtify];
     }
     else {
         // 判断为本地通知
@@ -270,7 +284,7 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
         [JPUSHService handleRemoteNotification:userInfo];
         NSLog(@"iOS10 收到远程通知:%@", [self logDic:userInfo]);
        // [rootViewController addNotificationCount];
-        
+        [home requestCheakNOtify];
     }
     else {
         // 判断为本地通知
@@ -409,5 +423,5 @@ didReceiveLocalNotification:(UILocalNotification *)notification {
     }
 }
 
-  
+
 @end

@@ -53,6 +53,8 @@
 		0E23231D1ED1C4FC007FF580 /* MessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E23231B1ED1C4FC007FF580 /* MessageCell.m */; };
 		0E23231E1ED1C4FC007FF580 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E23231C1ED1C4FC007FF580 /* MessageCell.xib */; };
 		0E26EDDB1EF375950063A5CE /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E26EDDA1EF375950063A5CE /* BaseModel.m */; };
+		0E2B3A001F73562D0016B08C /* costVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E2B39FE1F73562D0016B08C /* costVC.m */; };
+		0E2B3A011F73562D0016B08C /* costVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E2B39FF1F73562D0016B08C /* costVC.xib */; };
 		0E36BBB71ED030040022E3AD /* CheakNumberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E36BBB61ED030040022E3AD /* CheakNumberVC.m */; };
 		0E36BBB91ED06F4A0022E3AD /* SportDetail.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E36BBB81ED06F4A0022E3AD /* SportDetail.xib */; };
 		0E36BBBC1ED06F6E0022E3AD /* SportDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E36BBBB1ED06F6E0022E3AD /* SportDetailView.m */; };
@@ -442,6 +444,9 @@
 		0E23231C1ED1C4FC007FF580 /* MessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MessageCell.xib; sourceTree = "<group>"; };
 		0E26EDD91EF375950063A5CE /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
 		0E26EDDA1EF375950063A5CE /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		0E2B39FD1F73562D0016B08C /* costVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = costVC.h; sourceTree = "<group>"; };
+		0E2B39FE1F73562D0016B08C /* costVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = costVC.m; sourceTree = "<group>"; };
+		0E2B39FF1F73562D0016B08C /* costVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = costVC.xib; sourceTree = "<group>"; };
 		0E36BBB51ED030040022E3AD /* CheakNumberVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CheakNumberVC.h; sourceTree = "<group>"; };
 		0E36BBB61ED030040022E3AD /* CheakNumberVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CheakNumberVC.m; sourceTree = "<group>"; };
 		0E36BBB81ED06F4A0022E3AD /* SportDetail.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SportDetail.xib; path = ../../LoginVC/SportDetail.xib; sourceTree = "<group>"; };
@@ -1197,6 +1202,9 @@
 			children = (
 				0E7780081EC561FD00539E18 /* HomeVC.h */,
 				0E7780091EC561FD00539E18 /* HomeVC.m */,
+				0E2B39FD1F73562D0016B08C /* costVC.h */,
+				0E2B39FE1F73562D0016B08C /* costVC.m */,
+				0E2B39FF1F73562D0016B08C /* costVC.xib */,
 				0E21630D1F384C0700DB1AD2 /* JSCenterAnnotation.h */,
 				0E21630E1F384C0700DB1AD2 /* JSCenterAnnotation.m */,
 				0E21630F1F384C0700DB1AD2 /* ZXNLocationGaoDeManager.h */,
@@ -2237,6 +2245,7 @@
 				0EBB1BEA1ED49E92009BC5FF /* youhuijuan@2x.png in Resources */,
 				0EEF314E1F386E3F000A4E1A /* 60.png in Resources */,
 				0EEF31DE1F386FF0000A4E1A /* service@3x.png in Resources */,
+				0E2B3A011F73562D0016B08C /* costVC.xib in Resources */,
 				0EEF31EA1F386FF0000A4E1A /* ziliaoxg@3x.png in Resources */,
 				0EBB1C651ED526B8009BC5FF /* choosepay_wei@2x.png in Resources */,
 				0ECB41BB1ECEAA2400396A20 /* home_tips@2x.png in Resources */,
@@ -2419,6 +2428,7 @@
 				0E77810C1EC561FD00539E18 /* CheakViewController.m in Sources */,
 				0E7781581EC561FE00539E18 /* UIImage+CompressImage.m in Sources */,
 				0E7781501EC561FE00539E18 /* UIButton+AFNetworking.m in Sources */,
+				0E2B3A001F73562D0016B08C /* costVC.m in Sources */,
 				0E1E47411F1A66B4000B5671 /* cheakInfoVC.m in Sources */,
 				0ECB416A1ECC6F2D00396A20 /* GeocodeAnnotation.m in Sources */,
 				0E3B552D1F0A14C200BF38E8 /* ZKUDID.m in Sources */,

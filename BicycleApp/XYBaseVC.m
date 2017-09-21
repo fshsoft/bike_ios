@@ -409,7 +409,7 @@ NSString *const kName = @"Alun Chen";
     
     
      [RequestManager requestWithType:HttpRequestTypePost
-                           urlString:@"http://ying.baibaobike.com/authed/register.html"
+                           urlString:@"https://ying.baibaobike.com/authed/register.html"
                           parameters:@{@"imei":UDID,@"code":strEnRes}
                         successBlock:^(id response) {
                             NSLog(@"%@",response);
