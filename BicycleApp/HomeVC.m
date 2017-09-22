@@ -46,7 +46,7 @@
 #import "listInfoModel.h"
 #import "JSCenterAnnotation.h"
 #import "ZXNLocationGaoDeManager.h"
-
+#import "WalletMoneyVC.h"
 
 @interface HomeVC ()<AMapSearchDelegate,MAMapViewDelegate,AMapLocationManagerDelegate,AMapGeoFenceManagerDelegate>
 {
@@ -107,6 +107,7 @@
 @property (nonatomic,assign) int loadStatus;
 @property (nonatomic,assign) int moneyStatus;
 @property (nonatomic,assign) int certifyStatus;
+@property (nonatomic,assign) float moneyNum;
 @end
 
 @implementation HomeVC
@@ -767,7 +768,13 @@
                     [selfblock absPushViewController:vc animated:YES];
 
                 }else{
-                    [selfblock jumpCheakViewConroller];
+                    if([[DB getStringById:@"balance" fromTable:tabName] floatValue]>0){
+                        [selfblock jumpCheakViewConroller];
+                    }else{
+                        WalletMoneyVC *vc = [[WalletMoneyVC  alloc]init];
+                        [self.navigationController pushViewController:vc animated:YES];
+  
+                    }
                 }
             }
         }
@@ -879,7 +886,7 @@
     self.topCheakView.cheakBlock = ^{
     };
     self.topCheakView.frame = CGRectMake(0, 64, SCREEN_WIDTH, 170);
-    __weak HomeVC *weakself =self;
+   // __weak HomeVC *weakself =self;
 //    self.topCheakView.cheakBlock = ^{
 //        LoginVC *loginVC = [[LoginVC alloc]init];
 //        [weakself  absPushViewController:loginVC animated:YES];
@@ -891,7 +898,11 @@
 }
 
 - (void)mapViewDidFailLoadingMap:(MAMapView *)mapView withError:(NSError *)error{
-    UIAlertView *ale =[ [UIAlertView alloc]initWithTitle:nil message:@"地图加载失败请检查网络后重试" delegate:self cancelButtonTitle:nil otherButtonTitles:@"确认", nil];
+    UIAlertView *ale =[ [UIAlertView alloc]initWithTitle:nil
+                                                 message:@"地图加载失败请检查网络后重试"
+                                                delegate:self
+                                       cancelButtonTitle:nil
+                                       otherButtonTitles:@"确认", nil];
     [ale show];
 
 }

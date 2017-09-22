@@ -189,6 +189,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
+    [self sendRequest];
     if(![[DB getStringById:@"money" fromTable:tabName] isEqualToString:@"1"]){
             self.bottomView.tag=1;
     }else{
@@ -197,7 +198,7 @@
    }else{
           [self.bottomView  removeFromSuperview ];
           [self.viewInfoCheak addSubview:self.SbottomView];
-       [self sendRequest];
+       
    }
         }
 
@@ -227,7 +228,7 @@
          successBlock:^(BaseModel *response) {
          
              appInfoModel * appInfo = response.data;
-             // NSLog(@"%@==%@",appInfo.nickname,appInfo.truename);
+              NSLog(@"%@==%@",appInfo.nickname,appInfo.truename);
              [DB putString: appInfo.nickname withId:@"name" intoTable:tabName];
              [DB putString: appInfo.truename withId:@"truename" intoTable:tabName];
              [DB putString: appInfo.balance withId:@"balance" intoTable:tabName];

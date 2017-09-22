@@ -19,11 +19,13 @@
 @property (nonatomic,strong)payCateView    *Wx;
 @property (nonatomic,strong)payCateView    *Alipay;
 @property (nonatomic,assign)int type;
+@property (nonatomic,copy)   NSString     * money;
 @end
 
 @implementation paymentVC
 
 - (void)viewDidLoad {
+
     [super viewDidLoad];
     self.type=1;
     [self setNaivTitle:@"押金充值"];
@@ -60,7 +62,7 @@
                        range:NSMakeRange(textStr.length-5, 5)];
     self.pormot.title.attributedText =attribtStr;
     
-    [self.pormot.cheakBtn setTitle:@"¥99" forState:UIControlStateNormal];
+    [self.pormot.cheakBtn setTitle: @"¥99" forState:UIControlStateNormal];
     UIImageView *line =[[UIImageView alloc]initWithFrame:CGRectMake(0, self.pormot.height-1, SCREEN_WIDTH, 1)];
     line.backgroundColor =gary238;
     [self.pormot addSubview:line];
@@ -128,9 +130,9 @@
 -(void)payALI{
     [self requestType:HttpRequestTypePost
                   url:nil
-           parameters:@{@"action":      @"aliPay",
-                        @"total": @"0.01",
-                        @"type": @"1"}
+           parameters:@{@"action" :      @"aliPay",
+                        @"total"  : self.money,
+                        @"type"   : @"1"}
          successBlock:^(BaseModel *response) {
              
              if([response.errorno isEqualToString:@"0"]){
@@ -146,9 +148,9 @@
 -(void)payWX{
     [self requestType:HttpRequestTypePost
                   url:nil
-           parameters:@{@"action":      @"wxPay",
-                        @"total": @"0.01",
-                        @"type": @"1"}
+           parameters:@{@"action": @"wxPay",
+                        @"total" : self.money,
+                        @"type"  : @"1"}
          successBlock:^(BaseModel *response) {
              
              if([response.errorno isEqualToString:@"0"]){
@@ -173,6 +175,36 @@
     //监听通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderPayResult:) name:@"WXPay" object:nil];
      [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderalPayResult:) name:@"alPay" object:nil];
+    
+
+        [self requestType:HttpRequestTypePost
+                      url:nil
+               parameters:@{@"action":@"userStatus"}
+             successBlock:^(BaseModel *response) {
+                 
+                 if([response.errorno intValue]==0){
+                     if([response.data.is_verified intValue]==1){
+                         [DB putString: @"1"  withId: @"certify"  intoTable:tabName];
+                         
+                     }else{
+                         [DB deleteObjectById:@"certify" fromTable:tabName];
+                     }
+                     if([response.data.is_paydeposit intValue] ==1){
+                         [DB putString:@"1"   withId: @"money"  intoTable:tabName];
+                     }else{
+                         [DB deleteObjectById:@"money" fromTable:tabName];
+                     }
+                    [self.pormot.cheakBtn setTitle:[NSString stringWithFormat:@"¥%@",response.data.deposit] forState:UIControlStateNormal];
+                     self.money   = response.data.deposit;
+                     [DB putString:response.data.balance withId:@"balance" intoTable:tabName];
+                     [DB putString:response.data.deposit withId:@"deposit" intoTable:tabName];
+                 }
+             } failureBlock:^(NSError *error) {
+                 
+             }];
+
+
+    
     
 }
 - (void)getOrderalPayResult:(NSNotification *)notification

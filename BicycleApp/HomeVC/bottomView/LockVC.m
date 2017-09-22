@@ -180,7 +180,7 @@
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]){
         //  [  setImage:info[UIImagePickerControllerEditedImage] forState:UIControlStateNormal];
         //如果是图片
-        UIImage * image = info[UIImagePickerControllerEditedImage];
+       // UIImage * image = info[UIImagePickerControllerEditedImage];
        // [self.stopvc.photoSelect setImage:image forState:UIControlStateNormal];
         //压缩图片
         //NSData *fileData = UIImageJPEGRepresentation(image, 1.0);

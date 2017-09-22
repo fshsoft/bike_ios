@@ -520,6 +520,8 @@ NSString *const kName = @"Alun Chen";
                  }else{
                      [DB deleteObjectById:@"money" fromTable:tabName];
                  }
+                 [DB putString:response.data.balance withId:@"balance" intoTable:tabName];
+                 [DB putString:response.data.deposit withId:@"deposit" intoTable:tabName];
              }
          } failureBlock:^(NSError *error) {
              

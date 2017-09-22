@@ -392,7 +392,7 @@
    // WebViewController *VC = [[WebViewController alloc] init];
    // VC.URLString = openURLString;
     //此处不要直接取keyWindow
-    UIViewController* rootVC = [[UIApplication sharedApplication].delegate window].rootViewController;
+    //UIViewController* rootVC = [[UIApplication sharedApplication].delegate window].rootViewController;
     //[rootVC.myNavigationController pushViewController:VC animated:YES];
 }
 /**
