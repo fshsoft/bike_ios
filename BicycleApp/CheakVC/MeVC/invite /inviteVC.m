@@ -52,8 +52,8 @@
   
     message.mediaType = JSHARELink;
     message.url = @"http://xiaoying.shnow.cn";
-    message.text = @"欢迎使用小樱单车";
-    message.title = @"小樱单车期待你的加入";
+    message.text = @"欢迎使用乐享单车";
+    message.title = @"乐享单车期待你的加入";
     message.platform = platform;
    // NSString *imageURL = @"http://img.pconline.com.cn/images/upload/upc/tx/wallpaper/1308/02/c0/24056523_1375430477597.jpg";
     NSData *imageData = UIImageJPEGRepresentation(Img(@"logo"),1);

@@ -51,7 +51,7 @@
     
 }
 -(void)setLaunchfirst{
-   [LaunchIntroductionView sharedWithImages:@[@"page01",@"page02",@"page03",@"page04"] buttonImage:nil buttonFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
+   [LaunchIntroductionView sharedWithImages:@[@"01",@"page02",@"page03",@"04"] buttonImage:nil buttonFrame:CGRectMake(0, 0, kScreen_width, kScreen_height)];
 
 }
 -(void)setTabifno{

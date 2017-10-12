@@ -71,13 +71,13 @@
         if([DB getStringById:@"name" fromTable:tabName]){
             name = [DB getStringById:@"name" fromTable:tabName];
         }else{
-            name=@"小樱";
+            name=@"乐享";
         }
         NSString *imagePath = [path stringByAppendingString:@"/pic.png"];
         if([DB getStringById:@"truename" fromTable:tabName]){
             IDname = [DB getStringById:@"truename" fromTable:tabName];
         }else{
-            IDname =@"小樱单车";
+            IDname =@"乐享单车";
         }
         if([DB getStringById:@"phone" fromTable:tabName]){
             phone =[DB getStringById:@"phone" fromTable:tabName];

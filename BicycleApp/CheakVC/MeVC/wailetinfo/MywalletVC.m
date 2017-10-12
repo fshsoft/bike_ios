@@ -120,7 +120,7 @@
     labPromort.numberOfLines=0;
     labPromort.font = FontSize(12);
     labPromort.textColor =gary170;
-    labPromort.text = @"押金会立即退回,退款后您将不能使用小樱共享单车，确认要进行此退款吗？";
+    labPromort.text = @"押金会立即退回,退款后您将不能使用乐享共享单车，确认要进行此退款吗？";
     
     UIButton * btnleft = [[UIButton alloc]initWithFrame:CGRectMake(14,labPromort.bottom+10,(vic.width-34)/2.0, 30)];
     [vic addSubview:btnleft];

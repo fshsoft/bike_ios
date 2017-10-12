@@ -105,7 +105,7 @@
     lab.font =FontSize(13);
     lab.numberOfLines = 0;
     lab.textColor =gary153;
-    lab.text =@"•   全国百万小樱任你骑 \n•  押金随心退,安全秒到账\n•  完成注册领最高30天免费骑行大礼包";
+    lab.text =@"•   全国百万乐享任你骑 \n•  押金随心退,安全秒到账\n•  完成注册领最高30天免费骑行大礼包";
     [self.view addSubview:lab];
     
     UIButton *btnPrice = [[UIButton alloc]initWithFrame:CGRectMake(10, SCREENH_HEIGHT-50, SCREEN_WIDTH-20, 40)];
