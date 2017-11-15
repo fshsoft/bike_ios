@@ -50,39 +50,39 @@
     [self setLightStatusButton];
 }
 -(void)getScanDataString:(NSString*)scanDataString{
-    
-    
-    [self requestType:HttpRequestTypePost
-                  url:nil
-           parameters:@{ @"action":      @"scanCode",
-                         @"sn":scanDataString
-}
-         successBlock:^(BaseModel *response) {
-             
-             if([response.errorno   isEqualToString:@"0"]){
-                 CkeakDetaitleVC *vc =[[CkeakDetaitleVC alloc]init];
-                 [self.navigationController pushViewController:vc  animated:YES];
-             }else if([response.errorno  isEqualToString:@"40020"]){
-                 
-                 UIAlertController  * alra = [UIAlertController  alertControllerWithTitle:@"友情提示" message:response.errmsg preferredStyle:UIAlertControllerStyleAlert];
-                 UIAlertAction * select = [UIAlertAction actionWithTitle:@"充值" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-                     WalletMoneyVC  *vc  = [[WalletMoneyVC alloc]init];
-                     [self.navigationController pushViewController:vc animated:YES];
-                 } ];
-                 UIAlertAction * unselect = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                     
-                 } ];
-                 [alra addAction:select];
-                 [alra addAction:unselect];
-                 [self presentViewController:alra animated:YES completion:nil];
-             }
-             else{
-                 Toast(response.errmsg);
-             }
-
-         } failureBlock:^(NSError *error) {
-              [self.scanV startRunning];
-         }];
+    [self.blueToothdelegate  scanBlueTooth:scanDataString];
+   [self.navigationController popViewControllerAnimated:YES];
+//    [self requestType:HttpRequestTypePost
+//                  url:nil
+//           parameters:@{ @"action":      @"scanCode",
+//                         @"sn":scanDataString
+//}
+//         successBlock:^(BaseModel *response) {
+//
+//             if([response.errorno   isEqualToString:@"0"]){
+//                 CkeakDetaitleVC *vc =[[CkeakDetaitleVC alloc]init];
+//                 [self.navigationController pushViewController:vc  animated:YES];
+//             }else if([response.errorno  isEqualToString:@"40020"]){
+//
+//                 UIAlertController  * alra = [UIAlertController  alertControllerWithTitle:@"友情提示" message:response.errmsg preferredStyle:UIAlertControllerStyleAlert];
+//                 UIAlertAction * select = [UIAlertAction actionWithTitle:@"充值" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//                     WalletMoneyVC  *vc  = [[WalletMoneyVC alloc]init];
+//                     [self.navigationController pushViewController:vc animated:YES];
+//                 } ];
+//                 UIAlertAction * unselect = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//
+//                 } ];
+//                 [alra addAction:select];
+//                 [alra addAction:unselect];
+//                 [self presentViewController:alra animated:YES completion:nil];
+//             }
+//             else{
+//                 Toast(response.errmsg);
+//             }
+//
+//         } failureBlock:^(NSError *error) {
+//              [self.scanV startRunning];
+//         }];
    
     NSLog(@"二维码内容：%@",scanDataString);
     

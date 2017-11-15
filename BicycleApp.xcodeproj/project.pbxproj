@@ -276,6 +276,9 @@
 		0ED415831F593CEA00600F2E /* HomeNaiv.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ED4157E1F593CEA00600F2E /* HomeNaiv.xib */; };
 		0ED415841F593CEA00600F2E /* activityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED4157F1F593CEA00600F2E /* activityView.m */; };
 		0ED415851F593CEA00600F2E /* activity.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ED415811F593CEA00600F2E /* activity.xib */; };
+		0ED988561FBBDFBB00448B33 /* NSData+CRC16.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED988501FBBDFBA00448B33 /* NSData+CRC16.m */; };
+		0ED988571FBBDFBB00448B33 /* NSString+WithCRCModbus.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED988521FBBDFBA00448B33 /* NSString+WithCRCModbus.m */; };
+		0ED988581FBBDFBB00448B33 /* changeNumTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED988551FBBDFBB00448B33 /* changeNumTool.m */; };
 		0EDB9DE81EEE688800B42EBC /* annotionInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EDB9DE71EEE688800B42EBC /* annotionInfoModel.m */; };
 		0EEF31401F386E3F000A4E1A /* 320_480.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EEF31331F386E3F000A4E1A /* 320_480.png */; };
 		0EEF31411F386E3F000A4E1A /* 320_480.png in Resources */ = {isa = PBXBuildFile; fileRef = 0EEF31331F386E3F000A4E1A /* 320_480.png */; };
@@ -869,6 +872,12 @@
 		0ED4157F1F593CEA00600F2E /* activityView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = activityView.m; path = BicycleApp/HomeVC/activityView.m; sourceTree = SOURCE_ROOT; };
 		0ED415801F593CEA00600F2E /* activityView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = activityView.h; path = BicycleApp/HomeVC/activityView.h; sourceTree = SOURCE_ROOT; };
 		0ED415811F593CEA00600F2E /* activity.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = activity.xib; path = BicycleApp/HomeVC/activity.xib; sourceTree = SOURCE_ROOT; };
+		0ED988501FBBDFBA00448B33 /* NSData+CRC16.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+CRC16.m"; sourceTree = "<group>"; };
+		0ED988511FBBDFBA00448B33 /* NSString+WithCRCModbus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+WithCRCModbus.h"; sourceTree = "<group>"; };
+		0ED988521FBBDFBA00448B33 /* NSString+WithCRCModbus.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+WithCRCModbus.m"; sourceTree = "<group>"; };
+		0ED988531FBBDFBA00448B33 /* changeNumTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = changeNumTool.h; sourceTree = "<group>"; };
+		0ED988541FBBDFBB00448B33 /* NSData+CRC16.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+CRC16.h"; sourceTree = "<group>"; };
+		0ED988551FBBDFBB00448B33 /* changeNumTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = changeNumTool.m; sourceTree = "<group>"; };
 		0EDB9DE61EEE688800B42EBC /* annotionInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = annotionInfoModel.h; sourceTree = "<group>"; };
 		0EDB9DE71EEE688800B42EBC /* annotionInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = annotionInfoModel.m; sourceTree = "<group>"; };
 		0EEF31331F386E3F000A4E1A /* 320_480.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 320_480.png; sourceTree = "<group>"; };
@@ -1213,6 +1222,12 @@
 		0E777FF71EC561FD00539E18 /* HomeVC */ = {
 			isa = PBXGroup;
 			children = (
+				0ED988541FBBDFBB00448B33 /* NSData+CRC16.h */,
+				0ED988501FBBDFBA00448B33 /* NSData+CRC16.m */,
+				0ED988511FBBDFBA00448B33 /* NSString+WithCRCModbus.h */,
+				0ED988521FBBDFBA00448B33 /* NSString+WithCRCModbus.m */,
+				0ED988531FBBDFBA00448B33 /* changeNumTool.h */,
+				0ED988551FBBDFBB00448B33 /* changeNumTool.m */,
 				0E7780081EC561FD00539E18 /* HomeVC.h */,
 				0E7780091EC561FD00539E18 /* HomeVC.m */,
 				0E2B39FD1F73562D0016B08C /* costVC.h */,
@@ -2411,12 +2426,14 @@
 				0E77812B1EC561FE00539E18 /* MANaviPolyline.m in Sources */,
 				0E7781231EC561FE00539E18 /* APAuthV2Info.m in Sources */,
 				0E7781421EC561FE00539E18 /* UIColor+XYColor.m in Sources */,
+				0ED988581FBBDFBB00448B33 /* changeNumTool.m in Sources */,
 				0E77813C1EC561FE00539E18 /* NSLayoutConstraint+PureLayout.m in Sources */,
 				0ECB41891ECE04BE00396A20 /* CheakCaannimation.m in Sources */,
 				0EBB1C2F1ED4D5D1009BC5FF /* StopVC.m in Sources */,
 				0E77813A1EC561FE00539E18 /* ALView+PureLayout.m in Sources */,
 				0ECB416B1ECC6F2D00396A20 /* ReGeocodeAnnotation.m in Sources */,
 				0EBB1C371ED4DA6B009BC5FF /* ServesVC.m in Sources */,
+				0ED988571FBBDFBB00448B33 /* NSString+WithCRCModbus.m in Sources */,
 				0E7781321EC561FE00539E18 /* UIAlertView+WX.m in Sources */,
 				0E08791C1ECAB23E00D7CD28 /* ShareView.m in Sources */,
 				0E7781461EC561FE00539E18 /* AFSecurityPolicy.m in Sources */,
@@ -2443,6 +2460,7 @@
 				0E7781481EC561FE00539E18 /* AFURLResponseSerialization.m in Sources */,
 				0E77810D1EC561FD00539E18 /* CustomAnnotationView.m in Sources */,
 				0E36BC011ED099C70022E3AD /* UIView+ScaleAnimation.m in Sources */,
+				0ED988561FBBDFBB00448B33 /* NSData+CRC16.m in Sources */,
 				0ECB41741ECD4DE000396A20 /* shouTitleAnnotation.m in Sources */,
 				0EBB1C2A1ED4D0BD009BC5FF /* LockVC.m in Sources */,
 				0E7781331EC561FE00539E18 /* base64.m in Sources */,

@@ -48,7 +48,11 @@
 #import "ZXNLocationGaoDeManager.h"
 #import "WalletMoneyVC.h"
 
-@interface HomeVC ()<AMapSearchDelegate,MAMapViewDelegate,AMapLocationManagerDelegate,AMapGeoFenceManagerDelegate>
+#import <CoreBluetooth/CoreBluetooth.h>
+#import "NSData+CRC16.h"
+#import "NSString+WithCRCModbus.h"
+#import "changeNumTool.h"
+@interface HomeVC ()<AMapSearchDelegate,MAMapViewDelegate,AMapLocationManagerDelegate,AMapGeoFenceManagerDelegate,CBCentralManagerDelegate,CBPeripheralDelegate,scanDelegate>
 {
     NSMutableArray *all_arrayList;
     ZXNLocationGaoDeManager *currentPosition;
@@ -108,6 +112,19 @@
 @property (nonatomic,assign) int moneyStatus;
 @property (nonatomic,assign) int certifyStatus;
 @property (nonatomic,assign) float moneyNum;
+
+@property (nonatomic,strong)CBCentralManager  * mgr;
+@property (nonatomic,strong)CBPeripheral      * peripheral;
+@property (nonatomic,strong)NSData   * data;
+@property (nonatomic,strong)CBCharacteristic  * write;
+@property (nonatomic,strong)CBCharacteristic  * read;
+@property (nonatomic,strong)CBCharacteristic  * notify;
+@property (nonatomic,strong)CBCharacteristic  * unknow;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *detaile;
+@property (nonatomic,assign)int num;
+@property (nonatomic,copy)NSString * key;
+
 @end
 
 @implementation HomeVC
@@ -150,7 +167,7 @@
     [self setSearchMapPath];
     [self setBottomSubview];
     [self setNavLeftItemTitle:nil andImage:Img(@"catage")];
-    
+  
        
     }
 - (void)local{
@@ -858,11 +875,12 @@
     } else {
         
         CheakViewController *vic  = [[CheakViewController alloc ]init];
-       // vic.lightButton = [[UIButton alloc]init];
+        //vic.lightButton = [[UIButton alloc]init];
+        [self.mgr cancelPeripheralConnection:self.peripheral];
+        vic.blueToothdelegate   =self;
         [self.navigationController pushViewController:vic animated:YES];
     }
-   
-    }
+}
 
 -(void)BaseUpAnimation{
    [UIView animateWithDuration:0.50f animations:^{
@@ -1094,4 +1112,326 @@ NSLog(@"model.cost=%@model.duration=%@model.display=%@model.scene=%@",model.cost
              
          }];
 }
+
+- (IBAction)lockStatus:(UIButton *)sender {
+    [self cheakLockStatus];
+}
+- (IBAction)write:(UIButton *)sender {
+    
+    [self getKey];
+}
+- (IBAction)read:(UIButton *)sender {
+    
+    [self openLock];
+    
+}
+- (IBAction)getupInfo:(UIButton *)sender {
+    [self getUnloadInfo];
+}
+-(NSData *)getKey{
+    Byte data[19]={};
+    data[0]=[self Num16:@"FE"];
+    self.num = arc4random() %255;
+    
+    data[1] = [self Num16: [changeNumTool coverFromIntToHex:self.num+50]];
+    for (int i =2;i<6;i++){
+        data[i]=[self Num16:@"11"]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+    }
+    data[6]=[self Num16:@"00"]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+    data[7]= [self Num16:@"11"]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+    data[8]= [self Num16:@"08"]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+    NSString * str = @"yOTmK50z";
+    
+    const char * test =[str UTF8String];
+    for (int i=0;i<strlen(test);i++){
+        data[9+i]=(test[i]&0xff)^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+        // NSLog(@"%X",test[i]&0xff);//16进制
+        // NSLog(@"%x",[self Num16: [changeNumTool coverFromIntToHex:self.num]]);
+    }
+    NSString *mingwen=@"";
+    for(int i=0;i<17;i++){
+        // NSLog(@"testByteFF02[%d] = %@\n",i,[changeNumTool coverFromIntToHex:  data[i]]);
+        mingwen  =[mingwen   stringByAppendingString:[changeNumTool coverFromIntToHex:  data[i]]];
+    }
+    NSLog(@"%@",mingwen );
+    NSLog(@"%@",[mingwen getCrcString]);
+    NSString * one = [[mingwen getCrcString] substringWithRange:NSMakeRange(0, 2)];
+    NSString * two = [[mingwen getCrcString] substringWithRange:NSMakeRange(2, 2)];
+    data[17] =[self Num16:one];
+    data[18] = [self Num16:two];
+    
+    //Byte * testByte = (Byte *)[testData bytes];
+    NSData * result = [NSData dataWithBytes:data length:19];
+    [self.peripheral writeValue:result forCharacteristic:self.write type:CBCharacteristicWriteWithResponse];
+    return result;
+}
+
+-(void)scanBlueTooth:(NSString *)str{
+      self.mgr = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
+}
+-(void)openLock{
+    [self LockInfoCmd:@"21"];
+    
+}
+
+-(void)cheakLockStatus{
+    [self LockInfoCmd:@"31"];
+    
+}
+
+-(void)closeLock{
+    
+    [self LockInfoCmd:@"22"];
+}
+
+-(void)getUnloadInfo{
+    [self LockInfoCmd:@"51"];
+}
+
+-(void)clearInfo{
+    [self LockInfoCmd:@"52"];
+}
+-(void)LockInfoCmd:(NSString *)cmd{
+    Byte data[11]={};
+    data[0]=[self Num16:@"FE"];
+    self.num = arc4random() %255;
+    //self.num = 136;
+    data[1] = [self Num16: [changeNumTool coverFromIntToHex:self.num+50]];
+    for (int i =2;i<6;i++){
+        data[i]=[self Num16:@"11"]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+    }
+    data[6]=[self Num16:self.key]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+    data[7]= [self Num16:cmd] ^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+    data[8]= [self Num16:@"00"] ^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+    NSString *mingwen=@"";
+    for(int i=0;i<9;i++){
+        
+        mingwen  =[mingwen   stringByAppendingString:[changeNumTool coverFromIntToHex:  data[i]]];
+    }
+    NSString * one = [[mingwen getCrcString] substringWithRange:NSMakeRange(0, 2)];
+    NSString * two = [[mingwen getCrcString] substringWithRange:NSMakeRange(2, 2)];
+    data[9] =[self Num16:one];
+    data[10] = [self Num16:two];
+    NSData * result = [NSData dataWithBytes:data length:11];
+    [self.peripheral writeValue:result forCharacteristic:self.write type:CBCharacteristicWriteWithResponse];
+}
+-(Byte)Num16:(NSString *)str{
+    const  char * c =[str UTF8String];
+    
+    Byte byte = (Byte)strtol(c, NULL, 16);
+    return byte;
+}
+
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central{
+    if(central.state==CBManagerStatePoweredOn){
+        //扫描外设
+        [self.mgr scanForPeripheralsWithServices:nil options:nil];
+        self.mgr.delegate=self;
+    }else{
+        Toast(@"蓝牙未打开或其他问题");
+    }
+}
+//连接外设
+-(void)centralManager:(CBCentralManager *)central
+didDiscoverPeripheral:(CBPeripheral *)peripheral
+    advertisementData:(NSDictionary<NSString *,id> *)advertisementData
+                 RSSI:(NSNumber *)RSSI{
+    
+    if([peripheral.name hasPrefix:@"OmniBleLock"]){
+        self.peripheral=peripheral;
+        self.peripheral.delegate=self;
+        [self.mgr connectPeripheral:peripheral options:nil];
+        NSLog(@"peripheral.description==%@",peripheral.description);
+        NSLog(@"advertisementData==%@",advertisementData);
+        
+    }
+    
+    
+}
+
+-(void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral{
+    [peripheral discoverServices:nil];
+    [self.mgr stopScan];
+}
+
+-(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error{
+    for(CBService * service in peripheral.services){
+        NSLog(@"%@",service.UUID.UUIDString);
+        if([service.UUID.UUIDString isEqualToString:@"0783B03E-8535-B5A0-7140-A304D2495CB7"]){
+            [peripheral discoverCharacteristics:nil forService:service];
+        }
+    }
+}
+
+-(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error{
+    for (CBCharacteristic *Characteristic in service.characteristics) {
+        NSLog(@"%@",Characteristic.UUID.UUIDString);
+        
+        if([Characteristic.UUID.UUIDString isEqualToString:@"0783B03E-8535-B5A0-7140-A304D2495CB8"]){
+            
+            
+            self.read = Characteristic ;
+            [peripheral   setNotifyValue:YES forCharacteristic:self.read];
+            [peripheral   readValueForCharacteristic:self.read];
+            
+        }
+        if([Characteristic.UUID.UUIDString isEqualToString:@"0783B03E-8535-B5A0-7140-A304D2495CBA"]){
+            
+            self.write = Characteristic;
+              [self getKey];
+            
+        }
+    }
+}
+
+
+// 获取外设发来的数据，不论是read和notify,获取数据都是从这个方法中读取。更新特征的value的时候会调用 （凡是从蓝牙传过来的数据都要经过这个回调，简单的说这个方法就是你拿数据的唯一方法） 你可以判断是否
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    NSLog(@"%s, line = %d", __FUNCTION__, __LINE__);
+    self.data = characteristic.value;
+    
+    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"0783B03E-8535-B5A0-7140-A304D2495CB8"]]) {
+        NSData * data = characteristic.value;
+        
+        Byte * resultByte = (Byte *)[data bytes];
+        
+        int keyNum =(resultByte[7]^(resultByte[1]-0x32));
+        
+        if(keyNum==0x11){
+            //获取key
+            self.key =[changeNumTool coverFromIntToHex:(resultByte[6]^(resultByte[1]-0x32))];
+            if(self.key){
+                [self cheakLockStatus];
+                
+            }
+        }else if(keyNum==0x21){
+            //开锁返回
+            int lockStatus = (resultByte[9]^(resultByte[1]-0x32));
+            if(lockStatus==0x00){
+                 Toast(@"开锁成功");
+            }else if(lockStatus==0x01){
+                Toast(@"开锁失败");
+            }
+            
+            
+        }else if(keyNum==0x22){
+            //关锁返回
+            int lockStatus = (resultByte[9]^(resultByte[1]-0x32));
+            if(lockStatus==0x00){
+                Toast(@"关锁成功");
+                [self getUnloadInfo];
+                [self closeLock];
+            }else if(lockStatus==0x01){
+               Toast(@"关锁失败");
+            }
+        }else if(keyNum==0x31){
+            //查询锁的状况
+            int lockStatus = (resultByte[9]^(resultByte[1]-0x32));
+            if(lockStatus==0x00){
+                 Toast(@"处于开锁状态");
+            }else if(lockStatus==0x01){
+                 Toast(@"处于关锁状态");
+                [self openLock];
+            }
+            int lockeleStatus = (resultByte[10]^(resultByte[1]-0x32));
+            NSString * str = [NSString stringWithFormat:@"电量%fV",lockeleStatus/10.0];
+            Toast(str);
+            int lockinfoStatus = (resultByte[11]^(resultByte[1]-0x32));
+            if(lockinfoStatus==0x00){
+                NSLog(@"锁有数据未上传");
+                [self getUnloadInfo];
+            }else if(lockinfoStatus ==0x01){
+                NSLog(@"无数据");
+            }
+            
+        }else if(keyNum==0x51){
+            //获取未上传的数据
+            int a = (resultByte[9] ^(resultByte[1]-0x32));
+            int b = (resultByte[10]^(resultByte[1]-0x32));
+            int c = (resultByte[11]^(resultByte[1]-0x32));
+            int d = (resultByte[12]^(resultByte[1]-0x32));
+            int e = (resultByte[13]^(resultByte[1]-0x32));
+            int f = (resultByte[14]^(resultByte[1]-0x32));
+            int g = (resultByte[15]^(resultByte[1]-0x32));
+            int h = (resultByte[16]^(resultByte[1]-0x32));
+            NSLog(@"%x=%x=%x=%x=%x=%x=%x=%x",a,b,c,d,e,f,g,h);
+            
+            Toast(@"上传");
+            [self clearInfo];
+            
+        }else if(keyNum==0x52){
+            //清除未上传的数据
+            int lockStatus = (resultByte[9]^(resultByte[1]-0x32));
+            if(lockStatus==0x00){
+                NSLog(@"成功清除");
+            }else if(lockStatus==0x01){
+                NSLog(@"清除失败");
+            }
+        }
+        //        for(int i=0;i<[data length];i++){
+        //            NSLog(@"testByteFF02[%d] = %@\n",i, [changeNumTool coverFromIntToHex:resultByte[i]]);
+        //        if(i==6){
+        //
+        //          }
+        //       }
+    }
+    //    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"0783B03E-8535-B5A0-7140-A304D2495CBA"]]) {
+    //        NSData * data = characteristic.value;
+    //        NSLog(@"%@",data);
+    //        Byte * resultByte = (Byte *)[data bytes];
+    //
+    //        for(int i=0;i<[data length];i++)
+    //            printf("testByteFF02[%d] = %d\n",i,resultByte[i]);
+    //
+    //    }
+    
+}
+// 中心读取外设实时数据
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateNotificationStateForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error {
+    if (error) {
+        NSLog(@"Error changing notification state: %@", error.localizedDescription);
+    }
+    
+    // Notification has started
+    if (characteristic.isNotifying) {
+        [peripheral readValueForCharacteristic:characteristic];
+    } else { // Notification has stopped
+        // so disconnect from the peripheral
+        NSLog(@"Notification stopped on %@.  Disconnecting", characteristic);
+        //  [self updateLog:[NSString stringWithFormat:@"Notification stopped on %@.  Disconnecting", characteristic]];
+        [self.mgr cancelPeripheralConnection:self.peripheral];
+    }
+}
+
+
+//用于检测中心向外设写数据是否成功
+-(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    
+    
+    /* When a write occurs, need to set off a re-read of the local CBCharacteristic to update its value */
+    //[peripheral readValueForCharacteristic:characteristic];
+}
+
+
+
+
+
+//扫描Descriptors
+-(void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+    for (CBDescriptor * descriptor in characteristic.descriptors) {
+        NSLog(@"descriptor: %@",descriptor);
+        [peripheral readValueForDescriptor:descriptor];
+    }
+}
+//获取Descriptors的值
+-(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
+{
+    NSLog(@"Descriptors UUID: %@ value: %@",descriptor.UUID,[NSString stringWithFormat:@"%@",descriptor.value]);
+    //NSLog(@"已经向外设%@的特征值%@写入数据",peripheral.name,_readCharacteristic);
+}
+
 @end

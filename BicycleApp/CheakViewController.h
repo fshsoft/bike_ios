@@ -7,8 +7,10 @@
 //
 
 #import "XYBaseVC.h"
-
+@protocol scanDelegate <NSObject>
+- (void)scanBlueTooth:(NSString * )str;
+@end
 @interface CheakViewController : XYBaseVC
 //@property   (nonatomic,strong)UIButton *lightButton;
-
+@property (nonatomic,weak)id <scanDelegate>blueToothdelegate;
 @end
