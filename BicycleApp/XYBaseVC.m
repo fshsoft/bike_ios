@@ -409,7 +409,7 @@ NSString *const kName = @"Alun Chen";
     
     
      [RequestManager requestWithType:HttpRequestTypePost
-                           urlString:@"https://ying.baibaobike.com/authed/register.html"
+                           urlString:@"https://api.xybike.top/register.html"
                           parameters:@{@"imei":UDID,@"code":strEnRes}
                         successBlock:^(id response) {
                             NSLog(@"%@",response);
@@ -522,6 +522,8 @@ NSString *const kName = @"Alun Chen";
                  }
                  [DB putString:response.data.balance withId:@"balance" intoTable:tabName];
                  [DB putString:response.data.deposit withId:@"deposit" intoTable:tabName];
+                  [DB putString:response.data.uid withId:@"uid" intoTable:tabName];
+                 
              }
          } failureBlock:^(NSError *error) {
              

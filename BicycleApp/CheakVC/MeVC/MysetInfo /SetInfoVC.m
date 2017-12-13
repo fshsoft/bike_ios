@@ -45,7 +45,7 @@
 -(void)setSubview{
     [self setNaivTitle:@"设置"];
     self.view.backgroundColor =gary245;
-    self.tab = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 120) style:UITableViewStylePlain ];
+    self.tab = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 80) style:UITableViewStylePlain ];
     self.tab.delegate   = self;
     self.tab.dataSource = self;
     self.tab.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -88,7 +88,7 @@
 
 -(NSMutableArray*)arr{
     if(!_arr){
-     _arr =[NSMutableArray arrayWithObjects:@"常用地址",@"清除缓存",@"关于我们", nil];
+     _arr =[NSMutableArray arrayWithObjects:@"清除缓存",@"关于我们", nil];
     }
     return _arr;
 }
@@ -111,10 +111,10 @@
     return 40;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if(indexPath.row==2){
+    if(indexPath.row==1){
         AboutMeVC *meVC = [[AboutMeVC alloc]init];
         [self absPushViewController:meVC animated:YES];
-    }else if(indexPath.row==1){
+    }else if(indexPath.row==0){
            [self setCount];
     } 
 }

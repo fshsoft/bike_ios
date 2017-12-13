@@ -32,7 +32,7 @@
     btnPushInfo.backgroundColor =mainColor;
     [btnPushInfo setTitle:@"立即兑换" forState:UIControlStateNormal];
     btnPushInfo.titleLabel.font =FontSize(14);
-    [self showPlaceholderViewWithImage:Img(@"youhuijuan") message:@"还没有优惠卷" buttonTitle:nil centerOffsetY:-20 onSuperView:self.view];
+    [self showPlaceholderViewWithImage:Img(@"youhuijuan") message:@"还没有优惠券" buttonTitle:nil centerOffsetY:-20 onSuperView:self.view];
     
 }
 - (void)didReceiveMemoryWarning {
@@ -44,7 +44,7 @@
     if (!_number) {
         _number = [[LogoTextField alloc] initWithFrame:CGRectMake(14,  14, SCREEN_WIDTH-28, kRowHeight)];
         _number.tittle.text =@"优惠码";
-        _number.field.placeholder=@"请输入优惠卷";
+        _number.field.placeholder=@"请输入优惠券";
         }
     return _number;
 }

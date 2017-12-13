@@ -46,9 +46,9 @@
 }
 -(void)delayMethod{
     _count = _count+1;
-    NSLog(@"_count=====%d",_count);
+  
     self.AnimationView.pregress= _count/100.0;
-    NSLog(@"%f",self.AnimationView.pregress);
+  
     if(_count==100){
         [self.timer invalidate];
          [self.navigationController popToRootViewControllerAnimated:YES];

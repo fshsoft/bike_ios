@@ -52,6 +52,8 @@
 #import "NSData+CRC16.h"
 #import "NSString+WithCRCModbus.h"
 #import "changeNumTool.h"
+#include <stdlib.h>
+
 @interface HomeVC ()<AMapSearchDelegate,MAMapViewDelegate,AMapLocationManagerDelegate,AMapGeoFenceManagerDelegate,CBCentralManagerDelegate,CBPeripheralDelegate,scanDelegate>
 {
     NSMutableArray *all_arrayList;
@@ -107,7 +109,7 @@
 @property (nonatomic,strong) HomeNaviView *homeNaiv;
 @property (nonatomic,strong) activityView *actView;
 @property (nonatomic,assign) NSInteger    paopaoTag;
-@property (nonatomic ,strong)AMapGeoFenceManager *geoFenceManager;
+//@property (nonatomic ,strong)AMapGeoFenceManager *geoFenceManager;
 @property (nonatomic,assign) int loadStatus;
 @property (nonatomic,assign) int moneyStatus;
 @property (nonatomic,assign) int certifyStatus;
@@ -125,6 +127,9 @@
 @property (nonatomic,assign)int num;
 @property (nonatomic,copy)NSString * key;
 
+@property (nonatomic,assign)BOOL    BlueTooth;
+@property (nonatomic,copy  )NSString   * macStr;
+
 @end
 
 @implementation HomeVC
@@ -141,8 +146,8 @@
     [[ZXNLocationGaoDeManager sharedManager] getGps:^(NSString *lat, NSString *lon) {
         
         if(lat.length!=0&&lon.length!=0   ){
-            coor.longitude = [lat doubleValue];
-            coor.latitude =  [lon doubleValue];
+            coor.longitude = [lon doubleValue];
+            coor.latitude =  [lat doubleValue];
             
             [weakself   getLocationManagerAnnotationLat:lat Lng:lon ];
         }
@@ -167,8 +172,8 @@
     [self setSearchMapPath];
     [self setBottomSubview];
     [self setNavLeftItemTitle:nil andImage:Img(@"catage")];
-  
-       
+    self.BlueTooth =NO;
+       // self.mgr = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
     }
 - (void)local{
     //    centerAnnotaion.coordinate = currentCoordinate;
@@ -287,20 +292,20 @@
     
     [self.view addSubview:self.mapView];
     [self.view sendSubviewToBack:self.mapView];
-    [self configGeoFenceManager];
-    [self addGeoFencePolygonRegion];
+   // [self configGeoFenceManager];
+    //[self addGeoFencePolygonRegion];
       }
 
 
 
 //初始化地理围栏manager
-- (void)configGeoFenceManager {
-    self.geoFenceManager = [[AMapGeoFenceManager alloc] init];
-
-    self.geoFenceManager.delegate = self;
-    self.geoFenceManager.activeAction = AMapGeoFenceActiveActionInside | AMapGeoFenceActiveActionOutside | AMapGeoFenceActiveActionStayed; //进入，离开，停留都要进行通知
-    self.geoFenceManager.allowsBackgroundLocationUpdates = YES;  //允许后台定位
-}
+//- (void)configGeoFenceManager {
+//    self.geoFenceManager = [[AMapGeoFenceManager alloc] init];
+//
+//    self.geoFenceManager.delegate = self;
+//    self.geoFenceManager.activeAction = AMapGeoFenceActiveActionInside | AMapGeoFenceActiveActionOutside | AMapGeoFenceActiveActionStayed; //进入，离开，停留都要进行通知
+//    self.geoFenceManager.allowsBackgroundLocationUpdates = YES;  //允许后台定位
+//}
 
 //添加地理围栏对应的Overlay，方便查看。地图上显示圆
 - (MACircle *)showCircleInMap:(CLLocationCoordinate2D )coordinate radius:(NSInteger)radius {
@@ -319,7 +324,7 @@
 // 清除上一次按钮点击创建的围栏
 - (void)doClear {
     [self.mapView removeOverlays:self.mapView.overlays];  //把之前添加的Overlay都移除掉
-    [self.geoFenceManager removeAllGeoFenceRegions];  //移除所有已经添加的围栏，如果有正在请求的围栏也会丢弃
+    //[self.geoFenceManager removeAllGeoFenceRegions];  //移除所有已经添加的围栏，如果有正在请求的围栏也会丢弃
 }
 
 
@@ -328,22 +333,22 @@
 
 
 //添加多边形围栏按钮点击
-- (void)addGeoFencePolygonRegion {
-    NSInteger count = 5;
-    CLLocationCoordinate2D *coorArr = malloc(sizeof(CLLocationCoordinate2D) * count);
-    
-    coorArr[0] = CLLocationCoordinate2DMake(31.199987, 121.369135);     //平安里地铁站
-    coorArr[1] = CLLocationCoordinate2DMake(31.233835, 121.412253);     //西单地铁站
-    coorArr[2] = CLLocationCoordinate2DMake(31.223212, 121.558282);     //崇文门地铁站
-    coorArr[3] = CLLocationCoordinate2DMake(31.154261, 121.501653);     //东直门地铁站
-    coorArr[4] = CLLocationCoordinate2DMake(31.096887,  121.373303);
-   
-    [self doClear];
-    [self.geoFenceManager addPolygonRegionForMonitoringWithCoordinates:coorArr count:count customID:@"polygon_1"];
-    
-    free(coorArr);
-    coorArr = NULL;
-}
+//- (void)addGeoFencePolygonRegion {
+//    NSInteger count = 5;
+//    CLLocationCoordinate2D *coorArr = malloc(sizeof(CLLocationCoordinate2D) * count);
+//
+//    coorArr[0] = CLLocationCoordinate2DMake(31.199987, 121.369135);     //平安里地铁站
+//    coorArr[1] = CLLocationCoordinate2DMake(31.233835, 121.412253);     //西单地铁站
+//    coorArr[2] = CLLocationCoordinate2DMake(31.223212, 121.558282);     //崇文门地铁站
+//    coorArr[3] = CLLocationCoordinate2DMake(31.154261, 121.501653);     //东直门地铁站
+//    coorArr[4] = CLLocationCoordinate2DMake(31.096887,  121.373303);
+//
+//    [self doClear];
+//   // [self.geoFenceManager addPolygonRegionForMonitoringWithCoordinates:coorArr count:count customID:@"polygon_1"];
+//
+//    free(coorArr);
+//    coorArr = NULL;
+//}
 
 
 
@@ -632,7 +637,7 @@
     
     [self.mapView addAnnotations: self.annotations];
     [self.mapView addAnnotation:centerAnnotaion];
-    [self addGeoFencePolygonRegion];
+    //[self addGeoFencePolygonRegion];
     isMoveView = YES;
 }
 
@@ -698,6 +703,7 @@
 
 -(void)viewWillDisappear:(BOOL)animated
 {
+    
     self.actView.hidden=YES;
     self.topCheakView.hidden=YES;
     [self clearLine];
@@ -725,22 +731,19 @@
                      [self.mapView removeAnnotations:self.annotations];
                      [self.annotations removeAllObjects ];
                      
-                     
-                     
+                  
                      for(int i=0;i<arr.count;i++){
                          annotionInfoModel * infomodel =  arr[i];
                          
                          MAPointAnnotation *a1 = [[MAPointAnnotation alloc] init];
-                         a1.coordinate=CLLocationCoordinate2DMake( infomodel.lat,infomodel.lng  );
+                         //double lat = [[NSString stringWithFormat:@"%.12f",[infomodel.lat doubleValue]]doubleValue];
+                       
+                         //double lng = [[NSString stringWithFormat:@"%.12f",[infomodel.lng doubleValue]]doubleValue];
+        CLLocationCoordinate2D amapcoord =AMapCoordinateConvert(CLLocationCoordinate2DMake(infomodel.lat,infomodel.lng), AMapCoordinateTypeGPS);
+                         a1.coordinate=amapcoord;
                          
                          
-                         if(i==0){
-                             if(a1.coordinate.longitude==0||a1.coordinate.latitude==0){
-                                 a1.coordinate=CLLocationCoordinate2DMake( [lat doubleValue]-0.001, [lng doubleValue]-0.001);
-                             }
-                             a1.subtitle      = @"离我最近";
-                             
-                         }
+
                          [self.annotations addObject:a1];
                      }
                      [self.mapView addAnnotation:centerAnnotaion];
@@ -768,7 +771,7 @@
         [selfblock  setUpData];
     };
     bottom.cheakBlock=^{
-      
+      //[selfblock jumpCheakViewConroller];
         if( self.loadStatus!=1){
             [selfblock cheakToken];
             LoginVC *loginVC = [[LoginVC alloc]init];
@@ -793,8 +796,8 @@
   
                     }
                 }
-            }
-        }
+            }}
+        
     };
     
     bottom.mapBlock = ^{
@@ -844,23 +847,27 @@
    
     self.animationView =[[ HomeHelpView alloc]initWithFrame:CGRectMake(10, SCREENH_HEIGHT+210, SCREEN_WIDTH-20, 200)];
     self.animationView.lockBlock = ^{
-        LockVC    *vc = [[LockVC alloc]init];
-        [selfblock absPushViewController:vc animated:YES];
+        [[UIApplication  sharedApplication] openURL:[NSURL  URLWithString:  [NSString stringWithFormat:@"tel://%@",@"4008888"]]];
+//        LockVC    *vc = [[LockVC alloc]init];
+//        [selfblock absPushViewController:vc animated:YES];
     };
     
     self.animationView.otherBlock = ^{
-         ServesVC *vc =[[ServesVC alloc]init];
-         [selfblock.navigationController pushViewController:vc animated:YES];
+        [[UIApplication  sharedApplication] openURL:[NSURL  URLWithString:  [NSString stringWithFormat:@"tel://%@",@"4008888"]]];
+//         ServesVC *vc =[[ServesVC alloc]init];
+//         [selfblock.navigationController pushViewController:vc animated:YES];
     };
     
     self.animationView.stopBlock = ^{
-        StopVC  *vc =[[StopVC alloc]init];
-        [selfblock absPushViewController:vc animated:YES];
+        [[UIApplication  sharedApplication] openURL:[NSURL  URLWithString:  [NSString stringWithFormat:@"tel://%@",@"4008888"]]];
+//        StopVC  *vc =[[StopVC alloc]init];
+//        [selfblock absPushViewController:vc animated:YES];
     };
     
     self.animationView.breakdownBlock = ^{
-        breakDownVC *vc  =[[breakDownVC alloc]init];
-        [selfblock absPushViewController:vc animated:YES];
+        [[UIApplication  sharedApplication] openURL:[NSURL  URLWithString:  [NSString stringWithFormat:@"tel://%@",@"4008888"]]];
+//        breakDownVC *vc  =[[breakDownVC alloc]init];
+//        [selfblock absPushViewController:vc animated:YES];
     };
     [self.view addSubview:self.animationView ];
     
@@ -876,7 +883,13 @@
         
         CheakViewController *vic  = [[CheakViewController alloc ]init];
         //vic.lightButton = [[UIButton alloc]init];
-        [self.mgr cancelPeripheralConnection:self.peripheral];
+        if(self.BlueTooth){
+            
+            [self.mgr cancelPeripheralConnection:self.peripheral];
+            
+        }
+      
+     
         vic.blueToothdelegate   =self;
         [self.navigationController pushViewController:vic animated:YES];
     }
@@ -992,7 +1005,7 @@
     NSString *strEnRes = [CusMD5 md5String:UDID];
     NSLog(@"%@",UDID);
     [RequestManager requestWithType:HttpRequestTypePost
-                          urlString:@"https://ying.baibaobike.com/authed/register.html"
+                          urlString:@"https://api.xybike.top/register.html"
                          parameters:@{@"imei":UDID,@"code":strEnRes}
                        successBlock:^(id response) {
                            //NSLog(@"%@",response);
@@ -1086,9 +1099,12 @@
                        }];
     
 }
+
 -(void)viewWillAppear:(BOOL)animated{
+    [[NSNotificationCenter   defaultCenter]addObserver:self selector:@selector(numBlueTooth:) name:@"mac" object:nil];
     [super viewWillAppear:animated  ];
     [self cheakToken];
+    self.BlueTooth =NO;
     if(refressh_access_token){
         [self requestCheakNOtify];
     }
@@ -1113,21 +1129,7 @@ NSLog(@"model.cost=%@model.duration=%@model.display=%@model.scene=%@",model.cost
          }];
 }
 
-- (IBAction)lockStatus:(UIButton *)sender {
-    [self cheakLockStatus];
-}
-- (IBAction)write:(UIButton *)sender {
-    
-    [self getKey];
-}
-- (IBAction)read:(UIButton *)sender {
-    
-    [self openLock];
-    
-}
-- (IBAction)getupInfo:(UIButton *)sender {
-    [self getUnloadInfo];
-}
+
 -(NSData *)getKey{
     Byte data[19]={};
     data[0]=[self Num16:@"FE"];
@@ -1135,26 +1137,24 @@ NSLog(@"model.cost=%@model.duration=%@model.display=%@model.scene=%@",model.cost
     
     data[1] = [self Num16: [changeNumTool coverFromIntToHex:self.num+50]];
     for (int i =2;i<6;i++){
-        data[i]=[self Num16:@"11"]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+     data[i]=[self Num16:[[DB getStringById:@"uid" fromTable:tabName] substringWithRange:NSMakeRange((i-2)*2, 2)] ]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
     }
-    data[6]=[self Num16:@"00"]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+    data[6]= [self Num16:@"00"]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
     data[7]= [self Num16:@"11"]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
     data[8]= [self Num16:@"08"]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
-    NSString * str = @"yOTmK50z";
+    NSString * str = @"H5OzfVM2";
     
     const char * test =[str UTF8String];
     for (int i=0;i<strlen(test);i++){
         data[9+i]=(test[i]&0xff)^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
-        // NSLog(@"%X",test[i]&0xff);//16进制
-        // NSLog(@"%x",[self Num16: [changeNumTool coverFromIntToHex:self.num]]);
+        
     }
     NSString *mingwen=@"";
     for(int i=0;i<17;i++){
-        // NSLog(@"testByteFF02[%d] = %@\n",i,[changeNumTool coverFromIntToHex:  data[i]]);
+        
         mingwen  =[mingwen   stringByAppendingString:[changeNumTool coverFromIntToHex:  data[i]]];
     }
-    NSLog(@"%@",mingwen );
-    NSLog(@"%@",[mingwen getCrcString]);
+ 
     NSString * one = [[mingwen getCrcString] substringWithRange:NSMakeRange(0, 2)];
     NSString * two = [[mingwen getCrcString] substringWithRange:NSMakeRange(2, 2)];
     data[17] =[self Num16:one];
@@ -1167,8 +1167,18 @@ NSLog(@"model.cost=%@model.duration=%@model.display=%@model.scene=%@",model.cost
 }
 
 -(void)scanBlueTooth:(NSString *)str{
+      self.macStr =str;
+     [self loadupGprs];
       self.mgr = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
 }
+
+- (void)numBlueTooth:(NSNotification   *)str{
+    self.macStr =str.object;
+    [self loadupGprs];
+    self.mgr = [[CBCentralManager alloc]initWithDelegate:self queue:nil];
+}
+
+
 -(void)openLock{
     [self LockInfoCmd:@"21"];
     
@@ -1198,11 +1208,13 @@ NSLog(@"model.cost=%@model.duration=%@model.display=%@model.scene=%@",model.cost
     //self.num = 136;
     data[1] = [self Num16: [changeNumTool coverFromIntToHex:self.num+50]];
     for (int i =2;i<6;i++){
-        data[i]=[self Num16:@"11"]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+        [DB getStringById:@"uid" fromTable:tabName];
+
+        data[i]=[self Num16:[[DB getStringById:@"uid" fromTable:tabName] substringWithRange:NSMakeRange((i-2)*2, 2)] ]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
     }
-    data[6]=[self Num16:self.key]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
-    data[7]= [self Num16:cmd] ^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
-    data[8]= [self Num16:@"00"] ^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+    data[6]= [self Num16:self.key]^[self Num16: [changeNumTool coverFromIntToHex:self.num]];
+    data[7]= [self Num16:cmd] ^   [self Num16: [changeNumTool coverFromIntToHex:self.num]];
+    data[8]= [self Num16:@"00"] ^ [self Num16: [changeNumTool coverFromIntToHex:self.num]];
     NSString *mingwen=@"";
     for(int i=0;i<9;i++){
         
@@ -1227,8 +1239,10 @@ NSLog(@"model.cost=%@model.duration=%@model.display=%@model.scene=%@",model.cost
         //扫描外设
         [self.mgr scanForPeripheralsWithServices:nil options:nil];
         self.mgr.delegate=self;
+        
     }else{
-        Toast(@"蓝牙未打开或其他问题");
+        Toast(@"蓝牙未打开或其他问题请重新扫码");
+        self.BlueTooth =NO;
     }
 }
 //连接外设
@@ -1237,12 +1251,30 @@ didDiscoverPeripheral:(CBPeripheral *)peripheral
     advertisementData:(NSDictionary<NSString *,id> *)advertisementData
                  RSSI:(NSNumber *)RSSI{
     
+
     if([peripheral.name hasPrefix:@"OmniBleLock"]){
+        
+        
+        NSData * data = [advertisementData objectForKey:@"kCBAdvDataManufacturerData"];
+        NSString * str  = [NSString stringWithFormat:@"%@",data];
+        str = [str stringByReplacingOccurrencesOfString:@" " withString:@""];
+        str = [str stringByReplacingOccurrencesOfString:@"<" withString:@""];
+        str = [str stringByReplacingOccurrencesOfString:@">" withString:@""];
+       
+      
+        str = [str substringWithRange:NSMakeRange(4, 12)];
+        NSString * mac = self.macStr;
+        mac = [mac  stringByReplacingOccurrencesOfString:@":" withString:@""];
+        mac = [mac lowercaseString];
+      
+
+        if([str  isEqualToString: mac]){
         self.peripheral=peripheral;
         self.peripheral.delegate=self;
         [self.mgr connectPeripheral:peripheral options:nil];
-        NSLog(@"peripheral.description==%@",peripheral.description);
-        NSLog(@"advertisementData==%@",advertisementData);
+       
+         self.BlueTooth =YES;
+        }
         
     }
     
@@ -1256,7 +1288,7 @@ didDiscoverPeripheral:(CBPeripheral *)peripheral
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error{
     for(CBService * service in peripheral.services){
-        NSLog(@"%@",service.UUID.UUIDString);
+        
         if([service.UUID.UUIDString isEqualToString:@"0783B03E-8535-B5A0-7140-A304D2495CB7"]){
             [peripheral discoverCharacteristics:nil forService:service];
         }
@@ -1265,7 +1297,7 @@ didDiscoverPeripheral:(CBPeripheral *)peripheral
 
 -(void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error{
     for (CBCharacteristic *Characteristic in service.characteristics) {
-        NSLog(@"%@",Characteristic.UUID.UUIDString);
+     
         
         if([Characteristic.UUID.UUIDString isEqualToString:@"0783B03E-8535-B5A0-7140-A304D2495CB8"]){
             
@@ -1276,9 +1308,8 @@ didDiscoverPeripheral:(CBPeripheral *)peripheral
             
         }
         if([Characteristic.UUID.UUIDString isEqualToString:@"0783B03E-8535-B5A0-7140-A304D2495CBA"]){
-            
-            self.write = Characteristic;
-              [self getKey];
+           self.write = Characteristic;
+          [self getKey];
             
         }
     }
@@ -1289,7 +1320,7 @@ didDiscoverPeripheral:(CBPeripheral *)peripheral
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    NSLog(@"%s, line = %d", __FUNCTION__, __LINE__);
+   
     self.data = characteristic.value;
     
     if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:@"0783B03E-8535-B5A0-7140-A304D2495CB8"]]) {
@@ -1356,8 +1387,12 @@ didDiscoverPeripheral:(CBPeripheral *)peripheral
             int f = (resultByte[14]^(resultByte[1]-0x32));
             int g = (resultByte[15]^(resultByte[1]-0x32));
             int h = (resultByte[16]^(resultByte[1]-0x32));
-            NSLog(@"%x=%x=%x=%x=%x=%x=%x=%x",a,b,c,d,e,f,g,h);
+           
+            NSString * time  = [NSString stringWithFormat:@"%x%x%x%x",a,b,c,d];
+            NSString * uid = [NSString stringWithFormat:@"%x%x%x%x",e,f,g,h];
             
+            [self loadupGprs];
+            [self upBlueMac:uid   time:time];
             Toast(@"上传");
             [self clearInfo];
             
@@ -1366,6 +1401,7 @@ didDiscoverPeripheral:(CBPeripheral *)peripheral
             int lockStatus = (resultByte[9]^(resultByte[1]-0x32));
             if(lockStatus==0x00){
                 NSLog(@"成功清除");
+                [self closeLock];
             }else if(lockStatus==0x01){
                 NSLog(@"清除失败");
             }
@@ -1405,33 +1441,82 @@ didDiscoverPeripheral:(CBPeripheral *)peripheral
     }
 }
 
+-(void)upBlueMac:(NSString * )mac time:(NSString *)time{
+    [self requestType:HttpRequestTypePost url:nil
+           parameters:@{ @"action" : @"loadData",
+                         @"mac": self.macStr,//设备MAC
+                        @"uid":mac,//设备用户ID
+                        @"time":time//骑行时间（分钟）
+                          }
+         successBlock:
+     ^(BaseModel *response) {
+        
+    } failureBlock:^(NSError *error) {
+        
+    }];
+}
 
-//用于检测中心向外设写数据是否成功
--(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
+-(void)loadupGprs{
+    __block CLLocationCoordinate2D coor;
+    __block NSString * mac  =self.macStr;
+    coor.latitude =[currentPosition.lat_gaode doubleValue];
+    coor.longitude  = [currentPosition.lon_gaode doubleValue];
+    WeakSelf(self);
+    currentCoordinate = coor;
     
-    
-    /* When a write occurs, need to set off a re-read of the local CBCharacteristic to update its value */
-    //[peripheral readValueForCharacteristic:characteristic];
+    [[ZXNLocationGaoDeManager sharedManager] getGps:^(NSString *lat, NSString *lon) {
+        
+        if(lat.length!=0&&lon.length!=0   ){
+            coor.longitude = [lon doubleValue];
+            coor.latitude =  [lat doubleValue];
+            [weakself requestType:HttpRequestTypePost
+                              url:nil
+                       parameters:@{@"action" : @"gpsUpdate",
+                                     @"mac":  mac,//设备MAC
+                                     @"lat": lat,//经度
+                                     @"lng": lon//纬度
+                                     }
+                     successBlock:^(BaseModel *response) {
+                         if([response.status  isEqualToString:@"1"]){
+                             NSLog(@"%@",response.errmsg);
+                           [weakself   getLocationManagerAnnotationLat:lat Lng:lon ];
+                         }
+                
+            }        failureBlock:^(NSError *error) {
+                
+            }];
+           
+        }
+    }];
 }
-
-
-
-
-
-//扫描Descriptors
--(void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-    for (CBDescriptor * descriptor in characteristic.descriptors) {
-        NSLog(@"descriptor: %@",descriptor);
-        [peripheral readValueForDescriptor:descriptor];
-    }
+////用于检测中心向外设写数据是否成功
+//-(void)peripheral:(CBPeripheral *)peripheral didWriteValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+//{
+//
+//
+//    /* When a write occurs, need to set off a re-read of the local CBCharacteristic to update its value */
+//    //[peripheral readValueForCharacteristic:characteristic];
+//}
+//
+//
+//
+//
+//
+////扫描Descriptors
+//-(void)peripheral:(CBPeripheral *)peripheral didDiscoverDescriptorsForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+//{
+//    for (CBDescriptor * descriptor in characteristic.descriptors) {
+//        NSLog(@"descriptor: %@",descriptor);
+//        [peripheral readValueForDescriptor:descriptor];
+//    }
+//}
+////获取Descriptors的值
+//-(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
+//{
+//    NSLog(@"Descriptors UUID: %@ value: %@",descriptor.UUID,[NSString stringWithFormat:@"%@",descriptor.value]);
+//    //NSLog(@"已经向外设%@的特征值%@写入数据",peripheral.name,_readCharacteristic);
+//}
+- (void)dealloc{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"mac" object:nil];
 }
-//获取Descriptors的值
--(void)peripheral:(CBPeripheral *)peripheral didUpdateValueForDescriptor:(CBDescriptor *)descriptor error:(NSError *)error
-{
-    NSLog(@"Descriptors UUID: %@ value: %@",descriptor.UUID,[NSString stringWithFormat:@"%@",descriptor.value]);
-    //NSLog(@"已经向外设%@的特征值%@写入数据",peripheral.name,_readCharacteristic);
-}
-
 @end

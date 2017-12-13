@@ -67,6 +67,9 @@
              successBlock:^(BaseModel *response) {
                  if([response.errorno   isEqualToString:@"0"]){
                      CkeakDetaitleVC *vc =[[CkeakDetaitleVC alloc]init];
+                   
+                     
+                     [[NSNotificationCenter defaultCenter]postNotificationName:@"mac" object:response.mac];
                      [self.navigationController pushViewController:vc  animated:YES];
                  }else{
                      Toast(response. errmsg);

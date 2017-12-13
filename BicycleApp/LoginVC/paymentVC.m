@@ -125,9 +125,14 @@
         [self payALI];
     }
     
+    
+    
 
 }
 -(void)payALI{
+    if(self.money.length==0){
+        return;
+    }
     [self requestType:HttpRequestTypePost
                   url:nil
            parameters:@{@"action" :      @"aliPay",
@@ -146,6 +151,9 @@
     
 }
 -(void)payWX{
+    if(self.money.length==0){
+        return;
+    }
     [self requestType:HttpRequestTypePost
                   url:nil
            parameters:@{@"action": @"wxPay",

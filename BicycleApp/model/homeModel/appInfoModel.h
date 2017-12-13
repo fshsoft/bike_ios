@@ -52,4 +52,6 @@
 @property  (nonatomic,copy)NSString  *display;
 @property  (nonatomic,copy)NSString  *duration ;
 @property  (nonatomic,copy)NSString  *scene ;
+@property  (nonatomic,copy)NSString  * mac;
+@property  (nonatomic,copy)NSString  *  uid ;
 @end

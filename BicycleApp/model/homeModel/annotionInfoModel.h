@@ -10,8 +10,8 @@
 
 @interface annotionInfoModel : NSObject
 @property  (nonatomic,copy)NSString  * id;
-@property  (nonatomic,assign)float  lat;
-@property  (nonatomic,assign)float lng;
+@property  (nonatomic,assign)long double lat;
+@property  (nonatomic,assign)long double  lng;
 @property  (nonatomic,copy)NSString  * distance;
 @property  (nonatomic,copy)NSString  * action;
 
@@ -32,6 +32,9 @@
 @property (nonatomic,copy)NSString  * payment_id;
 @property (nonatomic,copy)NSString  *  paidtype;
 
+@property (nonatomic,copy)NSString  * order_id;
+@property (nonatomic,copy)NSString  * amount;
+@property (nonatomic,copy)NSString  * time;
 
  
 

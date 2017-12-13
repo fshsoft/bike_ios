@@ -80,7 +80,7 @@
 -(void)setGaodeMapInfo{
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
-    [AMapServices sharedServices].apiKey =@"9be0e88e2aad12e9788483b3a5adcef4";
+    [AMapServices sharedServices].apiKey =@"8d62d02999642e9a3e88e94ffd1106f1";
     
     [[AMapServices sharedServices] setEnableHTTPS:YES];
 }

@@ -91,11 +91,12 @@
                                                         
                                                                                                      }
                         successBlock:^(id response) {
+                            NSLog(@"response=0000000000=%@",response);
                             listInfoModel   * model = [listInfoModel yy_modelWithJSON:response];
                             if([model.errorno isEqualToString:@"0"]){
                                 [self.array addObjectsFromArray:model.data];
-                                annotionInfoModel * model =self.array[0];
-                                self. customView.num=model.current;
+                                //annotionInfoModel * model =self.array[0];
+                                //self. customView.num=model.current;
                                 [self.tab reloadData];
                             }else{
                                 
@@ -133,21 +134,8 @@
         cell.selectionStyle =UITableViewCellSelectionStyleNone  ;
     }
     annotionInfoModel * model =self.array[indexPath.row];
-    if([model.description isEqualToString:@"1"]){
-    cell.title.text =model.note;
-    //cell.time.text = @"2015-05  15-23";
-    cell.name.text=@"信用分";
-   
-        cell.num.textColor =mainColor;
-        cell.num.text= [NSString stringWithFormat:@"-%@", model.changed];
-    }else{
-            cell.title.text =model.note;
-            //cell.time.text = @"2015-05  15-23";
-            cell.name.text=@"信用分";
-            cell.num.textColor =[UIColor greenColor];
-         cell.num.text= [NSString stringWithFormat:@"+%@", model.changed];
-            
-        }
+    cell.title.text =model.amount;
+    cell.title.text = model.time;
     return cell;
 }
 

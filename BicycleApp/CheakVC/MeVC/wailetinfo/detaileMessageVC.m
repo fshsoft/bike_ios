@@ -50,15 +50,9 @@
     }
     
     annotionInfoModel * model = self.array[indexPath.row];
-    if([model.paidtype   isEqualToString:@"0"]){
-        cell.payName.text  =@"支付宝";
-        cell.title.text  = model.note;
-        cell.money.text  = model.changed;
-    }else{
-        cell.payName.text  =@"微信";
-        cell.title.text  = model.note;
-        cell.money.text  = model.changed;
-    }
+    cell.title.text = model.order_id;
+    cell.time.text  = model.time;
+    cell.money.text = model.amount;
     
     return cell;
 }
@@ -87,6 +81,7 @@
 
                          parameters:dic
                        successBlock:^(id response) {
+                           NSLog(@"response==%@",response);
                            listInfoModel * model = [listInfoModel yy_modelWithJSON:response];
                            if([model.errorno   isEqualToString:@"0"]){
                                [self.array addObjectsFromArray: model.data];

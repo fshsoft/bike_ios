@@ -30,7 +30,7 @@
     labPromot.textAlignment =NSTextAlignmentCenter;
     labPromot.textColor =mainColor;
     labPromot.font =FontSize(12);
-    labPromot.text =@"好友用您的邀请吗成功注册，您的信用会增加哦!";
+    labPromot.text =@"好友用您的邀请码成功注册，您的信用会增加哦!";
     [self.view addSubview:labPromot];
     UIButton *btnShear = [[UIButton alloc]initWithFrame:CGRectMake(14, labPromot.bottom+30, SCREEN_WIDTH-28, 40)];
     [self.view addSubview:btnShear];

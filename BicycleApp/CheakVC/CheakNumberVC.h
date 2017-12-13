@@ -7,7 +7,8 @@
 //
 
 #import "XYBaseVC.h"
-
+ 
 @interface CheakNumberVC : XYBaseVC
 @property (nonatomic,assign)NSInteger  cheakNum;
+
 @end

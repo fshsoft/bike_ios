@@ -348,12 +348,19 @@
     }
     //else
     //{*/
+    NSString * code =[NSString string];
+    if([DB getStringById:@"pushID" fromTable:tabName].length != 0  ){
+        code = [DB getStringById:@"pushID" fromTable:tabName] ;
+    }else{
+        code =@"";
+    }
+   
         [self requestType:HttpRequestTypePost
                   url:nil
            parameters:@{ @"action":      @"login",
                          @"mobile":self.phoneNum.field.text,
                          @"vericode":self.cheakNum.field.text,
-                         @"jpushid" :[DB getStringById:@"pushID" fromTable:tabName]  }
+                         @"jpushid" :code}
          successBlock:^(BaseModel *response) {
              if([response.errorno intValue]==0){
                  [self cheakMoneyandCertify];
